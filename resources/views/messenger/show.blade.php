@@ -1,10 +1,11 @@
-@extends('layouts.master')
+@if(isset($thread))
+    <div class="title"><b>Переписка - {{ $thread->subject }}</b><i class="fa fa-search"></i></div>
+    <div class="chat-list">
+        <ul style="width: 100%;">
 
-@section('content')
-    <div class="col-md-6">
-        <h1>{{ $thread->subject }}</h1>
-        @each('messenger.partials.messages', $thread->messages, 'message')
+                @each('messenger.partials.messages', $thread->messages, 'message')
 
-        @include('messenger.partials.form-message')
+        </ul>
     </div>
-@stop
+    @include('messenger.partials.form-message')
+@endif

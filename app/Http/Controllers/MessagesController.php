@@ -8,6 +8,7 @@ use Cmgmyr\Messenger\Models\Message;
 use Cmgmyr\Messenger\Models\Participant;
 use Cmgmyr\Messenger\Models\Thread;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
@@ -19,19 +20,29 @@ class MessagesController extends Controller
      *
      * @return mixed
      */
-    public function index()
+
+    public function __construct()
     {
-        // All threads, ignore deleted/archived participants
-        $threads = Thread::getAllLatest()->get();
 
-        // All threads that user is participating in
-        // $threads = Thread::forUser(Auth::id())->latest('updated_at')->get();
+    }
 
-        // All threads that user is participating in, with new messages
+    public function index(Thread $thread)
+    {
+        $users = User::whereNotIn('id', $thread->participantsUserIds(Auth::id()))->get();
+
+        // Все потоки, в которых участвует пользователь
+        $threads = $thread->forUser(Auth::id())->latest('updated_at')->get();
+
+        // Все потоки, игнорировать удаленных / архивированных участников
+        //$threads = Thread::getAllLatest()->get();
+
+        // Все потоки, в которых участвует пользователь, с новыми сообщениями
         // $threads = Thread::forUserWithNewMessages(Auth::id())->latest('updated_at')->get();
 
-        return view('messenger.index', compact('threads'));
+        return view('messenger.index', compact('threads','users'));
     }
+
+
 
     /**
      * Shows a message thread.
@@ -41,6 +52,10 @@ class MessagesController extends Controller
      */
     public function show($id)
     {
+
+        // Все потоки, в которых участвует пользователь
+        $threads = Thread::forUser(Auth::id())->latest('updated_at')->get();
+
         try {
             $thread = Thread::findOrFail($id);
         } catch (ModelNotFoundException $e) {
@@ -49,16 +64,16 @@ class MessagesController extends Controller
             return redirect()->route('messages');
         }
 
-        // show current user in list if not a current participant
+        // показать текущего пользователя в списке, если он не является текущим участником
         // $users = User::whereNotIn('id', $thread->participantsUserIds())->get();
 
-        // don't show the current user in list
+        // не показывать текущего пользователя в списке
         $userId = Auth::id();
-        $users = User::whereNotIn('id', $thread->participantsUserIds($userId))->get();
 
+        $users = User::whereIn('id', $thread->participantsUserIds())->get();
         $thread->markAsRead($userId);
 
-        return view('messenger.show', compact('thread', 'users'));
+        return view('messenger.index', compact('threads','thread', 'users'));
     }
 
     /**

@@ -16,7 +16,7 @@ Route::get('/', function () {
 // Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login')->name('auth.login');
-Route::post('logout', 'Auth\LoginController@logout')->name('auth.logout');
+Route::get('logout', 'Auth\LoginController@logout')->name('auth.logout');
 
 Route::group(['middleware' => ['auth'],'prefix' => 'messages', 'as' => 'messages.'], function () {
     Route::get('/', ['uses' => 'MessagesController@index', 'as' => 'index']);
