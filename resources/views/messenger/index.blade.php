@@ -53,18 +53,19 @@
             @include('messenger.show')
 
         </div>
-        <div class="right-tabs col-12 col-sm-3">
+        <div class="right-tabs col-12 col-sm-3 col" id="accordion">
             <ul class="tabs">
-                <li class="active">
-                    <a href="#"><i class="fa fa-users"></i></a>
+                <li>
+                    <a data-toggle="collapse" href="#Collapse1" role="button" aria-expanded="true" aria-controls="Collapse1"><i class="fa fa-users"></i></a>
                 </li>
-                <li><a href="#"><i class="fa fa-paperclip"></i></a></li>
-                <li><a href="#"><i class="fa fa-link"></i></a></li>
+                <li class="active"><a data-toggle="collapse" href="#Collapse2" role="button" aria-expanded="false" aria-controls="Collapse2"><i class="fa fa-paperclip"></i></a></li>
+                <li><a data-toggle="collapse" href="#Collapse3" role="button" aria-expanded="false" aria-controls="Collapse3"><i class="fa fa-link"></i></a></li>
             </ul>
-            <ul class="tabs-container">
-                <li class="active">
-                    <ul class="member-list">
-                        @foreach($users as $user)
+            <div class="col collapse show" id="Collapse1" data-parent="#accordion">
+                <ul class="tabs-container">
+                    <li class="active">
+                        <ul class="member-list">
+                            @foreach($users as $user)
                             <li class="btn-outline-light" style="cursor: pointer">
                                 <span class="status idle">
                                     <i class="fa fa-circle-o"></i>
@@ -77,12 +78,19 @@
                                     <a class="dropdown-item" href="#"  style="color: black">Написать</a>
                                 </div>
                             </li>
-                        @endforeach
-                    </ul>
-                </li>
-                <li></li>
-                <li></li>
-            </ul>
+                            @endforeach
+                        </ul>
+                    </li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+            <div class="col collapse"  id="Collapse2" data-parent="#accordion">
+                Two
+            </div>
+            <div class="col collapse"  id="Collapse3" data-parent="#accordion">
+                Three
+            </div>
             <i class="fa fa-cog"></i>
         </div>
 </div>
