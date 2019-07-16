@@ -11,20 +11,22 @@
         </div>
         <div class="title">
             <ul class="nav navbar-nav">
-                <li><a href="/">Главная</a></li>
-                <li><a href="#">Чаты @include('messenger.unread-count')</a></li>
+                <li><a href="/">Главная @include('messenger.unread-count')</a></li>
+                <li>
+                    <a href="#" role="button" data-toggle="modal" data-target="#createChat">
+                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                        <span>Создать чат!</span>
+                    </a>
+                    <!-- Modal -->
+                    @include('messenger.create')
+                </li>
             </ul>
         </div>
     </div>
     <div class="window-area row">
-        <div class="conversation-list col-12 col-sm-3">
-            <ul class="">
-                <li >
-                    <a href="/messages/create">
-                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                        <span style="width: 70%;">Создать чат!</span>
-                    </a>
-                </li>
+        <div class="conversation-list col-12 col-sm-3" style="padding: 0">
+            <ul style="margin-bottom: 46px;">
+
                 @each('messenger.partials.thread', $threads, 'thread', 'messenger.partials.no-threads')
             </ul>
             <div class="my-account">
@@ -63,13 +65,18 @@
                 <li class="active">
                     <ul class="member-list">
                         @foreach($users as $user)
-                        <li>
-                            <span class="status idle">
-                                <i class="fa fa-circle-o"></i>
-                            </span>
-                            <span>{{$user->name}}</span>
-                            <span class="time">10:45 pm</span>
-                        </li>
+                            <li class="btn-outline-light" style="cursor: pointer">
+                                <span class="status idle">
+                                    <i class="fa fa-circle-o"></i>
+                                </span>
+                                <span id="dropdownMenuButton{{$user->id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span style="color: black;">{{$user->name}}</span>
+                                </span>
+                                <span class="time">10:45 pm</span>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton{{$user->id}}">
+                                    <a class="dropdown-item" href="#"  style="color: black">Написать</a>
+                                </div>
+                            </li>
                         @endforeach
                     </ul>
                 </li>

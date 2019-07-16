@@ -1,5 +1,5 @@
 @if(isset($thread))
-    <div class="title"><b>Переписка - {{ $thread->subject }}</b><i class="fa fa-search"></i></div>
+    <div class="title"><b>{{ $thread->subject }}</b><i class="fa fa-search"></i></div>
     <div class="chat-list">
         <ul style="width: 100%;">
 

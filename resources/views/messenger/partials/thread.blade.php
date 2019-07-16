@@ -1,17 +1,23 @@
-<?php $class = $thread->isUnread(Auth::id()) ? '' : 'display: none;'; ?>
-<!--
-Тема: {{ $thread->subject }}
-Тело сообщения: {{ $thread->latestMessage->body }}
-Участники:{{ $thread->participantsString(Auth::id()) }}
--->
+<?php
+$class = $thread->isUnread(Auth::id()) ? '' : 'display: none;';
+$messages = $thread->messages()->with('user')->latest('created_at')->take(1)->get();
+$count = count($thread->participantsUserIds());
+?>
+@inject('request', 'Illuminate\Http\Request')
 
-<!-- <li class="item"><a href="#"><i class="fa fa-list-alt"></i><span>Учасники</span></a></li>
-     <li class="item active"><a href="#"><i class="fa fa-user"></i><span>Команда чата</span><i class="fa fa-times"></i></a></li>
-     <li><a href="#"><i class="fa fa-circle-o offline"></i></i><span>Сергей Бондарь</span><i class="fa fa-times"></i></a></li>
--->
-<li >
+<li xmlns="http://www.w3.org/1999/html" style="{{ $request->segment(2) == $thread->id ? 'background: #445166;' : '' }}">
     <a href="{{ route('messages.show', $thread->id) }}">
-        <i class="fa fa-circle-o online"></i></i>
-        <span style="width: 70%;">{{ $thread->creator()->name }}</span><span class="label label-danger" style="{{ $class }}">{{ $thread->userUnreadMessagesCount(Auth::id()) }}</span>
+        <span style="width: 70%;color: white;    font-size: 13px;">
+            <i class="fa {{$count>2?'fa-users':'fa-comments-o'}}" style="color: white" aria-hidden="true"></i>
+            {{$count>2? $thread->subject : $thread->participantsString(Auth::id()) }}
+        </span>
+        </br>
+        <span style=" margin: 5px;overflow: hidden;text-overflow: ellipsis;height: 13px;    width: 90%;">
+            @foreach($messages as $mess)
+            <h4 class="badge">{{$mess->user->id === Auth::id() ? 'Вы': $mess->user->name}}:</h4> {{$mess->body}}
+            @endforeach
+
+        </span>
+        <span class="label label-danger" style="{{ $class }} float: right;">{{ $thread->userUnreadMessagesCount(Auth::id()) }}</span>
     </a>
 </li>

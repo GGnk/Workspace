@@ -28,11 +28,11 @@ class MessagesController extends Controller
 
     public function index(Thread $thread)
     {
-        $users = User::whereNotIn('id', $thread->participantsUserIds(Auth::id()))->get();
 
-        // Все потоки, в которых участвует пользователь
+        $users = User::where('id','!=', Auth::id())->get();
+
+        // Все потоки, в которых участвует пользоватsель
         $threads = $thread->forUser(Auth::id())->latest('updated_at')->get();
-
         // Все потоки, игнорировать удаленных / архивированных участников
         //$threads = Thread::getAllLatest()->get();
 
@@ -83,6 +83,7 @@ class MessagesController extends Controller
      */
     public function create()
     {
+
         $users = User::where('id', '!=', Auth::id())->get();
 
         return view('messenger.create', compact('users'));
@@ -96,7 +97,6 @@ class MessagesController extends Controller
     public function store()
     {
         $input = Input::all();
-
         $thread = Thread::create([
             'subject' => $input['subject'],
         ]);
