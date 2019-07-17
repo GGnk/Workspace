@@ -25,3 +25,10 @@ Route::group(['middleware' => ['auth'],'prefix' => 'messages', 'as' => 'messages
     Route::get('{id}', ['uses' => 'MessagesController@show','as' => 'show']);
     Route::put('{id}', ['uses' => 'MessagesController@update','as' => 'update']);
 });
+Route::group(['middleware' => ['auth'],'prefix' => 'dialog', 'as' => 'dialog.'], function () {
+    Route::get('/', ['uses' => 'DialogController@index', 'as' => 'index']);
+    Route::get('create', [ 'uses' => 'DialogController@create','as' => 'create']);
+    Route::post('/', ['uses' => 'DialogController@store','as' => 'store']);
+    Route::get('{id}', ['uses' => 'DialogController@show','as' => 'show']);
+    Route::put('{id}', ['uses' => 'DialogController@update','as' => 'update']);
+});
