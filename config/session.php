@@ -35,6 +35,8 @@ return [
 
     'expire_on_close' => false,
 
+    'expired-session-redirect' => url(env('APP_URL')),
+
     /*
     |--------------------------------------------------------------------------
     | Session Encryption

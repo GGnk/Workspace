@@ -32,3 +32,7 @@ Route::group(['middleware' => ['auth'],'prefix' => 'dialog', 'as' => 'dialog.'],
     Route::get('{id}', ['uses' => 'DialogController@show','as' => 'show']);
     Route::put('{id}', ['uses' => 'DialogController@update','as' => 'update']);
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

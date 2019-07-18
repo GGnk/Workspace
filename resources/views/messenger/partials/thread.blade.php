@@ -5,7 +5,7 @@ $count = count($thread->participantsUserIds());
 ?>
 @inject('request', 'Illuminate\Http\Request')
 
-<li xmlns="http://www.w3.org/1999/html" style="{{ $request->segment(2) == $thread->id ? 'background: #445166;' : '' }}">
+<li style="{{ $request->segment(2) == $thread->id ? 'background: #445166;' : '' }}">
     <a href="{{ route('messages.show', $thread->id) }}">
         <span style="width: 70%;color: white;    font-size: 13px;">
             <i class="fa {{$count>2?'fa-users':'fa-comments-o'}}" style="color: white" aria-hidden="true"></i>

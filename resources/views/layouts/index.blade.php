@@ -25,8 +25,8 @@
 </head>
 <body>
 
-<div class="wrapper">
-
+<div class="wrapper" id="app">
+    <wrapper :user="{{$user}}" :users="{{$users}}" :threads="{{$threads}}"></wrapper>
 </div>
 
 <script src="{{ mix('js/app.js') }}"></script>
