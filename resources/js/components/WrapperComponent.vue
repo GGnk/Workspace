@@ -23,8 +23,11 @@
         <div class="window-area row">
             <div class="conversation-list col-12 col-sm-3" style="padding: 0">
                 <ul style="margin-bottom: 46px;">
-                    <threads :threads="threads.chat"></threads>
-
+                    <li style="" v-for="thread in threads.chat"  :key="thread.id">
+                        <a href="#" @click.prevent="SendChat(thread.id)">
+                            <threads :thread="thread"></threads>
+                        </a>
+                    </li>
                 </ul>
                 <div class="my-account">
                     <div class="image">
@@ -47,8 +50,15 @@
                 </div>
             </div>
             <div class="chat-area col-12 col-sm-6">
-                @include('messenger.show')
-
+                <show :thread="chat" :user="user"></show>
+                <div class="input-area">
+                    <div class="input-wrapper col-9">
+                        <input name="message" type="text" placeholder="текст...">
+                        <i class="fa fa-smile-o"></i>
+                        <i class="fa fa-paperclip"></i>
+                    </div>
+                    <button type="submit" class="btn btn-primary send-btn col-3" style="height: 32px;font-size: 12px;padding: 2px;" >Отправить</button>
+                </div>
             </div>
             <div class="right-tabs col-12 col-sm-3 col" id="accordion">
                 <ul class="tabs">
@@ -107,13 +117,25 @@
 
         },
         data() {
-            return {}
+            return {
+                chat: false,
+            }
         },
         watch: {
             // method(after, before) {
             //
             // }
         },
-        methods: {}
+        methods: {
+            SendChat(chatID) {
+                axios.post('/dialog/show', {chatID: chatID})
+                    .then((e) => {
+                        this.chat = e.data.chat
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                    })
+            }
+        }
     }
 </script>

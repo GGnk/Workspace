@@ -20,7 +20,7 @@ window.Vue = require('vue');
 
 Vue.component('wrapper', require('./components/WrapperComponent.vue').default);
 Vue.component('threads', require('./components/modules/ThreadsComponent.vue').default);
-
+Vue.component('show', require('./components/modules/ShowComponent.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

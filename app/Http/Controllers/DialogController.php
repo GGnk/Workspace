@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Cmgmyr\Messenger\Models\Message;
 use Cmgmyr\Messenger\Models\Participant;
 use Cmgmyr\Messenger\Models\Thread;
+use App\Dialog;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,10 +25,10 @@ class DialogController extends Controller
     {
         $user = Auth::user();
 
+        // Выгружаем всех пользотелей для списка
         $users = User::where('id','!=',$user->id)->get();
 
-        // Все потоки, в которых участвует пользователь
-//        $threads = $thread->forUser(Auth::id())->latest('updated_at')->get();
+        // Все потоки, в которых участвует пользователь c отношениями
         $req_threads = $thread->forUser($user->id)->latest('updated_at')->with(['messages.user'=> function ($query){
             $query->latest()->first();
         }])->get();
@@ -61,30 +62,23 @@ class DialogController extends Controller
      * @param $id
      * @return mixed
      */
-    public function show($id)
+    public function show(Request $request)
     {
 
-        // Все потоки, в которых участвует пользователь
-        $threads = Thread::forUser(Auth::id())->latest('updated_at')->get();
-
         try {
-            $thread = Thread::findOrFail($id);
+            $chat = Thread::findOrFail($request->chatID);
+            collect($chat->messages)->each(function ($item) {
+                $item->created = $item->created_at->diffForHumans();
+                return $item->user;
+            });
         } catch (ModelNotFoundException $e) {
-            Session::flash('error_message', 'The thread with ID: ' . $id . ' was not found.');
+            Session::flash('error_message', 'The thread with ID: ' . $request->chatID . ' was not found.');
 
             return redirect()->route('messages');
         }
 
-        // показать текущего пользователя в списке, если он не является текущим участником
-        // $users = User::whereNotIn('id', $thread->participantsUserIds())->get();
 
-        // не показывать текущего пользователя в списке
-        $userId = Auth::id();
-
-        $users = User::whereIn('id', $thread->participantsUserIds())->get();
-        $thread->markAsRead($userId);
-
-        return view('messenger.index', compact('threads','thread', 'users'));
+        return compact('chat');
     }
 
     /**

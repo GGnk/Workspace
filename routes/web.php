@@ -29,7 +29,7 @@ Route::group(['middleware' => ['auth'],'prefix' => 'dialog', 'as' => 'dialog.'],
     Route::get('/', ['uses' => 'DialogController@index', 'as' => 'index']);
     Route::get('create', [ 'uses' => 'DialogController@create','as' => 'create']);
     Route::post('/', ['uses' => 'DialogController@store','as' => 'store']);
-    Route::get('{id}', ['uses' => 'DialogController@show','as' => 'show']);
+    Route::post('show', ['uses' => 'DialogController@show','as' => 'show']);
     Route::put('{id}', ['uses' => 'DialogController@update','as' => 'update']);
 });
 
