@@ -1942,6 +1942,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 // import { mixin } from '../modal/alerts.js'
 /* harmony default export */ __webpack_exports__["default"] = ({
   // mixins: [mixin],
@@ -1951,7 +1956,11 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {},
   data: function data() {
     return {
-      chat: false
+      chat: {},
+      send: {
+        id: '',
+        message: ''
+      }
     };
   },
   watch: {// method(after, before) {
@@ -1959,16 +1968,29 @@ __webpack_require__.r(__webpack_exports__);
     // }
   },
   methods: {
-    SendChat: function SendChat(chatID) {
+    LookChat: function LookChat(chatID) {
       var _this = this;
 
       axios.post('/dialog/show', {
-        chatID: chatID
+        id: chatID
       }).then(function (e) {
         _this.chat = e.data.chat;
+        _this.send.id = e.data.chat.id;
       })["catch"](function (err) {
         console.log(err);
       });
+    },
+    SendChat: function SendChat() {
+      var _this2 = this;
+
+      if (this.send) {
+        axios.post('/dialog/update', this.send).then(function (e) {
+          _this2.chat = e.data.chat;
+          _this2.send.message = '';
+        })["catch"](function (err) {
+          console.log(err);
+        });
+      }
     }
   }
 });
@@ -37384,7 +37406,7 @@ var render = function() {
                     on: {
                       click: function($event) {
                         $event.preventDefault()
-                        return _vm.SendChat(thread.id)
+                        return _vm.LookChat(thread.id)
                       }
                     }
                   },
@@ -37438,7 +37460,53 @@ var render = function() {
         [
           _c("show", { attrs: { thread: _vm.chat, user: _vm.user } }),
           _vm._v(" "),
-          _vm._m(3)
+          _c("div", { staticClass: "input-area" }, [
+            _c("div", { staticClass: "input-wrapper col-9" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.send.message,
+                    expression: "send.message"
+                  }
+                ],
+                attrs: {
+                  name: "message",
+                  type: "text",
+                  placeholder: "текст..."
+                },
+                domProps: { value: _vm.send.message },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.send, "message", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("i", { staticClass: "fa fa-smile-o" }),
+              _vm._v(" "),
+              _c("i", { staticClass: "fa fa-paperclip" })
+            ]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary send-btn col-3",
+                staticStyle: {
+                  height: "32px",
+                  "font-size": "12px",
+                  padding: "2px"
+                },
+                attrs: { type: "submit" },
+                on: { click: _vm.SendChat }
+              },
+              [_vm._v("Отправить")]
+            )
+          ])
         ],
         1
       ),
@@ -37450,12 +37518,12 @@ var render = function() {
           attrs: { id: "accordion" }
         },
         [
-          _vm._m(4),
+          _vm._m(3),
           _vm._v(" "),
           _c(
             "div",
             {
-              staticClass: "col collapse show",
+              staticClass: "collapse show",
               attrs: { id: "Collapse1", "data-parent": "#accordion" }
             },
             [
@@ -37465,59 +37533,47 @@ var render = function() {
                     "ul",
                     { staticClass: "member-list" },
                     _vm._l(_vm.users, function(user) {
-                      return _c(
-                        "li",
-                        {
-                          staticClass: "btn-outline-light",
-                          staticStyle: { cursor: "pointer" }
-                        },
-                        [
-                          _vm._m(5, true),
-                          _vm._v(" "),
-                          _c(
-                            "span",
-                            {
-                              attrs: {
-                                id: "dropdownMenuButton" + user.id,
-                                "data-toggle": "dropdown",
-                                "aria-haspopup": "true",
-                                "aria-expanded": "false"
-                              }
-                            },
-                            [
-                              _c("span", { staticStyle: { color: "black" } }, [
-                                _vm._v(_vm._s(user.name))
-                              ])
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "time" }, [
-                            _vm._v("10:45 pm")
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass: "dropdown-menu",
-                              attrs: {
-                                "aria-labelledby":
-                                  "dropdownMenuButton" + user.id
-                              }
-                            },
-                            [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "dropdown-item",
-                                  staticStyle: { color: "black" },
-                                  attrs: { href: "#" }
-                                },
-                                [_vm._v("Написать")]
-                              )
-                            ]
-                          )
-                        ]
-                      )
+                      return _c("li", { staticClass: "btn-outline-light" }, [
+                        _vm._m(4, true),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          {
+                            attrs: {
+                              id: "dropdownMenuButton" + user.id,
+                              "data-toggle": "dropdown",
+                              "aria-haspopup": "true",
+                              "aria-expanded": "false"
+                            }
+                          },
+                          [_c("span", [_vm._v(_vm._s(user.name))])]
+                        ),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "time" }, [
+                          _vm._v("10:45 pm")
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "dropdown-menu",
+                            attrs: {
+                              "aria-labelledby": "dropdownMenuButton" + user.id
+                            }
+                          },
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "dropdown-item",
+                                staticStyle: { color: "black" },
+                                attrs: { href: "#" }
+                              },
+                              [_vm._v("Написать")]
+                            )
+                          ]
+                        )
+                      ])
                     }),
                     0
                   )
@@ -37533,7 +37589,7 @@ var render = function() {
           _c(
             "div",
             {
-              staticClass: "col collapse",
+              staticClass: "collapse",
               attrs: { id: "Collapse2", "data-parent": "#accordion" }
             },
             [_vm._v("\n                Two\n            ")]
@@ -37542,7 +37598,7 @@ var render = function() {
           _c(
             "div",
             {
-              staticClass: "col collapse",
+              staticClass: "collapse",
               attrs: { id: "Collapse3", "data-parent": "#accordion" }
             },
             [_vm._v("\n                Three\n            ")]
@@ -37620,34 +37676,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-area" }, [
-      _c("div", { staticClass: "input-wrapper col-9" }, [
-        _c("input", {
-          attrs: { name: "message", type: "text", placeholder: "текст..." }
-        }),
-        _vm._v(" "),
-        _c("i", { staticClass: "fa fa-smile-o" }),
-        _vm._v(" "),
-        _c("i", { staticClass: "fa fa-paperclip" })
-      ]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary send-btn col-3",
-          staticStyle: { height: "32px", "font-size": "12px", padding: "2px" },
-          attrs: { type: "submit" }
-        },
-        [_vm._v("Отправить")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("ul", { staticClass: "tabs" }, [
-      _c("li", [
+      _c("li", { staticClass: "active" }, [
         _c(
           "a",
           {
@@ -37663,7 +37693,7 @@ var staticRenderFns = [
         )
       ]),
       _vm._v(" "),
-      _c("li", { staticClass: "active" }, [
+      _c("li", [
         _c(
           "a",
           {

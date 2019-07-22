@@ -1,17 +1,8 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+
 Route::get('/', function () {
-    return redirect()->route('messages.index');
+    return redirect()->route('dialog.index');
 });
 // Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -30,7 +21,7 @@ Route::group(['middleware' => ['auth'],'prefix' => 'dialog', 'as' => 'dialog.'],
     Route::get('create', [ 'uses' => 'DialogController@create','as' => 'create']);
     Route::post('/', ['uses' => 'DialogController@store','as' => 'store']);
     Route::post('show', ['uses' => 'DialogController@show','as' => 'show']);
-    Route::put('{id}', ['uses' => 'DialogController@update','as' => 'update']);
+    Route::post('/update', ['uses' => 'DialogController@update','as' => 'update']);
 });
 
 Auth::routes();

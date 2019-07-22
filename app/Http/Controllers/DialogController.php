@@ -7,9 +7,8 @@ use Carbon\Carbon;
 use Cmgmyr\Messenger\Models\Message;
 use Cmgmyr\Messenger\Models\Participant;
 use Cmgmyr\Messenger\Models\Thread;
-use App\Dialog;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
@@ -29,8 +28,9 @@ class DialogController extends Controller
         $users = User::where('id','!=',$user->id)->get();
 
         // Все потоки, в которых участвует пользователь c отношениями
-        $req_threads = $thread->forUser($user->id)->latest('updated_at')->with(['messages.user'=> function ($query){
-            $query->latest()->first();
+        $req_threads = $thread->forUser($user->id)->latest('updated_at')->with(['messages'=> function ($query){
+            //Todo: Сделать вывод 1 записи (а не всех)
+            return $query->orderByDesc('created_at')->with('user');
         }])->get();
         $threads = collect();
         foreach ($req_threads as &$thread) {
@@ -56,32 +56,33 @@ class DialogController extends Controller
 
 
 
-    /**
+    /*
      * Shows a message thread.
      *
      * @param $id
      * @return mixed
      */
-    public function show(Request $request)
+    public function show($id = null)
     {
+        if (!$id){
+            $id = Input::get('id');
+        }
 
         try {
-            $chat = Thread::findOrFail($request->chatID);
+            $chat = Thread::findOrFail($id);
             collect($chat->messages)->each(function ($item) {
                 $item->created = $item->created_at->diffForHumans();
                 return $item->user;
             });
         } catch (ModelNotFoundException $e) {
-            Session::flash('error_message', 'The thread with ID: ' . $request->chatID . ' was not found.');
-
-            return redirect()->route('messages');
+            return 'The thread with ID: ' . $id . ' was not found';
         }
-
+        $chat->markAsRead(Auth::id());
 
         return compact('chat');
     }
 
-    /**
+    /*
      * Creates a new message thread.
      *
      * @return mixed
@@ -94,7 +95,7 @@ class DialogController extends Controller
         return view('messenger.create', compact('users'));
     }
 
-    /**
+    /*
      * Stores a new message thread.
      *
      * @return mixed
@@ -102,6 +103,7 @@ class DialogController extends Controller
     public function store()
     {
         $input = Input::all();
+
         $thread = Thread::create([
             'subject' => $input['subject'],
         ]);
@@ -124,24 +126,24 @@ class DialogController extends Controller
         if (Input::has('recipients')) {
             $thread->addParticipant($input['recipients']);
         }
+        return $this->show();
 
-        return redirect()->route('messages.index');
     }
 
-    /**
+    /*
      * Adds a new message to a current thread.
      *
      * @param $id
      * @return mixed
      */
-    public function update($id)
+    public function update()
     {
         try {
-            $thread = Thread::findOrFail($id);
+            $thread = Thread::findOrFail(Input::get('id'));
         } catch (ModelNotFoundException $e) {
-            Session::flash('error_message', 'The thread with ID: ' . $id . ' was not found.');
+            Session::flash('error_message', 'The thread with ID: ' . Input::get('id') . ' was not found.');
 
-            return redirect()->route('messages');
+            return $e;
         }
 
         $thread->activateAllParticipants();
@@ -166,6 +168,6 @@ class DialogController extends Controller
             $thread->addParticipant(Input::get('recipients'));
         }
 
-        return redirect()->route('messages.show', $id);
+        return $this->show(Input::get('id'));
     }
 }

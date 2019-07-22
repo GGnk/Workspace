@@ -24,7 +24,7 @@
             <div class="conversation-list col-12 col-sm-3" style="padding: 0">
                 <ul style="margin-bottom: 46px;">
                     <li style="" v-for="thread in threads.chat"  :key="thread.id">
-                        <a href="#" @click.prevent="SendChat(thread.id)">
+                        <a href="#" @click.prevent="LookChat(thread.id)">
                             <threads :thread="thread"></threads>
                         </a>
                     </li>
@@ -49,35 +49,40 @@
 
                 </div>
             </div>
+
             <div class="chat-area col-12 col-sm-6">
+
                 <show :thread="chat" :user="user"></show>
+
                 <div class="input-area">
                     <div class="input-wrapper col-9">
-                        <input name="message" type="text" placeholder="текст...">
+                        <input name="message" type="text" v-model="send.message" placeholder="текст...">
                         <i class="fa fa-smile-o"></i>
                         <i class="fa fa-paperclip"></i>
                     </div>
-                    <button type="submit" class="btn btn-primary send-btn col-3" style="height: 32px;font-size: 12px;padding: 2px;" >Отправить</button>
+                    <button type="submit" class="btn btn-primary send-btn col-3" style="height: 32px;font-size: 12px;padding: 2px;" @click="SendChat">Отправить</button>
                 </div>
             </div>
+
             <div class="right-tabs col-12 col-sm-3 col" id="accordion">
                 <ul class="tabs">
-                    <li>
+                    <li class="active">
                         <a data-toggle="collapse" href="#Collapse1" role="button" aria-expanded="true" aria-controls="Collapse1"><i class="fa fa-users"></i></a>
                     </li>
-                    <li class="active"><a data-toggle="collapse" href="#Collapse2" role="button" aria-expanded="false" aria-controls="Collapse2"><i class="fa fa-paperclip"></i></a></li>
+                    <li><a data-toggle="collapse" href="#Collapse2" role="button" aria-expanded="false" aria-controls="Collapse2"><i class="fa fa-paperclip"></i></a></li>
                     <li><a data-toggle="collapse" href="#Collapse3" role="button" aria-expanded="false" aria-controls="Collapse3"><i class="fa fa-link"></i></a></li>
                 </ul>
-                <div class="col collapse show" id="Collapse1" data-parent="#accordion">
+
+                <div class="collapse show" id="Collapse1" data-parent="#accordion">
                     <ul class="tabs-container">
                         <li class="active">
                             <ul class="member-list">
-                                <li v-for="user in users" class="btn-outline-light" style="cursor: pointer">
+                                <li v-for="user in users" class="btn-outline-light">
                                     <span class="status idle">
                                         <i class="fa fa-circle-o"></i>
                                     </span>
                                     <span :id="'dropdownMenuButton'+user.id" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <span style="color: black;">{{user.name}}</span>
+                                        <span>{{user.name}}</span>
                                     </span>
                                     <span class="time">10:45 pm</span>
                                     <div class="dropdown-menu" :aria-labelledby="'dropdownMenuButton'+user.id">
@@ -90,10 +95,10 @@
                         <li></li>
                     </ul>
                 </div>
-                <div class="col collapse"  id="Collapse2" data-parent="#accordion">
+                <div class="collapse"  id="Collapse2" data-parent="#accordion">
                     Two
                 </div>
-                <div class="col collapse"  id="Collapse3" data-parent="#accordion">
+                <div class="collapse"  id="Collapse3" data-parent="#accordion">
                     Three
                 </div>
                 <i class="fa fa-cog"></i>
@@ -118,7 +123,11 @@
         },
         data() {
             return {
-                chat: false,
+                chat: {},
+                send: {
+                    id: '',
+                    message: ''
+                }
             }
         },
         watch: {
@@ -127,15 +136,31 @@
             // }
         },
         methods: {
-            SendChat(chatID) {
-                axios.post('/dialog/show', {chatID: chatID})
-                    .then((e) => {
-                        this.chat = e.data.chat
-                    })
-                    .catch((err) => {
-                        console.log(err)
-                    })
+            LookChat(chatID) {
+
+                    axios.post('/dialog/show', {id: chatID})
+                        .then((e) => {
+                            this.chat = e.data.chat
+                            this.send.id = e.data.chat.id
+                        })
+                        .catch((err) => {
+                            console.log(err)
+                        })
+
+            },
+            SendChat() {
+                if (this.send) {
+                    axios.post('/dialog/update', this.send)
+                        .then((e) => {
+                            this.chat = e.data.chat
+                            this.send.message = ''
+                        })
+                        .catch((err) => {
+                            console.log(err)
+                        })
+                }
             }
         }
     }
 </script>
+

@@ -45,8 +45,8 @@ body {
     line-height: 1;
     font-family: 'Open Sans', Arial, sans-serif;
     font-size: 12px;
-    color: #333f4d;
-    background-color: white;
+    color: white;
+    background-color: #3d3e46;
 }
 ol, ul {
     list-style: none;
@@ -67,6 +67,12 @@ table {
 b{
     font-weight: bold;
 }
+
+.btn-outline-light:hover {
+    color: white !important;
+    background-color: #44454f !important;
+}
+
 .window-wrapper{
     background: #fff;
     margin: 30px auto;
@@ -122,7 +128,7 @@ b{
     bottom: 0;
 }
 .conversation-list{
-    background: #505d71;
+    background: #44454f;
 }
 .conversation-list ul li a{
     padding: 15px;
@@ -130,7 +136,7 @@ b{
     text-decoration: none;
     display: block;
     position: relative;
-    border-bottom: 2px solid #586476;
+    border-bottom:2px solid #3d3e46;
 }
 .conversation-list ul li a:hover,
 .conversation-list ul li.active a{
@@ -161,8 +167,8 @@ b{
     color: #f57e7d;
 }
 .chat-area{
-    border-top: 1px solid #cfdae1;
-    box-shadow: inset 0 1px 3px rgba(207, 218, 225, 0.42);
+    border-top: 1px solid #44454f;
+    box-shadow: inset -1px 0px 0px 2px #44454f;
     min-height: 50%;
 }
 .chat-area .title{
@@ -177,8 +183,8 @@ b{
     cursor: pointer;
 }
 .chat-area .chat-list{
-    border-top: 1px solid #cfdae1;
-    border-bottom: 1px solid #cfdae1;
+    border-top: 1px solid #44454f;
+    border-bottom: 1px solid #3d3e46;
     position: absolute;
     left: 0;
     top: 35px;
@@ -231,17 +237,17 @@ b{
 }
 .chat-area ul .message{
     padding: 14px 22px;
-    border: 1px solid #cfdae1;
+    margin: 10px 0 0 0;
+    border: 1px solid #27557b;
     float: left;
-    color: #333f4d;
     max-width: 550px;
     overflow-wrap: break-word;
-
     -webkit-border-radius: 30px;
     -webkit-border-top-left-radius: 0;
     -moz-border-radius: 30px;
     -moz-border-radius-topleft: 0;
     border-radius: 30px;
+    background-color: #44454f;
     border-top-left-radius: 0;
 }
 
@@ -254,6 +260,7 @@ b{
     -moz-border-radius-topright: 0;
     border-radius: 30px;
     border-top-right-radius: 0;
+    background-color: #27557b;
 }
 .chat-area ul .message > p{
     line-height: 20px;
@@ -269,18 +276,18 @@ b{
     font-size: 9px;
 }
 .input-area{
-    background: #e4eaee;
+    background: #44454f;
     padding: 6px;
     overflow: hidden;
     position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
-    border-top: 1px solid #cfdae1;
+    border-top: 1px solid #44454f;
 }
 .input-area .input-wrapper{
-    background: #fff;
-    border: 1px solid #cfdae1;
+    background: #44454f;
+    border: 1px solid #3d3e46;
     border-radius: 5px;
     overflow: hidden;
     float: left;
@@ -293,8 +300,8 @@ b{
     margin: 0;
     padding: 0 10px;
     outline: none;
-    color: #5D7185;
     min-width: 86%;
+    background: #44454f;
 }
 .input-area .input-wrapper i{
     font-size: 18px;
@@ -318,8 +325,8 @@ b{
 }
 .right-tabs{
     overflow: hidden;
-    border-left: 1px solid #cfdae1;
-    border-top: 1px solid #cfdae1;
+    border-left: 1px solid #44454f;
+    border-top: 1px solid #44454f;
 }
 .right-tabs > ul.tabs{
     overflow: hidden;
@@ -363,7 +370,8 @@ ul.tabs-container{
     cursor: pointer;
 }
 .member-list > li{
-    padding: 5px 0;
+    cursor: pointer;
+    padding: 5px;
 }
 .member-list > li .status{
     margin: 0 10px 0 0;
@@ -390,7 +398,7 @@ ul.tabs-container{
     bottom: 0;
     height: auto;
     padding: 8px;
-    background: #445166;
+    background: #3d3e46;
 }
 .my-account > .image{
     width: 30px;
