@@ -1,7 +1,7 @@
 <template>
     <div v-if="thread">
         <div class="title"><b>{{ thread.subject }}</b><i class="fa fa-search"></i></div>
-        <div class="chat-list">
+        <div class="chat-list" id="chat-list" :onload="Scroll">
             <ul style="width: 100%;">
 
                 <li v-for="message in thread.messages" :class="message.user_id == user.id ? 'me':''">
@@ -29,7 +29,22 @@
             'thread',
             'user'
         ],
+        watch: {
+            thread(after, before) {
+                this.Scroll()
+            }
+        },
+        mounted() {
+            this.Scroll()
+        },
+        methods: {
+            Scroll() {
+                let block = document.getElementById("chat-list");
+                block.scrollTop = block.scrollHeight;
+            },
+        }
     }
+
 </script>
 
 <style scoped>

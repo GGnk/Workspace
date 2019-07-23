@@ -20,15 +20,19 @@ class DialogController extends Controller
 
     }
 
-    public function index(Thread $thread)
+    public function index()
     {
-        $user = Auth::user();
+        return view('layouts.index');
+    }
+
+    public function fetchAll(Thread $thread) {
+        $auth_user = Auth::user();
 
         // Выгружаем всех пользотелей для списка
-        $users = User::where('id','!=',$user->id)->get();
-
+        $users = User::where('id','!=',$auth_user->id)->get();
+        $users_list = User::all();
         // Все потоки, в которых участвует пользователь c отношениями
-        $req_threads = $thread->forUser($user->id)->latest('updated_at')->with(['messages'=> function ($query){
+        $req_threads = $thread->forUser($auth_user->id)->latest('updated_at')->with(['messages'=> function ($query){
             //Todo: Сделать вывод 1 записи (а не всех)
             return $query->orderByDesc('created_at')->with('user');
         }])->get();
@@ -36,13 +40,13 @@ class DialogController extends Controller
         foreach ($req_threads as &$thread) {
             $count = collect($thread);
             $count->put('countPeople', $thread->participantsUserIds());
-            $count->put('interlocutor', $thread->participantsString($user->id));
-            $count->put('UnreadMessagesCount',$thread->userUnreadMessagesCount($user->id));
+            $count->put('interlocutor', $thread->participantsString($auth_user->id));
+            $count->put('UnreadMessagesCount',$thread->userUnreadMessagesCount($auth_user->id));
 
             $arr[] = $count;
             $threads['chat'] = $arr;
         }
-        $threads['newThreadsCount'] = $user->newThreadsCount();
+        $threads['newThreadsCount'] = $auth_user->newThreadsCount();
 
 
         // Все потоки, игнорировать удаленных / архивированных участников
@@ -51,10 +55,8 @@ class DialogController extends Controller
         // Все потоки, в которых участвует пользователь, с новыми сообщениями
         // $threads = Thread::forUserWithNewMessages(Auth::id())->latest('updated_at')->get();
 
-        return view('layouts.index', compact('threads','users', 'user'));
+        return compact('threads','users', 'auth_user', 'users_list');
     }
-
-
 
     /*
      * Shows a message thread.
@@ -77,9 +79,11 @@ class DialogController extends Controller
         } catch (ModelNotFoundException $e) {
             return 'The thread with ID: ' . $id . ' was not found';
         }
+
+        $users = User::whereIn('id', $chat->participantsUserIds())->get();
         $chat->markAsRead(Auth::id());
 
-        return compact('chat');
+        return compact('chat','users')->toJson();
     }
 
     /*
@@ -126,7 +130,7 @@ class DialogController extends Controller
         if (Input::has('recipients')) {
             $thread->addParticipant($input['recipients']);
         }
-        return $this->show();
+        return $this->show($thread->id);
 
     }
 

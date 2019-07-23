@@ -33,7 +33,7 @@
 <body>
 
 <div class="wrapper" id="app">
-    <wrapper :user="{{$user}}" :users="{{$users}}" :threads="{{$threads}}"></wrapper>
+    <wrapper></wrapper>
 </div>
 
 <script src="{{ mix('js/app.js') }}"></script>

@@ -46,7 +46,7 @@ body {
     font-family: 'Open Sans', Arial, sans-serif;
     font-size: 12px;
     color: white;
-    background-color: #3d3e46;
+    background-color: #353640;
 }
 ol, ul {
     list-style: none;
@@ -136,7 +136,7 @@ b{
     text-decoration: none;
     display: block;
     position: relative;
-    border-bottom:2px solid #3d3e46;
+    border-bottom:1px solid #3d3e46;
 }
 .conversation-list ul li a:hover,
 .conversation-list ul li.active a{
@@ -238,7 +238,7 @@ b{
 .chat-area ul .message{
     padding: 14px 22px;
     margin: 10px 0 0 0;
-    border: 1px solid #27557b;
+    border: 1px solid #6f7f8c;
     float: left;
     max-width: 550px;
     overflow-wrap: break-word;
@@ -247,7 +247,7 @@ b{
     -moz-border-radius: 30px;
     -moz-border-radius-topleft: 0;
     border-radius: 30px;
-    background-color: #44454f;
+    background-color: #5d5f69;
     border-top-left-radius: 0;
 }
 

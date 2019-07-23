@@ -18,8 +18,8 @@ Route::group(['middleware' => ['auth'],'prefix' => 'messages', 'as' => 'messages
 });
 Route::group(['middleware' => ['auth'],'prefix' => 'dialog', 'as' => 'dialog.'], function () {
     Route::get('/', ['uses' => 'DialogController@index', 'as' => 'index']);
-    Route::get('create', [ 'uses' => 'DialogController@create','as' => 'create']);
-    Route::post('/', ['uses' => 'DialogController@store','as' => 'store']);
+    Route::post('all', [ 'uses' => 'DialogController@fetchAll','as' => 'all']);
+    Route::post('/store', ['uses' => 'DialogController@store','as' => 'store']);
     Route::post('show', ['uses' => 'DialogController@show','as' => 'show']);
     Route::post('/update', ['uses' => 'DialogController@update','as' => 'update']);
 });

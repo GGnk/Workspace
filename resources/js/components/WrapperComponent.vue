@@ -8,13 +8,56 @@
             </div>
             <div class="title">
                 <ul class="nav navbar-nav">
-                    <li><a href="/">Главная <span class="label label-danger" v-if="threads.newThreadsCount"> {{threads.newThreadsCount}}</span></a></li>
+                    <li><a href="/">Главная <span class="label label-danger" v-if="chats.threads.newThreadsCount"> {{chats.threads.newThreadsCount}}</span></a></li>
                     <li>
                         <a href="#" role="button" data-toggle="modal" data-target="#createChat">
                             <i class="fa fa-plus-circle" aria-hidden="true"></i>
                             <span>Создать чат!</span>
                         </a>
+
                         <!-- Modal -->
+                        <div class="modal" id="createChat" tabindex="-1" role="dialog" aria-labelledby="createChatTitle" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content" style="color: black;">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="createChatTitle">Создать чат</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body" style="padding: 15px 0">
+                                        <div class="col-md-12" >
+                                            <!-- Subject Form Input -->
+                                            <div class="form-group row">
+                                                <div class="col-sm-9 col-12">
+                                                    <input type="text" class="form-control" name="subject" placeholder="Тема"
+                                                           v-model="send.subject">
+                                                </div>
+                                                <!-- Submit Form Input -->
+                                                <div class="form-group col-sm-3 col-12">
+                                                    <button type="submit" class="btn btn-primary form-control" @click="CreateChat" data-dismiss="modal" aria-label="Close">Написать</button>
+                                                </div>
+                                                <div class="col-12" >
+                                                    <label for="people" class="control-label">Пользователи</label>
+                                                    <ul id="people">
+                                                        <!--<label class="list-users" v-for="user in users_list">
+                                                            <li>
+                                                                <img :src="user.img"/>
+                                                                <span v-text="user.name"></span>
+                                                                <input v-model="send.recipients" :id="user.id" :value="user.id" type="checkbox">
+                                                            </li>
+                                                        </label>-->
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                     </li>
                 </ul>
@@ -23,7 +66,7 @@
         <div class="window-area row">
             <div class="conversation-list col-12 col-sm-3" style="padding: 0">
                 <ul style="margin-bottom: 46px;">
-                    <li style="" v-for="thread in threads.chat"  :key="thread.id">
+                    <li style="" v-for="thread in chats.threads.chat"  :key="thread.id">
                         <a href="#" @click.prevent="LookChat(thread.id)">
                             <threads :thread="thread"></threads>
                         </a>
@@ -31,13 +74,13 @@
                 </ul>
                 <div class="my-account">
                     <div class="image">
-                        <img :src="user.img">
+                        <img :src="auth_user.img">
                         <i class="fa fa-circle online"></i>
                     </div>
                     <div class="name">
                         <div class="dropdown">
                             <a href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span>{{user.name}}</span>
+                                <span>{{auth_user.name}}</span>
                                 <i class="fa fa-angle-down"></i>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -50,17 +93,18 @@
                 </div>
             </div>
 
-            <div class="chat-area col-12 col-sm-6">
+            <div class="chat-area col-12 col-sm-6" >
+                <div v-if="chat.id">
+                    <show :thread="chat" :user="user"></show>
 
-                <show :thread="chat" :user="user"></show>
-
-                <div class="input-area">
-                    <div class="input-wrapper col-9">
-                        <input name="message" type="text" v-model="send.message" placeholder="текст...">
-                        <i class="fa fa-smile-o"></i>
-                        <i class="fa fa-paperclip"></i>
+                    <div class="input-area">
+                        <div class="input-wrapper col-9">
+                            <input name="message" type="text" v-model="send.message" placeholder="текст...">
+                            <i class="fa fa-smile-o"></i>
+                            <i class="fa fa-paperclip"></i>
+                        </div>
+                        <button type="submit" class="btn btn-primary send-btn col-3" style="height: 32px;font-size: 12px;padding: 2px;" @click="SendChat">Отправить</button>
                     </div>
-                    <button type="submit" class="btn btn-primary send-btn col-3" style="height: 32px;font-size: 12px;padding: 2px;" @click="SendChat">Отправить</button>
                 </div>
             </div>
 
@@ -77,7 +121,7 @@
                     <ul class="tabs-container">
                         <li class="active">
                             <ul class="member-list">
-                                <li v-for="user in users" class="btn-outline-light">
+                                <li v-for="user in chats.users" class="btn-outline-light">
                                     <span class="status idle">
                                         <i class="fa fa-circle-o"></i>
                                     </span>
@@ -113,20 +157,24 @@
         // mixins: [mixin],
         components: {},
         name: "Wrapper",
-        props: [
-            'user',
-            'users',
-            'threads'
-        ],
+        props: [],
         mounted() {
-
+            this.fetchAllChats()
         },
         data() {
             return {
+                chats: {
+                    threads: {},
+                    users:{},
+                    auth_user:{},
+                    users_list:{}
+                },
                 chat: {},
                 send: {
                     id: '',
-                    message: ''
+                    message: '',
+                    subject: '',
+                    recipients: []
                 }
             }
         },
@@ -136,12 +184,22 @@
             // }
         },
         methods: {
+            fetchAllChats() {
+                axios.post('/dialog/all')
+                    .then((e) => {
+                        this.chats = e.data
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                    })
+            },
             LookChat(chatID) {
 
                     axios.post('/dialog/show', {id: chatID})
                         .then((e) => {
                             this.chat = e.data.chat
                             this.send.id = e.data.chat.id
+                            this.chats.users = e.data.users
                         })
                         .catch((err) => {
                             console.log(err)
@@ -149,11 +207,25 @@
 
             },
             SendChat() {
-                if (this.send) {
+                if (this.send.message) {
                     axios.post('/dialog/update', this.send)
                         .then((e) => {
                             this.chat = e.data.chat
                             this.send.message = ''
+                        })
+                        .catch((err) => {
+                            console.log(err)
+                        })
+                }
+            },
+            CreateChat() {
+                if (this.send.subject && this.send.recipients) {
+                    axios.post('/dialog/store', this.send)
+                        .then((e) => {
+                            this.chat = e.data.chat
+                            this.send.id = e.data.chat.id
+                            this.send.subject = ''
+                            this.send.recipients = []
                         })
                         .catch((err) => {
                             console.log(err)
@@ -164,3 +236,34 @@
     }
 </script>
 
+<style scoped>
+    .list-users {
+        display: contents;
+        cursor: pointer;
+    }
+    .list-users li {
+        height: 50px;
+        text-align: left;
+        position: relative;
+        padding: 10px;
+        border-bottom: 1px solid #d9d9da;
+    }
+    .list-users li:hover {
+        background-color: #e7e8ec;
+    }
+    .list-users li img {
+        width: 8%;
+        float: left;
+        border-radius: 18px;
+    }
+    .list-users li span {
+        position: relative;
+        top: 10px;
+        margin-left: 6px;
+        font-size: 14px;
+        font-family: cursive;
+    }
+    .list-users li input {
+        float: right;
+    }
+</style>
