@@ -2002,12 +2002,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      chats: {
-        threads: {},
-        users: {},
-        auth_user: {},
-        users_list: {}
-      },
+      threads: {},
+      users: {},
+      auth_user: {},
+      users_list: {},
       chat: {},
       send: {
         id: '',
@@ -2026,7 +2024,11 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.post('/dialog/all').then(function (e) {
-        _this.chats = e.data;
+        _this.threads = e.data.threads;
+        _this.users = e.data.users;
+        _this.auth_user = e.data.auth_user;
+        _this.users_list = e.data.users_list;
+        _this.chat = {};
       })["catch"](function (err) {
         console.log(err);
       });
@@ -2039,7 +2041,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (e) {
         _this2.chat = e.data.chat;
         _this2.send.id = e.data.chat.id;
-        _this2.chats.users = e.data.users;
+        _this2.users = e.data.users;
       })["catch"](function (err) {
         console.log(err);
       });
@@ -2111,11 +2113,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ShowComponent",
   props: ['thread', 'user'],
-  watch: {
-    thread: function thread(after, before) {
-      this.Scroll();
-    }
-  },
+  watch: {},
   mounted: function mounted() {
     this.Scroll();
   },
@@ -2157,7 +2155,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ThreadsComponent",
-  props: ['thread']
+  props: ['thread', 'user']
 });
 
 /***/ }),
@@ -38108,14 +38106,18 @@ var render = function() {
       _c("div", { staticClass: "title" }, [
         _c("ul", { staticClass: "nav navbar-nav" }, [
           _c("li", [
-            _c("a", { attrs: { href: "/" } }, [
-              _vm._v("Главная "),
-              _vm.chats.threads.newThreadsCount
-                ? _c("span", { staticClass: "label label-danger" }, [
-                    _vm._v(" " + _vm._s(_vm.chats.threads.newThreadsCount))
-                  ])
-                : _vm._e()
-            ])
+            _c(
+              "a",
+              { attrs: { href: "#" }, on: { click: _vm.fetchAllChats } },
+              [
+                _vm._v("Главная "),
+                _vm.threads.newThreadsCount
+                  ? _c("span", { staticClass: "label label-danger" }, [
+                      _vm._v(" " + _vm._s(_vm.threads.newThreadsCount))
+                    ])
+                  : _vm._e()
+              ]
+            )
           ]),
           _vm._v(" "),
           _c("li", [
@@ -38209,7 +38211,105 @@ var render = function() {
                                   ]
                                 ),
                                 _vm._v(" "),
-                                _vm._m(3)
+                                _c("div", { staticClass: "col-12" }, [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass: "control-label",
+                                      attrs: { for: "people" }
+                                    },
+                                    [_vm._v("Пользователи")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "ul",
+                                    { attrs: { id: "people" } },
+                                    _vm._l(_vm.users_list, function(user) {
+                                      return _c(
+                                        "label",
+                                        { staticClass: "list-users" },
+                                        [
+                                          _c("li", [
+                                            _c("img", {
+                                              attrs: { src: user.img }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("span", {
+                                              domProps: {
+                                                textContent: _vm._s(user.name)
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value: _vm.send.recipients,
+                                                  expression: "send.recipients"
+                                                }
+                                              ],
+                                              attrs: {
+                                                id: user.id,
+                                                type: "checkbox"
+                                              },
+                                              domProps: {
+                                                value: user.id,
+                                                checked: Array.isArray(
+                                                  _vm.send.recipients
+                                                )
+                                                  ? _vm._i(
+                                                      _vm.send.recipients,
+                                                      user.id
+                                                    ) > -1
+                                                  : _vm.send.recipients
+                                              },
+                                              on: {
+                                                change: function($event) {
+                                                  var $$a = _vm.send.recipients,
+                                                    $$el = $event.target,
+                                                    $$c = $$el.checked
+                                                      ? true
+                                                      : false
+                                                  if (Array.isArray($$a)) {
+                                                    var $$v = user.id,
+                                                      $$i = _vm._i($$a, $$v)
+                                                    if ($$el.checked) {
+                                                      $$i < 0 &&
+                                                        _vm.$set(
+                                                          _vm.send,
+                                                          "recipients",
+                                                          $$a.concat([$$v])
+                                                        )
+                                                    } else {
+                                                      $$i > -1 &&
+                                                        _vm.$set(
+                                                          _vm.send,
+                                                          "recipients",
+                                                          $$a
+                                                            .slice(0, $$i)
+                                                            .concat(
+                                                              $$a.slice($$i + 1)
+                                                            )
+                                                        )
+                                                    }
+                                                  } else {
+                                                    _vm.$set(
+                                                      _vm.send,
+                                                      "recipients",
+                                                      $$c
+                                                    )
+                                                  }
+                                                }
+                                              }
+                                            })
+                                          ])
+                                        ]
+                                      )
+                                    }),
+                                    0
+                                  )
+                                ])
                               ])
                             ])
                           ]
@@ -38236,7 +38336,7 @@ var render = function() {
           _c(
             "ul",
             { staticStyle: { "margin-bottom": "46px" } },
-            _vm._l(_vm.chats.threads.chat, function(thread) {
+            _vm._l(_vm.threads.chat, function(thread) {
               return _c("li", { key: thread.id }, [
                 _c(
                   "a",
@@ -38249,7 +38349,11 @@ var render = function() {
                       }
                     }
                   },
-                  [_c("threads", { attrs: { thread: thread } })],
+                  [
+                    _c("threads", {
+                      attrs: { thread: thread, user: _vm.auth_user }
+                    })
+                  ],
                   1
                 )
               ])
@@ -38257,39 +38361,43 @@ var render = function() {
             0
           ),
           _vm._v(" "),
-          _c("div", { staticClass: "my-account" }, [
-            _c("div", { staticClass: "image" }, [
-              _c("img", { attrs: { src: _vm.auth_user.img } }),
-              _vm._v(" "),
-              _c("i", { staticClass: "fa fa-circle online" })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "name" }, [
-              _c("div", { staticClass: "dropdown" }, [
-                _c(
-                  "a",
-                  {
-                    attrs: {
-                      href: "#",
-                      id: "dropdownMenuButton",
-                      "data-toggle": "dropdown",
-                      "aria-haspopup": "true",
-                      "aria-expanded": "false"
-                    }
-                  },
-                  [
-                    _c("span", [_vm._v(_vm._s(_vm.auth_user.name))]),
-                    _vm._v(" "),
-                    _c("i", { staticClass: "fa fa-angle-down" })
-                  ]
-                ),
+          _vm.auth_user
+            ? _c("div", { staticClass: "my-account" }, [
+                _c("div", { staticClass: "image" }, [
+                  _c("img", { attrs: { src: _vm.auth_user.img } }),
+                  _vm._v(" "),
+                  _c("i", { staticClass: "fa fa-circle online" })
+                ]),
                 _vm._v(" "),
-                _vm._m(4)
-              ]),
-              _vm._v(" "),
-              _c("span", { staticClass: "availability" }, [_vm._v("В сети")])
-            ])
-          ])
+                _c("div", { staticClass: "name" }, [
+                  _c("div", { staticClass: "dropdown" }, [
+                    _c(
+                      "a",
+                      {
+                        attrs: {
+                          href: "#",
+                          id: "dropdownMenuButton",
+                          "data-toggle": "dropdown",
+                          "aria-haspopup": "true",
+                          "aria-expanded": "false"
+                        }
+                      },
+                      [
+                        _c("span", [_vm._v(_vm._s(_vm.auth_user.name))]),
+                        _vm._v(" "),
+                        _c("i", { staticClass: "fa fa-angle-down" })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm._m(3)
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "availability" }, [
+                    _vm._v("В сети")
+                  ])
+                ])
+              ])
+            : _vm._e()
         ]
       ),
       _vm._v(" "),
@@ -38298,7 +38406,9 @@ var render = function() {
           ? _c(
               "div",
               [
-                _c("show", { attrs: { thread: _vm.chat, user: _vm.user } }),
+                _c("show", {
+                  attrs: { thread: _vm.chat, user: _vm.auth_user }
+                }),
                 _vm._v(" "),
                 _c("div", { staticClass: "input-area" }, [
                   _c("div", { staticClass: "input-wrapper col-9" }, [
@@ -38360,7 +38470,7 @@ var render = function() {
           attrs: { id: "accordion" }
         },
         [
-          _vm._m(5),
+          _vm._m(4),
           _vm._v(" "),
           _c(
             "div",
@@ -38374,9 +38484,9 @@ var render = function() {
                   _c(
                     "ul",
                     { staticClass: "member-list" },
-                    _vm._l(_vm.chats.users, function(user) {
+                    _vm._l(_vm.users, function(user) {
                       return _c("li", { staticClass: "btn-outline-light" }, [
-                        _vm._m(6, true),
+                        _vm._m(5, true),
                         _vm._v(" "),
                         _c(
                           "span",
@@ -38458,11 +38568,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "dots" }, [
-      _c("i", { staticClass: "fa fa-circle" }),
-      _vm._v(" "),
-      _c("i", { staticClass: "fa fa-circle" }),
-      _vm._v(" "),
-      _c("i", { staticClass: "fa fa-circle" })
+      _c("a", { attrs: { href: "/" } }, [
+        _c("img", { attrs: { src: "/public/favicon-32x32.png" } })
+      ])
     ])
   },
   function() {
@@ -38518,18 +38626,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12" }, [
-      _c("label", { staticClass: "control-label", attrs: { for: "people" } }, [
-        _vm._v("Пользователи")
-      ]),
-      _vm._v(" "),
-      _c("ul", { attrs: { id: "people" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c(
       "div",
       {
@@ -38554,7 +38650,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("ul", { staticClass: "tabs" }, [
-      _c("li", { staticClass: "active" }, [
+      _c("li", [
         _c(
           "a",
           {
@@ -38640,49 +38736,44 @@ var render = function() {
           _c("i", { staticClass: "fa fa-search" })
         ]),
         _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "chat-list",
-            attrs: { id: "chat-list", onload: _vm.Scroll }
-          },
-          [
-            _c(
-              "ul",
-              { staticStyle: { width: "100%" } },
-              _vm._l(_vm.thread.messages, function(message) {
-                return _c(
-                  "li",
-                  { class: message.user_id == _vm.user.id ? "me" : "" },
-                  [
-                    _c("div", { staticClass: "name" }, [
-                      _c("img", { attrs: { src: message.user.img } })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "message" }, [
-                      _c("span", { staticClass: "badge" }, [
-                        _vm._v(
-                          _vm._s(
-                            message.user_id == _vm.user.id
-                              ? "You"
-                              : message.user.name
-                          )
-                        )
+        _c("div", { staticClass: "chat-list", attrs: { id: "chat-list" } }, [
+          _c(
+            "ul",
+            { staticStyle: { width: "100%" } },
+            _vm._l(_vm.thread.messages, function(message) {
+              return message.body
+                ? _c(
+                    "li",
+                    { class: message.user_id == _vm.user.id ? "me" : "" },
+                    [
+                      _c("div", { staticClass: "name" }, [
+                        _c("img", { attrs: { src: message.user.img } })
                       ]),
                       _vm._v(" "),
-                      _c("p", [_vm._v(_vm._s(message.body))]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "msg-time" }, [
-                        _vm._v(_vm._s(message.created))
+                      _c("div", { staticClass: "message" }, [
+                        _c("span", { staticClass: "badge" }, [
+                          _vm._v(
+                            _vm._s(
+                              message.user_id == _vm.user.id
+                                ? "You"
+                                : message.user.name
+                            )
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("p", [_vm._v(_vm._s(message.body))]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "msg-time" }, [
+                          _vm._v(_vm._s(message.created))
+                        ])
                       ])
-                    ])
-                  ]
-                )
-              }),
-              0
-            )
-          ]
-        )
+                    ]
+                  )
+                : _vm._e()
+            }),
+            0
+          )
+        ])
       ])
     : _vm._e()
 }
@@ -38725,6 +38816,9 @@ var render = function() {
             _vm._s(
               _vm.thread.countPeople.length > 2
                 ? _vm.thread.subject
+                : _vm.thread.creator.id == _vm.user.id &&
+                  _vm.thread.countPeople.length == 1
+                ? "Избранное"
                 : _vm.thread.interlocutor
             ) +
             "\n    "
@@ -38744,8 +38838,24 @@ var render = function() {
         }
       },
       [
-        _c("h4", { staticClass: "badge" }, [_vm._v("Вы:")]),
-        _vm._v(" " + _vm._s(_vm.thread.messages[0].body) + "\n    ")
+        _vm.thread.latestMessage
+          ? _c("h4", { staticClass: "badge" }, [
+              _vm._v(
+                _vm._s(
+                  _vm.thread.creator.id == _vm.user.id ? "Вы:" : _vm.user.name
+                )
+              )
+            ])
+          : _vm._e(),
+        _vm._v(
+          " " +
+            _vm._s(
+              _vm.thread.latestMessage
+                ? _vm.thread.latestMessage.body
+                : "Чат пуст..."
+            ) +
+            "\n    "
+        )
       ]
     ),
     _vm._v(" "),

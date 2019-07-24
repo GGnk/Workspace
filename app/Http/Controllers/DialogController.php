@@ -32,13 +32,12 @@ class DialogController extends Controller
         $users = User::where('id','!=',$auth_user->id)->get();
         $users_list = User::all();
         // Все потоки, в которых участвует пользователь c отношениями
-        $req_threads = $thread->forUser($auth_user->id)->latest('updated_at')->with(['messages'=> function ($query){
-            //Todo: Сделать вывод 1 записи (а не всех)
-            return $query->orderByDesc('created_at')->with('user');
-        }])->get();
+        $req_threads = $thread->forUser($auth_user->id)->latest('updated_at')->get();
         $threads = collect();
         foreach ($req_threads as &$thread) {
             $count = collect($thread);
+            $count->put('latestMessage', $thread->latestMessage);
+            $count->put('creator', $thread->users()->oldest()->first());
             $count->put('countPeople', $thread->participantsUserIds());
             $count->put('interlocutor', $thread->participantsString($auth_user->id));
             $count->put('UnreadMessagesCount',$thread->userUnreadMessagesCount($auth_user->id));
@@ -83,7 +82,7 @@ class DialogController extends Controller
         $users = User::whereIn('id', $chat->participantsUserIds())->get();
         $chat->markAsRead(Auth::id());
 
-        return compact('chat','users')->toJson();
+        return compact('chat','users');
     }
 
     /*
@@ -113,11 +112,13 @@ class DialogController extends Controller
         ]);
 
         // Message
-        Message::create([
-            'thread_id' => $thread->id,
-            'user_id' => Auth::id(),
-            'body' => $input['message'],
-        ]);
+        if ($input['message']) {
+            Message::create([
+                'thread_id' => $thread->id,
+                'user_id' => Auth::id(),
+                'body' => $input['message'],
+            ]);
+        }
 
         // Sender
         Participant::create([

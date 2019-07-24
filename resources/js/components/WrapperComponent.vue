@@ -2,13 +2,13 @@
     <div>
         <div class="window-title">
             <div class="dots">
-                <i class="fa fa-circle"></i>
-                <i class="fa fa-circle"></i>
-                <i class="fa fa-circle"></i>
+                <a href="/">
+                    <img src="/public/favicon-32x32.png"/>
+                </a>
             </div>
             <div class="title">
                 <ul class="nav navbar-nav">
-                    <li><a href="/">Главная <span class="label label-danger" v-if="chats.threads.newThreadsCount"> {{chats.threads.newThreadsCount}}</span></a></li>
+                    <li><a href="#" @click="fetchAllChats">Главная <span class="label label-danger" v-if="threads.newThreadsCount"> {{threads.newThreadsCount}}</span></a></li>
                     <li>
                         <a href="#" role="button" data-toggle="modal" data-target="#createChat">
                             <i class="fa fa-plus-circle" aria-hidden="true"></i>
@@ -40,13 +40,13 @@
                                                 <div class="col-12" >
                                                     <label for="people" class="control-label">Пользователи</label>
                                                     <ul id="people">
-                                                        <!--<label class="list-users" v-for="user in users_list">
+                                                        <label class="list-users" v-for="user in users_list">
                                                             <li>
                                                                 <img :src="user.img"/>
                                                                 <span v-text="user.name"></span>
                                                                 <input v-model="send.recipients" :id="user.id" :value="user.id" type="checkbox">
                                                             </li>
-                                                        </label>-->
+                                                        </label>
 
                                                     </ul>
                                                 </div>
@@ -66,13 +66,13 @@
         <div class="window-area row">
             <div class="conversation-list col-12 col-sm-3" style="padding: 0">
                 <ul style="margin-bottom: 46px;">
-                    <li style="" v-for="thread in chats.threads.chat"  :key="thread.id">
+                    <li style="" v-for="thread in threads.chat"  :key="thread.id">
                         <a href="#" @click.prevent="LookChat(thread.id)">
-                            <threads :thread="thread"></threads>
+                            <threads :thread="thread" :user="auth_user"></threads>
                         </a>
                     </li>
                 </ul>
-                <div class="my-account">
+                <div class="my-account" v-if="auth_user">
                     <div class="image">
                         <img :src="auth_user.img">
                         <i class="fa fa-circle online"></i>
@@ -95,7 +95,7 @@
 
             <div class="chat-area col-12 col-sm-6" >
                 <div v-if="chat.id">
-                    <show :thread="chat" :user="user"></show>
+                    <show :thread="chat" :user="auth_user"></show>
 
                     <div class="input-area">
                         <div class="input-wrapper col-9">
@@ -110,7 +110,7 @@
 
             <div class="right-tabs col-12 col-sm-3 col" id="accordion">
                 <ul class="tabs">
-                    <li class="active">
+                    <li>
                         <a data-toggle="collapse" href="#Collapse1" role="button" aria-expanded="true" aria-controls="Collapse1"><i class="fa fa-users"></i></a>
                     </li>
                     <li><a data-toggle="collapse" href="#Collapse2" role="button" aria-expanded="false" aria-controls="Collapse2"><i class="fa fa-paperclip"></i></a></li>
@@ -121,7 +121,7 @@
                     <ul class="tabs-container">
                         <li class="active">
                             <ul class="member-list">
-                                <li v-for="user in chats.users" class="btn-outline-light">
+                                <li v-for="user in users" class="btn-outline-light">
                                     <span class="status idle">
                                         <i class="fa fa-circle-o"></i>
                                     </span>
@@ -163,12 +163,10 @@
         },
         data() {
             return {
-                chats: {
-                    threads: {},
-                    users:{},
-                    auth_user:{},
-                    users_list:{}
-                },
+                threads: {},
+                users:{},
+                auth_user:{},
+                users_list:{},
                 chat: {},
                 send: {
                     id: '',
@@ -187,7 +185,12 @@
             fetchAllChats() {
                 axios.post('/dialog/all')
                     .then((e) => {
-                        this.chats = e.data
+                        this.threads = e.data.threads
+                        this.users = e.data.users
+                        this.auth_user = e.data.auth_user
+                        this.users_list = e.data.users_list
+                        this.chat = {}
+
                     })
                     .catch((err) => {
                         console.log(err)
@@ -199,7 +202,7 @@
                         .then((e) => {
                             this.chat = e.data.chat
                             this.send.id = e.data.chat.id
-                            this.chats.users = e.data.users
+                            this.users = e.data.users
                         })
                         .catch((err) => {
                             console.log(err)

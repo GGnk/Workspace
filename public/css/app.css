@@ -9806,11 +9806,10 @@ b {
 
 .dots {
   float: left;
-  width: 50px;
-  padding: 3px;
+  margin-right: 20px;
   position: relative;
-  top: 15px;
-  left: 2px;
+  top: 4px;
+  left: 15px;
 }
 
 .window-title > .title {
@@ -10095,14 +10094,13 @@ b {
   float: left;
   width: 33.3%;
   text-align: center;
-  border-bottom: 1px solid #cfdae1;
 }
 
 .right-tabs > ul.tabs > li > a {
   border-left: 1px solid #cfdae1;
   color: #72a3ff;
   display: block;
-  background: #eef2f8;
+  background: #44454f;
   padding: 8px 0;
 }
 
@@ -10111,7 +10109,7 @@ b {
 }
 
 .right-tabs > ul.tabs > li.active > a {
-  background: #fff;
+  background: #eef2f8;
   color: #c3ccd3;
 }
 

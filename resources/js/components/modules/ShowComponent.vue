@@ -1,10 +1,10 @@
 <template>
     <div v-if="thread">
         <div class="title"><b>{{ thread.subject }}</b><i class="fa fa-search"></i></div>
-        <div class="chat-list" id="chat-list" :onload="Scroll">
+        <div class="chat-list" id="chat-list" >
             <ul style="width: 100%;">
 
-                <li v-for="message in thread.messages" :class="message.user_id == user.id ? 'me':''">
+                <li v-for="message in thread.messages" v-if="message.body" :class="message.user_id == user.id ? 'me':''">
                     <div class="name">
                         <img :src="message.user.img">
 
@@ -30,9 +30,7 @@
             'user'
         ],
         watch: {
-            thread(after, before) {
-                this.Scroll()
-            }
+
         },
         mounted() {
             this.Scroll()
