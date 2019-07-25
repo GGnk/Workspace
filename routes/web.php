@@ -22,6 +22,7 @@ Route::group(['middleware' => ['auth'],'prefix' => 'dialog', 'as' => 'dialog.'],
     Route::post('/store', ['uses' => 'DialogController@store','as' => 'store']);
     Route::post('show', ['uses' => 'DialogController@show','as' => 'show']);
     Route::post('/update', ['uses' => 'DialogController@update','as' => 'update']);
+    Route::post('/delete', ['uses' => 'DialogController@deleteChat','as' => 'delete']);
 });
 
 Auth::routes();

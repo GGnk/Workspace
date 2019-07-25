@@ -25,12 +25,19 @@ class DialogController extends Controller
         return view('layouts.index');
     }
 
+    /**
+     * All threads in which the user has a relationship.
+     *
+     * @param Thread $thread
+     * @return mixed
+     */
     public function fetchAll(Thread $thread) {
         $auth_user = Auth::user();
 
         // Выгружаем всех пользотелей для списка
         $users = User::where('id','!=',$auth_user->id)->get();
         $users_list = User::all();
+
         // Все потоки, в которых участвует пользователь c отношениями
         $req_threads = $thread->forUser($auth_user->id)->latest('updated_at')->get();
         $threads = collect();
@@ -42,8 +49,7 @@ class DialogController extends Controller
             $count->put('interlocutor', $thread->participantsString($auth_user->id));
             $count->put('UnreadMessagesCount',$thread->userUnreadMessagesCount($auth_user->id));
 
-            $arr[] = $count;
-            $threads['chat'] = $arr;
+            $threads['chats'] = [$count];
         }
         $threads['newThreadsCount'] = $auth_user->newThreadsCount();
 
@@ -57,7 +63,7 @@ class DialogController extends Controller
         return compact('threads','users', 'auth_user', 'users_list');
     }
 
-    /*
+    /**
      * Shows a message thread.
      *
      * @param $id
@@ -71,6 +77,12 @@ class DialogController extends Controller
 
         try {
             $chat = Thread::findOrFail($id);
+            $auth_user = Auth::user();
+            $chat['creator'] = $chat->users()->oldest()->first();
+            $chat['countPeople'] = $chat->participantsUserIds();
+            $chat['interlocutor'] = $chat->participantsString($auth_user->id);
+            $chat['UnreadMessagesCount'] = $chat->userUnreadMessagesCount($auth_user->id);
+            $chat['latestMessage'] = $chat->latestMessage;
             collect($chat->messages)->each(function ($item) {
                 $item->created = $item->created_at->diffForHumans();
                 return $item->user;
@@ -85,23 +97,12 @@ class DialogController extends Controller
         return compact('chat','users');
     }
 
-    /*
-     * Creates a new message thread.
+
+    /**
+     * Creates a new thread.
      *
      * @return mixed
-     */
-    public function create()
-    {
-
-        $users = User::where('id', '!=', Auth::id())->get();
-
-        return view('messenger.create', compact('users'));
-    }
-
-    /*
-     * Stores a new message thread.
-     *
-     * @return mixed
+     * @throws \Exception
      */
     public function store()
     {
@@ -135,20 +136,19 @@ class DialogController extends Controller
 
     }
 
-    /*
+    /**
      * Adds a new message to a current thread.
      *
-     * @param $id
      * @return mixed
+     * @throws \Exception
      */
     public function update()
     {
         try {
             $thread = Thread::findOrFail(Input::get('id'));
         } catch (ModelNotFoundException $e) {
-            Session::flash('error_message', 'The thread with ID: ' . Input::get('id') . ' was not found.');
 
-            return $e;
+            return 'The thread with ID: ' . Input::get('id') . ' was not found. '.$e;
         }
 
         $thread->activateAllParticipants();
@@ -174,5 +174,20 @@ class DialogController extends Controller
         }
 
         return $this->show(Input::get('id'));
+    }
+
+    /**
+     * Delete thread
+     *
+     * @return mixed
+     */
+    public function deleteChat() {
+        try {
+            $chat = Thread::findOrFail(Input::get('idChat'));
+        } catch (ModelNotFoundException $e) {
+            return 'The thread with ID: ' . Input::get('idChat') . ' was not found. '.$e;
+        }
+        $chat->removeParticipant(Input::get('idUser'));
+        return 'Chat deleted!';
     }
 }

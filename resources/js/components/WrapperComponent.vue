@@ -29,17 +29,16 @@
                                         <div class="col-md-12" >
                                             <!-- Subject Form Input -->
                                             <div class="form-group row">
-                                                <div class="col-sm-9 col-12">
+                                                <div class="col-sm-9 col-12" v-show="send.recipients.length > 1">
                                                     <input type="text" class="form-control" name="subject" placeholder="Тема"
                                                            v-model="send.subject">
                                                 </div>
                                                 <!-- Submit Form Input -->
-                                                <div class="form-group col-sm-3 col-12">
-                                                    <button type="submit" class="btn btn-primary form-control" @click="CreateChat" data-dismiss="modal" aria-label="Close">Написать</button>
+                                                <div class="form-group col-sm-3 col-12" style="margin: auto">
+                                                    <button type="submit" class="btn btn-primary form-control"  @click="CreateChat" data-dismiss="modal" aria-label="Close">Написать</button>
                                                 </div>
                                                 <div class="col-12" >
-                                                    <label for="people" class="control-label">Пользователи</label>
-                                                    <ul id="people">
+                                                    <ul>
                                                         <label class="list-users" v-for="user in users_list">
                                                             <li>
                                                                 <img :src="user.img"/>
@@ -65,13 +64,18 @@
         </div>
         <div class="window-area row">
             <div class="conversation-list col-12 col-sm-3" style="padding: 0">
-                <ul style="margin-bottom: 46px;">
-                    <li style="" v-for="thread in threads.chat"  :key="thread.id">
+                <ul style="margin-bottom: 46px;" >
+                    <li style="position: relative;" v-for="(thread, index) in threads.chats"  >
                         <a href="#" @click.prevent="LookChat(thread.id)">
                             <threads :thread="thread" :user="auth_user"></threads>
                         </a>
+                        <span class="deleteChat" @click="DeleteChat(thread.id, auth_user.id, index)"></span>
                     </li>
+                    <div v-if="!threads.chats || threads.chats.length == 0" style="padding: 20px;text-align: center;">
+                        Начни, создай чат с кем нибудь!
+                    </div>
                 </ul>
+
                 <div class="my-account" v-if="auth_user">
                     <div class="image">
                         <img :src="auth_user.img">
@@ -130,7 +134,7 @@
                                     </span>
                                     <span class="time">10:45 pm</span>
                                     <div class="dropdown-menu" :aria-labelledby="'dropdownMenuButton'+user.id">
-                                        <a class="dropdown-item" href="#"  style="color: black">Написать</a>
+                                        <a class="dropdown-item" href="#"  style="color: black" @click="minCreateChat(user.id)">Написать</a>
                                     </div>
                                 </li>
                             </ul>
@@ -158,12 +162,18 @@
         components: {},
         name: "Wrapper",
         props: [],
-        mounted() {
+        created() {
             this.fetchAllChats()
+        },
+        mounted() {
+
         },
         data() {
             return {
-                threads: {},
+                threads: {
+                    chats: [],
+                    newThreadsCount:''
+                },
                 users:{},
                 auth_user:{},
                 users_list:{},
@@ -171,7 +181,7 @@
                 send: {
                     id: '',
                     message: '',
-                    subject: '',
+                    subject: 'Сообщение',
                     recipients: []
                 }
             }
@@ -186,6 +196,7 @@
                 axios.post('/dialog/all')
                     .then((e) => {
                         this.threads = e.data.threads
+                        this.threads.chats = e.data.threads.chats? e.data.threads.chats: []
                         this.users = e.data.users
                         this.auth_user = e.data.auth_user
                         this.users_list = e.data.users_list
@@ -214,6 +225,8 @@
                     axios.post('/dialog/update', this.send)
                         .then((e) => {
                             this.chat = e.data.chat
+                            let index = this.threads.chats.findIndex(el => el.id === e.data.chat.id);
+                            this.threads.chats.splice(index, 1,e.data.chat)
                             this.send.message = ''
                         })
                         .catch((err) => {
@@ -226,14 +239,31 @@
                     axios.post('/dialog/store', this.send)
                         .then((e) => {
                             this.chat = e.data.chat
+                            this.threads.chats.unshift(e.data.chat)
                             this.send.id = e.data.chat.id
-                            this.send.subject = ''
                             this.send.recipients = []
+
                         })
                         .catch((err) => {
                             console.log(err)
                         })
                 }
+            },
+            minCreateChat(idUser) {
+                this.send.recipients = idUser
+                this.send.subject = 'Сообщение'
+                this.send.message = ''
+                this.CreateChat()
+            },
+            DeleteChat(idChat, idUser, index) {
+                axios.post('/dialog/delete', {idChat, idUser})
+                    .then((e) => {
+                        this.threads.chats.splice(index, 1)
+                        console.log(e.data)
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                    })
             }
         }
     }
@@ -268,5 +298,20 @@
     }
     .list-users li input {
         float: right;
+    }
+    .deleteChat {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: red;
+        text-align: center;
+        width: 25px;
+        height: 100%;
+        opacity: 0.1;
+        cursor: pointer;
+    }
+    .deleteChat:hover {
+        opacity: 0.3;
+        width: 100%;
     }
 </style>
