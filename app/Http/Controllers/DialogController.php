@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Carbon\Carbon;
+
+use Illuminate\Database\Eloquent\Builder;
 use Cmgmyr\Messenger\Models\Message;
 use Cmgmyr\Messenger\Models\Participant;
 use Cmgmyr\Messenger\Models\Thread;
@@ -41,18 +43,17 @@ class DialogController extends Controller
         // Все потоки, в которых участвует пользователь c отношениями
         $req_threads = $thread->forUser($auth_user->id)->latest('updated_at')->get();
         $threads = collect();
-        foreach ($req_threads as &$thread) {
+        foreach ($req_threads as $thread) {
             $count = collect($thread);
             $count->put('latestMessage', $thread->latestMessage);
             $count->put('creator', $thread->users()->oldest()->first());
             $count->put('countPeople', $thread->participantsUserIds());
             $count->put('interlocutor', $thread->participantsString($auth_user->id));
             $count->put('UnreadMessagesCount',$thread->userUnreadMessagesCount($auth_user->id));
-
-            $threads['chats'] = [$count];
+            $arr[] = $count;
+            $threads['chats'] = $arr;
         }
         $threads['newThreadsCount'] = $auth_user->newThreadsCount();
-
 
         // Все потоки, игнорировать удаленных / архивированных участников
         //$threads = Thread::getAllLatest()->get();
@@ -101,13 +102,14 @@ class DialogController extends Controller
     /**
      * Creates a new thread.
      *
+     * @param Thread $thread
      * @return mixed
      * @throws \Exception
      */
-    public function store()
+    public function store(Thread $thread)
     {
         $input = Input::all();
-
+        //Todo: реализовать поиск чатов между 2 пользователями, и не создавать повторы
         $thread = Thread::create([
             'subject' => $input['subject'],
         ]);

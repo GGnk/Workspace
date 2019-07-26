@@ -306,7 +306,7 @@
         background: red;
         text-align: center;
         width: 25px;
-        height: 100%;
+        height: 99%;
         opacity: 0.1;
         cursor: pointer;
     }
