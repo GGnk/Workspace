@@ -103,7 +103,7 @@
 
                     <div class="input-area">
                         <div class="input-wrapper col-9">
-                            <input name="message" type="text" v-model="send.message" placeholder="текст...">
+                            <textarea  v-model="send.message" placeholder="текст..."></textarea>
                             <i class="fa fa-smile-o"></i>
                             <i class="fa fa-paperclip"></i>
                         </div>
@@ -157,15 +157,33 @@
 
 <script>
     // import { mixin } from '../modal/alerts.js'
+
+
     export default {
         // mixins: [mixin],
         components: {},
         name: "Wrapper",
         props: [],
-        created() {
-            this.fetchAllChats()
-        },
+
         mounted() {
+            this.fetchAllChats();
+
+            /*window.Echo.channel("chatCreated").listen(".chat-created", e => {
+                this.threads.chats.unshift(e.data.chat)
+                console.log("Чат с id:" + e.data.chat.id + " была создан")
+            });*/
+            window.Echo.channel("chatUpdated").listen(".chat-updated", e => {
+                console.log("Чат был обновлен")
+                let index = this.threads.chats.findIndex(el => el.id === e.data.chat.id);
+                this.threads.chats.splice(index, 1,e.data.chat)
+
+            });
+            /*window.Echo.channel("chatRemoved").listen(".chat-removed", e => {
+                // TODO: сделать обновление одного элемента в списке
+                let index = this.threads.chats.findIndex(el => el.id === e.data.chat.id);
+                this.threads.chats.splice(index, 1)
+                console.log("Чат с id:" + e.data.chat.id + " был удален!")
+            });*/
 
         },
         data() {
@@ -224,9 +242,9 @@
                 if (this.send.message) {
                     axios.post('/dialog/update', this.send)
                         .then((e) => {
-                            this.chat = e.data.chat
-                            let index = this.threads.chats.findIndex(el => el.id === e.data.chat.id);
-                            this.threads.chats.splice(index, 1,e.data.chat)
+                            // this.chat = e.data.chat
+                            // let index = this.threads.chats.findIndex(el => el.id === e.data.chat.id);
+                            // this.threads.chats.splice(index, 1,e.data.chat)
                             this.send.message = ''
                         })
                         .catch((err) => {
@@ -239,7 +257,7 @@
                     axios.post('/dialog/store', this.send)
                         .then((e) => {
                             this.chat = e.data.chat
-                            this.threads.chats.unshift(e.data.chat)
+                            // this.threads.chats.unshift(e.data.chat)
                             this.send.id = e.data.chat.id
                             this.send.recipients = []
 

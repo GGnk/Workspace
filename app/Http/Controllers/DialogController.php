@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ChatCreated;
+use App\Events\ChatUpdated;
 use App\User;
 use Carbon\Carbon;
 
@@ -17,6 +19,7 @@ use Illuminate\Support\Facades\Session;
 
 class DialogController extends Controller
 {
+    public $chat;
     public function __construct()
     {
 
@@ -95,6 +98,8 @@ class DialogController extends Controller
         $users = User::whereIn('id', $chat->participantsUserIds())->get();
         $chat->markAsRead(Auth::id());
 
+        broadcast(new chatUpdated($chat));
+
         return compact('chat','users');
     }
 
@@ -134,6 +139,7 @@ class DialogController extends Controller
         if (Input::has('recipients')) {
             $thread->addParticipant($input['recipients']);
         }
+
         return $this->show($thread->id);
 
     }

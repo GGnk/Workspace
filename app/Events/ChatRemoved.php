@@ -10,7 +10,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class MessagePushed
+class ChatRemoved implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -19,9 +19,10 @@ class MessagePushed
      *
      * @return void
      */
-    public function __construct()
+    public $chat;
+    public function __construct($chat)
     {
-        //
+        $this->chat = $chat;
     }
 
     /**
@@ -31,6 +32,10 @@ class MessagePushed
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return new Channel('chatRemoved');
+    }
+
+    public function broadcastAs(){
+        return 'chat-removed';
     }
 }
