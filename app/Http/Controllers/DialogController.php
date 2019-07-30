@@ -97,10 +97,10 @@ class DialogController extends Controller
 
         $users = User::whereIn('id', $chat->participantsUserIds())->get();
         $chat->markAsRead(Auth::id());
+        $this->chat = $chat;
+        return compact("chat","users");
 
-        broadcast(new chatUpdated($chat));
-
-        return compact('chat','users');
+//        return compact('chat','users');
     }
 
 
@@ -180,8 +180,9 @@ class DialogController extends Controller
         if (Input::has('recipients')) {
             $thread->addParticipant(Input::get('recipients'));
         }
-
-        return $this->show(Input::get('id'));
+        $this->show(Input::get('id'));
+        broadcast(new chatUpdated($this->chat));
+        return 'Updated';
     }
 
     /**

@@ -9,6 +9,7 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Support\Facades\Auth;
 
 class ChatUpdated implements ShouldBroadcast
 {
@@ -20,6 +21,7 @@ class ChatUpdated implements ShouldBroadcast
      * @return void
      */
     public $chat;
+
     public function __construct($chat)
     {
         $this->chat = $chat;
@@ -36,6 +38,7 @@ class ChatUpdated implements ShouldBroadcast
     }
 
     public function broadcastAs(){
-        return 'chat-updated';
+        return 'chat';
     }
+
 }

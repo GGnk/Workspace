@@ -172,12 +172,12 @@
                 this.threads.chats.unshift(e.data.chat)
                 console.log("Чат с id:" + e.data.chat.id + " была создан")
             });*/
-            window.Echo.channel("chatUpdated").listen(".chat-updated", e => {
-                console.log("Чат был обновлен")
-                let index = this.threads.chats.findIndex(el => el.id === e.data.chat.id);
-                this.threads.chats.splice(index, 1,e.data.chat)
-
-            });
+            window.Echo.channel("chatUpdated")
+                .listen(".chat", e => {
+                    console.log("Чат был обновлен, "+e.chat.id)
+                    let index = this.threads.chats.findIndex(el => el.id === e.chat.id);
+                    this.threads.chats.splice(index, 1,e.chat)
+                })
             /*window.Echo.channel("chatRemoved").listen(".chat-removed", e => {
                 // TODO: сделать обновление одного элемента в списке
                 let index = this.threads.chats.findIndex(el => el.id === e.data.chat.id);

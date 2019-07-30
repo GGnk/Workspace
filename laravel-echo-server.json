@@ -1,5 +1,5 @@
 {
-	"authHost": "http://livechat",
+	"authHost": "http://livechat/",
 	"authEndpoint": "/broadcasting/auth",
 	"clients": [],
 	"database": "redis",
@@ -9,7 +9,7 @@
 			"databasePath": "/database/laravel-echo-server.sqlite"
 		}
 	},
-	"devMode": false,
+	"devMode": true,
 	"host": null,
 	"port": "6001",
 	"protocol": "http",
@@ -21,11 +21,5 @@
 	"subscribers": {
 		"http": true,
 		"redis": true
-	},
-	"apiOriginAllow": {
-		"allowCors": false,
-		"allowOrigin": "",
-		"allowMethods": "",
-		"allowHeaders": ""
 	}
 }
