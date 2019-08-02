@@ -2089,14 +2089,18 @@ __webpack_require__.r(__webpack_exports__);
         console.log("Чат с id:" + e.data.chat.id + " была создан")
     });*/
 
-    window.Echo.channel("chatUpdated").listen(".chat", function (e) {
-      console.log("Чат был обновлен, " + e.chat.id);
+    window.Echo.channel("laravel_database_chatUpdated").listen(".Chat", function (e) {
+      console.log("Чат 1");
 
       var index = _this.threads.chats.findIndex(function (el) {
-        return el.id === e.chat.id;
+        return el.id === e.chat.chat.id;
       });
 
-      _this.threads.chats.splice(index, 1, e.chat);
+      _this.threads.chats.splice(index, 1, e.chat.chat);
+
+      if (_this.chat.id === e.chat.chat.id) {
+        _this.chat = e.chat.chat;
+      }
     });
     /*window.Echo.channel("chatRemoved").listen(".chat-removed", e => {
         // TODO: сделать обновление одного элемента в списке
@@ -48850,7 +48854,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "dots" }, [
       _c("a", { attrs: { href: "/" } }, [
-        _c("img", { attrs: { src: "/public/favicon-32x32.png" } })
+        _c("img", { attrs: { src: "/favicon-32x32.png" } })
       ])
     ])
   },
@@ -61729,8 +61733,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Администратор\Desktop\OSPanel\domains\LiveChat\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Администратор\Desktop\OSPanel\domains\LiveChat\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /var/www/livechat/html/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/livechat/html/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ }),

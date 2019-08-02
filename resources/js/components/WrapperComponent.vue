@@ -3,7 +3,7 @@
         <div class="window-title">
             <div class="dots">
                 <a href="/">
-                    <img src="/public/favicon-32x32.png"/>
+                    <img src="/favicon-32x32.png"/>
                 </a>
             </div>
             <div class="title">
@@ -172,12 +172,16 @@
                 this.threads.chats.unshift(e.data.chat)
                 console.log("Чат с id:" + e.data.chat.id + " была создан")
             });*/
-            window.Echo.channel("chatUpdated")
-                .listen(".chat", e => {
-                    console.log("Чат был обновлен, "+e.chat.id)
-                    let index = this.threads.chats.findIndex(el => el.id === e.chat.id);
-                    this.threads.chats.splice(index, 1,e.chat)
+            window.Echo.channel("laravel_database_chatUpdated")
+                .listen(".Chat", e => {
+                    console.log("Чат 1")
+                    let index = this.threads.chats.findIndex(el => el.id === e.chat.chat.id);
+                    this.threads.chats.splice(index, 1,e.chat.chat)
+                    if(this.chat.id === e.chat.chat.id) {
+                        this.chat = e.chat.chat
+                    }
                 })
+            
             /*window.Echo.channel("chatRemoved").listen(".chat-removed", e => {
                 // TODO: сделать обновление одного элемента в списке
                 let index = this.threads.chats.findIndex(el => el.id === e.data.chat.id);

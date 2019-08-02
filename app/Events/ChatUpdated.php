@@ -38,7 +38,7 @@ class ChatUpdated implements ShouldBroadcast
     }
 
     public function broadcastAs(){
-        return 'chat';
+        return 'Chat';
     }
 
 }
