@@ -1,5 +1,11 @@
 <template>
     <div>
+        <div class="loader-request spinner-border text-primary" role="status" v-show="loaderRequest">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="loader-error" v-show="loaderError">
+            <i class="fa fa-exclamation-triangle"></i>
+        </div>
         <div class="window-title">
             <div class="dots">
                 <a href="/">
@@ -176,10 +182,15 @@
                 .listen(".Chat", e => {
                     console.log("Чат 1")
                     let index = this.threads.chats.findIndex(el => el.id === e.chat.chat.id);
-                    this.threads.chats.splice(index, 1,e.chat.chat)
+                    let count = 0
                     if(this.chat.id === e.chat.chat.id) {
                         this.chat = e.chat.chat
+                    } else {
+                        count = this.threads.chats[index].UnreadMessagesCount
                     }
+                    this.threads.chats.splice(index, 1,e.chat.chat)
+                    this.threads.chats[index].UnreadMessagesCount = ++count
+
                 })
             
             /*window.Echo.channel("chatRemoved").listen(".chat-removed", e => {
@@ -205,7 +216,9 @@
                     message: '',
                     subject: 'Сообщение',
                     recipients: []
-                }
+                },
+                loaderRequest: false,
+                loaderError: false
             }
         },
         watch: {
@@ -215,6 +228,7 @@
         },
         methods: {
             fetchAllChats() {
+                this.loader()
                 axios.post('/dialog/all')
                     .then((e) => {
                         this.threads = e.data.threads
@@ -223,26 +237,45 @@
                         this.auth_user = e.data.auth_user
                         this.users_list = e.data.users_list
                         this.chat = {}
-
+                        this.loader()
                     })
                     .catch((err) => {
+                        this.loader(err)
                         console.log(err)
                     })
             },
+            loader (err = null) {
+                if (this.loaderRequest && err == null) {
+                    this.loaderRequest = false
+                    this.loaderError = false
+                }else if(this.loaderRequest && err != null) {
+                    this.loaderRequest = false
+                    this.loaderError = true
+                }else {
+                    this.loaderRequest = true
+                }
+            },
             LookChat(chatID) {
-
+                    this.loader()
                     axios.post('/dialog/show', {id: chatID})
                         .then((e) => {
+                            let index = this.threads.chats.findIndex(el => el.id === e.data.chat.id);
+                            this.threads.chats[index].UnreadMessagesCount = 0
+
                             this.chat = e.data.chat
                             this.send.id = e.data.chat.id
                             this.users = e.data.users
+
+                            this.loader()
                         })
                         .catch((err) => {
+                            this.loader(err)
                             console.log(err)
                         })
 
             },
             SendChat() {
+                this.loader()
                 if (this.send.message) {
                     axios.post('/dialog/update', this.send)
                         .then((e) => {
@@ -250,23 +283,27 @@
                             // let index = this.threads.chats.findIndex(el => el.id === e.data.chat.id);
                             // this.threads.chats.splice(index, 1,e.data.chat)
                             this.send.message = ''
+                            this.loader()
                         })
                         .catch((err) => {
+                            this.loader(err)
                             console.log(err)
                         })
                 }
             },
             CreateChat() {
                 if (this.send.subject && this.send.recipients) {
+                    this.loader()
                     axios.post('/dialog/store', this.send)
                         .then((e) => {
                             this.chat = e.data.chat
                             // this.threads.chats.unshift(e.data.chat)
                             this.send.id = e.data.chat.id
                             this.send.recipients = []
-
+                            this.loader()
                         })
                         .catch((err) => {
+                            this.loader(err)
                             console.log(err)
                         })
                 }
@@ -278,12 +315,15 @@
                 this.CreateChat()
             },
             DeleteChat(idChat, idUser, index) {
+                this.loader()
                 axios.post('/dialog/delete', {idChat, idUser})
                     .then((e) => {
                         this.threads.chats.splice(index, 1)
+                        this.loader()
                         console.log(e.data)
                     })
                     .catch((err) => {
+                        this.loader(err)
                         console.log(err)
                     })
             }
@@ -333,7 +373,21 @@
         cursor: pointer;
     }
     .deleteChat:hover {
-        opacity: 0.3;
-        width: 100%;
+        opacity: 0.5;
     }
+    .loader-request {
+        position: absolute;
+        top: 1%;
+        right: 1%;
+    }
+    .loader-error {
+        position: absolute;
+        top: 1%;
+        right: 1%;
+    }
+    .loader-error i {
+        color: orange;
+        font-size: 33px;
+    }
+    
 </style>

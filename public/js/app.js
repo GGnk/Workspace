@@ -2074,6 +2074,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 // import { mixin } from '../modal/alerts.js'
 /* harmony default export */ __webpack_exports__["default"] = ({
   // mixins: [mixin],
@@ -2096,11 +2102,17 @@ __webpack_require__.r(__webpack_exports__);
         return el.id === e.chat.chat.id;
       });
 
-      _this.threads.chats.splice(index, 1, e.chat.chat);
+      var count = 0;
 
       if (_this.chat.id === e.chat.chat.id) {
         _this.chat = e.chat.chat;
+      } else {
+        count = _this.threads.chats[index].UnreadMessagesCount;
       }
+
+      _this.threads.chats.splice(index, 1, e.chat.chat);
+
+      _this.threads.chats[index].UnreadMessagesCount = ++count;
     });
     /*window.Echo.channel("chatRemoved").listen(".chat-removed", e => {
         // TODO: сделать обновление одного элемента в списке
@@ -2124,7 +2136,9 @@ __webpack_require__.r(__webpack_exports__);
         message: '',
         subject: 'Сообщение',
         recipients: []
-      }
+      },
+      loaderRequest: false,
+      loaderError: false
     };
   },
   watch: {// method(after, before) {
@@ -2135,6 +2149,7 @@ __webpack_require__.r(__webpack_exports__);
     fetchAllChats: function fetchAllChats() {
       var _this2 = this;
 
+      this.loader();
       axios.post('/dialog/all').then(function (e) {
         _this2.threads = e.data.threads;
         _this2.threads.chats = e.data.threads.chats ? e.data.threads.chats : [];
@@ -2142,25 +2157,54 @@ __webpack_require__.r(__webpack_exports__);
         _this2.auth_user = e.data.auth_user;
         _this2.users_list = e.data.users_list;
         _this2.chat = {};
+
+        _this2.loader();
       })["catch"](function (err) {
+        _this2.loader(err);
+
         console.log(err);
       });
+    },
+    loader: function loader() {
+      var err = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+      if (this.loaderRequest && err == null) {
+        this.loaderRequest = false;
+        this.loaderError = false;
+      } else if (this.loaderRequest && err != null) {
+        this.loaderRequest = false;
+        this.loaderError = true;
+      } else {
+        this.loaderRequest = true;
+      }
     },
     LookChat: function LookChat(chatID) {
       var _this3 = this;
 
+      this.loader();
       axios.post('/dialog/show', {
         id: chatID
       }).then(function (e) {
+        var index = _this3.threads.chats.findIndex(function (el) {
+          return el.id === e.data.chat.id;
+        });
+
+        _this3.threads.chats[index].UnreadMessagesCount = 0;
         _this3.chat = e.data.chat;
         _this3.send.id = e.data.chat.id;
         _this3.users = e.data.users;
+
+        _this3.loader();
       })["catch"](function (err) {
+        _this3.loader(err);
+
         console.log(err);
       });
     },
     SendChat: function SendChat() {
       var _this4 = this;
+
+      this.loader();
 
       if (this.send.message) {
         axios.post('/dialog/update', this.send).then(function (e) {
@@ -2168,7 +2212,11 @@ __webpack_require__.r(__webpack_exports__);
           // let index = this.threads.chats.findIndex(el => el.id === e.data.chat.id);
           // this.threads.chats.splice(index, 1,e.data.chat)
           _this4.send.message = '';
+
+          _this4.loader();
         })["catch"](function (err) {
+          _this4.loader(err);
+
           console.log(err);
         });
       }
@@ -2177,12 +2225,17 @@ __webpack_require__.r(__webpack_exports__);
       var _this5 = this;
 
       if (this.send.subject && this.send.recipients) {
+        this.loader();
         axios.post('/dialog/store', this.send).then(function (e) {
           _this5.chat = e.data.chat; // this.threads.chats.unshift(e.data.chat)
 
           _this5.send.id = e.data.chat.id;
           _this5.send.recipients = [];
+
+          _this5.loader();
         })["catch"](function (err) {
+          _this5.loader(err);
+
           console.log(err);
         });
       }
@@ -2196,14 +2249,19 @@ __webpack_require__.r(__webpack_exports__);
     DeleteChat: function DeleteChat(idChat, idUser, index) {
       var _this6 = this;
 
+      this.loader();
       axios.post('/dialog/delete', {
         idChat: idChat,
         idUser: idUser
       }).then(function (e) {
         _this6.threads.chats.splice(index, 1);
 
+        _this6.loader();
+
         console.log(e.data);
       })["catch"](function (err) {
+        _this6.loader(err);
+
         console.log(err);
       });
     }
@@ -9053,7 +9111,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.list-users[data-v-d37c49d6] {\n    display: contents;\n    cursor: pointer;\n}\n.list-users li[data-v-d37c49d6] {\n    height: 50px;\n    text-align: left;\n    position: relative;\n    padding: 10px;\n    border-bottom: 1px solid #d9d9da;\n}\n.list-users li[data-v-d37c49d6]:hover {\n    background-color: #e7e8ec;\n}\n.list-users li img[data-v-d37c49d6] {\n    width: 8%;\n    float: left;\n    border-radius: 18px;\n}\n.list-users li span[data-v-d37c49d6] {\n    position: relative;\n    top: 10px;\n    margin-left: 6px;\n    font-size: 14px;\n    font-family: cursive;\n}\n.list-users li input[data-v-d37c49d6] {\n    float: right;\n}\n.deleteChat[data-v-d37c49d6] {\n    position: absolute;\n    top: 0;\n    right: 0;\n    background: red;\n    text-align: center;\n    width: 25px;\n    height: 99%;\n    opacity: 0.1;\n    cursor: pointer;\n}\n.deleteChat[data-v-d37c49d6]:hover {\n    opacity: 0.3;\n    width: 100%;\n}\n", ""]);
+exports.push([module.i, "\n.list-users[data-v-d37c49d6] {\n    display: contents;\n    cursor: pointer;\n}\n.list-users li[data-v-d37c49d6] {\n    height: 50px;\n    text-align: left;\n    position: relative;\n    padding: 10px;\n    border-bottom: 1px solid #d9d9da;\n}\n.list-users li[data-v-d37c49d6]:hover {\n    background-color: #e7e8ec;\n}\n.list-users li img[data-v-d37c49d6] {\n    width: 8%;\n    float: left;\n    border-radius: 18px;\n}\n.list-users li span[data-v-d37c49d6] {\n    position: relative;\n    top: 10px;\n    margin-left: 6px;\n    font-size: 14px;\n    font-family: cursive;\n}\n.list-users li input[data-v-d37c49d6] {\n    float: right;\n}\n.deleteChat[data-v-d37c49d6] {\n    position: absolute;\n    top: 0;\n    right: 0;\n    background: red;\n    text-align: center;\n    width: 25px;\n    height: 99%;\n    opacity: 0.1;\n    cursor: pointer;\n}\n.deleteChat[data-v-d37c49d6]:hover {\n    opacity: 0.5;\n}\n.loader-request[data-v-d37c49d6] {\n    position: absolute;\n    top: 1%;\n    right: 1%;\n}\n.loader-error[data-v-d37c49d6] {\n    position: absolute;\n    top: 1%;\n    right: 1%;\n}\n.loader-error i[data-v-d37c49d6] {\n    color: orange;\n    font-size: 33px;\n}\n\n", ""]);
 
 // exports
 
@@ -48348,6 +48406,39 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.loaderRequest,
+            expression: "loaderRequest"
+          }
+        ],
+        staticClass: "loader-request spinner-border text-primary",
+        attrs: { role: "status" }
+      },
+      [_c("span", { staticClass: "sr-only" }, [_vm._v("Loading...")])]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.loaderError,
+            expression: "loaderError"
+          }
+        ],
+        staticClass: "loader-error"
+      },
+      [_c("i", { staticClass: "fa fa-exclamation-triangle" })]
+    ),
+    _vm._v(" "),
     _c("div", { staticClass: "window-title" }, [
       _vm._m(0),
       _vm._v(" "),
@@ -61733,8 +61824,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/livechat/html/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/livechat/html/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\OSPanel\domains\LiveChat\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\OSPanel\domains\LiveChat\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ }),
