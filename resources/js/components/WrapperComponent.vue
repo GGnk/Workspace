@@ -178,7 +178,7 @@
                 this.threads.chats.unshift(e.data.chat)
                 console.log("Чат с id:" + e.data.chat.id + " была создан")
             });*/
-            window.Echo.channel("laravel_database_chatUpdated")
+            window.Echo.channel("chatUpdated")
                 .listen(".Chat", e => {
                     console.log("Чат 1")
                     let index = this.threads.chats.findIndex(el => el.id === e.chat.chat.id);

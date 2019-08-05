@@ -2095,7 +2095,7 @@ __webpack_require__.r(__webpack_exports__);
         console.log("Чат с id:" + e.data.chat.id + " была создан")
     });*/
 
-    window.Echo.channel("laravel_database_chatUpdated").listen(".Chat", function (e) {
+    window.Echo.channel("chatUpdated").listen(".Chat", function (e) {
       console.log("Чат 1");
 
       var index = _this.threads.chats.findIndex(function (el) {
@@ -61824,8 +61824,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\OSPanel\domains\LiveChat\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\OSPanel\domains\LiveChat\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /var/www/livechat/html/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/livechat/html/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ }),
