@@ -9,7 +9,6 @@
     </root>
     <schema id="2" parent="1" name="0">
       <Current>1</Current>
-      <Visible>1</Visible>
       <Collation>utf8mb4_general_ci</Collation>
     </schema>
     <schema id="3" parent="1" name="information_schema">
