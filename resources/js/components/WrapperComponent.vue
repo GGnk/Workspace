@@ -178,9 +178,9 @@
                 this.threads.chats.unshift(e.data.chat)
                 console.log("Чат с id:" + e.data.chat.id + " была создан")
             });*/
-            window.Echo.channel("chatUpdated")
+            window.Echo.channel('chatUpdated')
                 .listen(".Chat", e => {
-                    console.log("Чат 1")
+                    console.log('Чат '+ this.chat.id)
                     let index = this.threads.chats.findIndex(el => el.id === e.chat.chat.id);
                     let count = 0
                     if(this.chat.id === e.chat.chat.id) {
@@ -192,7 +192,13 @@
                     this.threads.chats[index].UnreadMessagesCount = ++count
 
                 })
-            
+                /*.whisper('typing', {
+                name: this.auth_user
+                })
+                .listenForWhisper('typing', (e) => {
+                    console.log(e.name);
+                })*/
+
             /*window.Echo.channel("chatRemoved").listen(".chat-removed", e => {
                 // TODO: сделать обновление одного элемента в списке
                 let index = this.threads.chats.findIndex(el => el.id === e.data.chat.id);
