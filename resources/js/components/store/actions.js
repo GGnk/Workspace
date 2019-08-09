@@ -38,6 +38,22 @@ let actions = {
                 })
         }
     },
+    async CREATE_CHAT({commit, state}) {
+        if (state.send.subject && state.send.recipients) {
+            commit("LOADER_INFO", "NULL")
+            await axios.post('/dialog/store', state.send)
+                .then((e) => {
+                    state.chat = e.data.chat
+                    state.send.id = e.data.chat.id
+                    state.send.recipients = []
+                    commit("LOADER_INFO", "NULL")
+                })
+                .catch((err) => {
+                    commit("LOADER_INFO", 'ERROR')
+                    console.log(err)
+                })
+        }
+    },
 
 /* Пример
     ADD_TODO({

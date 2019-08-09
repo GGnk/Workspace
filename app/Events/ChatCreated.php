@@ -32,10 +32,10 @@ class ChatCreated implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('chatCreated');
+        return new Channel('Chat_created');
     }
 
     public function broadcastAs(){
-        return 'chat-created';
+        return 'server';
     }
 }

@@ -11,7 +11,7 @@ import state from "./state";
 
 export default new Vuex.Store({
     //Строгий режим. Все изменения проводить через мутацию (в режиме разработчика)
-    strict: process.env.NODE_ENV !== 'production',
+   // strict: process.env.NODE_ENV !== 'production',
 
     state,
     mutations,

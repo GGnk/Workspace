@@ -11,12 +11,12 @@
 |
 */
 
-Broadcast::channel('chatCreated', function(){
+Broadcast::channel('Chat_created', function(){
     return true;
 });
-Broadcast::channel('chatUpdated', function(){
+Broadcast::channel('Chats', function(){
      return true;
 });
-Broadcast::channel('chatRemoved', function(){
+Broadcast::channel('Chat_removed', function(){
     return true;
 });

@@ -32,10 +32,10 @@ class ChatRemoved implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('chatRemoved');
+        return new Channel('Chat_removed');
     }
 
     public function broadcastAs(){
-        return 'chat-removed';
+        return 'server';
     }
 }

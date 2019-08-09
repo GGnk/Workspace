@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\ChatCreated;
+use App\Events\Chats;
 use App\Events\ChatUpdated;
 use App\User;
 use Carbon\Carbon;
@@ -99,7 +100,6 @@ class DialogController extends Controller
         $chat->markAsRead(Auth::id());
         return compact("chat","users");
 
-//        return compact('chat','users');
     }
 
 
@@ -180,8 +180,8 @@ class DialogController extends Controller
             $thread->addParticipant(Input::get('recipients'));
         }
         $res = $this->show(Input::get('id'));
-        broadcast(new chatUpdated($res));
-        return 'Updated';
+        broadcast(new Chats($res))->toOthers();
+        return ['error'=>'false', 'thread'=>$res];
     }
 
     /**

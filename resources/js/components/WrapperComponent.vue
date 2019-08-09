@@ -41,7 +41,7 @@
                                                 </div>
                                                 <!-- Submit Form Input -->
                                                 <div class="form-group col-sm-3 col-12" style="margin: auto">
-                                                    <button type="submit" class="btn btn-primary form-control"  @click="CreateChat" data-dismiss="modal" aria-label="Close">Написать</button>
+                                                    <button type="submit" class="btn btn-primary form-control"  @click="CREATE_CHAT" data-dismiss="modal" aria-label="Close">Написать</button>
                                                 </div>
                                                 <div class="col-12" >
                                                     <ul>
@@ -172,6 +172,7 @@
 
     import {mapGetters} from 'vuex'
     import {mapActions} from 'vuex'
+
     export default {
         // mixins: [mixin],
         components: {
@@ -182,49 +183,31 @@
         props: [],
         computed: {
             ...mapGetters(['info_chats', 'get_chat', 'send_chat', 'auth_u', 'get_users', 'get_user_list', 'loader_request', 'loader_error']),
+
             chat: {
                 get () {
                     return this.send_chat
                 },
-                set (chat) {
-                    this.$store.commit('UPDATE_CHAT', chat)
+                set (value) {
+                    this.$store.commit('UPDATE_CHAT', value)
                 }
             }
         },
         mounted() {
             this.fetchAllChats()
 
-            /*window.Echo.channel("chatCreated").listen(".chat-created", e => {
-                this.threads.chats.unshift(e.data.chat)
-                console.log("Чат с id:" + e.data.chat.id + " была создан")
-            });*/
-            window.Echo.channel('chatUpdated')
-                .listen(".Chat", e => {
-                    console.log('Чат '+ this.chat.id)
-                    let index = this.threads.chats.findIndex(el => el.id === e.chat.chat.id);
-                    let count = 0
-                    if(this.chat.id === e.chat.chat.id) {
-                        this.chat = e.chat.chat
-                    } else {
-                        count = this.threads.chats[index].UnreadMessagesCount
-                    }
-                    this.threads.chats.splice(index, 1,e.chat.chat)
-                    this.threads.chats[index].UnreadMessagesCount = ++count
-
+            window.Echo.channel('Chats')
+                .listen(".server", e => {
+                    this.$store.commit('LISTEN_CHAT_UPDATE', e)
                 })
-                /*.whisper('typing', {
-                name: this.auth_user
+            window.Echo.channel('Chat_created')
+                .listen(".server", e => {
+                    this.$store.commit('LISTEN_CHAT_CREATE', e)
                 })
-                .listenForWhisper('typing', (e) => {
-                    console.log(e.name);
-                })*/
-
-            /*window.Echo.channel("chatRemoved").listen(".chat-removed", e => {
-                // TODO: сделать обновление одного элемента в списке
-                let index = this.threads.chats.findIndex(el => el.id === e.data.chat.id);
-                this.threads.chats.splice(index, 1)
-                console.log("Чат с id:" + e.data.chat.id + " был удален!")
-            });*/
+            window.Echo.channel('Chat_removed')
+                .listen(".server", e => {
+                    this.$store.commit('CHAT_REMOVE', e)
+                })
 
         },
 
@@ -238,26 +221,9 @@
                 this.$store.dispatch("ALL_CHATS")
             },
 
-            ...mapActions(["OPEN_CHAT", "SEND_MESSAGE"]),
+            ...mapActions(["OPEN_CHAT", "SEND_MESSAGE", "CREATE_CHAT"]),
 
 
-            CreateChat() {
-                if (this.send.subject && this.send.recipients) {
-                    this.loader()
-                    axios.post('/dialog/store', this.send)
-                        .then((e) => {
-                            this.chat = e.data.chat
-                            // this.threads.chats.unshift(e.data.chat)
-                            this.send.id = e.data.chat.id
-                            this.send.recipients = []
-                            this.loader()
-                        })
-                        .catch((err) => {
-                            this.loader(err)
-                            console.log(err)
-                        })
-                }
-            },
             minCreateChat(idUser) {
                 this.send.recipients = idUser
                 this.send.subject = 'Сообщение'

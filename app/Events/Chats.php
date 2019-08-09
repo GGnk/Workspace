@@ -11,7 +11,7 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Support\Facades\Auth;
 
-class ChatUpdated implements ShouldBroadcast
+class Chats implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -25,6 +25,8 @@ class ChatUpdated implements ShouldBroadcast
     public function __construct($chat)
     {
         $this->chat = $chat;
+
+        $this->dontBroadcastToCurrentUser();
     }
 
     /**
@@ -34,11 +36,11 @@ class ChatUpdated implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('chatUpdated');
+        return new Channel('Chats');
     }
 
     public function broadcastAs(){
-        return 'Chat';
+        return 'server';
     }
 
 }

@@ -30,22 +30,43 @@ let mutations = {
         state.send = chat
     },
     SEND_CHAT (state, message) {
-        state.chat = message.data.chat
-        let index = state.threads.chats.findIndex(el => el.id === message.data.chat.id);
-        state.threads.chats.splice(index, 1,message.data.chat)
+        state.chat = message.data.thread.chat
+        let index = state.threads.chats.findIndex(el => el.id === message.data.thread.chat.id);
+        state.threads.chats.splice(index, 1)
+        state.threads.chats.unshift(message.data.thread.chat)
         state.send.message = ''
+        if (process.env.NODE_ENV !== 'production') console.log(message.statusText)
     },
+    CHAT_REMOVE (state, chat) {
+        state.threads.chats.splice(state.threads.chats.splice(chat), 1)
 
-
-
-    // Пример
-/*    ADD_TODO(state, todo) {
-        state.todos.unshift(todo)
+        if (process.env.NODE_ENV !== 'production') console.log("Чат с id:" + chat.id + " был удален!")
     },
-    DELETE_TODO(state, todo) {
-        state.todos.splice(state.todos.indexOf(todo), 1)
-        state.toRemove = null;
-    }*/
+    LISTEN_CHAT_UPDATE (state, e) {
+        let index = state.threads.chats.findIndex(el => el.id === e.chat.chat.id);
+        let count = state.threads.chats[index].UnreadMessagesCount
+        state.threads.chats.splice(index, 1)
+        if(state.chat.id === e.chat.chat.id) {
+            state.chat = e.chat.chat
+        }
+        // TODO: сделать онлайн
+        let index2 = state.threads.chats.unshift(e.chat.chat)
+        state.threads.chats[state.threads.chats.indexOf(e.chat.chat)].UnreadMessagesCount = count++
+
+        if (process.env.NODE_ENV !== 'production') console.log('Listen chat #'+ e.chat.chat.id)
+    },
+    LISTEN_CHAT_CREATE (state, e) {
+        state.threads.chats.unshift(e.data.chat)
+        if (process.env.NODE_ENV !== 'production') console.log("Чат с id:" + e.data.chat.id + " был создан")
+    },
+    LISTEN_CHAT_REMOVE (state, e) {
+        // TODO: сделать обновление одного элемента в списке
+        // let index = this.threads.chats.findIndex(el => el.id === e.data.chat.id);
+        // this.threads.chats.splice(index, 1)
+        //
+        // if (process.env.NODE_ENV !== 'production') console.log("Чат с id:" + e.data.chat.id + " был удален!")
+    }
+
 }
 
 export default mutations

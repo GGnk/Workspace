@@ -34,6 +34,7 @@
         },
         mounted() {
             this.Scroll()
+
         },
         methods: {
             Scroll() {
