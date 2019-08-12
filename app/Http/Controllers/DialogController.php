@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\ChatCreated;
 use App\Events\Chats;
-use App\Events\ChatUpdated;
+use App\Events\ChatRemoved;
 use App\User;
 use Carbon\Carbon;
 
@@ -195,7 +195,8 @@ class DialogController extends Controller
         } catch (ModelNotFoundException $e) {
             return 'The thread with ID: ' . Input::get('idChat') . ' was not found. '.$e;
         }
+        broadcast(new ChatRemoved($chat->id))->toOthers();
         $chat->removeParticipant(Input::get('idUser'));
-        return 'Chat deleted!';
+
     }
 }

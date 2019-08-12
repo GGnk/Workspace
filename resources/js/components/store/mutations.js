@@ -38,9 +38,16 @@ let mutations = {
         if (process.env.NODE_ENV !== 'production') console.log(message.statusText)
     },
     CHAT_REMOVE (state, chat) {
-        state.threads.chats.splice(state.threads.chats.splice(chat), 1)
+        state.threads.chats.splice(state.threads.chats.findIndex(el => el.id === chat), 1)
 
-        if (process.env.NODE_ENV !== 'production') console.log("Чат с id:" + chat.id + " был удален!")
+        if (process.env.NODE_ENV !== 'production') console.log("Чат с id:" + chat + " был удален!")
+    },
+    CREATE_CHAT (state, chat) {
+        state.threads.chats.unshift(chat)
+        state.chat = chat
+        state.send.id = chat.id
+        state.send.recipients = []
+        if (process.env.NODE_ENV !== 'production') console.log("Чат с id:" + chat.id + " был создан!")
     },
     LISTEN_CHAT_UPDATE (state, e) {
         let index = state.threads.chats.findIndex(el => el.id === e.chat.chat.id);

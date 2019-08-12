@@ -1,5 +1,5 @@
 <?php
-
+use Cmgmyr\Messenger\Models\Thread;
 /*
 |--------------------------------------------------------------------------
 | Broadcast Channels
@@ -12,11 +12,11 @@
 */
 
 Broadcast::channel('Chat_created', function(){
-    return true;
+    return auth()->check();
 });
 Broadcast::channel('Chats', function(){
-     return true;
+     return auth()->check();
 });
-Broadcast::channel('Chat_removed', function(){
-    return true;
+Broadcast::channel('Chat_removed', function(Thread $thread){
+    return $thread->hasParticipant(auth()->id());
 });

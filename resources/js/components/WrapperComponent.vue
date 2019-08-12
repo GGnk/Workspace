@@ -71,13 +71,13 @@
         <div class="window-area row">
             <div class="conversation-list col-12 col-sm-3" style="padding: 0">
                 <ul style="margin-bottom: 46px;" >
-                    <li style="position: relative;" v-for="(thread, index) in info_chats.chats"  >
+                    <li style="position: relative;" v-for="(thread, index) in info_chats.chats" :style="thread.id === chat.id? 'background-color: #335d85;':''">
                         <a href="#" @click.prevent="OPEN_CHAT(thread.id)">
 
                             <chats :thread="thread" :user="auth_u"></chats>
 
                         </a>
-                        <span class="deleteChat" @click="DELETE_CHAT(thread.id, auth_u.id, index)"></span>
+                        <span class="deleteChat" @click="DELETE_CHAT(thread.id)"></span>
                     </li>
                     <div v-if="!info_chats.chats || info_chats.chats.length == 0" style="padding: 20px;text-align: center;">
                         Начни, создай чат с кем нибудь!
@@ -110,14 +110,6 @@
 
                     <show :thread="get_chat" :user="auth_u"></show>
 
-                    <div class="input-area">
-                        <div class="input-wrapper col-9">
-                            <textarea  v-model="chat.message" placeholder="текст..."></textarea>
-                            <i class="fa fa-smile-o"></i>
-                            <i class="fa fa-paperclip"></i>
-                        </div>
-                        <button type="submit" class="btn btn-primary send-btn col-3" style="height: 32px;font-size: 12px;padding: 2px;" @click="SEND_MESSAGE">Отправить</button>
-                    </div>
                 </div>
             </div>
 
@@ -206,7 +198,7 @@
                 })
             window.Echo.channel('Chat_removed')
                 .listen(".server", e => {
-                    this.$store.commit('CHAT_REMOVE', e)
+                    this.$store.commit('CHAT_REMOVE', e.id)
                 })
 
         },
@@ -221,27 +213,14 @@
                 this.$store.dispatch("ALL_CHATS")
             },
 
-            ...mapActions(["OPEN_CHAT", "SEND_MESSAGE", "CREATE_CHAT"]),
+            ...mapActions(["OPEN_CHAT", "SEND_MESSAGE", "CREATE_CHAT", "DELETE_CHAT"]),
 
 
             minCreateChat(idUser) {
-                this.send.recipients = idUser
-                this.send.subject = 'Сообщение'
-                this.send.message = ''
-                this.CreateChat()
-            },
-            DeleteChat(idChat, idUser, index) {
-                this.loader()
-                axios.post('/dialog/delete', {idChat, idUser})
-                    .then((e) => {
-                        this.threads.chats.splice(index, 1)
-                        this.loader()
-                        console.log(e.data)
-                    })
-                    .catch((err) => {
-                        this.loader(err)
-                        console.log(err)
-                    })
+                this.send_chat.recipients = idUser
+                this.send_chat.subject = 'Сообщение'
+                this.send_chat.message = ''
+                this.$store.dispatch("CREATE_CHAT")
             }
         }
     }

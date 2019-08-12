@@ -1,5 +1,5 @@
 <template>
-    <div v-if="thread">
+    <div>
         <div class="title"><b>{{ thread.subject }}</b><i class="fa fa-search"></i></div>
         <div class="chat-list" id="chat-list" >
             <ul style="width: 100%;">
@@ -18,7 +18,14 @@
 
             </ul>
         </div>
-
+        <div class="input-area">
+            <div class="input-wrapper col-9">
+                <textarea  v-model="chat.message" placeholder="текст..."></textarea>
+                <i class="fa fa-smile-o"></i>
+                <i class="fa fa-paperclip"></i>
+            </div>
+            <button type="submit" class="btn btn-primary send-btn col-3" style="height: 32px;font-size: 12px;padding: 2px;" @click="SEND_MESSAGE">Отправить</button>
+        </div>
     </div>
 </template>
 

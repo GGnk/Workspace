@@ -43,9 +43,7 @@ let actions = {
             commit("LOADER_INFO", "NULL")
             await axios.post('/dialog/store', state.send)
                 .then((e) => {
-                    state.chat = e.data.chat
-                    state.send.id = e.data.chat.id
-                    state.send.recipients = []
+                    commit("CREATE_CHAT", e.data.chat)
                     commit("LOADER_INFO", "NULL")
                 })
                 .catch((err) => {
@@ -54,41 +52,20 @@ let actions = {
                 })
         }
     },
-
-/* Пример
-    ADD_TODO({
-                 commit
-             }, todo) {
-        axios.post('/api/todos', todo)
-            .then(res => {
-            if (res.data === "added")
-                console.log('ok')
-        })
-            .catch(err => {
-            console.log(err)
-        })
-    },
-    UPDATE_TODO({commit}, todo) {
-        axios.put(`/api/todos/${todo.id}`, todo)
-            .then(res => {
-                if (res.data === 'updated')
-                    console.log("updated ")
+    async DELETE_CHAT({commit, state}, idChat) {
+        commit("LOADER_INFO", "NULL")
+        let idUser = state.auth_user.id
+        await axios.post('/dialog/delete', {idChat, idUser})
+            .then((e) => {
+                commit("CHAT_REMOVE", idChat)
+                commit("LOADER_INFO", "NULL")
             })
-            .catch(err => {console.log(err)})
-
-    },
-    GET_TODOS({commit}) {
-        axios.get('/api/todos')
-            .then(res => {
-                {
-                    console.log(res.data)
-                    commit('GET_TODOS', res.data)
-                }
-            })
-            .catch(err => {
+            .catch((err) => {
+                commit("LOADER_INFO", "ERROR")
                 console.log(err)
             })
-    }*/
+    },
+
 }
 
 export default actions

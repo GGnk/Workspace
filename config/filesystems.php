@@ -54,6 +54,18 @@ return [
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
+        'obmen' => [
+            'driver'   => 'ftp',
+            'host'     => '192.168.2.2',
+            'port'     => 32121,
+            'username' => 'user',
+            'password' => '463654',
+            // Optional FTP Settings...
+            // 'root'     => '',
+            'passive'  => true,
+            // 'ssl'      => true,
+            // 'timeout'  => 30,
+        ],
 
         /*'s3' => [
             'driver' => 's3',

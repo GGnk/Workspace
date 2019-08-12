@@ -9931,6 +9931,7 @@ b {
   bottom: 44px;
   overflow-y: auto;
   outline: none;
+  height: 81%;
 }
 
 .chat-area ul {

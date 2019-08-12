@@ -2096,14 +2096,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 // import { mixin } from '../modal/alerts.js'
 
 
@@ -2122,8 +2114,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       get: function get() {
         return this.send_chat;
       },
-      set: function set(chat) {
-        this.$store.commit('UPDATE_CHAT', chat);
+      set: function set(value) {
+        this.$store.commit('UPDATE_CHAT', value);
       }
     }
   }),
@@ -2131,43 +2123,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var _this = this;
 
     this.fetchAllChats();
-    /*window.Echo.channel("chatCreated").listen(".chat-created", e => {
-        this.threads.chats.unshift(e.data.chat)
-        console.log("Чат с id:" + e.data.chat.id + " была создан")
-    });*/
-
-    window.Echo.channel('chatUpdated').listen(".Chat", function (e) {
-      console.log('Чат ' + _this.chat.id);
-
-      var index = _this.threads.chats.findIndex(function (el) {
-        return el.id === e.chat.chat.id;
-      });
-
-      var count = 0;
-
-      if (_this.chat.id === e.chat.chat.id) {
-        _this.chat = e.chat.chat;
-      } else {
-        count = _this.threads.chats[index].UnreadMessagesCount;
-      }
-
-      _this.threads.chats.splice(index, 1, e.chat.chat);
-
-      _this.threads.chats[index].UnreadMessagesCount = ++count;
+    window.Echo.channel('Chats').listen(".server", function (e) {
+      _this.$store.commit('LISTEN_CHAT_UPDATE', e);
     });
-    /*.whisper('typing', {
-    name: this.auth_user
-    })
-    .listenForWhisper('typing', (e) => {
-        console.log(e.name);
-    })*/
-
-    /*window.Echo.channel("chatRemoved").listen(".chat-removed", e => {
-        // TODO: сделать обновление одного элемента в списке
-        let index = this.threads.chats.findIndex(el => el.id === e.data.chat.id);
-        this.threads.chats.splice(index, 1)
-        console.log("Чат с id:" + e.data.chat.id + " был удален!")
-    });*/
+    window.Echo.channel('Chat_created').listen(".server", function (e) {
+      _this.$store.commit('LISTEN_CHAT_CREATE', e);
+    });
+    window.Echo.channel('Chat_removed').listen(".server", function (e) {
+      _this.$store.commit('CHAT_REMOVE', e.id);
+    });
   },
   watch: {// method(after, before) {
     //
@@ -2177,50 +2141,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     fetchAllChats: function fetchAllChats() {
       this.$store.dispatch("ALL_CHATS");
     }
-  }, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapActions"])(["OPEN_CHAT", "SEND_MESSAGE"]), {
-    CreateChat: function CreateChat() {
-      var _this2 = this;
-
-      if (this.send.subject && this.send.recipients) {
-        this.loader();
-        axios.post('/dialog/store', this.send).then(function (e) {
-          _this2.chat = e.data.chat; // this.threads.chats.unshift(e.data.chat)
-
-          _this2.send.id = e.data.chat.id;
-          _this2.send.recipients = [];
-
-          _this2.loader();
-        })["catch"](function (err) {
-          _this2.loader(err);
-
-          console.log(err);
-        });
-      }
-    },
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapActions"])(["OPEN_CHAT", "SEND_MESSAGE", "CREATE_CHAT", "DELETE_CHAT"]), {
     minCreateChat: function minCreateChat(idUser) {
-      this.send.recipients = idUser;
-      this.send.subject = 'Сообщение';
-      this.send.message = '';
-      this.CreateChat();
-    },
-    DeleteChat: function DeleteChat(idChat, idUser, index) {
-      var _this3 = this;
-
-      this.loader();
-      axios.post('/dialog/delete', {
-        idChat: idChat,
-        idUser: idUser
-      }).then(function (e) {
-        _this3.threads.chats.splice(index, 1);
-
-        _this3.loader();
-
-        console.log(e.data);
-      })["catch"](function (err) {
-        _this3.loader(err);
-
-        console.log(err);
-      });
+      this.send_chat.recipients = idUser;
+      this.send_chat.subject = 'Сообщение';
+      this.send_chat.message = '';
+      this.$store.dispatch("CREATE_CHAT");
     }
   })
 });
@@ -2236,6 +2162,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -49254,7 +49187,7 @@ var render = function() {
                                           "data-dismiss": "modal",
                                           "aria-label": "Close"
                                         },
-                                        on: { click: _vm.CreateChat }
+                                        on: { click: _vm.CREATE_CHAT }
                                       },
                                       [_vm._v("Написать")]
                                     )
@@ -49375,35 +49308,45 @@ var render = function() {
             { staticStyle: { "margin-bottom": "46px" } },
             [
               _vm._l(_vm.info_chats.chats, function(thread, index) {
-                return _c("li", { staticStyle: { position: "relative" } }, [
-                  _c(
-                    "a",
-                    {
-                      attrs: { href: "#" },
+                return _c(
+                  "li",
+                  {
+                    staticStyle: { position: "relative" },
+                    style:
+                      thread.id === _vm.chat.id
+                        ? "background-color: #335d85;"
+                        : ""
+                  },
+                  [
+                    _c(
+                      "a",
+                      {
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.OPEN_CHAT(thread.id)
+                          }
+                        }
+                      },
+                      [
+                        _c("chats", {
+                          attrs: { thread: thread, user: _vm.auth_u }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("span", {
+                      staticClass: "deleteChat",
                       on: {
                         click: function($event) {
-                          $event.preventDefault()
-                          return _vm.OPEN_CHAT(thread.id)
+                          return _vm.DELETE_CHAT(thread.id)
                         }
                       }
-                    },
-                    [
-                      _c("chats", {
-                        attrs: { thread: thread, user: _vm.auth_u }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("span", {
-                    staticClass: "deleteChat",
-                    on: {
-                      click: function($event) {
-                        return _vm.DELETE_CHAT(thread.id, _vm.auth_u.id, index)
-                      }
-                    }
-                  })
-                ])
+                    })
+                  ]
+                )
               }),
               _vm._v(" "),
               !_vm.info_chats.chats || _vm.info_chats.chats.length == 0
@@ -49470,51 +49413,7 @@ var render = function() {
               [
                 _c("show", {
                   attrs: { thread: _vm.get_chat, user: _vm.auth_u }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "input-area" }, [
-                  _c("div", { staticClass: "input-wrapper col-9" }, [
-                    _c("textarea", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.chat.message,
-                          expression: "chat.message"
-                        }
-                      ],
-                      attrs: { placeholder: "текст..." },
-                      domProps: { value: _vm.chat.message },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.chat, "message", $event.target.value)
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("i", { staticClass: "fa fa-smile-o" }),
-                    _vm._v(" "),
-                    _c("i", { staticClass: "fa fa-paperclip" })
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary send-btn col-3",
-                      staticStyle: {
-                        height: "32px",
-                        "font-size": "12px",
-                        padding: "2px"
-                      },
-                      attrs: { type: "submit" },
-                      on: { click: _vm.SEND_MESSAGE }
-                    },
-                    [_vm._v("Отправить")]
-                  )
-                ])
+                })
               ],
               1
             )
@@ -49792,53 +49691,87 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.thread
-    ? _c("div", [
-        _c("div", { staticClass: "title" }, [
-          _c("b", [_vm._v(_vm._s(_vm.thread.subject))]),
-          _c("i", { staticClass: "fa fa-search" })
-        ]),
+  return _c("div", [
+    _c("div", { staticClass: "title" }, [
+      _c("b", [_vm._v(_vm._s(_vm.thread.subject))]),
+      _c("i", { staticClass: "fa fa-search" })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "chat-list", attrs: { id: "chat-list" } }, [
+      _c(
+        "ul",
+        { staticStyle: { width: "100%" } },
+        _vm._l(_vm.thread.messages, function(message) {
+          return message.body
+            ? _c("li", { class: message.user_id == _vm.user.id ? "me" : "" }, [
+                _c("div", { staticClass: "name" }, [
+                  _c("img", { attrs: { src: message.user.img } })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "message" }, [
+                  _c("span", { staticClass: "badge" }, [
+                    _vm._v(
+                      _vm._s(
+                        message.user_id == _vm.user.id
+                          ? "You"
+                          : message.user.name
+                      )
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v(_vm._s(message.body))]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "msg-time" }, [
+                    _vm._v(_vm._s(message.created))
+                  ])
+                ])
+              ])
+            : _vm._e()
+        }),
+        0
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "input-area" }, [
+      _c("div", { staticClass: "input-wrapper col-9" }, [
+        _c("textarea", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.chat.message,
+              expression: "chat.message"
+            }
+          ],
+          attrs: { placeholder: "текст..." },
+          domProps: { value: _vm.chat.message },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.chat, "message", $event.target.value)
+            }
+          }
+        }),
         _vm._v(" "),
-        _c("div", { staticClass: "chat-list", attrs: { id: "chat-list" } }, [
-          _c(
-            "ul",
-            { staticStyle: { width: "100%" } },
-            _vm._l(_vm.thread.messages, function(message) {
-              return message.body
-                ? _c(
-                    "li",
-                    { class: message.user_id == _vm.user.id ? "me" : "" },
-                    [
-                      _c("div", { staticClass: "name" }, [
-                        _c("img", { attrs: { src: message.user.img } })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "message" }, [
-                        _c("span", { staticClass: "badge" }, [
-                          _vm._v(
-                            _vm._s(
-                              message.user_id == _vm.user.id
-                                ? "You"
-                                : message.user.name
-                            )
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("p", [_vm._v(_vm._s(message.body))]),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "msg-time" }, [
-                          _vm._v(_vm._s(message.created))
-                        ])
-                      ])
-                    ]
-                  )
-                : _vm._e()
-            }),
-            0
-          )
-        ])
-      ])
-    : _vm._e()
+        _c("i", { staticClass: "fa fa-smile-o" }),
+        _vm._v(" "),
+        _c("i", { staticClass: "fa fa-paperclip" })
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary send-btn col-3",
+          staticStyle: { height: "32px", "font-size": "12px", padding: "2px" },
+          attrs: { type: "submit" },
+          on: { click: _vm.SEND_MESSAGE }
+        },
+        [_vm._v("Отправить")]
+      )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -63633,6 +63566,84 @@ var actions = {
     }
 
     return SEND_MESSAGE;
+  }(),
+  CREATE_CHAT: function () {
+    var _CREATE_CHAT = _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(_ref4) {
+      var commit, state;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              commit = _ref4.commit, state = _ref4.state;
+
+              if (!(state.send.subject && state.send.recipients)) {
+                _context4.next = 5;
+                break;
+              }
+
+              commit("LOADER_INFO", "NULL");
+              _context4.next = 5;
+              return axios.post('/dialog/store', state.send).then(function (e) {
+                commit("CREATE_CHAT", e.data.chat);
+                commit("LOADER_INFO", "NULL");
+              })["catch"](function (err) {
+                commit("LOADER_INFO", 'ERROR');
+                console.log(err);
+              });
+
+            case 5:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
+    }));
+
+    function CREATE_CHAT(_x5) {
+      return _CREATE_CHAT.apply(this, arguments);
+    }
+
+    return CREATE_CHAT;
+  }(),
+  DELETE_CHAT: function () {
+    var _DELETE_CHAT = _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(_ref5, idChat) {
+      var commit, state, idUser;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              commit = _ref5.commit, state = _ref5.state;
+              commit("LOADER_INFO", "NULL");
+              idUser = state.auth_user.id;
+              _context5.next = 5;
+              return axios.post('/dialog/delete', {
+                idChat: idChat,
+                idUser: idUser
+              }).then(function (e) {
+                commit("CHAT_REMOVE", idChat);
+                commit("LOADER_INFO", "NULL");
+              })["catch"](function (err) {
+                commit("LOADER_INFO", "ERROR");
+                console.log(err);
+              });
+
+            case 5:
+            case "end":
+              return _context5.stop();
+          }
+        }
+      }, _callee5);
+    }));
+
+    function DELETE_CHAT(_x6, _x7) {
+      return _DELETE_CHAT.apply(this, arguments);
+    }
+
+    return DELETE_CHAT;
   }()
 };
 /* harmony default export */ __webpack_exports__["default"] = (actions);
@@ -63714,7 +63725,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   //Строгий режим. Все изменения проводить через мутацию (в режиме разработчика)
-  strict: "development" !== 'production',
+  // strict: process.env.NODE_ENV !== 'production',
   state: _state__WEBPACK_IMPORTED_MODULE_5__["default"],
   mutations: _mutations__WEBPACK_IMPORTED_MODULE_3__["default"],
   getters: _getters__WEBPACK_IMPORTED_MODULE_4__["default"],
@@ -63765,12 +63776,53 @@ var mutations = {
     state.send = chat;
   },
   SEND_CHAT: function SEND_CHAT(state, message) {
-    state.chat = message.data.chat;
+    state.chat = message.data.thread.chat;
     var index = state.threads.chats.findIndex(function (el) {
-      return el.id === message.data.chat.id;
+      return el.id === message.data.thread.chat.id;
     });
-    state.threads.chats.splice(index, 1, message.data.chat);
+    state.threads.chats.splice(index, 1);
+    state.threads.chats.unshift(message.data.thread.chat);
     state.send.message = '';
+    if (true) console.log(message.statusText);
+  },
+  CHAT_REMOVE: function CHAT_REMOVE(state, chat) {
+    state.threads.chats.splice(state.threads.chats.findIndex(function (el) {
+      return el.id === chat;
+    }), 1);
+    if (true) console.log("Чат с id:" + chat + " был удален!");
+  },
+  CREATE_CHAT: function CREATE_CHAT(state, chat) {
+    state.threads.chats.unshift(chat);
+    state.chat = chat;
+    state.send.id = chat.id;
+    state.send.recipients = [];
+    if (true) console.log("Чат с id:" + chat.id + " был создан!");
+  },
+  LISTEN_CHAT_UPDATE: function LISTEN_CHAT_UPDATE(state, e) {
+    var index = state.threads.chats.findIndex(function (el) {
+      return el.id === e.chat.chat.id;
+    });
+    var count = state.threads.chats[index].UnreadMessagesCount;
+    state.threads.chats.splice(index, 1);
+
+    if (state.chat.id === e.chat.chat.id) {
+      state.chat = e.chat.chat;
+    } // TODO: сделать онлайн
+
+
+    var index2 = state.threads.chats.unshift(e.chat.chat);
+    state.threads.chats[state.threads.chats.indexOf(e.chat.chat)].UnreadMessagesCount = count++;
+    if (true) console.log('Listen chat #' + e.chat.chat.id);
+  },
+  LISTEN_CHAT_CREATE: function LISTEN_CHAT_CREATE(state, e) {
+    state.threads.chats.unshift(e.data.chat);
+    if (true) console.log("Чат с id:" + e.data.chat.id + " был создан");
+  },
+  LISTEN_CHAT_REMOVE: function LISTEN_CHAT_REMOVE(state, e) {// TODO: сделать обновление одного элемента в списке
+    // let index = this.threads.chats.findIndex(el => el.id === e.data.chat.id);
+    // this.threads.chats.splice(index, 1)
+    //
+    // if (process.env.NODE_ENV !== 'production') console.log("Чат с id:" + e.data.chat.id + " был удален!")
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (mutations);
