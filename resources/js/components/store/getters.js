@@ -24,16 +24,6 @@ let getters = {
         return state.loaderError
     },
 
-    /*  Пример
-        newTodo: state => {
-            return state.newTodo
-        },
-        completed: state => {
-            return state.todos.filter(todo => todo.completed === true)
-        },
-        remaining: state => {
-            return state.todos.filter(todo => todo.completed === false)
-        }*/
 }
 
 export default getters

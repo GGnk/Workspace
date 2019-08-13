@@ -1931,7 +1931,8 @@ module.exports = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_modules_ThreadsComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/modules/ThreadsComponent */ "./resources/js/components/modules/ThreadsComponent.vue");
 /* harmony import */ var _components_modules_ShowComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/modules/ShowComponent */ "./resources/js/components/modules/ShowComponent.vue");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _components_modules_FileManagerComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/modules/FileManagerComponent */ "./resources/js/components/modules/FileManagerComponent.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { keys.push.apply(keys, Object.getOwnPropertySymbols(object)); } if (enumerableOnly) keys = keys.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -2096,7 +2097,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 // import { mixin } from '../modal/alerts.js'
+
 
 
 
@@ -2105,11 +2115,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   // mixins: [mixin],
   components: {
     chats: _components_modules_ThreadsComponent__WEBPACK_IMPORTED_MODULE_0__["default"],
-    show: _components_modules_ShowComponent__WEBPACK_IMPORTED_MODULE_1__["default"]
+    show: _components_modules_ShowComponent__WEBPACK_IMPORTED_MODULE_1__["default"],
+    file_manager: _components_modules_FileManagerComponent__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   name: "Wrapper",
   props: [],
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])(['info_chats', 'get_chat', 'send_chat', 'auth_u', 'get_users', 'get_user_list', 'loader_request', 'loader_error']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapGetters"])(['info_chats', 'get_chat', 'send_chat', 'auth_u', 'get_users', 'get_user_list', 'loader_request', 'loader_error']), {
     chat: {
       get: function get() {
         return this.send_chat;
@@ -2141,7 +2152,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     fetchAllChats: function fetchAllChats() {
       this.$store.dispatch("ALL_CHATS");
     }
-  }, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapActions"])(["OPEN_CHAT", "SEND_MESSAGE", "CREATE_CHAT", "DELETE_CHAT"]), {
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapActions"])(["OPEN_CHAT", "SEND_MESSAGE", "CREATE_CHAT", "DELETE_CHAT"]), {
     minCreateChat: function minCreateChat(idUser) {
       this.send_chat.recipients = idUser;
       this.send_chat.subject = 'Сообщение';
@@ -2149,6 +2160,47 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.$store.dispatch("CREATE_CHAT");
     }
   })
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/modules/FileManagerComponent.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/modules/FileManagerComponent.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { keys.push.apply(keys, Object.getOwnPropertySymbols(object)); } if (enumerableOnly) keys = keys.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "FileManager",
+  props: [],
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["all_files", "all_directories"])),
+  watch: {},
+  mounted: function mounted() {
+    this.$store.dispatch("LOAD_DIRECTORY", '/');
+  },
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(["LOAD_DIRECTORY"]))
 });
 
 /***/ }),
@@ -2186,26 +2238,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ShowComponent",
   props: ['thread', 'user'],
+  computed: {},
   watch: {},
-  mounted: function mounted() {
-    this.Scroll();
-  },
-  methods: {
-    Scroll: function Scroll() {
-      var block = document.getElementById("chat-list");
-      block.scrollTop = block.scrollHeight;
-    }
-  }
+  mounted: function mounted() {},
+  methods: {}
 });
 
 /***/ }),
@@ -49406,19 +49445,79 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "chat-area col-12 col-sm-6" }, [
-        _vm.get_chat.id
-          ? _c(
-              "div",
-              [
-                _c("show", {
-                  attrs: { thread: _vm.get_chat, user: _vm.auth_u }
-                })
-              ],
-              1
-            )
-          : _vm._e()
-      ]),
+      _c(
+        "div",
+        { staticClass: "chat-area col-12 col-sm-6" },
+        [
+          _vm.get_chat.id
+            ? _c(
+                "div",
+                [
+                  _c("show", {
+                    attrs: { thread: _vm.get_chat, user: _vm.auth_u }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-area" }, [
+                    _c("div", { staticClass: "input-wrapper col-9" }, [
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.chat.message,
+                            expression: "chat.message"
+                          }
+                        ],
+                        attrs: { placeholder: "текст..." },
+                        domProps: { value: _vm.chat.message },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.chat, "message", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("i", { staticClass: "fa fa-smile-o" }),
+                      _vm._v(" "),
+                      _c("i", { staticClass: "fa fa-paperclip" })
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary send-btn col-3",
+                        staticStyle: {
+                          height: "32px",
+                          "font-size": "12px",
+                          padding: "2px"
+                        },
+                        attrs: { type: "submit" },
+                        on: { click: _vm.SEND_MESSAGE }
+                      },
+                      [_vm._v("Отправить")]
+                    )
+                  ])
+                ],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _c("file_manager", {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: !_vm.get_chat.id,
+                expression: "!get_chat.id"
+              }
+            ]
+          })
+        ],
+        1
+      ),
       _vm._v(" "),
       _c(
         "div",
@@ -49438,6 +49537,7 @@ var render = function() {
             [
               _c("ul", { staticClass: "tabs-container" }, [
                 _c("li", { staticClass: "active" }, [
+                  _vm._v("chat\n                        "),
                   _c(
                     "ul",
                     { staticClass: "member-list" },
@@ -49676,6 +49776,44 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/modules/FileManagerComponent.vue?vue&type=template&id=0089eadf&scoped=true&":
+/*!*******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/modules/FileManagerComponent.vue?vue&type=template&id=0089eadf&scoped=true& ***!
+  \*******************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "ul",
+      [
+        _vm._l(_vm.all_directories, function(dir) {
+          return _c("li", [_vm._v(_vm._s(dir))])
+        }),
+        _vm._v(" "),
+        _vm._l(_vm.all_files, function(file) {
+          return _c("li", [_vm._v(_vm._s(file))])
+        })
+      ],
+      2
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/modules/ShowComponent.vue?vue&type=template&id=abeb76c6&scoped=true&":
 /*!************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/modules/ShowComponent.vue?vue&type=template&id=abeb76c6&scoped=true& ***!
@@ -49729,46 +49867,6 @@ var render = function() {
             : _vm._e()
         }),
         0
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "input-area" }, [
-      _c("div", { staticClass: "input-wrapper col-9" }, [
-        _c("textarea", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.chat.message,
-              expression: "chat.message"
-            }
-          ],
-          attrs: { placeholder: "текст..." },
-          domProps: { value: _vm.chat.message },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.chat, "message", $event.target.value)
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("i", { staticClass: "fa fa-smile-o" }),
-        _vm._v(" "),
-        _c("i", { staticClass: "fa fa-paperclip" })
-      ]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary send-btn col-3",
-          staticStyle: { height: "32px", "font-size": "12px", padding: "2px" },
-          attrs: { type: "submit" },
-          on: { click: _vm.SEND_MESSAGE }
-        },
-        [_vm._v("Отправить")]
       )
     ])
   ])
@@ -63301,6 +63399,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/modules/FileManagerComponent.vue":
+/*!******************************************************************!*\
+  !*** ./resources/js/components/modules/FileManagerComponent.vue ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _FileManagerComponent_vue_vue_type_template_id_0089eadf_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FileManagerComponent.vue?vue&type=template&id=0089eadf&scoped=true& */ "./resources/js/components/modules/FileManagerComponent.vue?vue&type=template&id=0089eadf&scoped=true&");
+/* harmony import */ var _FileManagerComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FileManagerComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/modules/FileManagerComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _FileManagerComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _FileManagerComponent_vue_vue_type_template_id_0089eadf_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _FileManagerComponent_vue_vue_type_template_id_0089eadf_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "0089eadf",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/modules/FileManagerComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/modules/FileManagerComponent.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/modules/FileManagerComponent.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FileManagerComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./FileManagerComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/modules/FileManagerComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FileManagerComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/modules/FileManagerComponent.vue?vue&type=template&id=0089eadf&scoped=true&":
+/*!*************************************************************************************************************!*\
+  !*** ./resources/js/components/modules/FileManagerComponent.vue?vue&type=template&id=0089eadf&scoped=true& ***!
+  \*************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FileManagerComponent_vue_vue_type_template_id_0089eadf_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./FileManagerComponent.vue?vue&type=template&id=0089eadf&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/modules/FileManagerComponent.vue?vue&type=template&id=0089eadf&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FileManagerComponent_vue_vue_type_template_id_0089eadf_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FileManagerComponent_vue_vue_type_template_id_0089eadf_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/modules/ShowComponent.vue":
 /*!***********************************************************!*\
   !*** ./resources/js/components/modules/ShowComponent.vue ***!
@@ -63684,17 +63851,6 @@ var getters = {
   loader_error: function loader_error(state) {
     return state.loaderError;
   }
-  /*  Пример
-      newTodo: state => {
-          return state.newTodo
-      },
-      completed: state => {
-          return state.todos.filter(todo => todo.completed === true)
-      },
-      remaining: state => {
-          return state.todos.filter(todo => todo.completed === false)
-      }*/
-
 };
 /* harmony default export */ __webpack_exports__["default"] = (getters);
 
@@ -63716,6 +63872,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mutations__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./mutations */ "./resources/js/components/store/mutations.js");
 /* harmony import */ var _getters__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./getters */ "./resources/js/components/store/getters.js");
 /* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./state */ "./resources/js/components/store/state.js");
+/* harmony import */ var _modules_file_manager__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/file-manager */ "./resources/js/components/store/modules/file-manager.js");
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
@@ -63723,14 +63880,101 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   //Строгий режим. Все изменения проводить через мутацию (в режиме разработчика)
   // strict: process.env.NODE_ENV !== 'production',
+  modules: {
+    fileManager: _modules_file_manager__WEBPACK_IMPORTED_MODULE_6__["default"]
+  },
   state: _state__WEBPACK_IMPORTED_MODULE_5__["default"],
   mutations: _mutations__WEBPACK_IMPORTED_MODULE_3__["default"],
   getters: _getters__WEBPACK_IMPORTED_MODULE_4__["default"],
   actions: _actions__WEBPACK_IMPORTED_MODULE_2__["default"]
 }));
+
+/***/ }),
+
+/***/ "./resources/js/components/store/modules/file-manager.js":
+/*!***************************************************************!*\
+  !*** ./resources/js/components/store/modules/file-manager.js ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var actions = {
+  LOAD_DIRECTORY: function () {
+    var _LOAD_DIRECTORY = _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(_ref, name) {
+      var commit;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              commit = _ref.commit;
+              commit("LOADER_INFO", "NULL");
+              _context.next = 4;
+              return axios.post('/obmen', {
+                dir: name
+              }).then(function (e) {
+                commit('LOAD_DIRECTORY', e);
+                commit("LOADER_INFO", "NULL");
+              })["catch"](function (err) {
+                commit("LOADER_INFO", 'ERROR');
+                console.log(err);
+              });
+
+            case 4:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    function LOAD_DIRECTORY(_x, _x2) {
+      return _LOAD_DIRECTORY.apply(this, arguments);
+    }
+
+    return LOAD_DIRECTORY;
+  }()
+};
+var mutations = {
+  LOAD_DIRECTORY: function LOAD_DIRECTORY(state, info) {
+    state.directories = info.directories;
+    state.files = info.files;
+  }
+};
+var getters = {
+  all_directories: function all_directories(state) {
+    return state.directories;
+  },
+  all_files: function all_files(state) {
+    return state.files;
+  }
+};
+var state = {
+  directories: [],
+  files: []
+};
+/* harmony default export */ __webpack_exports__["default"] = ({
+  // namespaced: true,
+  state: state,
+  getters: getters,
+  actions: actions,
+  mutations: mutations
+});
 
 /***/ }),
 

@@ -7,15 +7,20 @@ use Illuminate\Support\Facades\Storage;
 
 class FileManagerController extends Controller
 {
-    public function index() {
+    /**
+     * @param Request $request
+     * @return array
+     */
+    public function index(Request $request) {
+        $dir = '';
+        if ($request->has('dir')) $dir = $request->dir;
 
-           $obmen = Storage::disk('obmen')->directories();
-            $files =  Storage::disk('obmen')->files();
-           foreach($files as $file) {
-                $obmen[] = $file;
-           };
+           $disk = Storage::disk('obmen');
+
+           $dirs = $disk->directories($dir);
+           $files = $disk->files($dir);
 
 
-        return $obmen;
+        return compact('dirs', 'files');
     }
 }

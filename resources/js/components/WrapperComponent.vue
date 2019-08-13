@@ -109,8 +109,16 @@
                 <div v-if="get_chat.id">
 
                     <show :thread="get_chat" :user="auth_u"></show>
-
+                    <div class="input-area">
+                        <div class="input-wrapper col-9">
+                            <textarea  v-model="chat.message" placeholder="текст..."></textarea>
+                            <i class="fa fa-smile-o"></i>
+                            <i class="fa fa-paperclip"></i>
+                        </div>
+                        <button type="submit" class="btn btn-primary send-btn col-3" style="height: 32px;font-size: 12px;padding: 2px;" @click="SEND_MESSAGE">Отправить</button>
+                    </div>
                 </div>
+                <file_manager v-show="!get_chat.id"></file_manager>
             </div>
 
             <div class="right-tabs col-12 col-sm-3 col" id="accordion">
@@ -124,7 +132,7 @@
 
                 <div class="collapse show" id="Collapse1" data-parent="#accordion">
                     <ul class="tabs-container">
-                        <li class="active">
+                        <li class="active">chat
                             <ul class="member-list">
                                 <li v-for="user in get_users" class="btn-outline-light">
                                     <span class="status idle">
@@ -161,6 +169,7 @@
 
     import chats from '../components/modules/ThreadsComponent'
     import show from '../components/modules/ShowComponent'
+    import file_manager from '../components/modules/FileManagerComponent'
 
     import {mapGetters} from 'vuex'
     import {mapActions} from 'vuex'
@@ -169,7 +178,8 @@
         // mixins: [mixin],
         components: {
             chats,
-            show
+            show,
+            file_manager
         },
         name: "Wrapper",
         props: [],

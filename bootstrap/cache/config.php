@@ -333,6 +333,15 @@
         'url' => 'http://livechat//storage',
         'visibility' => 'public',
       ),
+      'obmen' => 
+      array (
+        'driver' => 'ftp',
+        'host' => '192.168.2.2',
+        'port' => 32121,
+        'username' => 'user',
+        'password' => '463654',
+        'passive' => true,
+      ),
     ),
   ),
   'hashing' => 
