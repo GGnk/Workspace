@@ -15,8 +15,9 @@ let actions = {
 
 let mutations = {
     LOAD_DIRECTORY (state, info) {
-        state.directories = info.directories
-        state.files = info.files
+        console.log(info)
+        state.directories = info.data.dirs
+        state.files = info.data.files
 
     },
 

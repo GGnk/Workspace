@@ -71,7 +71,7 @@
         <div class="window-area row">
             <div class="conversation-list col-12 col-sm-3" style="padding: 0">
                 <ul style="margin-bottom: 46px;" >
-                    <li style="position: relative;" v-for="(thread, index) in info_chats.chats" :style="thread.id === chat.id? 'background-color: #335d85;':''">
+                    <li style="position: relative;" v-for="(thread, index) in info_chats.chats" :style="thread.id === get_chat.id? 'background-color: #335d85;':''">
                         <a href="#" @click.prevent="OPEN_CHAT(thread.id)">
 
                             <chats :thread="thread" :user="auth_u"></chats>
@@ -211,6 +211,8 @@
                     this.$store.commit('CHAT_REMOVE', e.id)
                 })
 
+
+
         },
 
         watch: {
@@ -220,6 +222,7 @@
         },
         methods: {
             fetchAllChats() {
+
                 this.$store.dispatch("ALL_CHATS")
             },
 

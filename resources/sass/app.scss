@@ -43,10 +43,11 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
     line-height: 1;
-    font-family: 'Open Sans', Arial, sans-serif;
-    font-size: 12px;
     color: white;
-    background-color: #353640;
+    background-color: #2f2e32;
+    font-family: 'Inter UI',sans-serif;
+    font-size: 13px;
+    font-weight: 600;
 }
 ol, ul {
     list-style: none;
@@ -127,7 +128,7 @@ b{
     bottom: 0;
 }
 .conversation-list{
-    background: #44454f;
+    background: #2b2a2e;;
 }
 .conversation-list ul li a{
     padding: 15px;
@@ -167,8 +168,8 @@ b{
 }
 .chat-area{
     border-top: 1px solid #44454f;
-    box-shadow: inset -1px 0px 0px 2px #44454f;
     min-height: 50%;
+    background-color: #2f2e32;
 }
 .chat-area .title{
     padding: 10px;
@@ -391,11 +392,12 @@ ul.tabs-container{
     margin-top: 4px;
 }
 .my-account{
-    position: absolute;
+    position: fixed;
     left: 0;
+    width: 25%;
     right: 0;
     bottom: 0;
-    height: auto;
+    height: 58px;
     padding: 8px;
     background: #3d3e46;
 }
