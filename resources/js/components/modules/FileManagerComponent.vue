@@ -15,8 +15,8 @@
                         <i class="fa fa-folder"></i>
                     </label>
                 </div>
-                <div class="main" @click="load_dirs(dir)">
-                    {{dir}}
+                <div class="main" @click="load_dirs(dir.path)">
+                    {{dir.name}}
                 </div>
 
             </li>
@@ -27,8 +27,8 @@
                         <i class="fa fa-file"></i>
                     </label>
                 </div>
-                <div class="main" >
-                    {{file}}
+                <div class="main" @click="load_dirs(file.path)">
+                    {{file.name}}
                 </div>
             </li>
         </ul>
@@ -40,6 +40,7 @@
     import {mapGetters} from 'vuex'
     import {mapActions} from 'vuex'
 
+
     export default {
         name: "FileManager",
         props: [
@@ -47,6 +48,7 @@
         ],
         computed: {
             ...mapGetters(["all_files", "all_directories"]),
+
         },
         watch: {
 
@@ -58,8 +60,7 @@
             ...mapActions(["LOAD_DIRECTORY"]),
             load_dirs(dir) {
                 this.$store.dispatch("LOAD_DIRECTORY", dir)
-            },
-
+            }
         }
     }
 

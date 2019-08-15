@@ -20,6 +20,23 @@ class FileManagerController extends Controller
            $dirs = $disk->directories($dir);
            $files = $disk->files($dir);
 
+           foreach ($dirs as $dirl) {
+               $cc = collect($dirl);
+               $cc->put("name", basename($dirl));
+               $cc->put("path",$dirl);
+               $arr[] = $cc;
+               $dirs = $arr;
+           }
+
+            foreach ($files as $dirl) {
+                $cc = collect($dirl);
+                $cc->put("name", basename($dirl));
+                $cc->put("path",$dirl);
+                $arr[] = $cc;
+                $files = $arr;
+            }
+
+
 
         return compact('dirs', 'files');
     }
