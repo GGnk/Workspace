@@ -1,9 +1,9 @@
 let actions = {
-    async LOAD_DIRECTORY({commit}, name) {
+    async LOAD_DIRECTORY({commit}, payload) {
         commit("LOADER_INFO", "NULL")
-        await axios.post('/obmen', {dir: name})
-            .then((e) => {
-                commit('LOAD_DIRECTORY', e)
+        await axios.post('/obmen', {'dir': payload.next})
+            .then((info) => {
+                commit('LOAD_DIRECTORY', {info, 'prev': payload.prev})
                 commit("LOADER_INFO","NULL")
             })
             .catch((err) => {
@@ -14,10 +14,12 @@ let actions = {
 }
 
 let mutations = {
-    LOAD_DIRECTORY (state, info) {
-        console.log(info)
-        state.directories = info.data.dirs
-        state.files = info.data.files
+    LOAD_DIRECTORY (state, payload) {
+        state.prev = payload.prev
+        state.directories = payload.info.data.dirs
+        state.files = payload.info.data.files
+
+        console.log(payload.prev)
 
     },
 
@@ -30,11 +32,15 @@ let getters = {
     all_files: state => {
         return state.files
     },
+    get_prev_folder: state => {
+        return state.prev ? state.prev:''
+    }
 }
 
 let state = {
     directories: [],
-    files:[]
+    files:[],
+    prev: ''
 }
 
 export default {

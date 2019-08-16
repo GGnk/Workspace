@@ -2218,19 +2218,35 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "FileManager",
   props: [],
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["all_files", "all_directories"])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["all_files", "all_directories", "get_prev_folder"])),
   watch: {},
   mounted: function mounted() {
     this.load_dirs('/');
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(["LOAD_DIRECTORY"]), {
-    load_dirs: function load_dirs(dir) {
-      this.$store.dispatch("LOAD_DIRECTORY", dir);
+    load_dirs: function load_dirs(next) {
+      var prev = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '.';
+      this.$store.dispatch("LOAD_DIRECTORY", {
+        next: next,
+        prev: prev
+      });
     }
   })
 });
@@ -9091,7 +9107,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.manager .control label i[data-v-0089eadf]{\n    font-size: 32px;\n}\n.manager .control label input[type=\"checkbox\"]:checked ~  i[data-v-0089eadf]{\n    color: orange;\n}\n.manager .menu-manager[data-v-0089eadf] {\n    display: flex;\n}\n.manager .menu-manager li[data-v-0089eadf] {\n    margin: 2px;\n    padding: 10px;\n}\n.manager .control-manager[data-v-0089eadf] {\n    margin: 0;\n    left: 1px;\n    overflow-y: auto;\n    position: absolute;\n    height: 100%;\n    width: 100%;\n}\n.control-manager li[data-v-0089eadf] {\n    padding: 1px 0;\n    height: 36px;\n    width: 100%;\n    line-height: 36px;\n}\n.control-manager .control[data-v-0089eadf] {\n    margin: 2px 10px;\n    float: left;\n}\n.control-manager .main[data-v-0089eadf] {\n    cursor: pointer;\n    display: block;\n    background-color: #4a494e99;\n}\n.control-manager .main[data-v-0089eadf]:hover {\n    background-color: #93919899;\n}\n", ""]);
+exports.push([module.i, "\n.manager .control label i[data-v-0089eadf]{\n    font-size: 32px;\n}\n.manager .control label input[type=\"checkbox\"]:checked ~  i[data-v-0089eadf]{\n    color: orange;\n}\n.manager .menu-manager[data-v-0089eadf] {\n    display: flex;\n}\n.manager .menu-manager li[data-v-0089eadf] {\n    margin: 2px;\n    padding: 10px;\n}\n.manager .control-manager[data-v-0089eadf] {\n    margin: 0;\n    left: 1px;\n    overflow-y: auto;\n    position: absolute;\n    height: 100%;\n    width: 100%;\n}\n.control-manager li[data-v-0089eadf] {\n    padding: 1px 0;\n    height: 36px;\n    line-height: 36px;\n    width: 100%;\n}\n.control-manager .file-setting[data-v-0089eadf] {\n}\n.control-manager .control[data-v-0089eadf] {\n    margin: 2px 10px;\n    float: left;\n}\n.control-manager .main[data-v-0089eadf] {\n    cursor: pointer;\n    display: block;\n    height: 36px;\n    background-color: #4a494e99;\n}\n.control-manager .file-setting .main h3[data-v-0089eadf]{\n    color: #e8f5a6;\n    float: left;\n    width: 84%;\n    font-size: 0.8vw;\n    line-height: 19px;\n    word-break: break-all;\n}\n.control-manager .file-setting .main span[data-v-0089eadf]{\n    color: orange;\n    font-size: 10px;\n    float: right;\n}\n.control-manager .main[data-v-0089eadf]:hover {\n    background-color: #93919899;\n}\n", ""]);
 
 // exports
 
@@ -49897,6 +49913,33 @@ var render = function() {
       "ul",
       { staticClass: "control-manager" },
       [
+        _c("li", { staticClass: "dir-setting" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "main",
+              on: {
+                click: function($event) {
+                  return _vm.load_dirs(_vm.get_prev_folder)
+                }
+              }
+            },
+            [
+              _vm._v(
+                "\n                " +
+                  _vm._s(
+                    _vm.get_prev_folder !== "."
+                      ? _vm.get_prev_folder
+                      : "на главную"
+                  ) +
+                  "\n            "
+              )
+            ]
+          )
+        ]),
+        _vm._v(" "),
         _vm._l(_vm.all_directories, function(dir) {
           return _c("li", { staticClass: "dir-setting" }, [
             _c("div", { staticClass: "control" }, [
@@ -49923,13 +49966,13 @@ var render = function() {
                 staticClass: "main",
                 on: {
                   click: function($event) {
-                    return _vm.load_dirs(dir.path)
+                    return _vm.load_dirs(dir.path, dir.dirname)
                   }
                 }
               },
               [
                 _vm._v(
-                  "\n                " + _vm._s(dir.name) + "\n            "
+                  "\n                " + _vm._s(dir.folder) + "\n            "
                 )
               ]
             )
@@ -49967,9 +50010,11 @@ var render = function() {
                 }
               },
               [
-                _vm._v(
-                  "\n                " + _vm._s(file.name) + "\n            "
-                )
+                _c("h3", [_vm._v(_vm._s(file.name))]),
+                _vm._v(" "),
+                file.size !== null
+                  ? _c("span", [_vm._v(_vm._s(file.size) + " Mb")])
+                  : _vm._e()
               ]
             )
           ])
@@ -49979,7 +50024,16 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "control" }, [
+      _c("i", { staticClass: "fa fa-arrow-left" })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -64108,7 +64162,7 @@ var actions = {
   LOAD_DIRECTORY: function () {
     var _LOAD_DIRECTORY = _asyncToGenerator(
     /*#__PURE__*/
-    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(_ref, name) {
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(_ref, payload) {
       var commit;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
@@ -64118,9 +64172,12 @@ var actions = {
               commit("LOADER_INFO", "NULL");
               _context.next = 4;
               return axios.post('/obmen', {
-                dir: name
-              }).then(function (e) {
-                commit('LOAD_DIRECTORY', e);
+                'dir': payload.next
+              }).then(function (info) {
+                commit('LOAD_DIRECTORY', {
+                  info: info,
+                  'prev': payload.prev
+                });
                 commit("LOADER_INFO", "NULL");
               })["catch"](function (err) {
                 commit("LOADER_INFO", 'ERROR');
@@ -64143,10 +64200,11 @@ var actions = {
   }()
 };
 var mutations = {
-  LOAD_DIRECTORY: function LOAD_DIRECTORY(state, info) {
-    console.log(info);
-    state.directories = info.data.dirs;
-    state.files = info.data.files;
+  LOAD_DIRECTORY: function LOAD_DIRECTORY(state, payload) {
+    state.prev = payload.prev;
+    state.directories = payload.info.data.dirs;
+    state.files = payload.info.data.files;
+    console.log(payload.prev);
   }
 };
 var getters = {
@@ -64155,11 +64213,15 @@ var getters = {
   },
   all_files: function all_files(state) {
     return state.files;
+  },
+  get_prev_folder: function get_prev_folder(state) {
+    return state.prev ? state.prev : '';
   }
 };
 var state = {
   directories: [],
-  files: []
+  files: [],
+  prev: ''
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
   // namespaced: true,
