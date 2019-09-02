@@ -16,7 +16,7 @@ Route::get('logout', 'Auth\LoginController@logout')->name('auth.logout');
     Route::get('{id}', ['uses' => 'MessagesController@show','as' => 'show']);
     Route::put('{id}', ['uses' => 'MessagesController@update','as' => 'update']);
 });*/
-Route::get('/obmen', ['uses' => 'FileManagerController@index', 'as' => 'index']);
+Route::get('/admin', ['uses' => 'HomeController@index', 'as' => 'index']);
 Route::post('/obmen', ['uses' => 'FileManagerController@index', 'as' => 'index']);
 Route::group(['middleware' => ['auth'],'prefix' => 'dialog', 'as' => 'dialog.'], function () {
     Route::get('/', ['uses' => 'DialogController@index', 'as' => 'index']);

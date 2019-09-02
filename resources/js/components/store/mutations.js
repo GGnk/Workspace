@@ -72,6 +72,10 @@ let mutations = {
         // this.threads.chats.splice(index, 1)
         //
         // if (process.env.NODE_ENV !== 'production') console.log("Чат с id:" + e.data.chat.id + " был удален!")
+    },
+    DIR_OR_CHAT (state) {
+        state.chat = {}
+        // if (process.env.NODE_ENV !== 'production') console.log("Чат с id:" + e.data.chat.id + " был удален!")
     }
 
 }

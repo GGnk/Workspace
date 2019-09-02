@@ -121,11 +121,9 @@ b{
     cursor: pointer;
 }
 .window-area{
-    position: absolute;
-    top: 40px;
+    position: relative;
     left: 15px;
-    right: 15px;
-    bottom: 0;
+    width: 100%;
 }
 .conversation-list{
     background: #2b2a2e;;
@@ -173,7 +171,6 @@ b{
 }
 .chat-area .title{
     padding: 10px;
-    overflow: hidden;
     line-height:15px;
 }
 .chat-area .title .fa-search{
@@ -185,14 +182,18 @@ b{
 .chat-area .chat-list{
     border-top: 1px solid #44454f;
     border-bottom: 1px solid #3d3e46;
-    position: absolute;
-    left: 0;
-    top: 35px;
-    right: 0;
-    bottom: 44px;
-    overflow-y: auto;
     outline: none;
-    height: 81%;
+    height: 100vh;
+
+}
+
+.bg-sohbet:before {
+    content: "";
+    position: absolute;
+}
+
+.card{
+   background-color: #2f2e32!important;
 }
 .chat-area ul{
     margin-right: -4px;
@@ -280,10 +281,6 @@ b{
     background: #44454f;
     padding: 6px;
     overflow: hidden;
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
     border-top: 1px solid #44454f;
 }
 .input-area .input-wrapper{
@@ -334,7 +331,7 @@ b{
 }
 .right-tabs > ul.tabs > li{
     float: left;
-    width: 33.3%;
+    width: 50%;
     text-align: center;
 }
 .right-tabs > ul.tabs > li > a{
@@ -441,3 +438,10 @@ ul.tabs-container{
 .jspVerticalBar{
     width: 7px;
 }
+
+
+
+
+
+
+

@@ -1,12 +1,12 @@
 <template>
-    <div class="manager">
+    <div class="manager" >
         <ul class="menu-manager">
             <li @click="load_dirs('/')">Главная</li>
             <li>Обновить</li>
             <li>Добавить</li>
             <li>Удалить</li>
         </ul>
-        <ul class="control-manager">
+        <ul class="control-manager" style="overflow-y: auto;height: 70vh;border: 1px solid;">
             <li class="dir-setting">
 
                 <div class="control">
@@ -95,11 +95,7 @@
     }
     .manager .control-manager {
         margin: 0;
-        left: 1px;
-        overflow-y: auto;
-        position: absolute;
-        height: 100%;
-        width: 100%;
+        
     }
     .control-manager li {
         padding: 1px 0;

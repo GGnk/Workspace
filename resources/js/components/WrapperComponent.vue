@@ -69,94 +69,193 @@
             </div>
         </div>
         <div class="window-area row">
-            <div class="conversation-list col-12 col-sm-3" style="padding: 0">
-                <ul style="margin-bottom: 46px;" >
-                    <li style="position: relative;" v-for="(thread, index) in info_chats.chats" :style="thread.id === get_chat.id? 'background-color: #335d85;':''">
-                        <a href="#" @click.prevent="OPEN_CHAT(thread.id)">
+            <aside class="main-sidebar col-12 col-sm-2">
+                <section class="sidebar" style="height: auto;">
+                    <ul class="sidebar-menu" style="text-align: center; color: white;">
+                        <li>
 
-                            <chats :thread="thread" :user="auth_u"></chats>
-
-                        </a>
-                        <span class="deleteChat" @click="DELETE_CHAT(thread.id)"></span>
-                    </li>
-                    <div v-if="!info_chats.chats || info_chats.chats.length == 0" style="padding: 20px;text-align: center;">
-                        Начни, создай чат с кем нибудь!
-                    </div>
-                </ul>
-
-                <div class="my-account" v-if="auth_u">
-                    <div class="image">
-                        <img :src="auth_u.img">
-                        <i class="fa fa-circle online"></i>
-                    </div>
-                    <div class="name">
-                        <div class="dropdown">
-                            <a href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span>{{auth_u.name}}</span>
-                                <i class="fa fa-angle-down"></i>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="/logout"  style="color: black">Выход</a>
+                            <div class="team-thumb " v-if="auth_u.img">
+                                <img :src="auth_u.img" :alt="auth_u.name" width="60%">
                             </div>
-                        </div>
-                        <span class="availability">В сети</span>
-                    </div>
+                            <span id="idname" class="team-name badge btn-warning" data-toggle="modal" data-target="#ModalCenterProfile1" data-backdrop="static" data-keyboard="false">{{auth_u.name}}</span>
 
-                </div>
-            </div>
+                            <span class="title">
+                                <div class="team-social-bar">
+                                    <a class="social-btn sb-style-1 sb-twitter" href="#">
+                                        <i class="fa fa-twitter"></i>
+                                    </a>
+                                    <a class="social-btn sb-style-1 sb-github" href="#">
+                                        <i class="fa fa-github"></i>
+                                    </a>
+                                    <a class="social-btn sb-style-1 sb-stackoverflow" href="#">
+                                        <i class="fa fa-linkedin"></i>
+                                    </a>
+                                    <a class="social-btn sb-style-1 sb-skype" href="#">
+                                        <i class="fa fa-skype"></i>
+                                    </a>
+                                </div>
+                            </span>
+                            
+                        </li>
+                    </ul>
+                    <ul class="sidebar-menu">
+                        <li class="active">
+                            <a href="http://192.168.2.59/admin/home">
+                                <i class="fa fa-wrench"></i>
+                                <span class="title">Панель управления</span>
+                            </a>
+                        </li>
+                                    <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-sitemap"></i>
+                                <span>Доп функционал</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                                    <li>
+                                   <a href="http://192.168.2.59/admin/tasks">
+                                   <i class="fa fa-tasks"></i>
+                                   <span class="title">Задачи</span>
+                                   </a>
+                                </li>
+                                                                        <li>
+                                    <a href="http://192.168.2.59/admin/faqs">
+                                        <i class="fa fa-question"></i>
+                                        <span class="title">Список вопросов</span>
+                                    </a>
+                                </li>
+                                                                        <li>
+                                    <a href="http://192.168.2.59/admin/files">
+                                        <i class="fa fa-tasks"></i>
+                                        <span class="title">Файлообменник</span>
+                                    </a>
+                                </li>
+                                                    <li>
+                                    <a href="http://192.168.2.59/admin/edo">
+                                        <i class="fa fa-cloud"></i>
+                                        <span>Список ЭДО</span>
+                                    </a>
+                                    <ul>
+                                                                    <li style="padding: 0 0 10px 0">
+                                            <a href="http://192.168.2.59/admin/cat_edo">
+                                                <i class="fa fa-list-ol"></i>
+                                                <span class="title">Категории ЭДО</span>
+                                            </a>
+                                        </li>
+                                                                </ul>
+                                </li>
+                                
+                            </ul>
+                        </li>            
 
-            <div class="chat-area col-12 col-sm-6" >
-                <div v-if="get_chat.id">
+                                    <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-sitemap"></i>
+                                <span>Структура</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                                    <li>
+                                    <a href="http://192.168.2.59/admin/macs">
+                                        <i class="fa fa-tv"></i>
+                                        <span>Список Mac</span>
+                                    </a>
+                                </li>                    
+                                                    <li>
+                                    <a href="http://192.168.2.59/admin/deps">
+                                        <i class="fa fa-home"></i>
+                                        <span>Список корпусов</span>
+                                    </a>
+                                </li>                    
+                                                    <li>
+                                    <a href="http://192.168.2.59/admin/offices">
+                                        <i class="fa fa-coffee"></i>
+                                        <span>Список офисов</span>
+                                    </a>
+                                </li>                    
+                            </ul>
+                        </li>            
+                                    <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-users"></i>
+                                <span>Управление сотрудниками</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                                    <li>
+                                    <a href="http://192.168.2.59/admin/users">
+                                        <i class="fa fa-user"></i>
+                                        <span>Сотрудники</span>
+                                    </a>
+                                </li>                    
+                                                    <li>
+                                    <a href="http://192.168.2.59/admin/roles">
+                                        <i class="fa fa-briefcase"></i>
+                                        <span>Привилегия</span>
+                                    </a>
+                                </li>                    
+                            </ul>
+                        </li>
+                        <li class="">
+                            <a href="http://192.168.2.59/change_password">
+                                <i class="fa fa-key"></i>
+                                <span class="title">Сменить пароль</span>
+                            </a>
+                        </li>
 
-                    <show :thread="get_chat" :user="auth_u"></show>
-                    <div class="input-area">
-                        <div class="input-wrapper col-9">
-                            <textarea  v-model="chat.message" placeholder="текст..."></textarea>
-                            <i class="fa fa-smile-o"></i>
-                            <i class="fa fa-paperclip"></i>
-                        </div>
-                        <button type="submit" class="btn btn-primary send-btn col-3" style="height: 32px;font-size: 12px;padding: 2px;" @click="SEND_MESSAGE">Отправить</button>
-                    </div>
-                </div>
-                <file_manager v-show="!get_chat.id"></file_manager>
-            </div>
+                        <li>
+                            <a href="#logout" onclick="$('#logout').submit();">
+                                <i class="fa fa-arrow-left"></i>
+                                <span class="title">Выйти</span>
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+            </aside>
 
-            <div class="right-tabs col-12 col-sm-3 col" id="accordion">
+            <div class="right-tabs col-12 col-sm-10 col" id="accordion">
                 <ul class="tabs">
                     <li>
                         <a data-toggle="collapse" href="#Collapse1" role="button" aria-expanded="true" aria-controls="Collapse1"><i class="fa fa-users"></i></a>
                     </li>
-                    <li><a data-toggle="collapse" href="#Collapse2" role="button" aria-expanded="false" aria-controls="Collapse2"><i class="fa fa-paperclip"></i></a></li>
-                    <li><a data-toggle="collapse" href="#Collapse3" role="button" aria-expanded="false" aria-controls="Collapse3"><i class="fa fa-link"></i></a></li>
+                    <li><a data-toggle="collapse" href="#Collapse3" role="button"  aria-controls="Collapse3" @click="DIR_OR_CHAT"><i class="fa fa-paperclip"></i></a></li>
                 </ul>
 
                 <div class="collapse show" id="Collapse1" data-parent="#accordion">
-                    <ul class="tabs-container">
-                        <li class="active">chat
-                            <ul class="member-list">
-                                <li v-for="user in get_users" class="btn-outline-light">
-                                    <span class="status idle">
-                                        <i class="fa fa-circle-o"></i>
-                                    </span>
-                                    <span :id="'dropdownMenuButton'+user.id" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <span>{{user.name}}</span>
-                                    </span>
-                                    <span class="time">10:45 pm</span>
-                                    <div class="dropdown-menu" :aria-labelledby="'dropdownMenuButton'+user.id">
-                                        <a class="dropdown-item" href="#"  style="color: black" @click="minCreateChat(user.id)">Написать</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                        <li></li>
-                        <li></li>
-                    </ul>
+                    <div class="conversation-list col-12" style="padding: 0">
+                        <ul style="margin-bottom: 46px;height: 80vh;overflow-y: auto;border: 1px solid;" >
+                            <li style="position: relative;" v-for="(thread, index) in info_chats.chats" :style="thread.id === get_chat.id? 'background-color: #335d85;':''">
+                                <a data-toggle="collapse" href="#Collapse2" role="button" aria-expanded="false" aria-controls="Collapse2" @click.prevent="OPEN_CHAT(thread.id)">
+
+                                    <chats :thread="thread" :user="auth_u"></chats>
+
+                                </a>
+                                <span class="deleteChat" @click="DELETE_CHAT(thread.id)"></span>
+                            </li>
+                            <div v-if="!info_chats.chats || info_chats.chats.length === 0" style="padding: 20px;text-align: center;">
+                                Начни, создай чат с кем нибудь!
+                            </div>
+                        </ul>
+
+                    
+                    </div>
                 </div>
                 <div class="collapse"  id="Collapse2" data-parent="#accordion">
-                    Two
+
+                    <show v-if="get_chat.id" :thread="get_chat" :user="auth_u"></show>
+
+
                 </div>
                 <div class="collapse"  id="Collapse3" data-parent="#accordion">
-                    Three
+                    <div class="chat-area">
+                        <file_manager ></file_manager>
+                    </div>
                 </div>
                 <i class="fa fa-cog"></i>
             </div>
@@ -173,6 +272,7 @@
 
     import {mapGetters} from 'vuex'
     import {mapActions} from 'vuex'
+    import {mapMutations} from 'vuex'
 
     export default {
         // mixins: [mixin],
@@ -226,8 +326,8 @@
                 this.$store.dispatch("ALL_CHATS")
             },
 
-            ...mapActions(["OPEN_CHAT", "SEND_MESSAGE", "CREATE_CHAT", "DELETE_CHAT"]),
-
+            ...mapActions(["OPEN_CHAT", "SEND_MESSAGE", "CREATE_CHAT", "DELETE_CHAT", "DIR_OR_CHAT"]),
+            ...mapMutations(["DIR_OR_CHAT"]),
 
             minCreateChat(idUser) {
                 this.send_chat.recipients = idUser
