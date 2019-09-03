@@ -6,16 +6,6 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
-
-/*
-  HTML implementation of a Hip Chat redesign based on Jan Dvořák Dribbble shot.
-  https://dribbble.com/shots/1529065-HipChat-Redesign
-*/
-.navbar-nav {
-    display: -webkit-box;
-    height: 40px;
-}
-
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -41,14 +31,7 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
     display: block;
 }
-body {
-    line-height: 1;
-    color: white;
-    background-color: #2f2e32;
-    font-family: 'Inter UI',sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-}
+
 ol, ul {
     list-style: none;
 }
@@ -69,374 +52,214 @@ b{
     font-weight: bold;
 }
 
-.btn-outline-light:hover {
-    color: white !important;
-    background-color: #44454f !important;
-}
-
-.window-wrapper{
-    background: #fff;
-    margin: 30px auto;
-    border-radius: 6px;
-    box-shadow: 0 0 6px rgba(0,0,0,0.3);
-    overflow: hidden;
-    min-height: 530px;
-    position: relative;
-}
-.window-title{
-    height: 40px;
-}
-.dots{
-    float: left;
-    margin-right: 20px;
-    position: relative;
-    top: 4px;
-    left: 15px;
-}
-.window-title > .title{
-    overflow: hidden;
-    text-align: center;
-    font-weight: bold;
-}
-.window-title > .expand{
-    position: absolute;
-    right: 14px;
-    top: 12px;
-}
-.dots > i{
-    margin-right: 2px;
-}
-.dots > i:nth-child(1){
-    color: #f57e7d;
-}
-.dots > i:nth-child(2){
-    color: #ffc881;
-}
-.dots > i:nth-child(3){
-    color: #82cf85;
-}
-.expand > i{
-    color: #cfd6e0;
-    font-size: 18px;
-    cursor: pointer;
-}
-.window-area{
-    position: relative;
-    left: 15px;
-    width: 100%;
-}
-.conversation-list{
-    background: #2b2a2e;;
-}
-.conversation-list ul li a{
-    padding: 15px;
-    color: #bcc3d0;
-    text-decoration: none;
-    display: block;
-    position: relative;
-    border-bottom:1px solid #3d3e46;
-}
-.conversation-list ul li a:hover,
-.conversation-list ul li.active a{
-    background: #445166;
-    color: #fff;
-}
-.conversation-list ul li a i{
-    color: #79889d;
-    font-size: 1.2em;
-}
-.conversation-list ul li a span{
-    display: inline-block;
-    margin-left: 3px;
-}
-.conversation-list ul li a i.fa-times{
-    position: absolute;
-    top:19px;
-    right:21px;
-    font-size: 10px;
-}
-.conversation-list .online{
-    color: #82cf85;
-}
-.conversation-list .idle{
-    color: #ffac69;
-}
-.conversation-list .offline{
-    color: #f57e7d;
-}
-.chat-area{
-    border-top: 1px solid #44454f;
-    min-height: 50%;
-    background-color: #2f2e32;
-}
-.chat-area .title{
-    padding: 10px;
-    line-height:15px;
-}
-.chat-area .title .fa-search{
-    font-size: 14px;
-    float: right;
-    color: #a8bbc6;
-    cursor: pointer;
-}
-.chat-area .chat-list{
-    border-top: 1px solid #44454f;
-    border-bottom: 1px solid #3d3e46;
-    outline: none;
-    height: 100vh;
-
-}
-
-.bg-sohbet:before {
-    content: "";
-    position: absolute;
-}
-
-.card{
-   background-color: #2f2e32!important;
-}
-.chat-area ul{
-    margin-right: -4px;
-}
-.chat-area ul > li{
-    overflow: hidden;
-    position: relative;
-    padding: 5px 0;
-}
-.chat-area ul > li:first-child{
-    border-top: none;
-}
-.chat-area ul .me .name {
-    float: right !important;
-}
-
-.name img {
-    border-radius: 30px;
-    width: 60px;
-    border: 1px solid cadetblue;
-}
-.input-area .checkbox label {
-    margin-top: 7px !important;
-    padding: 0;
-}
-.lbchecked:hover {
-    background-color: #2e8830;
-}
-.lbchecked {
-    font-size: 100%;
-}
-.input-area .checkbox input[type="checkbox"]:checked ~ .lbchecked {
-    background-color: #2e8830;
-}
-.chat-area ul .name{
-    padding: 5px;
-    width: 100px;
-    float: left;
-    color: #5d7185;
-    font-weight: bold;
-    line-height: 20px;
-    text-align: center;
-}
-.chat-area ul .message{
-    padding: 14px 22px;
-    margin: 10px 0 0 0;
-    border: 1px solid #6f7f8c;
-    float: left;
-    max-width: 550px;
-    overflow-wrap: break-word;
-    -webkit-border-radius: 30px;
-    -webkit-border-top-left-radius: 0;
-    -moz-border-radius: 30px;
-    -moz-border-radius-topleft: 0;
-    border-radius: 30px;
-    background-color: #5d5f69;
-    border-top-left-radius: 0;
-}
-
-.chat-area ul .me .message{
-    float: right !important;
-
-    -webkit-border-radius: 30px;
-    -webkit-border-top-right-radius: 0;
-    -moz-border-radius: 30px;
-    -moz-border-radius-topright: 0;
-    border-radius: 30px;
-    border-top-right-radius: 0;
-    background-color: #27557b;
-}
-.chat-area ul .message > p{
-    line-height: 20px;
-}
-.chat-area ul .message > p > .blue-label{
-    background: #6ea0ff;
-    color: #fff;
-    padding: 0 5px;
-    border-radius: 5px;
-}
-.chat-area ul .message .msg-time{
-    color: #738ba3;
-    font-size: 9px;
-}
-.input-area{
-    background: #44454f;
-    padding: 6px;
-    overflow: hidden;
-    border-top: 1px solid #44454f;
-}
-.input-area .input-wrapper{
-    background: #44454f;
-    border: 1px solid #3d3e46;
-    border-radius: 5px;
-    overflow: hidden;
-    float: left;
-    width: 88%;
-}
-.input-area .input-wrapper textarea {
-    height: 40px;
-    line-height: 30px;
-    border: 0;
-    margin: 0;
-    padding: 0 10px;
-    outline: none;
-    min-width: 86%;
-    background: #44454f;
-}
-.input-area .input-wrapper i{
-    font-size: 18px;
-    color: #a0b4c0;
-    margin-right: 10px;
-    cursor: pointer;
-}
-.input-area > input{
-    background: #a0b4c0;
-    border: none;
-    letter-spacing:1px;
-    font-weight: bold;
-    color: #fff;
-    border-radius: 5px;
-    float:right;
-    height: 30px;
-    line-height: 30px;
-    cursor: pointer;
-    font-family: 'Open Sans', Arial, sans-serif;
-    outline: none;
-}
-.right-tabs{
-    overflow: hidden;
-    border-left: 1px solid #44454f;
-    border-top: 1px solid #44454f;
-}
-.right-tabs > ul.tabs{
-    overflow: hidden;
-}
-.right-tabs > ul.tabs > li{
-    float: left;
-    width: 50%;
-    text-align: center;
-}
-.right-tabs > ul.tabs > li > a{
-    border-left: 1px solid #cfdae1;
-    color: #72a3ff;
-    display: block;
-    background: #44454f;
-    padding: 8px 0;
-}
-.right-tabs > ul.tabs > li.active{
-    border-bottom: none;
-}
-.right-tabs > ul.tabs > li.active > a{
-    background: #eef2f8;
-    color: #c3ccd3;
-}
-.right-tabs > ul.tabs > li:first-child > a{
-    border-left: none;
-}
-.right-tabs > ul.tabs > li > a >i{
-    font-size: 18px
-}
-ul.tabs-container{
-    padding: 10px;
-    color: #6e7f91;
-}
-.right-tabs > .fa-cog{
-    position: absolute;
-    bottom: 14px;
-    right: 14px;
-    color: #a0b4c0;
-    font-size: 18px;
-    cursor: pointer;
-}
-.member-list > li{
-    cursor: pointer;
-    padding: 5px;
-}
-.member-list > li .status{
-    margin: 0 10px 0 0;
-    font-size: 14px;
-}
-.member-list > li .status.online{
-    color: #82cf85;
-}
-.member-list > li .status.idle{
-    color: #ffac69;
-}
-.member-list > li .status.offline{
-    color: #f57e7d;
-}
-.member-list > li .time{
-    float: right;
-    font-size: 9px;
-    margin-top: 4px;
-}
-.my-account{
-    position: fixed;
-    left: 0;
-    width: 25%;
-    right: 0;
-    bottom: 0;
-    height: 58px;
-    padding: 8px;
-    background: #3d3e46;
-}
-.my-account > .image{
-    width: 30px;
-    height: 30px;
-    float: left;
-    position: relative;
-}
-.my-account > .image > i{
-    position: absolute;
-    top: -2px;
-    right: -2px;
-}
-.my-account > .image > img{
-    width: 30px;
-    height: 30px;
-    border-radius: 30px;
-}
-.my-account > .name{
-    color: #fff;
-    font-weight: bold;
-    margin-left: 40px;
-    float: unset;
-    cursor: pointer;
-}
-.my-account > .name a {
+body {
+    line-height: 1;
     color: white;
-}
-.my-account > .name .availability{
-    display: block;
-    font-weight: normal;
-    color: #8391a1;
-    margin-top: 5px;
+    background-color: #2f2e32;
+    font-family: 'Inter UI',sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+
+    a {
+        color: #fff;
+        text-decoration: none;
+        background-color: transparent;
+    }
+    a:hover {
+        color: #212121;
+        text-decoration: underline;
+    }
+
 }
 
-.jspDrag{
-    background: #A1AFC4;
-    border-radius: 10px;
-}
-.jspVerticalBar{
-    width: 7px;
+
+.wrapper {
+    .window-title{
+        height: 60px;
+        background-color: #212121;
+        box-shadow: 0 2px 4px rgba(0,0,0,.5);
+        .dots{
+            float: left;
+            margin-right: 20px;
+            position: relative;
+            top: 25%;
+            left: 15px;
+            i:nth-child(1){
+                color: #f57e7d;
+            }
+            i:nth-child(2){
+                color: #ffc881;
+            }
+            i:nth-child(3){
+                color: #82cf85;
+            }
+            i{
+                margin-right: 2px;
+            }
+        }
+        .title{
+            overflow: hidden;
+            text-align: center;
+            font-weight: bold;
+            .navbar-nav {
+                display: -webkit-box;
+                li {
+                    a{
+                        line-height: 30px;
+                    }
+                }
+            }
+        }
+
+    }
+    .window-area{
+        position: relative;
+        left: 15px;
+        width: 100%;
+        .right-tabs{
+            overflow: hidden;
+            border-left: 1px solid #44454f;
+            border-top: 1px solid #44454f;
+
+            .form-control {
+                background-color: black;
+                color: inherit;
+            }
+            .collapse {
+                height: 87vh;
+            }
+
+            .card{
+                background-color: #2f2e3200 !important;
+                .card-footer {
+                    position: fixed;
+                    bottom: 0;
+                    right: 0;
+                }
+            }
+            .chat-area{
+                ul{
+                    li{
+                        overflow: hidden;
+                        position: relative;
+                    }
+                    li:first-child{
+                        border-top: none;
+                    }
+                    .me .name {
+                        float: right !important;
+                    }
+                }
+
+            }
+            .conversation-list{
+                background: #2b2a2e;
+                box-shadow: inset -2px 1px 20px 0px rgba(0, 0, 0, 0.5);
+                padding: 0;
+                .online{
+                    color: #82cf85;
+                }
+                .idle{
+                    color: #ffac69;
+                }
+                .offline{
+                    color: #f57e7d;
+                }
+                ul {
+                    height: 80vh;
+                    overflow-y: auto;
+                    li{
+                        position: relative;
+                        a{
+                            padding: 15px;
+                            color: #bcc3d0;
+                            text-decoration: none;
+                            display: block;
+                            position: relative;
+                            border-bottom:1px solid #3d3e46;
+                            i{
+                                color: #79889d;
+                                font-size: 1.2em;
+                            }
+                            i.fa-times{
+                                position: absolute;
+                                top:19px;
+                                right:21px;
+                                font-size: 10px;
+                            }
+                            span{
+                                display: inline-block;
+                                margin-left: 3px;
+                                i{
+                                    color: white
+                                }
+                            }
+                            .title {
+                                width: 70%; color: white; font-size: 13px;
+                            }
+                            .content {
+                                margin: 5px;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                height: 18px;
+                                width: 90%;
+                                font-size: small;
+                            }
+                        }
+                        a:hover,
+                        .active a{
+                            background: #445166;
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+
+            ul.tabs{
+                margin: 0;
+                overflow: hidden;
+                li{
+                    float: left;
+                    width: 50%;
+                    text-align: center;
+                    a{
+                        border-left: 1px solid #cfdae1;
+                        color: #ffffff;
+                        display: block;
+                        background: #2a7984;
+                        padding: 8px 0;
+                    }
+                }
+                li.active{
+                    border-bottom: none;
+                    a{
+                        background: #eef2f8;
+                        color: #c3ccd3;
+                        i{
+                            font-size: 18px
+                        }
+                    }
+                }
+                li:first-child > a{
+                    border-left: none;
+                }
+            }
+            .fa-cog{
+                position: absolute;
+                top: -3px;
+                right: 0;
+                color: #fff;
+                font-size: 18px;
+                background-color: #2b2a2e;
+                cursor: pointer;
+                padding: 9px;
+            }
+            .fa-cog:hover{
+                color: #2b2a2e;
+                background-color: #fff;
+            }
+        }
+    }
 }
 
 

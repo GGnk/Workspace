@@ -2204,6 +2204,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // import { mixin } from '../modal/alerts.js'
 
 
@@ -2241,7 +2250,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       _this.$store.commit('LISTEN_CHAT_CREATE', e);
     });
     window.Echo.channel('Chat_removed').listen(".server", function (e) {
-      _this.$store.commit('CHAT_REMOVE', e.id);
+      _this.$store.commit('CHAT_REMOVE', e);
     });
   },
   watch: {// method(after, before) {
@@ -2369,7 +2378,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
 //
 //
 //
@@ -9249,7 +9257,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.list-users[data-v-d37c49d6] {\n    display: contents;\n    cursor: pointer;\n}\n.list-users li[data-v-d37c49d6] {\n    height: 50px;\n    text-align: left;\n    position: relative;\n    padding: 10px;\n    border-bottom: 1px solid #d9d9da;\n}\n.list-users li[data-v-d37c49d6]:hover {\n    background-color: #e7e8ec;\n}\n.list-users li img[data-v-d37c49d6] {\n    width: 8%;\n    float: left;\n    border-radius: 18px;\n}\n.list-users li span[data-v-d37c49d6] {\n    position: relative;\n    top: 10px;\n    margin-left: 6px;\n    font-size: 14px;\n    font-family: cursive;\n}\n.list-users li input[data-v-d37c49d6] {\n    float: right;\n}\n.deleteChat[data-v-d37c49d6] {\n    position: absolute;\n    top: 0;\n    right: 0;\n    background: red;\n    text-align: center;\n    width: 25px;\n    height: 99%;\n    opacity: 0.1;\n    cursor: pointer;\n}\n.deleteChat[data-v-d37c49d6]:hover {\n    opacity: 0.5;\n}\n.loader-request[data-v-d37c49d6] {\n    position: absolute;\n    top: 1%;\n    right: 1%;\n}\n.loader-error[data-v-d37c49d6] {\n    position: absolute;\n    top: 1%;\n    right: 1%;\n}\n.loader-error i[data-v-d37c49d6] {\n    color: orange;\n    font-size: 33px;\n}\n\n", ""]);
+exports.push([module.i, "\n#sidebar[data-v-d37c49d6] {\n     position: fixed;\n     top: 0;\n     left: -99%;\n     height: 100vh;\n     z-index: 999;\n     transition: all 0.3s;\n    background-color: #2a7984;\n}\n.window-area .active[data-v-d37c49d6]{\n    left: 0 !important;\n}\n#dismiss[data-v-d37c49d6] {\n    width: 35px;\n    height: 35px;\n    line-height: 35px;\n    text-align: center;\n    background: #7386D5;\n    position: absolute;\n    top: 10px;\n    right: 10px;\n    cursor: pointer;\n    transition: all 0.3s;\n}\n#dismiss[data-v-d37c49d6]:hover {\n    background: #fff;\n    color: #7386D5;\n}\n.overlay[data-v-d37c49d6] {\n    display: none;\n    position: fixed;\n    top: 0;\n    width: 100vw;\n    height: 100vh;\n    background: rgba(0, 0, 0, 0.7);\n    z-index: 998;\n    opacity: 0;\n    transition: all 0.5s ease-in-out;\n}\n.wrapper .active[data-v-d37c49d6] {\n    display: block;\n    opacity: 1;\n}\n.main-sidebar[data-v-d37c49d6] {\n    box-shadow: 9px 0px 18px 1px rgba(0, 0, 0, 0.5);\n    font-family: sans-serif;\n    font-size: 16px;\n}\n.badge[data-v-d37c49d6] {\n    white-space: pre-line;\n    word-break: break-word;\n}\n.list-users[data-v-d37c49d6] {\n    display: contents;\n    cursor: pointer;\n}\n.list-users li[data-v-d37c49d6] {\n    height: 50px;\n    text-align: left;\n    position: relative;\n    padding: 10px;\n    border-bottom: 1px solid #d9d9da;\n}\n.list-users li[data-v-d37c49d6]:hover {\n    background-color: #e7e8ec;\n}\n.list-users li img[data-v-d37c49d6] {\n    width: 8%;\n    float: left;\n    border-radius: 18px;\n}\n.list-users li span[data-v-d37c49d6] {\n    position: relative;\n    top: 10px;\n    margin-left: 6px;\n    font-size: 14px;\n    font-family: cursive;\n}\n.list-users li input[data-v-d37c49d6] {\n    float: right;\n}\n.deleteChat[data-v-d37c49d6] {\n    position: absolute;\n    top: 0;\n    right: 0;\n    background: red;\n    text-align: center;\n    width: 25px;\n    height: 99%;\n    opacity: 0.1;\n    cursor: pointer;\n}\n.deleteChat[data-v-d37c49d6]:hover {\n    opacity: 0.5;\n}\n.loader-request[data-v-d37c49d6] {\n    position: absolute;\n    top: 1%;\n    right: 1%;\n}\n.loader-error[data-v-d37c49d6] {\n    position: absolute;\n    top: 1%;\n    right: 1%;\n}\n.loader-error i[data-v-d37c49d6] {\n    color: orange;\n    font-size: 33px;\n}\n\n", ""]);
 
 // exports
 
@@ -9268,7 +9276,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.manager .control label i[data-v-0089eadf]{\n    font-size: 32px;\n}\n.manager .control label input[type=\"checkbox\"]:checked ~  i[data-v-0089eadf]{\n    color: orange;\n}\n.manager .menu-manager[data-v-0089eadf] {\n    display: flex;\n}\n.manager .menu-manager li[data-v-0089eadf] {\n    margin: 2px;\n    padding: 10px;\n}\n.manager .control-manager[data-v-0089eadf] {\n    margin: 0;\n}\n.control-manager li[data-v-0089eadf] {\n    padding: 1px 0;\n    height: 36px;\n    line-height: 36px;\n    width: 100%;\n}\n.control-manager .file-setting[data-v-0089eadf] {\n}\n.control-manager .control[data-v-0089eadf] {\n    margin: 2px 10px;\n    float: left;\n}\n.control-manager .main[data-v-0089eadf] {\n    cursor: pointer;\n    display: block;\n    height: 36px;\n    background-color: #4a494e99;\n}\n.control-manager .file-setting .main h3[data-v-0089eadf]{\n    color: #e8f5a6;\n    float: left;\n    width: 84%;\n    font-size: 0.8vw;\n    line-height: 19px;\n    word-break: break-all;\n}\n.control-manager .file-setting .main span[data-v-0089eadf]{\n    color: orange;\n    font-size: 10px;\n    float: right;\n}\n.control-manager .main[data-v-0089eadf]:hover {\n    background-color: #93919899;\n}\n", ""]);
+exports.push([module.i, "\n.manager[data-v-0089eadf] {\n    box-shadow: inset 0px -7px 8px 5px rgba(0, 0, 0, 0.5);\n}\n.manager .control label i[data-v-0089eadf]{\n    font-size: 32px;\n}\n.manager .control label input[type=\"checkbox\"]:checked ~  i[data-v-0089eadf]{\n    color: orange;\n}\n.manager .menu-manager[data-v-0089eadf] {\n    display: flex;\n}\n.manager .menu-manager li[data-v-0089eadf] {\n    margin: 2px;\n    padding: 10px;\n}\n.manager .control-manager[data-v-0089eadf] {\n    margin: 0;\n}\n.control-manager li[data-v-0089eadf] {\n    padding: 1px 0;\n    height: 36px;\n    line-height: 36px;\n    width: 100%;\n}\n.control-manager .file-setting[data-v-0089eadf] {\n}\n.control-manager .control[data-v-0089eadf] {\n    margin: 2px 10px;\n    float: left;\n}\n.control-manager .main[data-v-0089eadf] {\n    cursor: pointer;\n    display: block;\n    height: 36px;\n    background-color: #4a494e99;\n}\n.control-manager .file-setting .main h3[data-v-0089eadf]{\n    color: #e8f5a6;\n    float: left;\n    width: 84%;\n    font-size: 0.8vw;\n    line-height: 19px;\n    word-break: break-all;\n}\n.control-manager .file-setting .main span[data-v-0089eadf]{\n    color: orange;\n    font-size: 10px;\n    float: right;\n}\n.control-manager .main[data-v-0089eadf]:hover {\n    background-color: #93919899;\n}\n", ""]);
 
 // exports
 
@@ -9287,7 +9295,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\ntextarea[data-v-abeb76c6]:focus,\ninput[type=\"text\"][data-v-abeb76c6]:focus,\ninput[type=\"password\"][data-v-abeb76c6]:focus,\ninput[type=\"datetime\"][data-v-abeb76c6]:focus,\ninput[type=\"datetime-local\"][data-v-abeb76c6]:focus,\ninput[type=\"date\"][data-v-abeb76c6]:focus,\ninput[type=\"month\"][data-v-abeb76c6]:focus,\ninput[type=\"time\"][data-v-abeb76c6]:focus,\ninput[type=\"week\"][data-v-abeb76c6]:focus,\ninput[type=\"number\"][data-v-abeb76c6]:focus,\ninput[type=\"email\"][data-v-abeb76c6]:focus,\ninput[type=\"url\"][data-v-abeb76c6]:focus,\ninput[type=\"search\"][data-v-abeb76c6]:focus,\ninput[type=\"tel\"][data-v-abeb76c6]:focus,\ninput[type=\"color\"][data-v-abeb76c6]:focus,\n.uneditable-input[data-v-abeb76c6]:focus {\n    border-color: rgba(120, 144, 156,1.0); color: rgba(120, 144, 156,1.0); opacity: 0.9;\n    box-shadow: 0 0px 0px rgba(120, 144, 156,1.0) inset, 0 0 10px rgba(120, 144, 156,0.3);\n    outline: 0 none;\n}\n.card[data-v-abeb76c6]::-webkit-scrollbar {\n    width: 1px;\n}\n[data-v-abeb76c6]::-webkit-scrollbar-thumb {\n    border-radius: 9px;\n    background: rgba(96, 125, 139,0.99);\n}\n.balon1[data-v-abeb76c6], .balon2[data-v-abeb76c6] {\n\n    margin-top: 5px !important;\n    margin-bottom: 5px !important;\n}\n.balon1 a[data-v-abeb76c6] {\n\n    background: #42a5f5;\n    color: #fff !important;\n    border-radius: 20px 20px 3px 20px;\n    display: block;\n    max-width: 75%;\n    padding: 7px 13px 7px 13px;\n}\n.balon1[data-v-abeb76c6]:before {\n\n    content: attr(data-is);\n    position: absolute;\n    right: 15px;\n    bottom: -0.8em;\n    display: block;\n    font-size: .750rem;\n    color: rgba(84, 110, 122,1.0);\n}\n.balon2 a[data-v-abeb76c6] {\n\n    background: #f1f1f1;\n    color: #000 !important;\n    border-radius: 20px 20px 20px 3px;\n    display: block;\n    max-width: 75%;\n    padding: 7px 13px 7px 13px;\n}\n.balon2[data-v-abeb76c6]:before {\n\n    content: attr(data-is);\n    position: absolute;\n    left: 13px;\n    bottom: -0.8em;\n    display: block;\n    font-size: .750rem;\n    color: rgba(84, 110, 122,1.0);\n}\n.bg-sohbet[data-v-abeb76c6]:before {\n\n    content: \"\";\n    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTAgOCkiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+PGNpcmNsZSBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS4yNSIgY3g9IjE3NiIgY3k9IjEyIiByPSI0Ii8+PHBhdGggZD0iTTIwLjUuNWwyMyAxMW0tMjkgODRsLTMuNzkgMTAuMzc3TTI3LjAzNyAxMzEuNGw1Ljg5OCAyLjIwMy0zLjQ2IDUuOTQ3IDYuMDcyIDIuMzkyLTMuOTMzIDUuNzU4bTEyOC43MzMgMzUuMzdsLjY5My05LjMxNiAxMC4yOTIuMDUyLjQxNi05LjIyMiA5LjI3NC4zMzJNLjUgNDguNXM2LjEzMSA2LjQxMyA2Ljg0NyAxNC44MDVjLjcxNSA4LjM5My0yLjUyIDE0LjgwNi0yLjUyIDE0LjgwNk0xMjQuNTU1IDkwcy03LjQ0NCAwLTEzLjY3IDYuMTkyYy02LjIyNyA2LjE5Mi00LjgzOCAxMi4wMTItNC44MzggMTIuMDEybTIuMjQgNjguNjI2cy00LjAyNi05LjAyNS0xOC4xNDUtOS4wMjUtMTguMTQ1IDUuNy0xOC4xNDUgNS43IiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS4yNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTTg1LjcxNiAzNi4xNDZsNS4yNDMtOS41MjFoMTEuMDkzbDUuNDE2IDkuNTIxLTUuNDEgOS4xODVIOTAuOTUzbC01LjIzNy05LjE4NXptNjMuOTA5IDE1LjQ3OWgxMC43NXYxMC43NWgtMTAuNzV6IiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS4yNSIvPjxjaXJjbGUgZmlsbD0iIzAwMCIgY3g9IjcxLjUiIGN5PSI3LjUiIHI9IjEuNSIvPjxjaXJjbGUgZmlsbD0iIzAwMCIgY3g9IjE3MC41IiBjeT0iOTUuNSIgcj0iMS41Ii8+PGNpcmNsZSBmaWxsPSIjMDAwIiBjeD0iODEuNSIgY3k9IjEzNC41IiByPSIxLjUiLz48Y2lyY2xlIGZpbGw9IiMwMDAiIGN4PSIxMy41IiBjeT0iMjMuNSIgcj0iMS41Ii8+PHBhdGggZmlsbD0iIzAwMCIgZD0iTTkzIDcxaDN2M2gtM3ptMzMgODRoM3YzaC0zem0tODUgMThoM3YzaC0zeiIvPjxwYXRoIGQ9Ik0zOS4zODQgNTEuMTIybDUuNzU4LTQuNDU0IDYuNDUzIDQuMjA1LTIuMjk0IDcuMzYzaC03Ljc5bC0yLjEyNy03LjExNHpNMTMwLjE5NSA0LjAzbDEzLjgzIDUuMDYyLTEwLjA5IDcuMDQ4LTMuNzQtMTIuMTF6bS04MyA5NWwxNC44MyA1LjQyOS0xMC44MiA3LjU1Ny00LjAxLTEyLjk4N3pNNS4yMTMgMTYxLjQ5NWwxMS4zMjggMjAuODk3TDIuMjY1IDE4MGwyLjk0OC0xOC41MDV6IiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS4yNSIvPjxwYXRoIGQ9Ik0xNDkuMDUgMTI3LjQ2OHMtLjUxIDIuMTgzLjk5NSAzLjM2NmMxLjU2IDEuMjI2IDguNjQyLTEuODk1IDMuOTY3LTcuNzg1LTIuMzY3LTIuNDc3LTYuNS0zLjIyNi05LjMzIDAtNS4yMDggNS45MzYgMCAxNy41MSAxMS42MSAxMy43MyAxMi40NTgtNi4yNTcgNS42MzMtMjEuNjU2LTUuMDczLTIyLjY1NC02LjYwMi0uNjA2LTE0LjA0MyAxLjc1Ni0xNi4xNTcgMTAuMjY4LTEuNzE4IDYuOTIgMS41ODQgMTcuMzg3IDEyLjQ1IDIwLjQ3NiAxMC44NjYgMy4wOSAxOS4zMzEtNC4zMSAxOS4zMzEtNC4zMSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEuMjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvZz48L3N2Zz4=');\n    opacity: 0.06;\n    top: 0;\n    left: 0;\n    bottom: 0;\n    right: 0;\n    height:100%;\n    position: absolute;\n}\n", ""]);
+exports.push([module.i, "\n.form-control[data-v-abeb76c6] {\n    background-color: #2e2d30;\n}\n.card[data-v-abeb76c6]::-webkit-scrollbar {\n    width: 1px;\n}\n[data-v-abeb76c6]::-webkit-scrollbar-thumb {\n    border-radius: 9px;\n    background: rgba(96, 125, 139,0.99);\n}\n.balon1[data-v-abeb76c6], .balon2[data-v-abeb76c6] {\n\n    margin-top: 5px !important;\n    margin-bottom: 5px !important;\n}\n.balon1 a[data-v-abeb76c6] {\n\n    background: #42a5f5;\n    color: #fff !important;\n    border-radius: 20px 20px 3px 20px;\n    display: block;\n    max-width: 75%;\n    padding: 7px 13px 7px 13px;\n}\n.balon1[data-v-abeb76c6]:before {\n\n    content: attr(data-is);\n    position: absolute;\n    right: 15px;\n    bottom: -0.8em;\n    display: block;\n    font-size: .750rem;\n    color: rgb(195, 195, 195);\n}\n.balon2 a[data-v-abeb76c6] {\n\n    background: #f1f1f1;\n    color: #000 !important;\n    border-radius: 20px 20px 20px 3px;\n    display: block;\n    max-width: 75%;\n    padding: 7px 13px 7px 13px;\n}\n.balon2[data-v-abeb76c6]:before {\n\n    content: attr(data-is);\n    position: absolute;\n    left: 13px;\n    bottom: -0.8em;\n    display: block;\n    font-size: .750rem;\n    color: rgb(195, 195, 195);\n}\n.bg-sohbet[data-v-abeb76c6]:before {\n\n    content: \"\";\n    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTAgOCkiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+PGNpcmNsZSBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS4yNSIgY3g9IjE3NiIgY3k9IjEyIiByPSI0Ii8+PHBhdGggZD0iTTIwLjUuNWwyMyAxMW0tMjkgODRsLTMuNzkgMTAuMzc3TTI3LjAzNyAxMzEuNGw1Ljg5OCAyLjIwMy0zLjQ2IDUuOTQ3IDYuMDcyIDIuMzkyLTMuOTMzIDUuNzU4bTEyOC43MzMgMzUuMzdsLjY5My05LjMxNiAxMC4yOTIuMDUyLjQxNi05LjIyMiA5LjI3NC4zMzJNLjUgNDguNXM2LjEzMSA2LjQxMyA2Ljg0NyAxNC44MDVjLjcxNSA4LjM5My0yLjUyIDE0LjgwNi0yLjUyIDE0LjgwNk0xMjQuNTU1IDkwcy03LjQ0NCAwLTEzLjY3IDYuMTkyYy02LjIyNyA2LjE5Mi00LjgzOCAxMi4wMTItNC44MzggMTIuMDEybTIuMjQgNjguNjI2cy00LjAyNi05LjAyNS0xOC4xNDUtOS4wMjUtMTguMTQ1IDUuNy0xOC4xNDUgNS43IiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS4yNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTTg1LjcxNiAzNi4xNDZsNS4yNDMtOS41MjFoMTEuMDkzbDUuNDE2IDkuNTIxLTUuNDEgOS4xODVIOTAuOTUzbC01LjIzNy05LjE4NXptNjMuOTA5IDE1LjQ3OWgxMC43NXYxMC43NWgtMTAuNzV6IiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS4yNSIvPjxjaXJjbGUgZmlsbD0iIzAwMCIgY3g9IjcxLjUiIGN5PSI3LjUiIHI9IjEuNSIvPjxjaXJjbGUgZmlsbD0iIzAwMCIgY3g9IjE3MC41IiBjeT0iOTUuNSIgcj0iMS41Ii8+PGNpcmNsZSBmaWxsPSIjMDAwIiBjeD0iODEuNSIgY3k9IjEzNC41IiByPSIxLjUiLz48Y2lyY2xlIGZpbGw9IiMwMDAiIGN4PSIxMy41IiBjeT0iMjMuNSIgcj0iMS41Ii8+PHBhdGggZmlsbD0iIzAwMCIgZD0iTTkzIDcxaDN2M2gtM3ptMzMgODRoM3YzaC0zem0tODUgMThoM3YzaC0zeiIvPjxwYXRoIGQ9Ik0zOS4zODQgNTEuMTIybDUuNzU4LTQuNDU0IDYuNDUzIDQuMjA1LTIuMjk0IDcuMzYzaC03Ljc5bC0yLjEyNy03LjExNHpNMTMwLjE5NSA0LjAzbDEzLjgzIDUuMDYyLTEwLjA5IDcuMDQ4LTMuNzQtMTIuMTF6bS04MyA5NWwxNC44MyA1LjQyOS0xMC44MiA3LjU1Ny00LjAxLTEyLjk4N3pNNS4yMTMgMTYxLjQ5NWwxMS4zMjggMjAuODk3TDIuMjY1IDE4MGwyLjk0OC0xOC41MDV6IiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS4yNSIvPjxwYXRoIGQ9Ik0xNDkuMDUgMTI3LjQ2OHMtLjUxIDIuMTgzLjk5NSAzLjM2NmMxLjU2IDEuMjI2IDguNjQyLTEuODk1IDMuOTY3LTcuNzg1LTIuMzY3LTIuNDc3LTYuNS0zLjIyNi05LjMzIDAtNS4yMDggNS45MzYgMCAxNy41MSAxMS42MSAxMy43MyAxMi40NTgtNi4yNTcgNS42MzMtMjEuNjU2LTUuMDczLTIyLjY1NC02LjYwMi0uNjA2LTE0LjA0MyAxLjc1Ni0xNi4xNTcgMTAuMjY4LTEuNzE4IDYuOTIgMS41ODQgMTcuMzg3IDEyLjQ1IDIwLjQ3NiAxMC44NjYgMy4wOSAxOS4zMzEtNC4zMSAxOS4zMzEtNC4zMSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEuMjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvZz48L3N2Zz4=');\n    opacity: 1;\n    top: 0;\n    left: 0;\n    bottom: 0;\n    right: 0;\n    height:100%;\n    position: absolute;\n}\n", ""]);
 
 // exports
 
@@ -49636,71 +49644,79 @@ var render = function() {
                 )
               ]
             )
-          ])
+          ]),
+          _vm._v(" "),
+          _vm._m(3)
         ])
       ])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "window-area row" }, [
-      _c("aside", { staticClass: "main-sidebar col-12 col-sm-2" }, [
-        _c(
-          "section",
-          { staticClass: "sidebar", staticStyle: { height: "auto" } },
-          [
-            _c(
-              "ul",
-              {
-                staticClass: "sidebar-menu",
-                staticStyle: { "text-align": "center", color: "white" }
-              },
-              [
-                _c("li", [
-                  _vm.auth_u.img
-                    ? _c("div", { staticClass: "team-thumb " }, [
-                        _c("img", {
-                          attrs: {
-                            src: _vm.auth_u.img,
-                            alt: _vm.auth_u.name,
-                            width: "60%"
-                          }
-                        })
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c(
-                    "span",
-                    {
-                      staticClass: "team-name badge btn-warning",
-                      attrs: {
-                        id: "idname",
-                        "data-toggle": "modal",
-                        "data-target": "#ModalCenterProfile1",
-                        "data-backdrop": "static",
-                        "data-keyboard": "false"
-                      }
-                    },
-                    [_vm._v(_vm._s(_vm.auth_u.name))]
-                  ),
-                  _vm._v(" "),
-                  _vm._m(3)
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _vm._m(4)
-          ]
-        )
-      ]),
+      _c(
+        "aside",
+        {
+          staticClass: "main-sidebar col-12 col-sm-2",
+          attrs: { id: "sidebar" }
+        },
+        [
+          _vm._m(4),
+          _vm._v(" "),
+          _c(
+            "section",
+            { staticClass: "sidebar", staticStyle: { height: "auto" } },
+            [
+              _c(
+                "ul",
+                {
+                  staticClass: "sidebar-menu",
+                  staticStyle: { "text-align": "center", color: "white" }
+                },
+                [
+                  _c("li", [
+                    _vm.auth_u.img
+                      ? _c("div", { staticClass: "team-thumb " }, [
+                          _c("img", {
+                            attrs: {
+                              src: _vm.auth_u.img,
+                              alt: _vm.auth_u.name,
+                              width: "60%"
+                            }
+                          })
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        staticClass: "team-name badge btn-warning",
+                        attrs: {
+                          id: "idname",
+                          "data-toggle": "modal",
+                          "data-target": "#ModalCenterProfile1",
+                          "data-backdrop": "static",
+                          "data-keyboard": "false"
+                        }
+                      },
+                      [_vm._v(_vm._s(_vm.auth_u.name))]
+                    ),
+                    _vm._v(" "),
+                    _vm._m(5)
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _vm._m(6)
+            ]
+          )
+        ]
+      ),
       _vm._v(" "),
       _c(
         "div",
-        {
-          staticClass: "right-tabs col-12 col-sm-10 col",
-          attrs: { id: "accordion" }
-        },
+        { staticClass: "right-tabs col-12 ", attrs: { id: "accordion" } },
         [
           _c("ul", { staticClass: "tabs" }, [
-            _vm._m(5),
+            _vm._m(7),
             _vm._v(" "),
             _c("li", [
               _c(
@@ -49726,93 +49742,77 @@ var render = function() {
               attrs: { id: "Collapse1", "data-parent": "#accordion" }
             },
             [
-              _c(
-                "div",
-                {
-                  staticClass: "conversation-list col-12",
-                  staticStyle: { padding: "0" }
-                },
-                [
-                  _c(
-                    "ul",
-                    {
-                      staticStyle: {
-                        "margin-bottom": "46px",
-                        height: "80vh",
-                        "overflow-y": "auto",
-                        border: "1px solid"
-                      }
-                    },
-                    [
-                      _vm._l(_vm.info_chats.chats, function(thread, index) {
-                        return _c(
-                          "li",
-                          {
-                            staticStyle: { position: "relative" },
-                            style:
-                              thread.id === _vm.get_chat.id
-                                ? "background-color: #335d85;"
-                                : ""
-                          },
-                          [
-                            _c(
-                              "a",
-                              {
-                                attrs: {
-                                  "data-toggle": "collapse",
-                                  href: "#Collapse2",
-                                  role: "button",
-                                  "aria-expanded": "false",
-                                  "aria-controls": "Collapse2"
-                                },
-                                on: {
-                                  click: function($event) {
-                                    $event.preventDefault()
-                                    return _vm.OPEN_CHAT(thread.id)
-                                  }
-                                }
+              _c("div", { staticClass: "conversation-list col-12" }, [
+                _c(
+                  "ul",
+                  [
+                    _vm._l(_vm.info_chats.chats, function(thread, index) {
+                      return _c(
+                        "li",
+                        {
+                          style:
+                            thread.id === _vm.get_chat.id
+                              ? "background-color: #335d85;"
+                              : ""
+                        },
+                        [
+                          _c(
+                            "a",
+                            {
+                              attrs: {
+                                "data-toggle": "collapse",
+                                href: "#Collapse2",
+                                role: "button",
+                                "aria-expanded": "false",
+                                "aria-controls": "Collapse2"
                               },
-                              [
-                                _c("chats", {
-                                  attrs: { thread: thread, user: _vm.auth_u }
-                                })
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c("span", {
-                              staticClass: "deleteChat",
                               on: {
                                 click: function($event) {
-                                  return _vm.DELETE_CHAT(thread.id)
+                                  $event.preventDefault()
+                                  return _vm.OPEN_CHAT(thread.id)
                                 }
-                              }
-                            })
-                          ]
-                        )
-                      }),
-                      _vm._v(" "),
-                      !_vm.info_chats.chats || _vm.info_chats.chats.length === 0
-                        ? _c(
-                            "div",
-                            {
-                              staticStyle: {
-                                padding: "20px",
-                                "text-align": "center"
                               }
                             },
                             [
-                              _vm._v(
-                                "\n                            Начни, создай чат с кем нибудь!\n                        "
-                              )
-                            ]
-                          )
-                        : _vm._e()
-                    ],
-                    2
-                  )
-                ]
-              )
+                              _c("chats", {
+                                attrs: { thread: thread, user: _vm.auth_u }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("span", {
+                            staticClass: "deleteChat",
+                            on: {
+                              click: function($event) {
+                                return _vm.DELETE_CHAT(thread.id)
+                              }
+                            }
+                          })
+                        ]
+                      )
+                    }),
+                    _vm._v(" "),
+                    !_vm.info_chats.chats || _vm.info_chats.chats.length === 0
+                      ? _c(
+                          "div",
+                          {
+                            staticStyle: {
+                              padding: "20px",
+                              "text-align": "center"
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                            Начни, создай чат с кем нибудь!\n                        "
+                            )
+                          ]
+                        )
+                      : _vm._e()
+                  ],
+                  2
+                )
+              ])
             ]
           ),
           _vm._v(" "),
@@ -49844,7 +49844,9 @@ var render = function() {
           _c("i", { staticClass: "fa fa-cog" })
         ]
       )
-    ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "overlay" })
   ])
 }
 var staticRenderFns = [
@@ -49905,6 +49907,29 @@ var staticRenderFns = [
         },
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-info",
+          attrs: { type: "button", id: "sidebarCollapse" }
+        },
+        [_c("i", { staticClass: "fa fa-align-left" })]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { attrs: { id: "dismiss" } }, [
+      _c("i", { staticClass: "fa fa-arrow-left" })
     ])
   },
   function() {
@@ -50182,11 +50207,7 @@ var render = function() {
       "ul",
       {
         staticClass: "control-manager",
-        staticStyle: {
-          "overflow-y": "auto",
-          height: "70vh",
-          border: "1px solid"
-        }
+        staticStyle: { "overflow-y": "auto", height: "80vh" }
       },
       [
         _c("li", { staticClass: "dir-setting" }, [
@@ -50352,11 +50373,18 @@ var render = function() {
               "div",
               {
                 staticClass:
-                  "card-header p-1 bg-light border border-top-0 border-left-0 border-right-0",
-                staticStyle: { color: "rgba(96, 125, 139,1.0)" }
+                  "card-header p-1 border border-top-0 border-left-0 border-right-0"
               },
               [
                 _c("img", {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.thread.countPeople.length < 3,
+                      expression: "thread.countPeople.length<3"
+                    }
+                  ],
                   staticClass: "rounded float-left",
                   staticStyle: { width: "50px", height: "50px" },
                   attrs: { src: _vm.thread.creator.img }
@@ -50371,14 +50399,13 @@ var render = function() {
                   [
                     _vm._v(
                       "  " +
-                        _vm._s(_vm.thread.creator.name) +
+                        _vm._s(
+                          _vm.thread.countPeople.length < 3
+                            ? _vm.thread.creator.name
+                            : _vm.thread.subject
+                        ) +
                         "\n                    "
                     ),
-                    _c("i", {
-                      staticClass: "fa fa-check text-primary",
-                      attrs: { title: "Проверен", "aria-hidden": "true" }
-                    }),
-                    _vm._v(" "),
                     _c("br"),
                     _vm._v(" "),
                     _c("small", [_vm._v(" Должность ")])
@@ -50393,7 +50420,7 @@ var render = function() {
               "div",
               {
                 staticClass: "card bg-sohbet border-0 m-0 p-0",
-                staticStyle: { height: "70vh" }
+                staticStyle: { height: "65vh" }
               },
               [
                 _c(
@@ -50440,12 +50467,12 @@ var render = function() {
               "div",
               {
                 staticClass:
-                  "w-100 card-footer p-0 bg-light border border-bottom-0 border-left-0 border-right-0"
+                  "w-100 card-footer p-0 border border-bottom-0 border-left-0 border-right-0"
               },
               [
                 _c("div", { staticClass: "row m-0 p-0" }, [
                   _c("div", { staticClass: "col-9 m-0 p-1" }, [
-                    _c("input", {
+                    _c("textarea", {
                       directives: [
                         {
                           name: "model",
@@ -50459,8 +50486,8 @@ var render = function() {
                         id: "text",
                         type: "text",
                         name: "text",
-                        title: "Type a message...",
-                        placeholder: "Type a message...",
+                        title: "пиши",
+                        placeholder: "Вводите сообщение...",
                         required: ""
                       },
                       domProps: { value: _vm.chat.message },
@@ -50481,13 +50508,17 @@ var render = function() {
                       {
                         staticClass:
                           "btn btn-outline-secondary rounded border w-100",
-                        staticStyle: { "padding-right": "16px" },
+                        staticStyle: {
+                          "padding-right": "16px",
+                          height: "100%"
+                        },
                         attrs: { title: "Отправить" },
                         on: { click: _vm.SEND_MESSAGE }
                       },
                       [
                         _c("i", {
                           staticClass: "fa fa-paper-plane",
+                          staticStyle: { color: "wheat", "font-size": "large" },
                           attrs: { "aria-hidden": "true" }
                         })
                       ]
@@ -50594,66 +50625,48 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c(
-      "span",
-      { staticStyle: { width: "70%", color: "white", "font-size": "13px" } },
-      [
-        _c("i", {
-          staticClass: "fa",
-          class:
-            _vm.thread.countPeople.length > 2 ? "fa-users" : "fa-comments-o",
-          staticStyle: { color: "white" },
-          attrs: { "aria-hidden": "true" }
-        }),
-        _vm._v(
-          "\n        " +
-            _vm._s(
-              _vm.thread.countPeople.length > 2
-                ? _vm.thread.subject
-                : _vm.thread.creator.id == _vm.user.id &&
-                  _vm.thread.countPeople.length == 1
-                ? "Избранное"
-                : _vm.thread.interlocutor
-            ) +
-            "\n    "
-        )
-      ]
-    ),
+    _c("span", { staticClass: "title" }, [
+      _c("i", {
+        staticClass: "fa",
+        class: _vm.thread.countPeople.length > 2 ? "fa-users" : "fa-comments-o",
+        attrs: { "aria-hidden": "true" }
+      }),
+      _vm._v(
+        "\n        " +
+          _vm._s(
+            _vm.thread.countPeople.length > 2
+              ? _vm.thread.subject
+              : _vm.thread.creator.id == _vm.user.id &&
+                _vm.thread.countPeople.length == 1
+              ? "Избранное"
+              : _vm.thread.interlocutor
+          ) +
+          "\n    "
+      )
+    ]),
     _vm._v(" "),
-    _c(
-      "span",
-      {
-        staticStyle: {
-          margin: "5px",
-          overflow: "hidden",
-          "text-overflow": "ellipsis",
-          height: "13px",
-          width: "90%"
-        }
-      },
-      [
-        _vm.thread.latestMessage
-          ? _c("h4", { staticClass: "badge" }, [
-              _vm._v(
-                _vm._s(
-                  _vm.thread.latestMessage.user_id == _vm.user.id
-                    ? "Вы:"
-                    : _vm.user.name
-                )
+    _c("span", { staticClass: "content" }, [
+      _vm.thread.latestMessage
+        ? _c("h4", { staticClass: "badge" }, [
+            _vm._v(
+              _vm._s(
+                _vm.thread.latestMessage.user_id == _vm.user.id
+                  ? "Вы:"
+                  : _vm.user.name
               )
-            ])
-          : _vm._e(),
-        _vm._v(
-          " " +
-            _vm._s(
-              _vm.thread.latestMessage
-                ? _vm.thread.latestMessage.body
-                : "Чат пуст..."
-            ) +
-            "\n    "
-        )
-      ]
-    ),
+            )
+          ])
+        : _vm._e(),
+      _vm._v(
+        " " +
+          _vm._s(
+            _vm.thread.latestMessage
+              ? _vm.thread.latestMessage.body
+              : "Чат пуст..."
+          ) +
+          "\n    "
+      )
+    ]),
     _vm._v(" "),
     _vm.thread.UnreadMessagesCount
       ? _c(
@@ -64442,13 +64455,13 @@ var actions = {
           switch (_context3.prev = _context3.next) {
             case 0:
               commit = _ref3.commit, state = _ref3.state;
-              commit("LOADER_INFO", "NULL");
 
               if (!state.send.message) {
                 _context3.next = 5;
                 break;
               }
 
+              commit("LOADER_INFO", "NULL");
               _context3.next = 5;
               return axios.post('/dialog/update', state.send).then(function (e) {
                 commit("SEND_CHAT", e);
@@ -64523,12 +64536,14 @@ var actions = {
             case 0:
               commit = _ref5.commit, state = _ref5.state;
               commit("LOADER_INFO", "NULL");
+              console.log('Отправили id: ' + idChat);
               idUser = state.auth_user.id;
-              _context5.next = 5;
+              _context5.next = 6;
               return axios.post('/dialog/delete', {
                 idChat: idChat,
                 idUser: idUser
               }).then(function (e) {
+                console.log('Получили от сервера ' + e.data);
                 commit("CHAT_REMOVE", idChat);
                 commit("LOADER_INFO", "NULL");
               })["catch"](function (err) {
@@ -64536,7 +64551,7 @@ var actions = {
                 console.log(err);
               });
 
-            case 5:
+            case 6:
             case "end":
               return _context5.stop();
           }
@@ -64776,11 +64791,12 @@ var mutations = {
     state.send.message = '';
     if (true) console.log(message.statusText);
   },
-  CHAT_REMOVE: function CHAT_REMOVE(state, chat) {
+  CHAT_REMOVE: function CHAT_REMOVE(state, id) {
+    console.log('Отправили id в мутатор: ' + id.chat);
     state.threads.chats.splice(state.threads.chats.findIndex(function (el) {
-      return el.id === chat;
+      return el.id === id.chat;
     }), 1);
-    if (true) console.log("Чат с id:" + chat + " был удален!");
+    if (true) console.log("Чат с id:" + id.chat + " был удален!");
   },
   CREATE_CHAT: function CREATE_CHAT(state, chat) {
     state.threads.chats.unshift(chat);
@@ -64806,7 +64822,9 @@ var mutations = {
     if (true) console.log('Listen chat #' + e.chat.chat.id);
   },
   LISTEN_CHAT_CREATE: function LISTEN_CHAT_CREATE(state, e) {
-    state.threads.chats.unshift(e.data.chat);
+    // TODO:    контроллер проверить
+    console.log('Сокет прислал новый чат c id: ' + e.chat.id);
+    state.threads.chats.unshift(e.chat);
     if (true) console.log("Чат с id:" + e.data.chat.id + " был создан");
   },
   LISTEN_CHAT_REMOVE: function LISTEN_CHAT_REMOVE(state, e) {// TODO: сделать обновление одного элемента в списке

@@ -25,8 +25,8 @@ let actions = {
 
     },
     async SEND_MESSAGE({commit, state}) {
-        commit("LOADER_INFO", "NULL")
         if (state.send.message) {
+            commit("LOADER_INFO", "NULL")
             await axios.post('/dialog/update', state.send)
                 .then((e) => {
                     commit("SEND_CHAT", e)
@@ -54,9 +54,11 @@ let actions = {
     },
     async DELETE_CHAT({commit, state}, idChat) {
         commit("LOADER_INFO", "NULL")
+        console.log('Отправили id: '+ idChat)
         let idUser = state.auth_user.id
         await axios.post('/dialog/delete', {idChat, idUser})
             .then((e) => {
+                console.log('Получили от сервера '+ e.data)
                 commit("CHAT_REMOVE", idChat)
                 commit("LOADER_INFO", "NULL")
             })

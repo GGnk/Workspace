@@ -65,11 +65,19 @@
                         </div>
 
                     </li>
+                    <li>
+                        <button type="button" id="sidebarCollapse" class="btn btn-info">
+                            <i class="fa fa-align-left"></i>
+                        </button>
+                    </li>
                 </ul>
             </div>
         </div>
         <div class="window-area row">
-            <aside class="main-sidebar col-12 col-sm-2">
+            <aside class="main-sidebar col-12 col-sm-2" id="sidebar">
+                <div id="dismiss">
+                    <i class="fa fa-arrow-left"></i>
+                </div>
                 <section class="sidebar" style="height: auto;">
                     <ul class="sidebar-menu" style="text-align: center; color: white;">
                         <li>
@@ -219,7 +227,7 @@
                 </section>
             </aside>
 
-            <div class="right-tabs col-12 col-sm-10 col" id="accordion">
+            <div class="right-tabs col-12 " id="accordion">
                 <ul class="tabs">
                     <li>
                         <a data-toggle="collapse" href="#Collapse1" role="button" aria-expanded="true" aria-controls="Collapse1"><i class="fa fa-users"></i></a>
@@ -228,9 +236,9 @@
                 </ul>
 
                 <div class="collapse show" id="Collapse1" data-parent="#accordion">
-                    <div class="conversation-list col-12" style="padding: 0">
-                        <ul style="margin-bottom: 46px;height: 80vh;overflow-y: auto;border: 1px solid;" >
-                            <li style="position: relative;" v-for="(thread, index) in info_chats.chats" :style="thread.id === get_chat.id? 'background-color: #335d85;':''">
+                    <div class="conversation-list col-12">
+                        <ul>
+                            <li v-for="(thread, index) in info_chats.chats" :style="thread.id === get_chat.id? 'background-color: #335d85;':''">
                                 <a data-toggle="collapse" href="#Collapse2" role="button" aria-expanded="false" aria-controls="Collapse2" @click.prevent="OPEN_CHAT(thread.id)">
 
                                     <chats :thread="thread" :user="auth_u"></chats>
@@ -243,7 +251,7 @@
                             </div>
                         </ul>
 
-                    
+
                     </div>
                 </div>
                 <div class="collapse"  id="Collapse2" data-parent="#accordion">
@@ -260,6 +268,7 @@
                 <i class="fa fa-cog"></i>
             </div>
         </div>
+        <div class="overlay"></div>
     </div>
 </template>
 
@@ -308,7 +317,7 @@
                 })
             window.Echo.channel('Chat_removed')
                 .listen(".server", e => {
-                    this.$store.commit('CHAT_REMOVE', e.id)
+                    this.$store.commit('CHAT_REMOVE', e)
                 })
 
 
@@ -340,6 +349,63 @@
 </script>
 
 <style scoped>
+
+    #sidebar {
+         position: fixed;
+         top: 0;
+         left: -99%;
+         height: 100vh;
+         z-index: 999;
+         transition: all 0.3s;
+        background-color: #2a7984;
+
+     }
+    .window-area .active{
+        left: 0 !important;
+
+    }
+    #dismiss {
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+        text-align: center;
+        background: #7386D5;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        -webkit-transition: all 0.3s;
+        -o-transition: all 0.3s;
+        transition: all 0.3s;
+    }
+    #dismiss:hover {
+        background: #fff;
+        color: #7386D5;
+    }
+    .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 998;
+        opacity: 0;
+        transition: all 0.5s ease-in-out;
+    }
+    .wrapper .active {
+        display: block;
+        opacity: 1;
+    }
+    .main-sidebar {
+        box-shadow: 9px 0px 18px 1px rgba(0, 0, 0, 0.5);
+        font-family: sans-serif;
+        font-size: 16px;
+    }
+    .badge {
+        white-space: pre-line;
+        word-break: break-word;
+    }
     .list-users {
         display: contents;
         cursor: pointer;

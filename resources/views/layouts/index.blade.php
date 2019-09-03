@@ -37,6 +37,20 @@
 </div>
 
 <script src="{{ mix('js/app.js') }}"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#dismiss, .overlay').on('click', function () {
+            $('#sidebar').removeClass('active');
+            $('.overlay').removeClass('active');
+        });
+
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').addClass('active');
+            $('.overlay').addClass('active');
+        });
+    });
+</script>
 </body>
 </html>
 

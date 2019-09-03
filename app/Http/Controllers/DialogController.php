@@ -138,8 +138,9 @@ class DialogController extends Controller
         if (Input::has('recipients')) {
             $thread->addParticipant($input['recipients']);
         }
-
-        return $this->show($thread->id);
+        $res = $this->show($thread->id);
+        broadcast(new Chats($res))->toOthers();
+        return $res;
 
     }
 

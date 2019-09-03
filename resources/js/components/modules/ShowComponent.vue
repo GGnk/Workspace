@@ -3,13 +3,12 @@
             <div class="col-12 p-0 m-0 " style="right: 0px;">
                 <div class="card border-0 rounded" style="box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10), 0 6px 10px 0 rgba(0, 0, 0, 0.01); overflow: hidden; height: 100%;">
 
-                    <div class="card-header p-1 bg-light border border-top-0 border-left-0 border-right-0" style="color: rgba(96, 125, 139,1.0);">
+                    <div class="card-header p-1 border border-top-0 border-left-0 border-right-0" >
 
-                        <img class="rounded float-left" style="width: 50px; height: 50px;" :src="thread.creator.img"/>
+                        <img class="rounded float-left" style="width: 50px; height: 50px;" v-show="thread.countPeople.length<3" :src="thread.creator.img"/>
 
-                        <h6 class="float-left" style="margin: 0px 0px 0px 10px;">  {{thread.creator.name}}
-                            <i class="fa fa-check text-primary" title="Проверен" aria-hidden="true"></i>
-                            </br>
+                        <h6 class="float-left" style="margin: 0px 0px 0px 10px;">  {{thread.countPeople.length<3 ? thread.creator.name : thread.subject}}
+                            <br/>
                             <small> Должность </small>
                         </h6>
 
@@ -28,7 +27,7 @@
 
                     </div>
 
-                    <div class="card bg-sohbet border-0 m-0 p-0" style="height: 70vh;">
+                    <div class="card bg-sohbet border-0 m-0 p-0" style="height: 65vh;">
                         <div id="sohbet" class="card border-0 m-0 p-0 position-relative bg-transparent" style="overflow-y: auto; height: 100vh;">
 
                             <div v-for="message in thread.messages" v-if="message.body" :class="message.user_id === user.id ? 'balon1':'balon2'"
@@ -41,18 +40,18 @@
                         </div>
                     </div>
 
-                    <div class="w-100 card-footer p-0 bg-light border border-bottom-0 border-left-0 border-right-0">
+                    <div class="w-100 card-footer p-0 border border-bottom-0 border-left-0 border-right-0">
 
                         <div class="row m-0 p-0">
                             <div class="col-9 m-0 p-1">
 
-                                <input  v-model="chat.message" id="text" class="mw-100 border rounded form-control" type="text" name="text" title="Type a message..." placeholder="Type a message..." required>
+                                <textarea  v-model="chat.message" id="text" class="mw-100 border rounded form-control" type="text" name="text" title="пиши" placeholder="Вводите сообщение..." required></textarea>
 
                             </div>
                             <div class="col-3 m-0 p-1">
 
-                                <button class="btn btn-outline-secondary rounded border w-100" title="Отправить" style="padding-right: 16px;" @click="SEND_MESSAGE">
-                                    <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                                <button class="btn btn-outline-secondary rounded border w-100" title="Отправить" style="padding-right: 16px; height: 100%;" @click="SEND_MESSAGE">
+                                    <i class="fa fa-paper-plane" aria-hidden="true" style="color: wheat;font-size: large;"></i>
                                 </button>
 
                             </div>
@@ -103,26 +102,9 @@
 </script>
 
 <style scoped>
-
-    textarea:focus,
-    input[type="text"]:focus,
-    input[type="password"]:focus,
-    input[type="datetime"]:focus,
-    input[type="datetime-local"]:focus,
-    input[type="date"]:focus,
-    input[type="month"]:focus,
-    input[type="time"]:focus,
-    input[type="week"]:focus,
-    input[type="number"]:focus,
-    input[type="email"]:focus,
-    input[type="url"]:focus,
-    input[type="search"]:focus,
-    input[type="tel"]:focus,
-    input[type="color"]:focus,
-    .uneditable-input:focus {
-        border-color: rgba(120, 144, 156,1.0); color: rgba(120, 144, 156,1.0); opacity: 0.9;
-        box-shadow: 0 0px 0px rgba(120, 144, 156,1.0) inset, 0 0 10px rgba(120, 144, 156,0.3);
-        outline: 0 none; }
+    .form-control {
+        background-color: #2e2d30;
+    }
 
 
     .card::-webkit-scrollbar {
@@ -161,7 +143,7 @@
         bottom: -0.8em;
         display: block;
         font-size: .750rem;
-        color: rgba(84, 110, 122,1.0);
+        color: rgb(195, 195, 195);
 
     }
 
@@ -184,7 +166,7 @@
         bottom: -0.8em;
         display: block;
         font-size: .750rem;
-        color: rgba(84, 110, 122,1.0);
+        color: rgb(195, 195, 195);
 
     }
 
@@ -192,7 +174,7 @@
 
         content: "";
         background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTAgOCkiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+PGNpcmNsZSBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS4yNSIgY3g9IjE3NiIgY3k9IjEyIiByPSI0Ii8+PHBhdGggZD0iTTIwLjUuNWwyMyAxMW0tMjkgODRsLTMuNzkgMTAuMzc3TTI3LjAzNyAxMzEuNGw1Ljg5OCAyLjIwMy0zLjQ2IDUuOTQ3IDYuMDcyIDIuMzkyLTMuOTMzIDUuNzU4bTEyOC43MzMgMzUuMzdsLjY5My05LjMxNiAxMC4yOTIuMDUyLjQxNi05LjIyMiA5LjI3NC4zMzJNLjUgNDguNXM2LjEzMSA2LjQxMyA2Ljg0NyAxNC44MDVjLjcxNSA4LjM5My0yLjUyIDE0LjgwNi0yLjUyIDE0LjgwNk0xMjQuNTU1IDkwcy03LjQ0NCAwLTEzLjY3IDYuMTkyYy02LjIyNyA2LjE5Mi00LjgzOCAxMi4wMTItNC44MzggMTIuMDEybTIuMjQgNjguNjI2cy00LjAyNi05LjAyNS0xOC4xNDUtOS4wMjUtMTguMTQ1IDUuNy0xOC4xNDUgNS43IiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS4yNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTTg1LjcxNiAzNi4xNDZsNS4yNDMtOS41MjFoMTEuMDkzbDUuNDE2IDkuNTIxLTUuNDEgOS4xODVIOTAuOTUzbC01LjIzNy05LjE4NXptNjMuOTA5IDE1LjQ3OWgxMC43NXYxMC43NWgtMTAuNzV6IiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS4yNSIvPjxjaXJjbGUgZmlsbD0iIzAwMCIgY3g9IjcxLjUiIGN5PSI3LjUiIHI9IjEuNSIvPjxjaXJjbGUgZmlsbD0iIzAwMCIgY3g9IjE3MC41IiBjeT0iOTUuNSIgcj0iMS41Ii8+PGNpcmNsZSBmaWxsPSIjMDAwIiBjeD0iODEuNSIgY3k9IjEzNC41IiByPSIxLjUiLz48Y2lyY2xlIGZpbGw9IiMwMDAiIGN4PSIxMy41IiBjeT0iMjMuNSIgcj0iMS41Ii8+PHBhdGggZmlsbD0iIzAwMCIgZD0iTTkzIDcxaDN2M2gtM3ptMzMgODRoM3YzaC0zem0tODUgMThoM3YzaC0zeiIvPjxwYXRoIGQ9Ik0zOS4zODQgNTEuMTIybDUuNzU4LTQuNDU0IDYuNDUzIDQuMjA1LTIuMjk0IDcuMzYzaC03Ljc5bC0yLjEyNy03LjExNHpNMTMwLjE5NSA0LjAzbDEzLjgzIDUuMDYyLTEwLjA5IDcuMDQ4LTMuNzQtMTIuMTF6bS04MyA5NWwxNC44MyA1LjQyOS0xMC44MiA3LjU1Ny00LjAxLTEyLjk4N3pNNS4yMTMgMTYxLjQ5NWwxMS4zMjggMjAuODk3TDIuMjY1IDE4MGwyLjk0OC0xOC41MDV6IiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS4yNSIvPjxwYXRoIGQ9Ik0xNDkuMDUgMTI3LjQ2OHMtLjUxIDIuMTgzLjk5NSAzLjM2NmMxLjU2IDEuMjI2IDguNjQyLTEuODk1IDMuOTY3LTcuNzg1LTIuMzY3LTIuNDc3LTYuNS0zLjIyNi05LjMzIDAtNS4yMDggNS45MzYgMCAxNy41MSAxMS42MSAxMy43MyAxMi40NTgtNi4yNTcgNS42MzMtMjEuNjU2LTUuMDczLTIyLjY1NC02LjYwMi0uNjA2LTE0LjA0MyAxLjc1Ni0xNi4xNTcgMTAuMjY4LTEuNzE4IDYuOTIgMS41ODQgMTcuMzg3IDEyLjQ1IDIwLjQ3NiAxMC44NjYgMy4wOSAxOS4zMzEtNC4zMSAxOS4zMzEtNC4zMSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjEuMjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvZz48L3N2Zz4=');
-        opacity: 0.06;
+        opacity: 1;
         top: 0;
         left: 0;
         bottom: 0;

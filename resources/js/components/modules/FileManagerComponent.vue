@@ -6,7 +6,7 @@
             <li>Добавить</li>
             <li>Удалить</li>
         </ul>
-        <ul class="control-manager" style="overflow-y: auto;height: 70vh;border: 1px solid;">
+        <ul class="control-manager" style="overflow-y: auto;height: 80vh;">
             <li class="dir-setting">
 
                 <div class="control">
@@ -79,6 +79,9 @@
 </script>
 
 <style scoped>
+    .manager {
+        box-shadow: inset 0px -7px 8px 5px rgba(0, 0, 0, 0.5);
+    }
     .manager .control label i{
         font-size: 32px;
     }
