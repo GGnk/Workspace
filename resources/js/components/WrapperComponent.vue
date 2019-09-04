@@ -66,7 +66,7 @@
 
                     </li>
                     <li>
-                        <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <button type="button" id="sidebarCollapse" class="btn btn-light">
                             <i class="fa fa-align-left"></i>
                         </button>
                     </li>
@@ -74,197 +74,20 @@
             </div>
         </div>
         <div class="window-area row">
-            <aside class="main-sidebar col-12 col-sm-2" id="sidebar">
-                <div id="dismiss">
-                    <i class="fa fa-arrow-left"></i>
-                </div>
-                <section class="sidebar" style="height: auto;">
-                    <ul class="sidebar-menu" style="text-align: center; color: white;">
-                        <li>
+            <sidebar></sidebar>
 
-                            <div class="team-thumb " v-if="auth_u.img">
-                                <img :src="auth_u.img" :alt="auth_u.name" width="60%">
-                            </div>
-                            <span id="idname" class="team-name badge btn-warning" data-toggle="modal" data-target="#ModalCenterProfile1" data-backdrop="static" data-keyboard="false">{{auth_u.name}}</span>
-
-                            <span class="title">
-                                <div class="team-social-bar">
-                                    <a class="social-btn sb-style-1 sb-twitter" href="#">
-                                        <i class="fa fa-twitter"></i>
-                                    </a>
-                                    <a class="social-btn sb-style-1 sb-github" href="#">
-                                        <i class="fa fa-github"></i>
-                                    </a>
-                                    <a class="social-btn sb-style-1 sb-stackoverflow" href="#">
-                                        <i class="fa fa-linkedin"></i>
-                                    </a>
-                                    <a class="social-btn sb-style-1 sb-skype" href="#">
-                                        <i class="fa fa-skype"></i>
-                                    </a>
-                                </div>
-                            </span>
-                            
-                        </li>
-                    </ul>
-                    <ul class="sidebar-menu">
-                        <li class="active">
-                            <a href="http://192.168.2.59/admin/home">
-                                <i class="fa fa-wrench"></i>
-                                <span class="title">Панель управления</span>
-                            </a>
-                        </li>
-                                    <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-sitemap"></i>
-                                <span>Доп функционал</span>
-                                <span class="pull-right-container">
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                                    <li>
-                                   <a href="http://192.168.2.59/admin/tasks">
-                                   <i class="fa fa-tasks"></i>
-                                   <span class="title">Задачи</span>
-                                   </a>
-                                </li>
-                                                                        <li>
-                                    <a href="http://192.168.2.59/admin/faqs">
-                                        <i class="fa fa-question"></i>
-                                        <span class="title">Список вопросов</span>
-                                    </a>
-                                </li>
-                                                                        <li>
-                                    <a href="http://192.168.2.59/admin/files">
-                                        <i class="fa fa-tasks"></i>
-                                        <span class="title">Файлообменник</span>
-                                    </a>
-                                </li>
-                                                    <li>
-                                    <a href="http://192.168.2.59/admin/edo">
-                                        <i class="fa fa-cloud"></i>
-                                        <span>Список ЭДО</span>
-                                    </a>
-                                    <ul>
-                                                                    <li style="padding: 0 0 10px 0">
-                                            <a href="http://192.168.2.59/admin/cat_edo">
-                                                <i class="fa fa-list-ol"></i>
-                                                <span class="title">Категории ЭДО</span>
-                                            </a>
-                                        </li>
-                                                                </ul>
-                                </li>
-                                
-                            </ul>
-                        </li>            
-
-                                    <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-sitemap"></i>
-                                <span>Структура</span>
-                                <span class="pull-right-container">
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                                    <li>
-                                    <a href="http://192.168.2.59/admin/macs">
-                                        <i class="fa fa-tv"></i>
-                                        <span>Список Mac</span>
-                                    </a>
-                                </li>                    
-                                                    <li>
-                                    <a href="http://192.168.2.59/admin/deps">
-                                        <i class="fa fa-home"></i>
-                                        <span>Список корпусов</span>
-                                    </a>
-                                </li>                    
-                                                    <li>
-                                    <a href="http://192.168.2.59/admin/offices">
-                                        <i class="fa fa-coffee"></i>
-                                        <span>Список офисов</span>
-                                    </a>
-                                </li>                    
-                            </ul>
-                        </li>            
-                                    <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-users"></i>
-                                <span>Управление сотрудниками</span>
-                                <span class="pull-right-container">
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                                    <li>
-                                    <a href="http://192.168.2.59/admin/users">
-                                        <i class="fa fa-user"></i>
-                                        <span>Сотрудники</span>
-                                    </a>
-                                </li>                    
-                                                    <li>
-                                    <a href="http://192.168.2.59/admin/roles">
-                                        <i class="fa fa-briefcase"></i>
-                                        <span>Привилегия</span>
-                                    </a>
-                                </li>                    
-                            </ul>
-                        </li>
-                        <li class="">
-                            <a href="http://192.168.2.59/change_password">
-                                <i class="fa fa-key"></i>
-                                <span class="title">Сменить пароль</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#logout" onclick="$('#logout').submit();">
-                                <i class="fa fa-arrow-left"></i>
-                                <span class="title">Выйти</span>
-                            </a>
-                        </li>
-                    </ul>
-                </section>
-            </aside>
-
-            <div class="right-tabs col-12 " id="accordion">
+            <div class="right-tabs col-12 ">
                 <ul class="tabs">
-                    <li>
-                        <a data-toggle="collapse" href="#Collapse1" role="button" aria-expanded="true" aria-controls="Collapse1"><i class="fa fa-users"></i></a>
+                    <li v-for="tab in list_tabs"
+                        :key="tab"
+                        :class="[{ active: currentTabComponent === tab }]"
+                        @click="CURRENT_TAB(tab)">
+                        <i class="fa fa-users"></i> {{ tab }}
                     </li>
-                    <li><a data-toggle="collapse" href="#Collapse3" role="button"  aria-controls="Collapse3" @click="DIR_OR_CHAT"><i class="fa fa-paperclip"></i></a></li>
                 </ul>
 
-                <div class="collapse show" id="Collapse1" data-parent="#accordion">
-                    <div class="conversation-list col-12">
-                        <ul>
-                            <li v-for="(thread, index) in info_chats.chats" :style="thread.id === get_chat.id? 'background-color: #335d85;':''">
-                                <a data-toggle="collapse" href="#Collapse2" role="button" aria-expanded="false" aria-controls="Collapse2" @click.prevent="OPEN_CHAT(thread.id)">
+                <component :is="currentTabComponent"></component>
 
-                                    <chats :thread="thread" :user="auth_u"></chats>
-
-                                </a>
-                                <span class="deleteChat" @click="DELETE_CHAT(thread.id)"></span>
-                            </li>
-                            <div v-if="!info_chats.chats || info_chats.chats.length === 0" style="padding: 20px;text-align: center;">
-                                Начни, создай чат с кем нибудь!
-                            </div>
-                        </ul>
-
-
-                    </div>
-                </div>
-                <div class="collapse"  id="Collapse2" data-parent="#accordion">
-
-                    <show v-if="get_chat.id" :thread="get_chat" :user="auth_u"></show>
-
-
-                </div>
-                <div class="collapse"  id="Collapse3" data-parent="#accordion">
-                    <div class="chat-area">
-                        <file_manager ></file_manager>
-                    </div>
-                </div>
                 <i class="fa fa-cog"></i>
             </div>
         </div>
@@ -278,6 +101,7 @@
     import chats from '../components/modules/ThreadsComponent'
     import show from '../components/modules/ShowComponent'
     import file_manager from '../components/modules/FileManagerComponent'
+    import sidebar from '../components/modules/SideBarComponent'
 
     import {mapGetters} from 'vuex'
     import {mapActions} from 'vuex'
@@ -288,12 +112,13 @@
         components: {
             chats,
             show,
-            file_manager
+            file_manager,
+            sidebar
         },
         name: "Wrapper",
         props: [],
         computed: {
-            ...mapGetters(['info_chats', 'get_chat', 'send_chat', 'auth_u', 'get_users', 'get_user_list', 'loader_request', 'loader_error']),
+            ...mapGetters(['info_chats', 'send_chat', 'auth_u', 'get_user_list', 'loader_request', 'loader_error', 'list_tabs', 'currentTabComponent']),
 
             chat: {
                 get () {
@@ -335,8 +160,8 @@
                 this.$store.dispatch("ALL_CHATS")
             },
 
-            ...mapActions(["OPEN_CHAT", "SEND_MESSAGE", "CREATE_CHAT", "DELETE_CHAT", "DIR_OR_CHAT"]),
-            ...mapMutations(["DIR_OR_CHAT"]),
+            ...mapActions(["CREATE_CHAT"]),
+            ...mapMutations(["DIR_OR_CHAT", "CURRENT_TAB"]),
 
             minCreateChat(idUser) {
                 this.send_chat.recipients = idUser

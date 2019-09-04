@@ -1,5 +1,6 @@
 <template>
-    <div class="manager" >
+    <div class="chat-area">
+        <div class="manager" >
         <ul class="menu-manager">
             <li @click="load_dirs('/')">Главная</li>
             <li>Обновить</li>
@@ -45,6 +46,7 @@
             </li>
         </ul>
 
+    </div>
     </div>
 </template>
 

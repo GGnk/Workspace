@@ -5,9 +5,9 @@
 
                     <div class="card-header p-1 border border-top-0 border-left-0 border-right-0" >
 
-                        <img class="rounded float-left" style="width: 50px; height: 50px;" v-show="thread.countPeople.length<3" :src="thread.creator.img"/>
+                        <img class="rounded float-left" style="width: 50px; height: 50px;" v-show="get_chat.countPeople.length<3" :src="get_chat.creator.img"/>
 
-                        <h6 class="float-left" style="margin: 0px 0px 0px 10px;">  {{thread.countPeople.length<3 ? thread.creator.name : thread.subject}}
+                        <h6 class="float-left" style="margin: 0px 0px 0px 10px;">  {{get_chat.countPeople.length<3 ? get_chat.creator.name : get_chat.subject}}
                             <br/>
                             <small> Должность </small>
                         </h6>
@@ -18,7 +18,7 @@
 
                             <div class="dropdown-menu dropdown-menu-right border p-0" aria-labelledby="dropdownMenuLink">
 
-                                <a class="dropdown-item p-2 text-secondary" href="#"> <i class="fa fa-user m-1" aria-hidden="true"></i> Profile </a>
+                                <a class="dropdown-item p-2 text-secondary" href="#"> <i class="fa fa-auth_u m-1" aria-hidden="true"></i> Profile </a>
                                 <hr class="my-1"></hr>
                                 <a class="dropdown-item p-2 text-secondary" href="#"> <i class="fa fa-trash m-1" aria-hidden="true"></i> Delete </a>
 
@@ -30,10 +30,10 @@
                     <div class="card bg-sohbet border-0 m-0 p-0" style="height: 65vh;">
                         <div id="sohbet" class="card border-0 m-0 p-0 position-relative bg-transparent" style="overflow-y: auto; height: 100vh;">
 
-                            <div v-for="message in thread.messages" v-if="message.body" :class="message.user_id === user.id ? 'balon1':'balon2'"
+                            <div v-for="message in get_chat.messages" v-if="message.body" :class="message.user_id === auth_u.id ? 'balon1':'balon2'"
                                  class="p-2 m-0 position-relative" :data-is="message.created ">
 
-                                <a :class="message.user_id === user.id ? 'float-right':'float-left'"> {{ message.body }} </a>
+                                <a :class="message.user_id === auth_u.id ? 'float-right':'float-left'"> {{ message.body }} </a>
 
                             </div>
 
@@ -70,12 +70,9 @@
 
     export default {
         name: "ShowComponent",
-        props: [
-            'thread',
-            'user'
-        ],
+        props: [],
         computed: {
-            ...mapGetters(['send_chat']),
+            ...mapGetters(['send_chat', 'get_chat', 'auth_u']),
 
             chat: {
                 get () {

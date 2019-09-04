@@ -103,6 +103,10 @@ body {
             font-weight: bold;
             .navbar-nav {
                 display: -webkit-box;
+                #sidebarCollapse {
+                    position: relative;
+                    top:10px;
+                }
                 li {
                     a{
                         line-height: 30px;
@@ -131,11 +135,7 @@ body {
 
             .card{
                 background-color: #2f2e3200 !important;
-                .card-footer {
-                    position: fixed;
-                    bottom: 0;
-                    right: 0;
-                }
+                
             }
             .chat-area{
                 ul{
@@ -156,7 +156,7 @@ body {
                 background: #2b2a2e;
                 box-shadow: inset -2px 1px 20px 0px rgba(0, 0, 0, 0.5);
                 padding: 0;
-                .online{
+                .online {
                     color: #82cf85;
                 }
                 .idle{
@@ -222,22 +222,15 @@ body {
                     float: left;
                     width: 50%;
                     text-align: center;
-                    a{
-                        border-left: 1px solid #cfdae1;
-                        color: #ffffff;
-                        display: block;
-                        background: #2a7984;
-                        padding: 8px 0;
-                    }
+                    color: #ffffff;
+                    display: block;
+                    background: #2a7984;
+                    padding: 8px 0;
                 }
                 li.active{
-                    border-bottom: none;
-                    a{
-                        background: #eef2f8;
-                        color: #c3ccd3;
-                        i{
-                            font-size: 18px
-                        }
+                    background: #2b2a2e;
+                    i{
+                        font-size: 18px
                     }
                 }
                 li:first-child > a{

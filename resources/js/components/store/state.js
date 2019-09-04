@@ -14,7 +14,9 @@ let state = {
         recipients: []
     },
     loaderRequest: false,
-    loaderError: false
+    loaderError: false,
+    currentTab: 'chats',
+    tabss: ['chats', 'file_manager']
 
 }
 export default state

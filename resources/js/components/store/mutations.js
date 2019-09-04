@@ -25,6 +25,8 @@ let mutations = {
         state.chat = e.data.chat
         state.send.id = e.data.chat.id
         state.users = e.data.users
+
+        state.currentTab = 'show'
     },
     UPDATE_CHAT (state, chat) {
         state.send = chat
@@ -76,9 +78,11 @@ let mutations = {
         //
         // if (process.env.NODE_ENV !== 'production') console.log("Чат с id:" + e.data.chat.id + " был удален!")
     },
-    DIR_OR_CHAT (state) {
-        state.chat = {}
-        // if (process.env.NODE_ENV !== 'production') console.log("Чат с id:" + e.data.chat.id + " был удален!")
+    /**
+     * @return {string}
+     */
+    CURRENT_TAB (state, data) {
+        state.currentTab = data
     }
 
 }

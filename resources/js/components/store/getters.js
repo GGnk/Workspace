@@ -23,6 +23,12 @@ let getters = {
     loader_error: state => {
         return state.loaderError
     },
+    list_tabs: state => {
+        return state.tabss
+    },
+    currentTabComponent: state => {
+        return state.currentTab
+    }
 
 }
 
