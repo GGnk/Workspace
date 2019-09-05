@@ -5,6 +5,7 @@ let getters = {
     get_chat: state => {
         return state.chat
     },
+
     send_chat: state => {
         return state.send
     },
@@ -17,6 +18,7 @@ let getters = {
     get_user_list: state => {
       return state.users_list
     },
+
     loader_request: state => {
         return state.loaderRequest
     },
@@ -28,7 +30,11 @@ let getters = {
     },
     currentTabComponent: state => {
         return state.currentTab
+    },
+    show_or_notshow: state => {
+        return state.showChat
     }
+
 
 }
 

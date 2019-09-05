@@ -7,7 +7,7 @@
             <li>Добавить</li>
             <li>Удалить</li>
         </ul>
-        <ul class="control-manager" style="overflow-y: auto;height: 80vh;">
+        <ul class="control-manager" style="overflow-y: auto;height: calc(100vh - 155px)">
             <li class="dir-setting">
 
                 <div class="control">

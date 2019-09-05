@@ -16,7 +16,19 @@ let state = {
     loaderRequest: false,
     loaderError: false,
     currentTab: 'chats',
-    tabss: ['chats', 'file_manager']
+    showChat: 'notshow',
+    tabss: [
+        {
+            icon: 'fa fa-users',
+            name: 'chats',
+            title: 'Чат'
+        }, 
+        {
+            icon: 'fa fa-folder-open',
+            name: 'file_manager',
+            title: 'Файловый менеджер'
+        }
+    ]
 
 }
 export default state

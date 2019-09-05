@@ -16,7 +16,7 @@ let mutations = {
         state.users = e.data.users
         state.auth_user = e.data.auth_user
         state.users_list = e.data.users_list
-        state.chat = {}
+
     },
     GET_CHAT (state, e) {
         let index = state.threads.chats.findIndex(el => el.id === e.data.chat.id);
@@ -24,9 +24,10 @@ let mutations = {
 
         state.chat = e.data.chat
         state.send.id = e.data.chat.id
+        state.send.subject = e.data.chat.subject
         state.users = e.data.users
 
-        state.currentTab = 'show'
+        state.showChat = 'show'
     },
     UPDATE_CHAT (state, chat) {
         state.send = chat

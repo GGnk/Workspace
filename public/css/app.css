@@ -9782,10 +9782,39 @@ body a {
   background-color: transparent;
 }
 body a:hover {
-  color: #212121;
+  color: #ffffff;
   text-decoration: underline;
 }
 
+.wrapper .loader-request {
+  position: absolute;
+  top: 1%;
+  right: 1%;
+}
+.wrapper .loader-error {
+  position: absolute;
+  top: 1%;
+  right: 1%;
+}
+.wrapper .loader-error i {
+  color: orange;
+  font-size: 33px;
+}
+.wrapper .overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 998;
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+}
+.wrapper .active {
+  display: block;
+  opacity: 1;
+}
 .wrapper .window-title {
   height: 60px;
   background-color: #212121;
@@ -9818,7 +9847,7 @@ body a:hover {
 .wrapper .window-title .title .navbar-nav {
   display: -webkit-box;
 }
-.wrapper .window-title .title .navbar-nav #sidebarCollapse {
+.wrapper .window-title .title .navbar-nav li #sidebarCollapse {
   position: relative;
   top: 10px;
 }
@@ -9829,6 +9858,43 @@ body a:hover {
   position: relative;
   left: 15px;
   width: 100%;
+}
+.wrapper .window-area #sidebar {
+  position: fixed;
+  top: 0;
+  left: -99%;
+  height: 100vh;
+  z-index: 999;
+  transition: all 0.3s;
+  background-color: #2a7984;
+}
+.wrapper .window-area #sidebar #dismiss {
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  background: #7386D5;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.wrapper .window-area #sidebar #dismiss:hover {
+  background: #fff;
+  color: #7386D5;
+}
+.wrapper .window-area .active {
+  left: 0 !important;
+}
+.wrapper .window-area .main-sidebar {
+  box-shadow: 9px 0px 18px 1px rgba(0, 0, 0, 0.5);
+  font-family: sans-serif;
+  font-size: 16px;
+}
+.wrapper .window-area .main-sidebar .badge {
+  white-space: pre-line;
+  word-break: break-word;
 }
 .wrapper .window-area .right-tabs {
   overflow: hidden;
@@ -9860,6 +9926,51 @@ body a:hover {
   box-shadow: inset -2px 1px 20px 0px rgba(0, 0, 0, 0.5);
   padding: 0;
 }
+.wrapper .window-area .right-tabs .conversation-list .menu-chats {
+  max-height: 50px;
+  padding: 15px;
+  background-color: #164b52;
+  -ms-box-shadow: 0 5px 10px 0 rgba(42, 121, 132, 0.51);
+  -o-box-shadow: 0 5px 10px 0 rgba(42, 121, 132, 0.51);
+  box-shadow: 0 5px 10px 0 rgba(42, 121, 132, 0.51);
+}
+.wrapper .window-area .right-tabs .conversation-list .menu-chats input[type=search] {
+  width: 50%;
+  position: absolute;
+  right: 22px;
+  top: 5px;
+  background-color: #164b52;
+  border: 1px solid #ced4da30;
+}
+.wrapper .window-area .right-tabs .conversation-list .list-users {
+  display: contents;
+  cursor: pointer;
+}
+.wrapper .window-area .right-tabs .conversation-list .list-users li {
+  height: 50px;
+  text-align: left;
+  position: relative;
+  padding: 10px;
+  border-bottom: 1px solid #d9d9da;
+}
+.wrapper .window-area .right-tabs .conversation-list .list-users li img {
+  width: 8%;
+  float: left;
+  border-radius: 18px;
+}
+.wrapper .window-area .right-tabs .conversation-list .list-users li:hover {
+  background-color: #e7e8ec;
+}
+.wrapper .window-area .right-tabs .conversation-list .list-users span {
+  position: relative;
+  top: 10px;
+  margin-left: 6px;
+  font-size: 14px;
+  font-family: cursive;
+}
+.wrapper .window-area .right-tabs .conversation-list .list-users input {
+  float: right;
+}
 .wrapper .window-area .right-tabs .conversation-list .online {
   color: #82cf85;
 }
@@ -9869,12 +9980,54 @@ body a:hover {
 .wrapper .window-area .right-tabs .conversation-list .offline {
   color: #f57e7d;
 }
+.wrapper .window-area .right-tabs .conversation-list .card::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: #F5F5F5;
+}
+.wrapper .window-area .right-tabs .conversation-list .card::-webkit-scrollbar {
+  width: 5px;
+  background-color: #2f2e32;
+}
+.wrapper .window-area .right-tabs .conversation-list .card::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #2a7984;
+}
+.wrapper .window-area .right-tabs .conversation-list ul::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: #37373a;
+}
+.wrapper .window-area .right-tabs .conversation-list ul::-webkit-scrollbar {
+  width: 5px;
+  background-color: #2f2e32;
+}
+.wrapper .window-area .right-tabs .conversation-list ul::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: white;
+}
 .wrapper .window-area .right-tabs .conversation-list ul {
-  height: 80vh;
+  height: calc(100vh - 100px);
   overflow-y: auto;
 }
 .wrapper .window-area .right-tabs .conversation-list ul li {
   position: relative;
+}
+.wrapper .window-area .right-tabs .conversation-list ul li .deleteChat {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: red;
+  text-align: center;
+  width: 25px;
+  height: 99%;
+  opacity: 0.1;
+  cursor: pointer;
+}
+.wrapper .window-area .right-tabs .conversation-list ul li .deleteChat:hover {
+  opacity: 0.5;
 }
 .wrapper .window-area .right-tabs .conversation-list ul li a {
   padding: 15px;

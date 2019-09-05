@@ -27,7 +27,7 @@
 
                     </div>
 
-                    <div class="card bg-sohbet border-0 m-0 p-0" style="height: 65vh;">
+                    <div class="card bg-sohbet border-0 m-0 p-0" style="height: calc(100vh - 225px);">
                         <div id="sohbet" class="card border-0 m-0 p-0 position-relative bg-transparent" style="overflow-y: auto; height: 100vh;">
 
                             <div v-for="message in get_chat.messages" v-if="message.body" :class="message.user_id === auth_u.id ? 'balon1':'balon2'"
@@ -58,7 +58,6 @@
                         </div>
 
                     </div>
-
                 </div>
             </div>
         </div>
@@ -72,8 +71,8 @@
         name: "ShowComponent",
         props: [],
         computed: {
-            ...mapGetters(['send_chat', 'get_chat', 'auth_u']),
-
+            ...mapGetters(['send_chat', 'get_chat', 'groupUsers', 'auth_u']),
+            
             chat: {
                 get () {
                     return this.send_chat
