@@ -18,13 +18,15 @@ Route::get('logout', 'Auth\LoginController@logout')->name('auth.logout');
 });*/
 Route::get('/admin', ['uses' => 'HomeController@index', 'as' => 'index']);
 Route::post('/obmen', ['uses' => 'FileManagerController@index', 'as' => 'index']);
-Route::group(['middleware' => ['auth'],'prefix' => 'dialog', 'as' => 'dialog.'], function () {
+
+Route::group(['middleware' =>  ['auth'],'prefix' => 'dialog', 'as' => 'dialog.'], function () {
     Route::get('/', ['uses' => 'DialogController@index', 'as' => 'index']);
     Route::post('all', [ 'uses' => 'DialogController@fetchAll','as' => 'all']);
-    Route::post('/store', ['uses' => 'DialogController@store','as' => 'store']);
+    Route::post('store', ['uses' => 'DialogController@store','as' => 'store']);
     Route::post('show', ['uses' => 'DialogController@show','as' => 'show']);
-    Route::post('/update', ['uses' => 'DialogController@update','as' => 'update']);
-    Route::post('/delete', ['uses' => 'DialogController@deleteChat','as' => 'delete']);
+    Route::post('update', ['uses' => 'DialogController@update','as' => 'update']);
+    Route::post('delete', ['uses' => 'DialogController@deleteChat','as' => 'delete']);
+
 });
 
 Auth::routes();

@@ -25,6 +25,12 @@ let actions = {
 
     },
     async SEND_MESSAGE({commit, state}) {
+        /*console.log($('meta[name="csrf-token"]').attr('content'))
+        let config = {
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        }*/
         if (state.send.message) {
             commit("LOADER_INFO", "NULL")
             await axios.post('/dialog/update', state.send)

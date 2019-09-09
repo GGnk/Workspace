@@ -36,6 +36,6 @@ class ChatCreated implements ShouldBroadcast
     }
 
     public function broadcastAs(){
-        return 'server';
+        return 'server2';
     }
 }

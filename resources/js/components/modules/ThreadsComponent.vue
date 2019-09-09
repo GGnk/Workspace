@@ -108,9 +108,18 @@
         },
         mounted(){
             this.$store.dispatch("ALL_CHATS")
+
+            window.Echo.channel('Chat_created')
+                .listen(".server", e => {
+                    this.$store.commit('LISTEN_CHAT_CREATE', e)
+                })
+            window.Echo.channel('Chat_removed')
+                .listen(".server", e => {
+                    this.$store.commit('CHAT_REMOVE', e)
+                })
         },
         methods: {
-            ...mapActions(["OPEN_CHAT", "CREATE_CHAT", "ALL_CHATS"])
+            ...mapActions(["OPEN_CHAT", "CREATE_CHAT"])
         }
     }
 </script>

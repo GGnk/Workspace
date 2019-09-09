@@ -3,7 +3,9 @@ let state = {
         chats: [],
         newThreadsCount:''
     },
+    // Users - delete
     users:{},
+
     auth_user:{},
     users_list:{},
     chat: {},
@@ -28,7 +30,11 @@ let state = {
             name: 'file_manager',
             title: 'Файловый менеджер'
         }
-    ]
+    ],
+
+    isWriting: false,
+    setTimer: false
+
 
 }
 export default state

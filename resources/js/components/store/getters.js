@@ -33,6 +33,9 @@ let getters = {
     },
     show_or_notshow: state => {
         return state.showChat
+    },
+    user_write: state => {
+        return {write: state.isWriting, time: state.setTimer}
     }
 
 

@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use App\Events\ChatCreated;
 use App\Events\Chats;
 use App\Events\ChatRemoved;
+
 use App\User;
+use App\Dialog as Chat;
 use Carbon\Carbon;
 
-use Illuminate\Database\Eloquent\Builder;
 use Cmgmyr\Messenger\Models\Message;
 use Cmgmyr\Messenger\Models\Participant;
 use Cmgmyr\Messenger\Models\Thread;
+
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 use Illuminate\Support\Facades\Auth;
@@ -34,38 +36,19 @@ class DialogController extends Controller
     /**
      * All threads in which the user has a relationship.
      *
-     * @param Thread $thread
+     * @param Chat $chats
      * @return mixed
      */
-    public function fetchAll(Thread $thread) {
+    public function fetchAll(Chat $chats) {
         $auth_user = Auth::user();
 
         // Выгружаем всех пользотелей для списка
-        $users = User::where('id','!=',$auth_user->id)->get();
-        $users_list = User::all();
+        $users_list = User::all()->take(5);
 
         // Все потоки, в которых участвует пользователь c отношениями
-        $req_threads = $thread->forUser($auth_user->id)->latest('updated_at')->get();
-        $threads = collect();
-        foreach ($req_threads as $thread) {
-            $count = collect($thread);
-            $count->put('latestMessage', $thread->latestMessage);
-            $count->put('creator', $thread->users()->oldest()->first());
-            $count->put('countPeople', $thread->participantsUserIds());
-            $count->put('interlocutor', $thread->participantsString($auth_user->id));
-            $count->put('UnreadMessagesCount',$thread->userUnreadMessagesCount($auth_user->id));
-            $arr[] = $count;
-            $threads['chats'] = $arr;
-        }
-        $threads['newThreadsCount'] = $auth_user->newThreadsCount();
+        $result = $chats->getAllChatsForUser($auth_user);
 
-        // Все потоки, игнорировать удаленных / архивированных участников
-        //$threads = Thread::getAllLatest()->get();
-
-        // Все потоки, в которых участвует пользователь, с новыми сообщениями
-        // $threads = Thread::forUserWithNewMessages(Auth::id())->latest('updated_at')->get();
-
-        return compact('threads','users', 'auth_user', 'users_list');
+        return compact('result', 'users_list', 'auth_user');
     }
 
     /**
@@ -139,7 +122,7 @@ class DialogController extends Controller
             $thread->addParticipant($input['recipients']);
         }
         $res = $this->show($thread->id);
-        broadcast(new Chats($res))->toOthers();
+        broadcast(new ChatCreated($res))->toOthers();
         return $res;
 
     }
@@ -181,7 +164,7 @@ class DialogController extends Controller
             $thread->addParticipant(Input::get('recipients'));
         }
         $res = $this->show(Input::get('id'));
-        broadcast(new Chats($res))->toOthers();
+        broadcast(new Chats($res));
         return ['error'=>'false', 'thread'=>$res];
     }
 

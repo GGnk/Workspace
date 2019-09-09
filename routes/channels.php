@@ -12,11 +12,13 @@ use Cmgmyr\Messenger\Models\Thread;
 */
 
 Broadcast::channel('Chat_created', function(){
-    return auth()->check();
+    return true;
 });
-Broadcast::channel('Chats', function(){
-     return auth()->check();
+Broadcast::channel('chat.{thread_id}', function($user, $thread_id){
+    /*$thread = Thread::findOrFail($thread_id);
+    return $thread->hasParticipant($user.id);*/
+    return true;
 });
 Broadcast::channel('Chat_removed', function(Thread $thread){
-    return $thread->hasParticipant(auth()->id());
+    return true;
 });

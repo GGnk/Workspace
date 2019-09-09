@@ -4,7 +4,7 @@
     'name' => 'Laravel',
     'env' => 'local',
     'debug' => true,
-    'url' => 'http://livechat/',
+    'url' => 'http://192.168.2.59:8000/',
     'asset_url' => NULL,
     'timezone' => 'UTC',
     'locale' => 'en',
@@ -315,6 +315,97 @@
       ),
     ),
   ),
+  'debugbar' => 
+  array (
+    'enabled' => NULL,
+    'except' => 
+    array (
+      0 => 'telescope*',
+    ),
+    'storage' => 
+    array (
+      'enabled' => true,
+      'driver' => 'file',
+      'path' => '/var/www/livechat/html/storage/debugbar',
+      'connection' => NULL,
+      'provider' => '',
+    ),
+    'include_vendors' => true,
+    'capture_ajax' => true,
+    'add_ajax_timing' => false,
+    'error_handler' => false,
+    'clockwork' => false,
+    'collectors' => 
+    array (
+      'phpinfo' => true,
+      'messages' => true,
+      'time' => true,
+      'memory' => true,
+      'exceptions' => true,
+      'log' => true,
+      'db' => true,
+      'views' => true,
+      'route' => true,
+      'auth' => false,
+      'gate' => true,
+      'session' => true,
+      'symfony_request' => true,
+      'mail' => true,
+      'laravel' => false,
+      'events' => false,
+      'default_request' => false,
+      'logs' => false,
+      'files' => false,
+      'config' => false,
+      'cache' => false,
+      'models' => false,
+    ),
+    'options' => 
+    array (
+      'auth' => 
+      array (
+        'show_name' => true,
+      ),
+      'db' => 
+      array (
+        'with_params' => true,
+        'backtrace' => true,
+        'timeline' => false,
+        'explain' => 
+        array (
+          'enabled' => false,
+          'types' => 
+          array (
+            0 => 'SELECT',
+          ),
+        ),
+        'hints' => true,
+      ),
+      'mail' => 
+      array (
+        'full_log' => false,
+      ),
+      'views' => 
+      array (
+        'data' => false,
+      ),
+      'route' => 
+      array (
+        'label' => true,
+      ),
+      'logs' => 
+      array (
+        'file' => NULL,
+      ),
+      'cache' => 
+      array (
+        'values' => true,
+      ),
+    ),
+    'inject' => true,
+    'route_prefix' => '_debugbar',
+    'route_domain' => NULL,
+  ),
   'filesystems' => 
   array (
     'default' => 'local',
@@ -330,7 +421,7 @@
       array (
         'driver' => 'local',
         'root' => '/var/www/livechat/html/storage/app/public',
-        'url' => 'http://livechat//storage',
+        'url' => 'http://192.168.2.59:8000//storage',
         'visibility' => 'public',
       ),
       'obmen' => 
@@ -600,7 +691,7 @@
     'driver' => 'file',
     'lifetime' => '120',
     'expire_on_close' => false,
-    'expired-session-redirect' => 'http://livechat/',
+    'expired-session-redirect' => 'http://192.168.2.59:8000/',
     'encrypt' => false,
     'files' => '/var/www/livechat/html/storage/framework/sessions',
     'connection' => NULL,

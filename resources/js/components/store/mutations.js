@@ -11,9 +11,8 @@ let mutations = {
         }
     },
     GET_ALL_CHATS (state, e) {
-        state.threads = e.data.threads
-        state.threads.chats = e.data.threads.chats? e.data.threads.chats: []
-        state.users = e.data.users
+        state.threads = e.data.result
+        state.threads.chats = e.data.result.chats? e.data.result.chats: []
         state.auth_user = e.data.auth_user
         state.users_list = e.data.users_list
 
@@ -84,6 +83,12 @@ let mutations = {
      */
     CURRENT_TAB (state, data) {
         state.currentTab = data
+    },
+    USER_WRITE(state, data) {
+        state.isWriting = data
+    },
+    SET_TIMER(state, data) {
+        state.setTimer = data
     }
 
 }

@@ -36,6 +36,6 @@ class ChatRemoved implements ShouldBroadcast
     }
 
     public function broadcastAs(){
-        return 'server';
+        return 'server3';
     }
 }

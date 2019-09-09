@@ -14,7 +14,7 @@
             </div>
             <div class="title">
                 <ul class="nav navbar-nav">
-                    <li><a href="#" @click="fetchAllChats">Главная <span class="label label-danger" v-if="info_chats.newThreadsCount"> {{info_chats.newThreadsCount}}</span></a></li>
+                    <li><a href="#" >Главная <span class="label label-danger" v-if="info_chats.newThreadsCount"> {{info_chats.newThreadsCount}}</span></a></li>
                     <li>
                         <button type="button" id="sidebarCollapse" class="btn btn-light">
                             <i class="fa fa-align-left"></i>
@@ -67,27 +67,13 @@
         name: "Wrapper",
         props: [],
         computed: {
-            ...mapGetters(['info_chats', 'send_chat', 'auth_u', 'loader_request', 'loader_error', 'list_tabs', 'currentTabComponent']),
+            ...mapGetters(['info_chats', 'send_chat',
+             'auth_u', 'loader_request', 'loader_error',
+              'list_tabs', 'currentTabComponent', 'user_write']),
 
 
         },
         mounted() {
-            this.fetchAllChats()
-
-            window.Echo.channel('Chats')
-                .listen(".server", e => {
-                    this.$store.commit('LISTEN_CHAT_UPDATE', e)
-                })
-            window.Echo.channel('Chat_created')
-                .listen(".server", e => {
-                    this.$store.commit('LISTEN_CHAT_CREATE', e)
-                })
-            window.Echo.channel('Chat_removed')
-                .listen(".server", e => {
-                    this.$store.commit('CHAT_REMOVE', e)
-                })
-
-
 
         },
 
@@ -97,11 +83,8 @@
             // }
         },
         methods: {
-            fetchAllChats() {
-                this.$store.dispatch("ALL_CHATS")
-            },
 
-            ...mapMutations(["DIR_OR_CHAT", "CURRENT_TAB"]),
+            ...mapMutations(["DIR_OR_CHAT", "CURRENT_TAB", "USER_WRITE", "SET_TIMER"]),
 
         }
     }

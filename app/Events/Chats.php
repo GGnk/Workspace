@@ -36,7 +36,7 @@ class Chats implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('Chats');
+        return new PresenceChannel('chat.'.$this->chat['chat']->id);
     }
 
     public function broadcastAs(){
