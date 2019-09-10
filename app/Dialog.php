@@ -8,7 +8,7 @@ use Cmgmyr\Messenger\Models\Thread;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Collection;
 class Dialog extends Model
 {
 
@@ -29,8 +29,8 @@ class Dialog extends Model
         $threads = collect();
         foreach ($req_threads as $thread) {
             $count = collect($thread);
-            $count->put('latestMessage', $thread->latestMessage);
-            $count->put('creator', $thread->users()->oldest()->first());
+            $count->put('latestMessage', $thread->latestMessag);
+            $count->put('creator', $thread->creator());
             $count->put('countPeople', $thread->participantsUserIds());
             $count->put('interlocutor', $thread->participantsString($user->id));
             $count->put('UnreadMessagesCount',$thread->userUnreadMessagesCount($user->id));
