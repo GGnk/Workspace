@@ -7,12 +7,10 @@ use App\Events\Chats;
 use App\Events\ChatRemoved;
 
 use App\User;
-use App\Dialog as Chat;
-use Carbon\Carbon;
 
-use Cmgmyr\Messenger\Models\Message;
-use Cmgmyr\Messenger\Models\Participant;
-use Cmgmyr\Messenger\Models\Thread;
+use App\Traits\Dialog;
+
+use Carbon\Carbon;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -22,7 +20,8 @@ use Illuminate\Support\Facades\Session;
 
 class DialogController extends Controller
 {
-    public $chat;
+    use Dialog;
+
     public function __construct()
     {
 
@@ -36,17 +35,16 @@ class DialogController extends Controller
     /**
      * All threads in which the user has a relationship.
      *
-     * @param Chat $chats
      * @return mixed
      */
-    public function fetchAll(Chat $chats) {
+    public function fetchAll() {
         $auth_user = Auth::user();
 
         // Выгружаем всех пользотелей для списка
         $users_list = User::all()->take(5);
 
         // Все потоки, в которых участвует пользователь c отношениями
-        $result = $chats->getAllChatsForUser($auth_user);
+        $result = $this->getAllChatsForUser($auth_user);
 
         return compact('result', 'users_list', 'auth_user');
     }
