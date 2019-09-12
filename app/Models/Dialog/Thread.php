@@ -2,69 +2,37 @@
 
 namespace App\Models\Dialog;
 
+use App\Traits\Dialog;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Collection;
+use App\User;
 
 class Thread extends Model
 {
     use SoftDeletes;
+    use Dialog;
 
     protected $fillable = [
         'subject'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
 
     ];
 
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
     protected $dates = ['deleted_at'];
 
     /**
-     * Internal cache for creator.
-     *
-     * @var null|User|Model
-     */
-    protected $creatorCache;
-
-    /**
-     * Messages relationship.
-     *
-     * @return HasMany
-     *
-     */
-    public function messages()
-    {
-        return $this->hasMany(Message::class, 'thread_id', 'id');
-    }
-
-    /**
-     * Returns the latest message from a thread.
-     *
-     * @return Eloquent|HasMany|object
-     */
-    public function getLatestMessageAttribute()
-    {
-        return $this->messages()->latest()->first();
-    }
-
-    /**
-     * Отношения участников.
+     * The relationship of users to the chat.
      *
      * @return HasMany
      *
@@ -75,11 +43,10 @@ class Thread extends Model
     }
 
     /**
-     * Отношения пользователя.
+     * The relationship of users to the chat.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsToMany
      *
-     * @codeCoverageIgnore
      */
     public function users()
     {
@@ -87,34 +54,32 @@ class Thread extends Model
     }
 
 
-    public function ForUser($userId, Builder $query)
-    {
-        $participantsTable = (new Participant)->getTable();
-        $threadsTable = $this->getTable();
-
-        return $query->join($participantsTable, $this->getQualifiedKeyName(), '=', $participantsTable . '.thread_id')
-            ->where($participantsTable . '.user_id', $userId)
-            ->whereNull($participantsTable . '.deleted_at')
-            ->select($threadsTable . '.*');
-    }
     /**
-     * Возвращает объект user, который создал поток.
+     * Returns the user object that created the chat.
      *
-     * @return null|User|Model
+     * @return BelongsTo
      */
     public function creator()
     {
-        if ($this->creatorCache === null) {
-            $firstMessage = $this->messages()->withTrashed()->oldest()->first();
-            $this->creatorCache = $firstMessage ? $firstMessage->user : User::class;
-        }
-
-        return $this->creatorCache;
+        return $this->belongsTo(User::class, 'user_id');
     }
 
+    /**
+     * Returns the latest message from a chat.
+     *
+     * @return object
+     */
+    public function getLatestMessageAttribute()
+    {
+        return $this->messages()->select('body', 'user_id')->latest()->first();
+    }
+
+    public function interlocutors($option) {
+        if($option == 1) return $this->users()->where('user_id', '!=', Auth::id())->first();
+    }
 
     /**
-     * Возвращает массив идентификаторов пользователей, связанных с потоком.
+     * Returns an array of user IDs associated with the chat.
      *
      * @param null|int $userId
      *
@@ -134,13 +99,13 @@ class Thread extends Model
     }
 
     /**
-     * Находит запись участника по идентификатору пользователя.
+     * Finds a member record by user ID.
      *
      * @param $userId
      *
      * @return mixed
      *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     * @throws ModelNotFoundException
      */
     public function getParticipantFromUser($userId)
     {
@@ -148,11 +113,11 @@ class Thread extends Model
     }
 
     /**
-     * Возвращает массив непрочитанных сообщений в потоке для данного пользователя.
+     * Returns an array of unread messages in the stream for this user.
      *
      * @param int $userId
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function userUnreadMessages($userId)
     {
@@ -174,7 +139,7 @@ class Thread extends Model
     }
 
     /**
-     * Возвращает количество непрочитанных сообщений в потоке для данного пользователя.
+     * Returns the number of unread messages in the stream for this user.
      *
      * @param int $userId
      *

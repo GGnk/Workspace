@@ -50559,7 +50559,7 @@ var render = function() {
                         _c("i", {
                           staticClass: "fa",
                           class:
-                            thread.countPeople.length > 2
+                            thread.countParticipants > 2
                               ? "fa-users"
                               : "fa-comments-o",
                           attrs: { "aria-hidden": "true" }
@@ -50567,12 +50567,12 @@ var render = function() {
                         _vm._v(
                           "\n                        " +
                             _vm._s(
-                              thread.countPeople.length > 2
+                              thread.countParticipants > 2
                                 ? thread.subject
                                 : thread.creator.id == _vm.auth_u.id &&
-                                  thread.countPeople.length == 1
+                                  thread.countParticipants == 1
                                 ? "Избранное"
-                                : thread.interlocutor
+                                : thread.interlocutor.name
                             ) +
                             "\n                    "
                         )

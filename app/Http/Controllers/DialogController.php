@@ -7,20 +7,17 @@ use App\Events\Chats;
 use App\Events\ChatRemoved;
 
 use App\User;
-
-use App\Traits\Dialog;
-
+use App\Models\Dialog;
 use Carbon\Carbon;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 
 class DialogController extends Controller
 {
-    use Dialog;
 
     public function __construct()
     {
@@ -35,16 +32,17 @@ class DialogController extends Controller
     /**
      * All threads in which the user has a relationship.
      *
+     * @param User $user
      * @return mixed
      */
-    public function fetchAll() {
+    public function fetchAll(User $user) {
         $auth_user = Auth::user();
 
         // Выгружаем всех пользотелей для списка
         $users_list = User::all()->take(5);
 
         // Все потоки, в которых участвует пользователь c отношениями
-        $result = $this->getAllChatsForUser($auth_user);
+        $result = $user->getAllChatsForUser($auth_user->id);
 
         return compact('result', 'users_list', 'auth_user');
     }
@@ -62,13 +60,7 @@ class DialogController extends Controller
         }
 
         try {
-            $chat = Thread::findOrFail($id);
-            $auth_user = Auth::user();
-            $chat['creator'] = $chat->users()->oldest()->first();
-            $chat['countPeople'] = $chat->participantsUserIds();
-            $chat['interlocutor'] = $chat->participantsString($auth_user->id);
-            $chat['UnreadMessagesCount'] = $chat->userUnreadMessagesCount($auth_user->id);
-            $chat['latestMessage'] = $chat->latestMessage;
+            $chat = Dialog\Thread::findOrFail($id);
             collect($chat->messages)->each(function ($item) {
                 $item->created = $item->created_at->diffForHumans();
                 return $item->user;
@@ -77,9 +69,8 @@ class DialogController extends Controller
             return 'The thread with ID: ' . $id . ' was not found';
         }
 
-        $users = User::whereIn('id', $chat->participantsUserIds())->get();
         $chat->markAsRead(Auth::id());
-        return compact("chat","users");
+        return compact("chat");
 
     }
 
@@ -101,7 +92,7 @@ class DialogController extends Controller
 
         // Message
         if ($input['message']) {
-            Message::create([
+            Dialog\Message::create([
                 'thread_id' => $thread->id,
                 'user_id' => Auth::id(),
                 'body' => $input['message'],
@@ -109,7 +100,7 @@ class DialogController extends Controller
         }
 
         // Sender
-        Participant::create([
+        Dialog\Participant::create([
             'thread_id' => $thread->id,
             'user_id' => Auth::id(),
             'last_read' => new Carbon,
@@ -134,7 +125,7 @@ class DialogController extends Controller
     public function update()
     {
         try {
-            $thread = Thread::findOrFail(Input::get('id'));
+            $thread = Dialog\Thread::findOrFail(Input::get('id'));
         } catch (ModelNotFoundException $e) {
 
             return 'The thread with ID: ' . Input::get('id') . ' was not found. '.$e;
@@ -143,14 +134,14 @@ class DialogController extends Controller
         $thread->activateAllParticipants();
 
         // Message
-        Message::create([
+        Dialog\Message::create([
             'thread_id' => $thread->id,
             'user_id' => Auth::id(),
             'body' => Input::get('message'),
         ]);
 
         // Add replier as a participant
-        $participant = Participant::firstOrCreate([
+        $participant = Dialog\Participant::firstOrCreate([
             'thread_id' => $thread->id,
             'user_id' => Auth::id(),
         ]);
@@ -173,7 +164,7 @@ class DialogController extends Controller
      */
     public function deleteChat() {
         try {
-            $chat = Thread::findOrFail(Input::get('idChat'));
+            $chat = Dialog\Thread::findOrFail(Input::get('idChat'));
         } catch (ModelNotFoundException $e) {
             return 'The thread with ID: ' . Input::get('idChat') . ' was not found. '.$e;
         }

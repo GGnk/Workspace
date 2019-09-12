@@ -3,8 +3,10 @@
 namespace App\Models\Dialog;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Participant extends Model
 {
+    use SoftDeletes;
     //
 }

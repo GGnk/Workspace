@@ -2,16 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="381a243a-1d9c-4d69-8a68-88a322d6b33a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Models/Dialog/Message.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Dialog/Participant.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/683cf5fd-a708-403c-ae55-1bf839a9d2a0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/683cf5fd-a708-403c-ae55-1bf839a9d2a0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Dialog.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Traits/Dialog.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DialogController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DialogController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Dialog/Message.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Dialog/Message.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Dialog/Participant.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Dialog/Participant.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Dialog/Thread.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Dialog/Thread.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Traits/Dialog.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Traits/Dialog.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/auth.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laravel-echo-server.lock" beforeDir="false" afterPath="$PROJECT_DIR$/laravel-echo-server.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/messenger.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/messenger.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/modules/ThreadsComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modules/ThreadsComponent.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -291,7 +296,7 @@
       <workItem from="1568181126689" duration="606000" />
       <workItem from="1568182864863" duration="265000" />
       <workItem from="1568191352154" duration="7156000" />
-      <workItem from="1568198528381" duration="2737000" />
+      <workItem from="1568198528381" duration="31750000" />
     </task>
     <task id="LOCAL-00001" summary="Обновление 0.0.2">
       <created>1563279931885</created>
@@ -468,7 +473,14 @@
       <option name="project" value="LOCAL" />
       <updated>1568038457741</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Обновление 0.0.2.27">
+      <created>1568201594684</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1568201594684</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -514,7 +526,8 @@
     <MESSAGE value="Обновление 0.0.2.24" />
     <MESSAGE value="Обновление 0.0.2.25" />
     <MESSAGE value="Обновление 0.0.2.26" />
-    <option name="LAST_COMMIT_MESSAGE" value="Обновление 0.0.2.26" />
+    <MESSAGE value="Обновление 0.0.2.27" />
+    <option name="LAST_COMMIT_MESSAGE" value="Обновление 0.0.2.27" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

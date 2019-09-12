@@ -2,10 +2,13 @@
 
 namespace App\Traits;
 
+use App\User;
 use App\Models\Dialog\Thread;
 use App\Models\Dialog\Participant;
 use App\Models\Dialog\Message;
 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Collection;
@@ -13,33 +16,40 @@ use Illuminate\Support\Collection;
 trait Dialog
 {
 
-    public $thread;
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
 
     /**
-     * Dialog constructor.
-     * @param Thread $thread
+     * Participants relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     *
+     * @codeCoverageIgnore
      */
-    public function bootDialog(Thread $thread)
+    public function participants()
     {
-        $this->thread = $thread;
+        return $this->hasMany(Participant::class);
     }
 
-    public function getAllChatsForUser($user) {
 
-        $req_threads = $this->thread->ForUser($user->id)->latest('updated_at')->get();
-        $threads = collect();
-        foreach ($req_threads as $thread) {
-            $count = collect($thread);
-            $count->put('latestMessage', $thread->latestMessage);
-            $count->put('creator', $thread->creator());
-            $count->put('countPeople', $thread->participantsUserIds());
-            /*$count->put('interlocutor', $thread->44($user->id));*/
-            $count->put('UnreadMessagesCount',$thread->userUnreadMessagesCount($user->id));
-            $arr[] = $count;
-            $threads['chats'] = $arr;
-        }
-        $threads['newThreadsCount'] = $user->newThreadsCount();
-
-        return $threads;
+    /**
+     * Thread relationship.
+     *
+     * @return BelongsToMany
+     *
+     * @codeCoverageIgnore
+     */
+    public function threads()
+    {
+        return $this->belongsToMany(
+            Thread::class,
+            Participant::class
+            /*'user_id',
+            'thread_id'*/
+        );
     }
+
+
 }

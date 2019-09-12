@@ -56,8 +56,8 @@
                     <a role="button" @click.prevent="OPEN_CHAT(thread.id)">
 
                         <span class="title">
-                            <i class="fa" :class="thread.countPeople.length>2?'fa-users':'fa-comments-o'" aria-hidden="true"></i>
-                            {{thread.countPeople.length>2? thread.subject : (thread.creator.id == auth_u.id && thread.countPeople.length == 1?'Избранное':thread.interlocutor) }}
+                            <i class="fa" :class="thread.countParticipants>2?'fa-users':'fa-comments-o'" aria-hidden="true"></i>
+                            {{thread.countParticipants>2? thread.subject : (thread.creator.id == auth_u.id && thread.countParticipants == 1?'Избранное':thread.interlocutor.name) }}
                         </span>
                         <span class="content">
                             <h4 class="badge" v-if="thread.latestMessage">{{thread.latestMessage.user_id == auth_u.id? 'Вы:': auth_u.name}}</h4> {{thread.latestMessage?thread.latestMessage.body: 'Чат пуст...'}}
