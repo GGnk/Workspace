@@ -1,6 +1,6 @@
 let getters = {
     info_chats: state => {
-      return state.threads
+        return state.threads
     },
     get_chat: state => {
         return state.chat
@@ -13,10 +13,10 @@ let getters = {
         return state.auth_user
     },
     get_users: state => {
-      return state.users
+        return state.users
     },
     get_user_list: state => {
-      return state.users_list
+        return state.users_list
     },
 
     loader_request: state => {

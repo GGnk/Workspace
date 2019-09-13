@@ -2,19 +2,21 @@
 
 namespace App\Models\Dialog;
 
-use App\Traits\Dialog;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\User;
+
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\Dialog;
+
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\App;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Collection;
-use App\User;
+
 
 class Thread extends Model
 {
@@ -22,7 +24,7 @@ class Thread extends Model
     use Dialog;
 
     protected $fillable = [
-        'subject'
+        'subject', 'user_id'
     ];
 
     protected $hidden = [
@@ -31,27 +33,6 @@ class Thread extends Model
 
     protected $dates = ['deleted_at'];
 
-    /**
-     * The relationship of users to the chat.
-     *
-     * @return HasMany
-     *
-     */
-    public function participants()
-    {
-        return $this->hasMany(Participant::class, 'thread_id', 'id');
-    }
-
-    /**
-     * The relationship of users to the chat.
-     *
-     * @return BelongsToMany
-     *
-     */
-    public function users()
-    {
-        return $this->belongsToMany(User::class, Participant::class, 'thread_id', 'user_id');
-    }
 
 
     /**
@@ -71,7 +52,7 @@ class Thread extends Model
      */
     public function getLatestMessageAttribute()
     {
-        return $this->messages()->select('body', 'user_id')->latest()->first();
+        return $this->messages()->with('user')->latest()->first();
     }
 
     public function interlocutors($option) {
@@ -148,6 +129,25 @@ class Thread extends Model
     public function userUnreadMessagesCount($userId)
     {
         return $this->userUnreadMessages($userId)->count();
+    }
+
+    /**
+     * Mark the chat as read for the user.
+     *
+     * @param int $userId
+     *
+     * @return ModelNotFoundException
+     * @throws
+     */
+    public function markAsRead($userId)
+    {
+        try {
+            $participant = $this->getParticipantFromUser($userId);
+            $participant->last_read = new Carbon();
+            $participant->save();
+        } catch (ModelNotFoundException $e) {
+            return $e;
+        }
     }
 
 }

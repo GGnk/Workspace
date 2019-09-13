@@ -9,6 +9,9 @@ class Message extends Model
 {
     use SoftDeletes;
 
+    protected $fillable = [
+        'thread_id', 'user_id', 'body',
+    ];
     /**
      * User relationship.
      *

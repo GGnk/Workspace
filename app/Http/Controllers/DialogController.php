@@ -9,7 +9,8 @@ use App\Events\ChatRemoved;
 use App\User;
 use App\Models\Dialog;
 use Carbon\Carbon;
-
+use Cmgmyr\Messenger\Models\Models;
+use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
@@ -60,10 +61,10 @@ class DialogController extends Controller
         }
 
         try {
-            $chat = Dialog\Thread::findOrFail($id);
-            collect($chat->messages)->each(function ($item) {
+            $chat = Dialog\Thread::select('id')->with('messages.user')->findOrFail($id);
+
+            collect($chat['messages'])->each(function ($item) {
                 $item->created = $item->created_at->diffForHumans();
-                return $item->user;
             });
         } catch (ModelNotFoundException $e) {
             return 'The thread with ID: ' . $id . ' was not found';
@@ -76,25 +77,27 @@ class DialogController extends Controller
 
 
     /**
-     * Creates a new thread.
+     * Creates a new chat.
      *
-     * @param Thread $thread
+     * @param Dialog\Thread $thread
      * @return mixed
-     * @throws \Exception
+     * @throws Exception
      */
-    public function store(Thread $thread)
+    public function store()
     {
         $input = Input::all();
+        $userId = Auth::id();
         //Todo: реализовать поиск чатов между 2 пользователями, и не создавать повторы
-        $thread = Thread::create([
+        $thread = Dialog\Thread::create([
             'subject' => $input['subject'],
+            'user_id' => $userId,
         ]);
 
         // Message
         if ($input['message']) {
             Dialog\Message::create([
                 'thread_id' => $thread->id,
-                'user_id' => Auth::id(),
+                'user_id' => $userId,
                 'body' => $input['message'],
             ]);
         }
@@ -102,7 +105,7 @@ class DialogController extends Controller
         // Sender
         Dialog\Participant::create([
             'thread_id' => $thread->id,
-            'user_id' => Auth::id(),
+            'user_id' => $userId,
             'last_read' => new Carbon,
         ]);
 
@@ -120,7 +123,7 @@ class DialogController extends Controller
      * Adds a new message to a current thread.
      *
      * @return mixed
-     * @throws \Exception
+     * @throws Exception
      */
     public function update()
     {
@@ -154,22 +157,26 @@ class DialogController extends Controller
         }
         $res = $this->show(Input::get('id'));
         broadcast(new Chats($res));
-        return ['error'=>'false', 'thread'=>$res];
+        return ['error'=>'false', 'update'=>$res];
     }
 
     /**
-     * Delete thread
+     * Remove a user from the chat.
      *
      * @return mixed
+     * @throws Exception
      */
     public function deleteChat() {
-        try {
-            $chat = Dialog\Thread::findOrFail(Input::get('idChat'));
-        } catch (ModelNotFoundException $e) {
-            return 'The thread with ID: ' . Input::get('idChat') . ' was not found. '.$e;
-        }
-        broadcast(new ChatRemoved($chat->id))->toOthers();
-        $chat->removeParticipant(Input::get('idUser'));
+        $del_id = Input::get('idChat');
 
+        try {
+            $chat = Dialog\Thread::findOrFail($del_id);
+            $chat->removeParticipant(Input::get('idUser'));
+        } catch (ModelNotFoundException $e) {
+            return 'The thread with ID: ' . $del_id . ' was not found. '.$e;
+        }
+
+        broadcast(new ChatRemoved($del_id))->toOthers();
+        return ['error'=>'false', 'delete_id'=>$del_id];
     }
 }

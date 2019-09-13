@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Notifications\Notifiable;
@@ -47,9 +48,8 @@ class User extends Authenticatable {
     /**
      * Message relationship.
      *
-     * @param User $req_user
      * @param $id
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      *
      * @codeCoverageIgnore
      */
@@ -57,7 +57,16 @@ class User extends Authenticatable {
     public function getAllChatsForUser($id) {
         $res = $this->findOrFail($id);
 
-        $req_threads = $res->threads()->with('creator')->get();
+        $req_threads = $res->threads()
+            //Todo: Выгрузка последний не прочитанный сообщений выше всех остальных
+            ->where(function($qwery) {
+                $qwery->where((new Dialog\Thread())->getTable() . '.updated_at',
+                    '>',
+                    (new Dialog\Participant)->getTable() . '.last_read');
+            })
+            ->wherePivot('deleted_at', null)
+            ->with('creator')
+            ->get();
 
         $threads = collect();
         foreach ($req_threads as $thread) {

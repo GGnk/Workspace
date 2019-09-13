@@ -2219,7 +2219,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ShowComponent",
   props: [],
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['send_chat', 'get_chat', 'groupUsers', 'auth_u', 'user_write']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['send_chat', 'get_chat', 'auth_u', 'user_write']), {
     chat: {
       get: function get() {
         return this.send_chat;
@@ -2572,7 +2572,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       _this.$store.commit('CHAT_REMOVE', e);
     });
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapActions"])(["OPEN_CHAT", "CREATE_CHAT"]))
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapActions"])(["OPEN_CHAT", "CREATE_CHAT", "DELETE_CHAT"]))
 });
 
 /***/ }),
@@ -49768,8 +49768,8 @@ var render = function() {
                     {
                       name: "show",
                       rawName: "v-show",
-                      value: _vm.get_chat.countPeople.length < 3,
-                      expression: "get_chat.countPeople.length<3"
+                      value: _vm.get_chat.countParticipants < 3,
+                      expression: "get_chat.countParticipants<3"
                     }
                   ],
                   staticClass: "rounded float-left",
@@ -49787,7 +49787,7 @@ var render = function() {
                     _vm._v(
                       "  " +
                         _vm._s(
-                          _vm.get_chat.countPeople.length < 3
+                          _vm.get_chat.countParticipants < 3
                             ? _vm.get_chat.creator.name
                             : _vm.get_chat.subject
                         ) +
@@ -50386,6 +50386,7 @@ var render = function() {
                                       }
                                     ],
                                     staticClass: "form-control",
+                                    staticStyle: { background: "white" },
                                     attrs: {
                                       type: "text",
                                       name: "subject",
@@ -50569,8 +50570,8 @@ var render = function() {
                             _vm._s(
                               thread.countParticipants > 2
                                 ? thread.subject
-                                : thread.creator.id == _vm.auth_u.id &&
-                                  thread.countParticipants == 1
+                                : thread.creator.id === _vm.auth_u.id &&
+                                  thread.countParticipants === 1
                                 ? "Избранное"
                                 : thread.interlocutor.name
                             ) +
@@ -50578,28 +50579,28 @@ var render = function() {
                         )
                       ]),
                       _vm._v(" "),
-                      _c("span", { staticClass: "content" }, [
-                        thread.latestMessage
-                          ? _c("h4", { staticClass: "badge" }, [
+                      thread.latestMessage
+                        ? _c("span", { staticClass: "content" }, [
+                            _c("h4", { staticClass: "badge" }, [
                               _vm._v(
                                 _vm._s(
-                                  thread.latestMessage.user_id == _vm.auth_u.id
+                                  thread.latestMessage.user_id === _vm.auth_u.id
                                     ? "Вы:"
-                                    : _vm.auth_u.name
+                                    : thread.latestMessage.user.name
                                 )
                               )
-                            ])
-                          : _vm._e(),
-                        _vm._v(
-                          " " +
-                            _vm._s(
-                              thread.latestMessage
-                                ? thread.latestMessage.body
-                                : "Чат пуст..."
-                            ) +
-                            "\n                    "
-                        )
-                      ]),
+                            ]),
+                            _vm._v(
+                              " " +
+                                _vm._s(
+                                  thread.latestMessage
+                                    ? thread.latestMessage.body
+                                    : "Чат пуст..."
+                                ) +
+                                "\n                    "
+                            )
+                          ])
+                        : _vm._e(),
                       _vm._v(" "),
                       thread.UnreadMessagesCount
                         ? _c(
@@ -64665,7 +64666,7 @@ var actions = {
                 idChat: idChat,
                 idUser: idUser
               }).then(function (e) {
-                console.log('Получили от сервера ' + e.data);
+                console.log('Получили от сервера ' + e.data.delete_id);
                 commit("CHAT_REMOVE", idChat);
                 commit("LOADER_INFO", "NULL");
               })["catch"](function (err) {
@@ -64909,31 +64910,30 @@ var mutations = {
       return el.id === e.data.chat.id;
     });
     state.threads.chats[index].UnreadMessagesCount = 0;
-    state.chat = e.data.chat;
+    state.chat = state.threads.chats[index];
+    state.chat.messages = e.data.chat.messages;
     state.send.id = e.data.chat.id;
-    state.send.subject = e.data.chat.subject;
-    state.users = e.data.users;
+    state.send.subject = state.chat.subject;
     state.showChat = 'show';
   },
   UPDATE_CHAT: function UPDATE_CHAT(state, chat) {
     state.send = chat;
   },
   SEND_CHAT: function SEND_CHAT(state, message) {
-    state.chat = message.data.thread.chat;
+    state.chat.messages = message.data.update.chat.messages;
     var index = state.threads.chats.findIndex(function (el) {
-      return el.id === message.data.thread.chat.id;
+      return el.id === message.data.update.chat.id;
     });
-    state.threads.chats.splice(index, 1);
-    state.threads.chats.unshift(message.data.thread.chat);
+    state.threads.chats[index].latestMessage = message.data.update.chat.messages[message.data.update.chat.messages.length - 1];
     state.send.message = '';
     if (true) console.log(message.statusText);
   },
   CHAT_REMOVE: function CHAT_REMOVE(state, id) {
-    console.log('Отправили id в мутатор: ' + id.chat);
+    console.log('Отправили id в мутатор: ' + id);
     state.threads.chats.splice(state.threads.chats.findIndex(function (el) {
-      return el.id === id.chat;
+      return el.id === id;
     }), 1);
-    if (true) console.log("Чат с id:" + id.chat + " был удален!");
+    if (true) console.log("Чат с id:" + id + " был удален!");
   },
   CREATE_CHAT: function CREATE_CHAT(state, chat) {
     state.threads.chats.unshift(chat);
@@ -64970,10 +64970,6 @@ var mutations = {
     //
     // if (process.env.NODE_ENV !== 'production') console.log("Чат с id:" + e.data.chat.id + " был удален!")
   },
-
-  /**
-   * @return {string}
-   */
   CURRENT_TAB: function CURRENT_TAB(state, data) {
     state.currentTab = data;
   },

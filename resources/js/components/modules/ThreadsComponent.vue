@@ -22,7 +22,7 @@
                                     <!-- Subject Form Input -->
                                     <div class="form-group row">
                                         <div class="col-sm-9 col-12" v-show="chat.recipients.length > 1">
-                                            <input type="text" class="form-control" name="subject" placeholder="Тема"
+                                            <input type="text" style="background: white" class="form-control" name="subject" placeholder="Тема"
                                                    v-model="chat.subject">
                                         </div>
                                         <!-- Submit Form Input -->
@@ -35,7 +35,7 @@
                                                     <li>
                                                         <img :src="user.img"/>
                                                         <span v-text="user.name"></span>
-                                                        <input v-model="chat.recipients" :value="user.id" type="checkbox">
+                                                        <input v-model="chat.recipients" :value="user.id"  type="checkbox">
                                                     </li>
                                                 </label>
 
@@ -57,10 +57,10 @@
 
                         <span class="title">
                             <i class="fa" :class="thread.countParticipants>2?'fa-users':'fa-comments-o'" aria-hidden="true"></i>
-                            {{thread.countParticipants>2? thread.subject : (thread.creator.id == auth_u.id && thread.countParticipants == 1?'Избранное':thread.interlocutor.name) }}
+                            {{thread.countParticipants>2? thread.subject : (thread.creator.id === auth_u.id && thread.countParticipants === 1?'Избранное':thread.interlocutor.name) }}
                         </span>
-                        <span class="content">
-                            <h4 class="badge" v-if="thread.latestMessage">{{thread.latestMessage.user_id == auth_u.id? 'Вы:': auth_u.name}}</h4> {{thread.latestMessage?thread.latestMessage.body: 'Чат пуст...'}}
+                        <span class="content" v-if="thread.latestMessage">
+                            <h4 class="badge">{{thread.latestMessage.user_id === auth_u.id? 'Вы:': thread.latestMessage.user.name}}</h4> {{thread.latestMessage ? thread.latestMessage.body: 'Чат пуст...'}}
                         </span>
                         <span class="label label-danger" style="float: right;" v-if="thread.UnreadMessagesCount">{{thread.UnreadMessagesCount}}</span>
 
@@ -119,7 +119,7 @@
                 })
         },
         methods: {
-            ...mapActions(["OPEN_CHAT", "CREATE_CHAT"])
+            ...mapActions(["OPEN_CHAT", "CREATE_CHAT", "DELETE_CHAT"])
         }
     }
 </script>

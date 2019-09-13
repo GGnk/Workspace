@@ -8,5 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Participant extends Model
 {
     use SoftDeletes;
-    //
+
+    protected $fillable = [
+        'thread_id', 'user_id', 'last_read'
+    ];
 }

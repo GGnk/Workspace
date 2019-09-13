@@ -5,9 +5,9 @@
 
                     <div class="card-header p-1 border border-top-0 border-left-0 border-right-0" >
 
-                        <img class="rounded float-left" style="width: 50px; height: 50px;" v-show="get_chat.countPeople.length<3" :src="get_chat.creator.img"/>
+                        <img class="rounded float-left" style="width: 50px; height: 50px;" v-show="get_chat.countParticipants<3" :src="get_chat.creator.img"/>
 
-                        <h6 class="float-left" style="margin: 0px 0px 0px 10px;">  {{get_chat.countPeople.length<3 ? get_chat.creator.name : get_chat.subject}}
+                        <h6 class="float-left" style="margin: 0px 0px 0px 10px;">  {{get_chat.countParticipants<3 ? get_chat.creator.name : get_chat.subject}}
                             <br/>
                             <small> Должность </small>
                         </h6>
@@ -75,8 +75,8 @@
         name: "ShowComponent",
         props: [],
         computed: {
-            ...mapGetters(['send_chat', 'get_chat', 'groupUsers', 'auth_u', 'user_write']),
-            
+            ...mapGetters(['send_chat', 'get_chat',  'auth_u', 'user_write']),
+
             chat: {
                 get () {
                     return this.send_chat
@@ -120,7 +120,7 @@
             },
 
             ...mapActions(["SEND_MESSAGE"]),
-            
+
 
         }
     }

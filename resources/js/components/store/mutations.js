@@ -21,10 +21,10 @@ let mutations = {
         let index = state.threads.chats.findIndex(el => el.id === e.data.chat.id);
         state.threads.chats[index].UnreadMessagesCount = 0
 
-        state.chat = e.data.chat
+        state.chat = state.threads.chats[index]
+        state.chat.messages = e.data.chat.messages
         state.send.id = e.data.chat.id
-        state.send.subject = e.data.chat.subject
-        state.users = e.data.users
+        state.send.subject = state.chat.subject
 
         state.showChat = 'show'
     },
@@ -32,18 +32,17 @@ let mutations = {
         state.send = chat
     },
     SEND_CHAT (state, message) {
-        state.chat = message.data.thread.chat
-        let index = state.threads.chats.findIndex(el => el.id === message.data.thread.chat.id);
-        state.threads.chats.splice(index, 1)
-        state.threads.chats.unshift(message.data.thread.chat)
+        state.chat.messages = message.data.update.chat.messages
+        let index = state.threads.chats.findIndex(el => el.id === message.data.update.chat.id);
+        state.threads.chats[index].latestMessage = message.data.update.chat.messages[message.data.update.chat.messages.length - 1]
         state.send.message = ''
         if (process.env.NODE_ENV !== 'production') console.log(message.statusText)
     },
     CHAT_REMOVE (state, id) {
-        console.log('Отправили id в мутатор: '+ id.chat)
-        state.threads.chats.splice(state.threads.chats.findIndex(el => el.id === id.chat), 1)
+        console.log('Отправили id в мутатор: '+ id)
+        state.threads.chats.splice(state.threads.chats.findIndex(el => el.id === id), 1)
 
-        if (process.env.NODE_ENV !== 'production') console.log("Чат с id:" + id.chat + " был удален!")
+        if (process.env.NODE_ENV !== 'production') console.log("Чат с id:" + id + " был удален!")
     },
     CREATE_CHAT (state, chat) {
         state.threads.chats.unshift(chat)
@@ -78,9 +77,7 @@ let mutations = {
         //
         // if (process.env.NODE_ENV !== 'production') console.log("Чат с id:" + e.data.chat.id + " был удален!")
     },
-    /**
-     * @return {string}
-     */
+
     CURRENT_TAB (state, data) {
         state.currentTab = data
     },

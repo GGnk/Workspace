@@ -25,12 +25,6 @@ let actions = {
 
     },
     async SEND_MESSAGE({commit, state}) {
-        /*console.log($('meta[name="csrf-token"]').attr('content'))
-        let config = {
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        }*/
         if (state.send.message) {
             commit("LOADER_INFO", "NULL")
             await axios.post('/dialog/update', state.send)
@@ -64,7 +58,7 @@ let actions = {
         let idUser = state.auth_user.id
         await axios.post('/dialog/delete', {idChat, idUser})
             .then((e) => {
-                console.log('Получили от сервера '+ e.data)
+                console.log('Получили от сервера '+ e.data.delete_id)
                 commit("CHAT_REMOVE", idChat)
                 commit("LOADER_INFO", "NULL")
             })
