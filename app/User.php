@@ -48,6 +48,7 @@ class User extends Authenticatable {
     /**
      * Message relationship.
      *
+     * @param Builder $query
      * @param $id
      * @return HasMany
      *
@@ -56,17 +57,21 @@ class User extends Authenticatable {
 
     public function getAllChatsForUser($id) {
         $res = $this->findOrFail($id);
-
+        $participantTable = (new Dialog\Participant())->getTable();
+        $threadsTable = (new Dialog\Thread())->getTable();
         $req_threads = $res->threads()
+
             //Todo: Выгрузка последний не прочитанный сообщений выше всех остальных
-            ->where(function($qwery) {
-                $qwery->where((new Dialog\Thread())->getTable() . '.updated_at',
-                    '>',
-                    (new Dialog\Participant)->getTable() . '.last_read');
+            ->where(function ($query) use ($participantTable, $threadsTable) {
+                $query->where($threadsTable . '.updated_at', '>',  $participantTable . '.last_read')
+                    ->orWhereNull($participantTable . '.last_read');
             })
             ->wherePivot('deleted_at', null)
+
             ->with('creator')
+            ->latest('updated_at')
             ->get();
+
 
         $threads = collect();
         foreach ($req_threads as $thread) {

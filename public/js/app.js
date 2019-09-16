@@ -50579,9 +50579,9 @@ var render = function() {
                         )
                       ]),
                       _vm._v(" "),
-                      thread.latestMessage
-                        ? _c("span", { staticClass: "content" }, [
-                            _c("h4", { staticClass: "badge" }, [
+                      _c("span", { staticClass: "content" }, [
+                        thread.latestMessage
+                          ? _c("h4", { staticClass: "badge" }, [
                               _vm._v(
                                 _vm._s(
                                   thread.latestMessage.user_id === _vm.auth_u.id
@@ -50589,18 +50589,18 @@ var render = function() {
                                     : thread.latestMessage.user.name
                                 )
                               )
-                            ]),
-                            _vm._v(
-                              " " +
-                                _vm._s(
-                                  thread.latestMessage
-                                    ? thread.latestMessage.body
-                                    : "Чат пуст..."
-                                ) +
-                                "\n                    "
-                            )
-                          ])
-                        : _vm._e(),
+                            ])
+                          : _vm._e(),
+                        _vm._v(
+                          " " +
+                            _vm._s(
+                              thread.latestMessage
+                                ? thread.latestMessage.body
+                                : "Чат пуст..."
+                            ) +
+                            "\n                    "
+                        )
+                      ]),
                       _vm._v(" "),
                       thread.UnreadMessagesCount
                         ? _c(

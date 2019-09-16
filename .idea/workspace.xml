@@ -3,19 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="381a243a-1d9c-4d69-8a68-88a322d6b33a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DialogController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DialogController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Dialog/Message.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Dialog/Message.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Dialog/Participant.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Dialog/Participant.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Dialog/Thread.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Dialog/Thread.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Traits/Dialog.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Traits/Dialog.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/modules/ShowComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modules/ShowComponent.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/modules/ThreadsComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modules/ThreadsComponent.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/store/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/store/actions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/store/getters.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/store/getters.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/store/mutations.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/store/mutations.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -204,6 +195,7 @@
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1568180178441" />
@@ -214,7 +206,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="ts.external.directory.path" value="D:\inst\IntelliJ IDEA 2018.3.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+    <property name="ts.external.directory.path" value="D:\inst\IntelliJ IDEA 2019.2.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -295,7 +287,8 @@
       <workItem from="1568181126689" duration="606000" />
       <workItem from="1568182864863" duration="265000" />
       <workItem from="1568191352154" duration="7156000" />
-      <workItem from="1568198528381" duration="56328000" />
+      <workItem from="1568198528381" duration="56384000" />
+      <workItem from="1568608621373" duration="13244000" />
     </task>
     <task id="LOCAL-00001" summary="Обновление 0.0.2">
       <created>1563279931885</created>
@@ -486,7 +479,14 @@
       <option name="project" value="LOCAL" />
       <updated>1568293450908</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Обновление 0.0.2.29">
+      <created>1568377721258</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1568377721258</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -508,7 +508,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Обновление 0.0.2.1" />
     <MESSAGE value="Обновление 0.0.2.2" />
     <MESSAGE value="Обновление 0.0.2.3 (vue.js)" />
     <MESSAGE value="Обновление 0.0.2.4 (vue.js)" />
@@ -533,7 +532,8 @@
     <MESSAGE value="Обновление 0.0.2.26" />
     <MESSAGE value="Обновление 0.0.2.27" />
     <MESSAGE value="Обновление 0.0.2.28" />
-    <option name="LAST_COMMIT_MESSAGE" value="Обновление 0.0.2.28" />
+    <MESSAGE value="Обновление 0.0.2.29" />
+    <option name="LAST_COMMIT_MESSAGE" value="Обновление 0.0.2.29" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

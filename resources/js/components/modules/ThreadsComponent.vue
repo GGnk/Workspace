@@ -59,8 +59,8 @@
                             <i class="fa" :class="thread.countParticipants>2?'fa-users':'fa-comments-o'" aria-hidden="true"></i>
                             {{thread.countParticipants>2? thread.subject : (thread.creator.id === auth_u.id && thread.countParticipants === 1?'Избранное':thread.interlocutor.name) }}
                         </span>
-                        <span class="content" v-if="thread.latestMessage">
-                            <h4 class="badge">{{thread.latestMessage.user_id === auth_u.id? 'Вы:': thread.latestMessage.user.name}}</h4> {{thread.latestMessage ? thread.latestMessage.body: 'Чат пуст...'}}
+                        <span class="content">
+                            <h4 v-if="thread.latestMessage" class="badge">{{thread.latestMessage.user_id === auth_u.id? 'Вы:': thread.latestMessage.user.name}}</h4> {{thread.latestMessage ? thread.latestMessage.body: 'Чат пуст...'}}
                         </span>
                         <span class="label label-danger" style="float: right;" v-if="thread.UnreadMessagesCount">{{thread.UnreadMessagesCount}}</span>
 
