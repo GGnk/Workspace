@@ -22,3 +22,13 @@ Broadcast::channel('chat.{thread_id}', function($user, $thread_id){
 Broadcast::channel('Chat_removed', function(Thread $thread){
     return true;
 });
+
+Broadcast::channel('newTask', function(){
+    return true;
+});
+Broadcast::channel('taskUpdated', function(){
+    return true;
+});
+Broadcast::channel('taskRemoved', function(){
+    return true;
+});

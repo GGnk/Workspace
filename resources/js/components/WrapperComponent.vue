@@ -49,10 +49,10 @@
     // import { mixin } from '../modal/alerts.js'
 
     import chats from '../components/modules/ThreadsComponent'
-    
+
     import file_manager from '../components/modules/FileManagerComponent'
     import sidebar from '../components/modules/SideBarComponent'
-
+    import mapRGD from '../components/modules/MapComponent'
     import {mapGetters} from 'vuex'
     import {mapActions} from 'vuex'
     import {mapMutations} from 'vuex'
@@ -62,7 +62,8 @@
         components: {
             chats,
             file_manager,
-            sidebar
+            sidebar,
+            mapRGD
         },
         name: "Wrapper",
         props: [],

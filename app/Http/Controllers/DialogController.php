@@ -43,7 +43,7 @@ class DialogController extends Controller
         $users_list = User::all()->take(5);
 
         // Все потоки, в которых участвует пользователь c отношениями
-        $result = $user->getAllChatsForUser($auth_user->id);
+        $result = $user->getAllChatsForUser($auth_user);
 
         return compact('result', 'users_list', 'auth_user');
     }

@@ -27,6 +27,9 @@ Route::group(['middleware' =>  ['auth'],'prefix' => 'dialog', 'as' => 'dialog.']
     Route::post('update', ['uses' => 'DialogController@update','as' => 'update']);
     Route::post('delete', ['uses' => 'DialogController@deleteChat','as' => 'delete']);
 
+    Route::resource('tasks', 'TaskController', [
+        'except' => ['create', 'edit', 'show']
+    ]);
 });
 
 Auth::routes();

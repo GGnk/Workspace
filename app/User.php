@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Dialog;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Traits\Dialog as TrDialog;
+use phpDocumentor\Reflection\Types\This;
 
 class User extends Authenticatable {
     use TrDialog;
@@ -48,44 +49,39 @@ class User extends Authenticatable {
     /**
      * Message relationship.
      *
-     * @param Builder $query
-     * @param $id
+     * @param User $user
      * @return HasMany
      *
-     * @codeCoverageIgnore
      */
 
-    public function getAllChatsForUser($id) {
-        $res = $this->findOrFail($id);
-        $participantTable = (new Dialog\Participant())->getTable();
-        $threadsTable = (new Dialog\Thread())->getTable();
-        $req_threads = $res->threads()
+    public function getAllChatsForUser(User $user) {
+        $participantTable = (new Dialog\Participant)->getTable();
+        $threadsTable = (new Dialog\Thread)->getTable();
 
-            //Todo: Выгрузка последний не прочитанный сообщений выше всех остальных
-            ->where(function ($query) use ($participantTable, $threadsTable) {
-                $query->where($threadsTable . '.updated_at', '>',  $participantTable . '.last_read')
-                    ->orWhereNull($participantTable . '.last_read');
-            })
+        $res = $user->threads()
+
             ->wherePivot('deleted_at', null)
-
             ->with('creator')
-            ->latest('updated_at')
+
+
+            ->latest($participantTable .'.updated_at')
             ->get();
 
+        $req_threads = collect($res);
 
-        $threads = collect();
-        foreach ($req_threads as $thread) {
-            $count = collect($thread);
-            $count->put('latestMessage', $thread->latestMessage);
-            $count->put('countParticipants', count($thread->participantsUserIds()));
-            $count->put('interlocutor', $thread->interlocutors($thread->option_thread));
-            $count->put('UnreadMessagesCount',$thread->userUnreadMessagesCount($id));
-            $arr[] = $count;
-            $threads['chats'] = $arr;
-        }
-        $threads['newThreadsCount'] = $this->newThreadsCount();
+        $req_threads->each(function($thread) use ($user) {
+            $thread['latestMessage'] = $thread->latestMessage;
+            $thread['countParticipants'] = count($thread->participantsUserIds());
+            $thread['interlocutor'] = $thread->interlocutors($thread->option_thread);
+            $thread['UnreadMessagesCount'] = $thread->userUnreadMessagesCount($user->id);
+        })
+        ->sortBy('updated_at');
 
-        return $threads;
+        $res_chats['chats'] = $req_threads;
+
+        $res_chats['newThreadsCount'] = $this->newThreadsCount();
+
+        return $res_chats;
     }
 
 

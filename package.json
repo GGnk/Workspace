@@ -25,6 +25,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "2gis-maps": "^3.5.12",
         "admin-lte": "^2.4.17",
         "laravel-echo": "^1.5.4",
         "laravel-echo-server": "^1.5.5",
