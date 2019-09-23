@@ -1,7 +1,7 @@
 <template>
-    <div class="row">
-        <tasks class="col-6"></tasks>
-        <div id="mapRGD" class="col-6" style="height: calc(100vh - 11em);"></div>
+    <div class="col-12">
+        <tasks class="col-12 col-sm-3"></tasks>
+        <div id="mapRGD" class="col-12 col-sm-9" style="height: calc(100vh - 11em);"></div>
         Координаты маркера: {{map_cursor}}
     </div>
 </template>

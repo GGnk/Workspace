@@ -2,29 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="381a243a-1d9c-4d69-8a68-88a322d6b33a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Events/TaskCreated.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Events/TaskRemoved.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Events/TaskUpdated.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Task.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/modules/MapComponent.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/modules/TasksComponent.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/store/modules/maps.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/store/modules/tasks.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DialogController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DialogController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/WrapperComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/WrapperComponent.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/store/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/store/state.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/store/state.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/channels.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/channels.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/modules/MapComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modules/MapComponent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/modules/TasksComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modules/TasksComponent.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -309,7 +292,7 @@
       <workItem from="1568191352154" duration="7156000" />
       <workItem from="1568198528381" duration="56384000" />
       <workItem from="1568608621373" duration="17018000" />
-      <workItem from="1568698473535" duration="41613000" />
+      <workItem from="1568698473535" duration="47766000" />
     </task>
     <task id="LOCAL-00001" summary="Обновление 0.0.2">
       <created>1563279931885</created>
@@ -514,7 +497,14 @@
       <option name="project" value="LOCAL" />
       <updated>1568637868275</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Обновление 0.0.2.31">
+      <created>1569088268619</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1569088268619</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -537,7 +527,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Обновление 0.0.2.3 (vue.js)" />
     <MESSAGE value="Обновление 0.0.2.4 (vue.js)" />
     <MESSAGE value="Обновление 0.0.2.5 (vue.js)" />
     <MESSAGE value="Обновление 0.0.2.6 (vue.js, not run)" />
@@ -562,7 +551,8 @@
     <MESSAGE value="Обновление 0.0.2.28" />
     <MESSAGE value="Обновление 0.0.2.29" />
     <MESSAGE value="Обновление 0.0.2.30" />
-    <option name="LAST_COMMIT_MESSAGE" value="Обновление 0.0.2.30" />
+    <MESSAGE value="Обновление 0.0.2.31" />
+    <option name="LAST_COMMIT_MESSAGE" value="Обновление 0.0.2.31" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

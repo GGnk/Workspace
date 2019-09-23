@@ -3,9 +3,9 @@
         <ul class="todo-list1">
             <li v-for="(task, index) in sortedArray"
                 :key="task.id"
-                class="todo col-3">
+                class="todo col-12">
 
-                <div class="view row">
+                <div class="view" style="display: grid;">
                     <div class="taskT" data-toggle="modal" :data-target="'#ModalCenter'+task.id" data-backdrop="static" data-keyboard="false">
                         <i class="fa "  :class="task.completed ? 'fa-check' : 'fa-minus'" :style="!task.completed ? 'color: red' : ''"></i>
                         {{ task.title }}
@@ -16,7 +16,7 @@
                                              text-decoration-skip-ink: none;
                                              color: tomato;font-weight: bold;
                                              cursor: help;">{{task.status}}</div>
-                    <div class="col-4">
+                    <div class="col-12">
 
                         <span>{{task.users?task.users.name.replace(/(\S)\S* (\S+) (\S)\S*/, "$2 $3.$1.") :'Нет данных'}}</span>
 
@@ -133,9 +133,36 @@
         box-shadow: 0 2px 4px 0 rgba(15,15,15,.15);
         display: inline-flex;
         height: 70px;
-        word-break: break-word;
         overflow: hidden;
-        padding: 5px;
-        margin-left: 5px;
+        padding: 5px 3px 3px 10px;
+        font-size: 11px;
+        margin: 5px;
+        width:96%;
+    }
+    .taskT {
+        overflow: hidden;
+        height: 15px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .todo-list1::-webkit-scrollbar-track
+    {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0);
+        border-radius: 10px;
+        background-color: #f1f1f1;
+    }
+
+    .todo-list1::-webkit-scrollbar
+    {
+        width: 5px;
+        background-color: #2f2e32;
+    }
+
+    .todo-list1::-webkit-scrollbar-thumb
+    {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+        background-color: #b8db81;
+
     }
 </style>

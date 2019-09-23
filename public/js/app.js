@@ -9564,7 +9564,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.todo-list1[data-v-6fcc8142] {\n    height: calc(100vh - 8.2em);\n    background: #f1f1f1;\n    overflow-y: auto;\n    overflow-x: hidden;\n}\n.todo-list1 li[data-v-6fcc8142] {\n    background: #fff;\n    color: #000;\n    border: 1px solid rgba(15,15,15,.1);\n    border-radius: 5px;\n    box-shadow: 0 2px 4px 0 rgba(15,15,15,.15);\n    display: inline-flex;\n    height: 70px;\n    word-break: break-word;\n    overflow: hidden;\n    padding: 5px;\n    margin-left: 5px;\n}\n", ""]);
+exports.push([module.i, "\n.todo-list1[data-v-6fcc8142] {\n    height: calc(100vh - 8.2em);\n    background: #f1f1f1;\n    overflow-y: auto;\n    overflow-x: hidden;\n}\n.todo-list1 li[data-v-6fcc8142] {\n    background: #fff;\n    color: #000;\n    border: 1px solid rgba(15,15,15,.1);\n    border-radius: 5px;\n    box-shadow: 0 2px 4px 0 rgba(15,15,15,.15);\n    display: inline-flex;\n    height: 70px;\n    overflow: hidden;\n    padding: 5px 3px 3px 10px;\n    font-size: 11px;\n    margin: 5px;\n    width:96%;\n}\n.taskT[data-v-6fcc8142] {\n    overflow: hidden;\n    height: 15px;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n}\n.todo-list1[data-v-6fcc8142]::-webkit-scrollbar-track\n{\n    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0);\n    border-radius: 10px;\n    background-color: #f1f1f1;\n}\n.todo-list1[data-v-6fcc8142]::-webkit-scrollbar\n{\n    width: 5px;\n    background-color: #2f2e32;\n}\n.todo-list1[data-v-6fcc8142]::-webkit-scrollbar-thumb\n{\n    border-radius: 10px;\n    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);\n    background-color: #b8db81;\n}\n", ""]);
 
 // exports
 
@@ -49949,12 +49949,12 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "row" },
+    { staticClass: "col-12" },
     [
-      _c("tasks", { staticClass: "col-6" }),
+      _c("tasks", { staticClass: "col-12 col-sm-3" }),
       _vm._v(" "),
       _c("div", {
-        staticClass: "col-6",
+        staticClass: "col-12 col-sm-9",
         staticStyle: { height: "calc(100vh - 11em)" },
         attrs: { id: "mapRGD" }
       }),
@@ -50616,8 +50616,8 @@ var render = function() {
       "ul",
       { staticClass: "todo-list1" },
       _vm._l(_vm.sortedArray, function(task, index) {
-        return _c("li", { key: task.id, staticClass: "todo col-3" }, [
-          _c("div", { staticClass: "view row" }, [
+        return _c("li", { key: task.id, staticClass: "todo col-12" }, [
+          _c("div", { staticClass: "view", staticStyle: { display: "grid" } }, [
             _c(
               "div",
               {
@@ -50657,7 +50657,7 @@ var render = function() {
               [_vm._v(_vm._s(task.status))]
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "col-4" }, [
+            _c("div", { staticClass: "col-12" }, [
               _c("span", [
                 _vm._v(
                   _vm._s(
