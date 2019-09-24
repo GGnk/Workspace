@@ -21,4 +21,8 @@ class Task extends Model
     {
         return $this->belongsTo(User::class, 'user_create');
     }
+    public function dep()
+    {
+        return $this->belongsTo(Dep::class, 'deps_id');
+    }
 }

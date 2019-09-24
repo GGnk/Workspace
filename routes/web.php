@@ -27,6 +27,9 @@ Route::group(['middleware' =>  ['auth'],'prefix' => 'dialog', 'as' => 'dialog.']
     Route::post('update', ['uses' => 'DialogController@update','as' => 'update']);
     Route::post('delete', ['uses' => 'DialogController@deleteChat','as' => 'delete']);
 
+    Route::resource('deps', 'DepController', [
+        'except' => ['create', 'edit', 'show']
+    ]);
     Route::resource('tasks', 'TaskController', [
         'except' => ['create', 'edit', 'show']
     ]);
@@ -34,4 +37,4 @@ Route::group(['middleware' =>  ['auth'],'prefix' => 'dialog', 'as' => 'dialog.']
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+

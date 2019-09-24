@@ -33,7 +33,7 @@
 
         },
         mounted() {
-            this.$store.commit('MOUNT_MAP')
+            this.$store.dispatch('LOAD_MAP')
         },
         methods: {
 

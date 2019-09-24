@@ -1,20 +1,20 @@
 let actions = {
-    /*async LOAD_DIRECTORY({commit}, payload) {
+    async LOAD_MAP ({commit}) {
         commit("LOADER_INFO", "NULL")
-        await axios.post('/obmen', {'dir': payload.next})
+        await axios.get('/dialog/deps')
             .then((info) => {
-                commit('LOAD_DIRECTORY', {info, 'prev': payload.prev})
+                commit('MOUNT_MAP', info.data)
                 commit("LOADER_INFO","NULL")
             })
             .catch((err) => {
                 commit("LOADER_INFO", 'ERROR')
                 console.log(err)
             })
-    },*/
+    },
 }
 
 let mutations = {
-    MOUNT_MAP (state, payload) {
+    MOUNT_MAP (state, deps) {
         // Иницилизация карты
         state.markers.mapM = DG.map('mapRGD', {
             center: [51.519700, 45.994682],
@@ -23,9 +23,23 @@ let mutations = {
         // Создание группы маркеров
         let groupKey = DG.featureGroup()
 
+        state.markers.data = deps
         // Добавляем маркера в группу
         state.markers.data.forEach(function (item) {
-            DG.marker(item.location).addTo(groupKey).bindPopup(item.name).openPopup();
+            let html =
+                '<div>' +
+                '   <h1>'+item.name+'</h1>' +
+                '   <p>' +
+                '       <span>'+item.lat+'</span>' +
+                '       <span>'+item.lon+'</span>' +
+                '   </p>' +
+                '</div>'
+
+            DG.marker([item.lat, item.lon]).addTo(groupKey).bindPopup(html, {
+                maxHeight: 555,
+                maxWidth: 350,
+                minWidth: 320
+            }).openPopup();
         })
 
         //  Отправляем на карту
@@ -41,7 +55,7 @@ let mutations = {
         // Движущий маркер
         let marker = DG.marker([51.519582, 45.993898], {
             draggable: true
-        }).addTo(state.markers.mapM).bindPopup('Меня можно передвигать! Внизу пишутся координаты.');
+        }).addTo(state.markers.mapM).bindPopup('<b style="color:blue;">HTML-код</b>');
         marker.on('drag', function(e) {
             let lat = e.target._latlng.lat.toFixed(6),
                 lng = e.target._latlng.lng.toFixed(6)
@@ -69,7 +83,7 @@ let state = {
         polyline: [[51.519616, 45.994858],[51.519559, 45.994386],[51.519619, 45.994064],
             [51.519656, 45.993828], [51.519692, 45.993624], [51.519566, 45.993469],
             [51.519392, 45.993351], [51.519345, 45.993131], [51.519485, 45.992707]],
-        data: [
+        data: [/*
             {name: 'Администарция', location: [51.519485, 45.992707]},
             {name: 'Терапия', location: [51.519048, 45.993855]},
             {name: 'Поликлиника', location: [51.520313, 45.992417]},
@@ -81,7 +95,7 @@ let state = {
             {name: 'Скорая', location: [51.520594, 45.993201]},
             {name: 'Аптека', location: [51.520206, 45.993437]},
             {name: 'Стоматология', location: [51.519699, 45.992171]},
-        ]
+        */]
 
     }
 }

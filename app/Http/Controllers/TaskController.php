@@ -16,7 +16,7 @@ class TaskController extends Controller
 {
     public function index()
     {
-        $task = Task::with('users')->latest()->get();
+        $task = Task::with('users', 'dep')->latest()->get();
         return $task;
     }
     /**

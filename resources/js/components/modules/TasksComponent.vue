@@ -121,16 +121,16 @@
 <style scoped>
     .todo-list1 {
         height: calc(100vh - 8.2em);
-        background: #f1f1f1;
+        background: #2f2e32;
         overflow-y: auto;
         overflow-x: hidden;
     }
     .todo-list1 li {
         background: #fff;
         color: #000;
-        border: 1px solid rgba(15,15,15,.1);
+        border: 1px solid rgb(255, 255, 255);
         border-radius: 5px;
-        box-shadow: 0 2px 4px 0 rgba(15,15,15,.15);
+        box-shadow: 0 2px 4px 0 rgb(234, 234, 234);
         display: inline-flex;
         height: 70px;
         overflow: hidden;
