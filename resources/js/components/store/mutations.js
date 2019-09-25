@@ -11,6 +11,7 @@ let mutations = {
         }
     },
     GET_ALL_CHATS (state, e) {
+        console.log(e)
         state.threads = e.data.result
         state.threads.chats = e.data.result.chats? e.data.result.chats: []
         state.auth_user = e.data.auth_user
@@ -32,6 +33,7 @@ let mutations = {
         state.send = chat
     },
     SEND_CHAT (state, message) {
+
         state.chat.messages = message.data.update.chat.messages
         let index = state.threads.chats.findIndex(el => el.id === message.data.update.chat.id);
         state.threads.chats[index].latestMessage = message.data.update.chat.messages[message.data.update.chat.messages.length - 1]

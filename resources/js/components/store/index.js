@@ -4,10 +4,12 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex);
 
+
 import actions from './actions'
 import mutations from './mutations'
 import getters from './getters'
 import state from "./state"
+
 import fileManager from "./modules/file-manager"
 import maps from "./modules/maps";
 import tasks from "./modules/tasks";

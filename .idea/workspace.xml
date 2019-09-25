@@ -2,28 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="381a243a-1d9c-4d69-8a68-88a322d6b33a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/DepController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Dep.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/vendor/@mdi/materialdesignicons-webfont.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/vendor/@mdi/materialdesignicons-webfont.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/vendor/@mdi/materialdesignicons-webfont.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/vendor/@mdi/materialdesignicons-webfont.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/modules/HomeComponent.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/683cf5fd-a708-403c-ae55-1bf839a9d2a0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/683cf5fd-a708-403c-ae55-1bf839a9d2a0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fonts/vendor/material-design-icons-icondist/MaterialIcons-Regular.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fonts/vendor/material-design-icons-icondist/MaterialIcons-Regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fonts/vendor/material-design-icons-icondist/MaterialIcons-Regular.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fonts/vendor/material-design-icons-icondist/MaterialIcons-Regular.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/modules/Widget.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/modules/pages/Dashboard.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/store/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Task.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Task.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laravel-echo-server.lock" beforeDir="false" afterPath="$PROJECT_DIR$/laravel-echo-server.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/modules/MapComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modules/MapComponent.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/modules/TasksComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modules/TasksComponent.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/store/modules/maps.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/store/modules/maps.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/modules/HomeComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modules/HomeComponent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/store/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/store/mutations.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/store/mutations.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.scss" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -295,7 +293,7 @@
       <workItem from="1568198528381" duration="56384000" />
       <workItem from="1568608621373" duration="17018000" />
       <workItem from="1568698473535" duration="58238000" />
-      <workItem from="1569326563732" duration="3316000" />
+      <workItem from="1569326563732" duration="31548000" />
     </task>
     <task id="LOCAL-00001" summary="Обновление 0.0.2">
       <created>1563279931885</created>
@@ -514,7 +512,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569241778123</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Обновление 0.0.2.33">
+      <created>1569330019591</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1569330019591</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -537,7 +542,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Обновление 0.0.2.5 (vue.js)" />
     <MESSAGE value="Обновление 0.0.2.6 (vue.js, not run)" />
     <MESSAGE value="Обновление 0.0.2.7 (vue.js, run)" />
     <MESSAGE value="Обновление 0.0.2.8 (vue.js)" />
@@ -562,7 +566,8 @@
     <MESSAGE value="Обновление 0.0.2.30" />
     <MESSAGE value="Обновление 0.0.2.31" />
     <MESSAGE value="Обновление 0.0.2.32" />
-    <option name="LAST_COMMIT_MESSAGE" value="Обновление 0.0.2.32" />
+    <MESSAGE value="Обновление 0.0.2.33" />
+    <option name="LAST_COMMIT_MESSAGE" value="Обновление 0.0.2.33" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
