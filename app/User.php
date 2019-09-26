@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Task;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -45,6 +46,10 @@ class User extends Authenticatable {
         'email_verified_at' => 'datetime',
     ];
 
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'users_id');
+    }
 
     /**
      * Message relationship.

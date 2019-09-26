@@ -3,7 +3,7 @@
         <v-col>
             <v-card class="mb-2" max-width="400">
                 <widget icon="domain"
-                        :title="todos.length+(todos.length == 0?' задач!':(todos.length == 1?' задача!':' задачи!'))"
+                        :title="sortedArray.length+(sortedArray.length >= 0?' задач!':(sortedArray.length == 1?' задача!':' задачи!'))"
                         :subTitle="day+' '+date+''+ord+' '+year"
                         supTitle="День чудес"
                         color="#00b297"/>
@@ -11,25 +11,33 @@
                 <v-list two-line subheader>
                     <v-container>
                         <v-flex xs12>
-                            <v-text-field clearable v-model="newTodo" id="newTodo" name="newTodo" label="Начни что то делать..." @keyup.enter="addTodo">
+                            <v-text-field clearable v-model="newTodo" id="newTodo" name="newTodo" :label="sortedArray.length > 0 ?'Еще пару задач?':'Начни что то делать...'" @keyup.enter="addTodo">
                             </v-text-field>
                         </v-flex>
                     </v-container>
-                    <v-subheader class="subheading" v-if="todos.length === 0">У тебя 0 задач, добавь...</v-subheader>
-                    <v-subheader class="subheading" v-else="todos.length == 1">Твои задачи: </v-subheader>
-                    <div v-for="(todo, i) in todos">
+                    <v-subheader class="subheading">Задачи:
+                        <div class="mx-2">
+                            <v-select
+                                :items="usersItem"
+                                label="Пользователя"
+                                width="120"
+                                height="48"
+                            ></v-select>
+                        </div>
+                    </v-subheader>
+                    <div v-for="(todo, i) in sortedArray" v-if="!todo.completed && todo.users_id == 1">
                         <v-list-item>
                             <v-list-item-action>
-                                <v-checkbox v-model="todo.done"></v-checkbox>
+                                <v-checkbox v-model="todo.completed"></v-checkbox>
                             </v-list-item-action>
                             <v-list-item-content>
                                 <v-list-item-title :class="{
-      done: todo.done
-      }" class="title">{{todo.title | capitalize}}
+                                    done: todo.completed
+                                    }" class="title">{{todo.title}}
                                 </v-list-item-title>
-                                <v-list-item-subtitle>Создана: {{date}}{{ord}} {{day}} {{year}}</v-list-item-subtitle>
+                                <v-list-item-subtitle>Создана: {{todo.created_at}}</v-list-item-subtitle>
                             </v-list-item-content>
-                            <v-btn icon ripple color="red"  v-if="todo.done" @click="removeTodo(i)">
+                            <v-btn icon ripple color="red"  v-if="todo.completed" @click="removeTodo(i)">
                                 <v-icon class="white--text opacity-1">close</v-icon>
                             </v-btn>
                         </v-list-item>
@@ -38,30 +46,69 @@
             </v-card>
         </v-col>
         <v-col>
-            <v-card class="mb-2" max-width="450">
-                <v-card-text>
-                    <div>Word of the Day</div>
-                    <p class="display-1 text--primary">
-                        be•nev•o•lent
-                    </p>
-                    <p>adjective</p>
-                    <div class="text--primary">
-                        well meaning and kindly.<br>
-                        "a benevolent smile"
-                    </div>
-                </v-card-text>
-                <v-card-actions>
-                    <v-btn
-                        text
-                        color="deep-purple accent-4"
-                    >
-                        Прочитать
-                    </v-btn>
-                </v-card-actions>
-            </v-card>
+            <v-expansion-panels popout style="min-width:333px; max-width:450px" >
+                <v-expansion-panel
+                    v-for="(message, i) in messages"
+                    :key="i"
+                    hide-actions
+                    style="max-width:inherit"
+                >
+                    <v-expansion-panel-header>
+                        <v-row
+                            align="center"
+                            class="spacer"
+                            no-gutters
+                        >
+                            <v-col
+                                cols="2"
+                                sm="3"
+                                md="2"
+                            >
+                                <v-avatar
+                                    size="36px"
+                                >
+                                    <img
+                                        v-if="message.avatar"
+                                        alt="Avatar"
+                                        src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
+                                    >
+                                    <v-icon
+                                        v-else
+                                        :color="message.color"
+                                        v-text="message.icon"
+                                    ></v-icon>
+                                </v-avatar>
+                            </v-col>
+
+                            <v-col
+                                class="text-no-wrap"
+                                cols="9"
+                                sm="11"
+                                md="9"
+                            >
+                                <v-chip
+                                    :color="`${message.color} lighten-4`"
+                                    class="ml-0"
+                                    label
+                                    small
+                                >
+                                    <strong v-html="message.title"></strong>
+                                </v-chip>
+
+                            </v-col>
+
+                        </v-row>
+                    </v-expansion-panel-header>
+
+                    <v-expansion-panel-content>
+                        <v-divider></v-divider>
+                        <v-card-text v-text="lorem"></v-card-text>
+                    </v-expansion-panel-content>
+                </v-expansion-panel>
+            </v-expansion-panels>
         </v-col>
         <v-col>
-            <v-card class="mb-2 timeline" max-width="450">
+            <v-card class="mb-2 timeline" max-width="390">
                 <v-card
                     dark
                     flat>
@@ -180,6 +227,7 @@
 
 <script>
     import widget from '../Widget'
+    import {mapGetters} from 'vuex'
     export default {
         name: "Dashboard",
         components: {
@@ -187,7 +235,7 @@
         },
         data: () => ({
             avatarIcon: 'https://avataaars.io/',
-
+            usersItem: ['dsd', 'dsds'],
             show: true,
             newTodo: '',
             todo: [],
@@ -196,7 +244,37 @@
             date: 'Wednesday ',
             ord: 'dddd',
             year: '2019',
+            messages: [
+                {
+                    avatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
+                    name: 'John Leider',
+                    title: 'Welcome to Vuetify.js!',
+                    color: 'red',
+                },
+                {
+                    color: 'red',
+                    icon: 'people',
+                    name: 'Social',
+                    title: 'Twitter',
+                },
+                {
+                    color: 'teal',
+                    icon: 'local_offer',
+                    name: 'Promos',
+                    title: 'Shop your way',
+                },
+            ],
+            lorem: 'Lorem ipsum dolor sit amet, at aliquam vivendum vel, everti delicatissimi cu eos. Dico iuvaret debitis mel an, et cum zril menandri. Eum in consul legimus accusam. Ea dico abhorreant duo, quo illum minimum incorrupte no, nostro voluptaria sea eu. Suas eligendi ius at, at nemore equidem est. Sed in error hendrerit, in consul constituam cum.',
         }),
+        computed: {
+            ...mapGetters(['sortedArray','options', 'usersTasks']),
+        },
+        created() {
+            this.$store.dispatch('FETCH_DATA')
+        },
+        mounted() {
+        console.log(this.usersTasks)
+        },
         methods: {
             onAddPerson() {
 
@@ -213,7 +291,7 @@
                 this.newTodo = '';
             },
             removeTodo(index) {
-                this.todos.splice(index, 1);
+
             },
             todoDay() {
                 var d = new Date();

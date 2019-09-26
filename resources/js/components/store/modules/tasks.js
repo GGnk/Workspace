@@ -15,6 +15,11 @@ let actions = {
 
 let mutations = {
     TASKS_DATA (state, data) {
+        // state.tasks = data
+        state.usersWithTasks = data
+        console.log(this.usersTasks)
+    },
+    TASK_LIST (state, data) {
         state.tasks = data
     }
 
@@ -30,10 +35,15 @@ let getters = {
     options: state=> {
         return state.options
     },
+    usersTasks: state => {
+        return state.usersWithTasks
+    }
+
 }
 
 let state = {
     tasks: [],
+    usersWithTasks:[],
     task: {
         user: '',
         priority: 1,

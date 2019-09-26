@@ -6,6 +6,7 @@ use App\Events\TaskCreated;
 use App\Events\TaskRemoved;
 use App\Events\TaskUpdated;
 use App\Models\Task;
+use App\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -16,7 +17,9 @@ class TaskController extends Controller
 {
     public function index()
     {
-        $task = Task::with('users', 'dep')->latest()->get();
+        $task = User::with(['tasks' => function($qwery){
+            $qwery->where('completed', false);
+        }])->get();
         return $task;
     }
     /**
