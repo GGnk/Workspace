@@ -267,13 +267,12 @@
             lorem: 'Lorem ipsum dolor sit amet, at aliquam vivendum vel, everti delicatissimi cu eos. Dico iuvaret debitis mel an, et cum zril menandri. Eum in consul legimus accusam. Ea dico abhorreant duo, quo illum minimum incorrupte no, nostro voluptaria sea eu. Suas eligendi ius at, at nemore equidem est. Sed in error hendrerit, in consul constituam cum.',
         }),
         computed: {
-            ...mapGetters(['sortedArray','options', 'usersTasks']),
+            ...mapGetters(['sortedArray','options', 'tasksUsers']),
         },
         created() {
             this.$store.dispatch('FETCH_DATA')
         },
         mounted() {
-        console.log(this.usersTasks)
         },
         methods: {
             onAddPerson() {

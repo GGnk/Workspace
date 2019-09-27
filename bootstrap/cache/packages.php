@@ -17,13 +17,6 @@
       0 => 'BeyondCode\\DumpServer\\DumpServerServiceProvider',
     ),
   ),
-  'cmgmyr/messenger' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Cmgmyr\\Messenger\\MessengerServiceProvider',
-    ),
-  ),
   'fideloper/proxy' => 
   array (
     'providers' => 

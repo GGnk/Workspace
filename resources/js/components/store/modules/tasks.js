@@ -3,7 +3,7 @@ let actions = {
         commit("LOADER_INFO", "NULL")
         await axios.get('/dialog/tasks')
             .then((e) => {
-                commit('TASKS_DATA', e.data)
+                commit('TASKS_DATA', e)
                 commit("LOADER_INFO", "NULL")
             })
             .catch((err) => {
@@ -14,10 +14,10 @@ let actions = {
 }
 
 let mutations = {
-    TASKS_DATA (state, data) {
-        // state.tasks = data
-        state.usersWithTasks = data
-        console.log(this.usersTasks)
+    TASKS_DATA (state, info) {
+        state.tasks = info.data[0].tasks
+
+        console.log(state.tasks)
     },
     TASK_LIST (state, data) {
         state.tasks = data
@@ -27,7 +27,7 @@ let mutations = {
 
 let getters = {
     Auser: state=> {
-        /*return state.user = this.$root.state.auth_user*/
+        return 'Ghbdtn'
     },
     sortedArray: state=> {
         return state.tasks.sort((a, b) => a.completed - b.completed)
@@ -35,15 +35,15 @@ let getters = {
     options: state=> {
         return state.options
     },
-    usersTasks: state => {
-        return state.usersWithTasks
+    tasksUsers: state => {
+        return state.Wusers
     }
 
 }
 
 let state = {
     tasks: [],
-    usersWithTasks:[],
+    Wusers: [],
     task: {
         user: '',
         priority: 1,
