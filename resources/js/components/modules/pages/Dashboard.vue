@@ -1,7 +1,14 @@
 <template>
     <v-row>
-        <v-col>
-            <v-card class="mb-2" max-width="400">
+        <v-col sm="4">
+            <widget icon="domain"
+                    :title="sortedArray.length+(sortedArray.length >= 0?' задач!':(sortedArray.length == 1?' задача!':' задачи!'))"
+                    :subTitle="day+' '+date+''+ord+' '+year"
+                    supTitle="День чудес"
+                    class="mb-5"
+                    color="#502020"/>
+
+            <v-card class="mb-2">
                 <widget icon="domain"
                         :title="sortedArray.length+(sortedArray.length >= 0?' задач!':(sortedArray.length == 1?' задача!':' задачи!'))"
                         :subTitle="day+' '+date+''+ord+' '+year"
@@ -18,14 +25,19 @@
                     <v-subheader class="subheading">Задачи:
                         <div class="mx-2">
                             <v-select
-                                :items="usersItem"
+                                :items="tasksUsers"
                                 label="Пользователя"
                                 width="120"
+                                v-model="task_array"
+                                item-text="name"
+                                item-value="id"
+                                hide-selected
+                                color="success"
                                 height="48"
                             ></v-select>
                         </div>
                     </v-subheader>
-                    <div v-for="(todo, i) in sortedArray" v-if="!todo.completed && todo.users_id == 1">
+                    <div v-for="(todo, i) in sortedArray" >
                         <v-list-item>
                             <v-list-item-action>
                                 <v-checkbox v-model="todo.completed"></v-checkbox>
@@ -38,15 +50,25 @@
                                 <v-list-item-subtitle>Создана: {{todo.created_at}}</v-list-item-subtitle>
                             </v-list-item-content>
                             <v-btn icon ripple color="red"  v-if="todo.completed" @click="removeTodo(i)">
-                                <v-icon class="white--text opacity-1">close</v-icon>
+                                <v-icon class="white--text opacity-1"
+                                        color="red"
+                                >close</v-icon>
                             </v-btn>
                         </v-list-item>
                     </div>
                 </v-list>
             </v-card>
         </v-col>
-        <v-col>
-            <v-expansion-panels popout style="min-width:333px; max-width:450px" >
+        <v-col
+            sm="4">
+            <widget icon="domain"
+                    :title="'Что то там'"
+                    :subTitle="'Где то тут'"
+                    supTitle="День чудес"
+                    class="mb-5"
+                    color="#00b827"/>
+
+            <v-expansion-panels popout >
                 <v-expansion-panel
                     v-for="(message, i) in messages"
                     :key="i"
@@ -107,43 +129,9 @@
                 </v-expansion-panel>
             </v-expansion-panels>
         </v-col>
-        <v-col>
-            <v-card class="mb-2 timeline" max-width="390">
-                <v-card
-                    dark
-                    flat>
-                    <v-btn
-                        absolute
-                        bottom
-                        color="pink"
-                        right
-                        fab
-                        @click="onAddPerson">
-                        <v-icon>person_add</v-icon>
-                    </v-btn>
-                    <v-card-title class="pa-2 purple lighten-3">
-                        <v-btn icon>
-                            <v-icon>mdi-menu</v-icon>
-                        </v-btn>
-                        <h3 class="title font-weight-light text-xs-center grow">Timeline</h3>
-                        <v-avatar>
-                            <v-img :src="avatarIcon"></v-img>
-                        </v-avatar>
-                    </v-card-title>
-                    <v-img
-                        src="https://cdn.vuetifyjs.com/images/cards/forest.jpg"
-                        gradient="to top, rgba(0,0,0,.44), rgba(0,0,0,.44)">
-                        <v-container fill-height>
-                            <v-layout align-center>
-                                <strong class="display-4 font-weight-regular mr-4">8</strong>
-                                <v-layout column justify-end>
-                                    <div class="headline font-weight-light">Monday</div>
-                                    <div class="text-uppercase font-weight-light">February 2015</div>
-                                </v-layout>
-                            </v-layout>
-                        </v-container>
-                    </v-img>
-                </v-card>
+        <v-col
+            sm="4">
+            <v-card class="mb-2 timeline">
                 <v-card-text class="py-0">
                     <v-timeline
                         align-top
@@ -267,12 +255,21 @@
             lorem: 'Lorem ipsum dolor sit amet, at aliquam vivendum vel, everti delicatissimi cu eos. Dico iuvaret debitis mel an, et cum zril menandri. Eum in consul legimus accusam. Ea dico abhorreant duo, quo illum minimum incorrupte no, nostro voluptaria sea eu. Suas eligendi ius at, at nemore equidem est. Sed in error hendrerit, in consul constituam cum.',
         }),
         computed: {
-            ...mapGetters(['sortedArray','options', 'tasksUsers']),
+            ...mapGetters(['sortedArray','options', 'tasksUsers', 'intTask']),
+            task_array: {
+                get () {
+                    return this.intTask
+                },
+                set (value) {
+                    this.$store.commit('TASK_LIST', value)
+                }
+            }
         },
         created() {
             this.$store.dispatch('FETCH_DATA')
         },
         mounted() {
+
         },
         methods: {
             onAddPerson() {

@@ -12,15 +12,17 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
     public function index()
     {
-        $task = User::with(['tasks' => function($qwery){
+        $tasks = User::with(['tasks' => function($qwery){
             $qwery->where('completed', false);
         }])->get();
-        return $task;
+        $auth = Auth::user();
+        return compact('tasks', 'auth');
     }
     /**
      * Store a newly created resource in storage.
