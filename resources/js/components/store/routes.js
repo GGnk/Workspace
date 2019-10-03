@@ -1,10 +1,8 @@
-import Dashboard from "../modules/pages/Dashboard";
-
 let routes = [
     {
         path: '/',
         name: 'Dashboard',
-        component: Dashboard,
+        component: () => import('../modules/pages/Dashboard'),
         meta: {
             // requiresAuth: true
         }

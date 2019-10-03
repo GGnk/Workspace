@@ -1,5 +1,39 @@
 <template>
-    <v-row>
+    <v-row
+        class="layout wrap"
+    >
+        <v-flex lg3 sm4 xs12>
+            <v-col
+                class="mr-md-3 mr-xl-5"
+            >
+                <h2>Welcome back,</h2>
+                <p class="mb-md-0">Your analytics dashboard template.</p>
+            </v-col>
+        </v-flex>
+        <v-flex lg4 sm4 xs12>
+            <v-col
+                class="d-flex"
+                style="margin-top: 20px;">
+                <i class="mdi mdi-home text-muted hover-cursor"></i>
+                <p class="text-muted mb-0 hover-cursor">&nbsp;/&nbsp;Dashboard&nbsp;/&nbsp;</p>
+                <p class="text-primary mb-0 hover-cursor">Analytics</p>
+            </v-col>
+        </v-flex>
+        <v-flex lg4 sm4 xs12 >
+            <div class="d-flex justify-end align-items-end flex-wrap" style="margin-top: 20px;">
+                <button type="button" class="btn btn-light bg-white btn-icon mr-3 d-none d-md-block ">
+                    <i class="mdi mdi-download text-muted"></i>
+                </button>
+                <button type="button" class="btn btn-light bg-white btn-icon mr-3 mt-2 mt-xl-0">
+                    <i class="mdi mdi-clock-outline text-muted"></i>
+                </button>
+                <button type="button" class="btn btn-light bg-white btn-icon mr-3 mt-2 mt-xl-0">
+                    <i class="mdi mdi-plus text-muted"></i>
+                </button>
+                <button class="btn btn-primary mt-2 mt-xl-0">Download report</button>
+            </div>
+        </v-flex>
+
         <v-col sm="4">
             <widget icon="domain"
                     :title="sortedArray.length+(sortedArray.length >= 0?' задач!':(sortedArray.length == 1?' задача!':' задачи!'))"
