@@ -2,53 +2,9 @@
     <v-row
         class="layout wrap"
     >
-        <v-flex lg3 sm4 xs12>
-            <v-col
-                class="mr-md-3 mr-xl-5"
-            >
-                <h2>Welcome back,</h2>
-                <p class="mb-md-0">Your analytics dashboard template.</p>
-            </v-col>
-        </v-flex>
-        <v-flex lg4 sm4 xs12>
-            <v-col
-                class="d-flex"
-                style="margin-top: 20px;">
-                <i class="mdi mdi-home text-muted hover-cursor"></i>
-                <p class="text-muted mb-0 hover-cursor">&nbsp;/&nbsp;Dashboard&nbsp;/&nbsp;</p>
-                <p class="text-primary mb-0 hover-cursor">Analytics</p>
-            </v-col>
-        </v-flex>
         <v-flex lg4 sm4 xs12 >
-            <div class="d-flex justify-end align-items-end flex-wrap" style="margin-top: 20px;">
-                <button type="button" class="btn btn-light bg-white btn-icon mr-3 d-none d-md-block ">
-                    <i class="mdi mdi-download text-muted"></i>
-                </button>
-                <button type="button" class="btn btn-light bg-white btn-icon mr-3 mt-2 mt-xl-0">
-                    <i class="mdi mdi-clock-outline text-muted"></i>
-                </button>
-                <button type="button" class="btn btn-light bg-white btn-icon mr-3 mt-2 mt-xl-0">
-                    <i class="mdi mdi-plus text-muted"></i>
-                </button>
-                <button class="btn btn-primary mt-2 mt-xl-0">Download report</button>
-            </div>
-        </v-flex>
-
-        <v-col sm="4">
-            <widget icon="domain"
-                    :title="sortedArray.length+(sortedArray.length >= 0?' задач!':(sortedArray.length == 1?' задача!':' задачи!'))"
-                    :subTitle="day+' '+date+''+ord+' '+year"
-                    supTitle="День чудес"
-                    class="mb-5"
-                    color="#502020"/>
-
-            <v-card class="mb-2">
-                <widget icon="domain"
-                        :title="sortedArray.length+(sortedArray.length >= 0?' задач!':(sortedArray.length == 1?' задача!':' задачи!'))"
-                        :subTitle="day+' '+date+''+ord+' '+year"
-                        supTitle="День чудес"
-                        color="#00b297"/>
-
+            <v-card class="mb-2 mx-3">
+                <mac-header :title="sortedArray.length+(sortedArray.length >= 0?' задач!':(sortedArray.length == 1?' задача!':' задачи!'))"></mac-header>
                 <v-list two-line subheader>
                     <v-container>
                         <v-flex xs12>
@@ -92,16 +48,10 @@
                     </div>
                 </v-list>
             </v-card>
-        </v-col>
-        <v-col
+        </v-flex>
+        <v-flex lg4 sm4 xs12
             sm="4">
-            <widget icon="domain"
-                    :title="'Что то там'"
-                    :subTitle="'Где то тут'"
-                    supTitle="День чудес"
-                    class="mb-5"
-                    color="#00b827"/>
-
+            <mac-header title="Хранилище"></mac-header>
             <v-expansion-panels popout >
                 <v-expansion-panel
                     v-for="(message, i) in messages"
@@ -162,98 +112,69 @@
                     </v-expansion-panel-content>
                 </v-expansion-panel>
             </v-expansion-panels>
-        </v-col>
-        <v-col
+        </v-flex>
+        <v-flex lg4 sm4 xs12
             sm="4">
-            <v-card class="mb-2 timeline">
-                <v-card-text class="py-0">
-                    <v-timeline
-                        align-top
-                        dense>
-                        <v-timeline-item
-                            color="pink"
-                            small>
-                            <v-layout pt-3>
-                                <v-flex xs3>
-                                    <strong>5pm</strong>
-                                </v-flex>
-                                <v-flex>
-                                    <strong>New Icon</strong>
-                                    <div class="caption">Mobile App</div>
-                                </v-flex>
-                            </v-layout>
-                        </v-timeline-item>
+            <v-card class="mb-2 mx-3 timeline">
+                <mac-header title="Новости Саратова"></mac-header>
+                <v-carousel
+                    cycle
+                    hide-delimiter-background
+                    show-arrows-on-hover
+                >
+                    <v-carousel-item
+                        v-for="(item, i) in XMLyandex"
+                        :key="i"
 
-                        <v-timeline-item
-                            color="teal lighten-3"
-                            small>
-                            <v-layout wrap pt-3>
-                                <v-flex xs3>
-                                    <strong>3-4pm</strong>
-                                </v-flex>
-                                <v-flex>
-                                    <strong>Design Stand Up</strong>
-                                    <div class="caption mb-2">Hangouts</div>
-                                    <v-avatar>
-                                        <v-img
-                                            src="https://avataaars.io/"
-                                        ></v-img>
-                                    </v-avatar>
-                                    <v-avatar>
+                    >
 
-                                        <v-img
-                                            src="https://avataaars.io/"
-                                        ></v-img>
-                                    </v-avatar>
-                                    <v-avatar>
-                                        <v-img
-                                            src="https://avataaars.io/"
-                                        ></v-img>
-                                    </v-avatar>
-                                </v-flex>
-                            </v-layout>
-                        </v-timeline-item>
+                        <v-sheet
+                            height="100%"
+                            tile
+                            :color="colorNews[Math.round(i + 1) ]"
+                            style="padding-top: 10%;"
+                        >
+                            <v-row
+                                align="center"
+                                justify="center"
+                            >
 
-                        <v-timeline-item
-                            color="pink"
-                            small>
-                            <v-layout pt-3>
-                                <v-flex xs3>
-                                    <strong>12pm</strong>
-                                </v-flex>
-                                <v-flex>
-                                    <strong>Lunch break</strong>
-                                </v-flex>
-                            </v-layout>
-                        </v-timeline-item>
-
-                        <v-timeline-item
-                            color="teal lighten-3"
-                            small>
-                            <v-layout pt-3>
-                                <v-flex xs3>
-                                    <strong>9-11am</strong>
-                                </v-flex>
-                                <v-flex>
-                                    <strong>Finish Home Screen</strong>
-                                    <div class="caption">Web App</div>
-                                </v-flex>
-                            </v-layout>
-                        </v-timeline-item>
-                    </v-timeline>
-                </v-card-text>
+                                <div class="display-1" style="
+                                    height: 210px;
+                                    overflow: hidden;
+                                    padding:10px; width: 75%; text-align: center; background: #080808ad">{{item.title}}</div>
+                                <div style="margin-top:10px;
+                                    padding:10px;
+                                    border-radius: 10px;
+                                    width: 75%;
+                                    height: 145px;
+                                    overflow: hidden;
+                                    text-align: center;
+                                    background: rgba(0, 0, 0, 0.44);
+                                    box-shadow: inset 0 -8px 3px 0px #ffffffa6;" v-html="item.descr"></div>
+                                <a :href="item.url" target="_blank">
+                                    <v-btn
+                                        text
+                                    >Подробнее ...</v-btn>
+                                </a>
+                            </v-row>
+                        </v-sheet>
+                    </v-carousel-item>
+                </v-carousel>
             </v-card>
-        </v-col>
+        </v-flex>
     </v-row>
 </template>
 
 <script>
     import widget from '../Widget'
     import {mapGetters} from 'vuex'
+
     export default {
         name: "Dashboard",
         components: {
-          widget
+          widget,
+            'mac-header':  () => import ('../mac-header')
         },
         data: () => ({
             avatarIcon: 'https://avataaars.io/',
@@ -286,6 +207,14 @@
                     title: 'Shop your way',
                 },
             ],
+            XMLyandex: window.m_index,
+            colorNews: [
+                'indigo',
+                'warning',
+                'pink darken-2',
+                'red lighten-1',
+                'deep-purple accent-4'
+            ],
             lorem: 'Lorem ipsum dolor sit amet, at aliquam vivendum vel, everti delicatissimi cu eos. Dico iuvaret debitis mel an, et cum zril menandri. Eum in consul legimus accusam. Ea dico abhorreant duo, quo illum minimum incorrupte no, nostro voluptaria sea eu. Suas eligendi ius at, at nemore equidem est. Sed in error hendrerit, in consul constituam cum.',
         }),
         computed: {
@@ -303,11 +232,29 @@
             this.$store.dispatch('FETCH_DATA')
         },
         mounted() {
-
         },
         methods: {
-            onAddPerson() {
-
+            YandexNews() {
+                    var data=window.m_index;
+                    if(!data||!data.length){return;}
+                    function formatDate(ts){
+                        var d=new Date(ts*1000);
+                        return d.getHours()+':'+('0'+d.getMinutes()).substr(-2);
+                    }
+                    var html='<div class="ya-news__title"><a href="https://news.yandex.ru/" target="_blank">Новости Саратов</a></div>';
+                    for(var i=0;i<data.length;i++){
+                        var item=data[i];
+                        html+='<div>' +
+                            '<span class="ya-news__date">'+item.date+'&nbsp;'+item.time+ '</span>'
+                            + '<span class="ya-news__title">'
+                            + '<a href="'+item.url+'" target="_blank">'+item.title+'</a>' +
+                            '</span>' +
+                            '</div>' +
+                            '<div class="ya-news__description">'+item.descr+'</div>';
+                    }
+                    html+='<div class="ya-news__all"><a href="https://news.yandex.ru/" target="_blank">Все новости на '+formatDate(data.update_time_t)+'</a></div>';
+                    this.XMLyandex = html
+                console.log(window.m_index)
             },
             addTodo() {
                 var value = this.newTodo && this.newTodo.trim();
@@ -349,5 +296,9 @@
 </script>
 
 <style scoped>
-
+    .ya-news__title{font-size:100%;font-weight:700;margin-bottom:.5em}
+    .ya-news__date{font-size:85%;margin-right:.5em}
+    .ya-news__informer{font-size:85%;margin-bottom:.3em}
+    .ya-news__description{font-size:85%;margin-bottom:.5em}
+    .ya-news__all{font-size:80%;margin-top:.3em}
 </style>

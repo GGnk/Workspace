@@ -22,5 +22,6 @@
     </div>
 
     <script src="{{ mix('js/app.js') }}"></script>
+    <script src="https://news.yandex.ru/Saratov/index5.utf8.js" charset="utf-8"></script>
 </body>
 </html>

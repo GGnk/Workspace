@@ -2,415 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="381a243a-1d9c-4d69-8a68-88a322d6b33a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/.editorconfig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/.eslintignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/.eslintrc.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/.prettierrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/.travlis.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/babel.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/css/app.292c4734.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/css/chunk-bad4fb00.6c7c7325.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/css/chunk-vendors.0d594891.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/css/routes.a43b3296.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/fonts/Roboto-Black.313a6563.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/fonts/Roboto-Black.59eb3601.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/fonts/Roboto-BlackItalic.cc2fadc3.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/fonts/Roboto-BlackItalic.f75569f8.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/fonts/Roboto-Bold.50d75e48.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/fonts/Roboto-Bold.b52fac2b.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/fonts/Roboto-BoldItalic.4fe0f73c.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/fonts/Roboto-BoldItalic.94008e69.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/fonts/Roboto-Light.c73eb1ce.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/fonts/Roboto-Light.d26871e8.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/fonts/Roboto-LightItalic.13efe6cb.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/fonts/Roboto-LightItalic.e8eaae90.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/fonts/Roboto-Medium.1d659482.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/fonts/Roboto-Medium.90d16760.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/fonts/Roboto-MediumItalic.13ec0eb5.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/fonts/Roboto-MediumItalic.83e114c3.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/fonts/Roboto-Regular.35b07eb2.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/fonts/Roboto-Regular.73f0a88b.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/fonts/Roboto-RegularItalic.4357beb8.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/fonts/Roboto-RegularItalic.f5902d5e.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/fonts/Roboto-Thin.ad538a69.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/fonts/Roboto-Thin.d3b47375.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/fonts/Roboto-ThinItalic.5b4a33e1.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/fonts/Roboto-ThinItalic.8a96edbb.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/fonts/fontawesome-webfont.674f50d2.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/fonts/fontawesome-webfont.af7ae505.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/fonts/fontawesome-webfont.b06871f2.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/fonts/fontawesome-webfont.fee66e71.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/img/fontawesome-webfont.912ec66d.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/js/app.b53fec95.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/js/app.b53fec95.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/js/chunk-bad4fb00.04515520.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/js/chunk-bad4fb00.04515520.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/js/chunk-vendors.dff1bb35.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/js/chunk-vendors.dff1bb35.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/js/routes.310e3005.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/js/routes.310e3005.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/manifest.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/precache-manifest.30b3fc33e343484e64eb176b0f9a172e.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/robots.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/service-worker.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/.gitkeep" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/avatar/a1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/avatar/a2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/avatar/a3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/avatar/a4.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/avatar/man_1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/avatar/man_2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/avatar/man_3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/avatar/man_4.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/avatar/man_5.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/avatar/me.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/10.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/11.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/12.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/13.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/14.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/15.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/16.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/17.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/18.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/19.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/20.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/21.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/22.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/23.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/24.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/25.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/26.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/27.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/28.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/29.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/30.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/31.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/32.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/33.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/34.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/35.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/36.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/37.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/38.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/39.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/4.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/40.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/5.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/6.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/7.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/8.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/bg/9.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/creative_process/01.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/creative_process/02.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/creative_process/03.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/creative_process/04.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/creative_process/05.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/creative_process/06.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/creative_process/07.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/creative_process/08.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/creative_process/09.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/creative_process/10.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/creative_process/11.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/creative_process/12.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/data/chat_message.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/data/file.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/data/font-awesome.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/data/material.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/data/user.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/discover_word/ds_1.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/discover_word/ds_2.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/discover_word/ds_3.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/discover_word/ds_4.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/discover_word/ds_5.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/discover_word/thumb/ds_1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/discover_word/thumb/ds_2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/discover_word/thumb/ds_3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/discover_word/thumb/ds_4.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/discover_word/thumb/ds_5.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/error/403.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/error/404.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/error/500.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/google.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/icon/file_empty.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/icon/google.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/icon/hangouts.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/icon/inbox.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/icon/keep.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/m.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/m.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/nature/n1.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/nature/n2.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/nature/n3.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/nature/n4.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/nature/n5.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/nature/n6.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/nature/n7.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/nature/n8.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/people/man/m1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/people/man/m2.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/people/man/m3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/people/man/m4.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/people/man/m5.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/people/woman/w1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/people/woman/w2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/people/woman/w3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/people/woman/w4.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/people/woman/w5.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/dist/static/robots.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/mock/chat.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/mock/chatMessage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/mock/data.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/mock/file.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/mock/generate.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/mock/mail.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/mock/post.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/mock/schema.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/mock/user.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/postcss.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/manifest.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/robots.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/.gitkeep" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/avatar/a1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/avatar/a2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/avatar/a3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/avatar/a4.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/avatar/man_1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/avatar/man_2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/avatar/man_3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/avatar/man_4.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/avatar/man_5.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/avatar/me.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/10.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/11.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/12.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/13.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/14.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/15.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/16.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/17.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/18.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/19.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/20.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/21.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/22.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/23.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/24.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/25.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/26.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/27.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/28.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/29.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/30.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/31.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/32.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/33.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/34.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/35.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/36.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/37.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/38.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/39.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/4.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/40.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/5.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/6.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/7.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/8.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/bg/9.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/creative_process/01.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/creative_process/02.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/creative_process/03.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/creative_process/04.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/creative_process/05.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/creative_process/06.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/creative_process/07.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/creative_process/08.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/creative_process/09.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/creative_process/10.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/creative_process/11.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/creative_process/12.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/data/chat_message.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/data/file.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/data/font-awesome.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/data/material.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/data/user.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/discover_word/ds_1.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/discover_word/ds_2.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/discover_word/ds_3.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/discover_word/ds_4.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/discover_word/ds_5.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/discover_word/thumb/ds_1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/discover_word/thumb/ds_2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/discover_word/thumb/ds_3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/discover_word/thumb/ds_4.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/discover_word/thumb/ds_5.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/error/403.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/error/404.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/error/500.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/google.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/icon/file_empty.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/icon/google.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/icon/hangouts.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/icon/inbox.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/icon/keep.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/m.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/m.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/nature/n1.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/nature/n2.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/nature/n3.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/nature/n4.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/nature/n5.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/nature/n6.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/nature/n7.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/nature/n8.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/people/man/m1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/people/man/m2.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/people/man/m3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/people/man/m4.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/people/man/m5.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/people/woman/w1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/people/woman/w2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/people/woman/w3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/people/woman/w4.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/people/woman/w5.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/public/static/robots.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/App.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/api/activity.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/api/chart.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/api/chat.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/api/country.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/api/file.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/api/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/api/mail.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/api/menu.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/api/message.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/api/notification.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/api/order.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/api/post.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/api/project.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/api/user.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/assets/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/assets/logo.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/AppDrawer.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/AppFab.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/AppToolbar.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/PageHeader.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/ThemeSettings.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/VWidget.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/chart/echart.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/chart/vchart.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/chat/ChatContact.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/chat/ChatContactList.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/chat/ChatContactProfile.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/chat/ChatHistory.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/chat/ChatLayout.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/chat/ChatMenu.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/chat/ChatMessaging.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/chat/ChatWindow.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/circle/VCircle.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/circle/VCircle.styl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/email/Compose.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/email/Layout.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/email/List.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/email/Reply.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/layouts/AdminLayout.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/layouts/AuthLayout.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/layouts/ChatLayout.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/layouts/DefaultLayout.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/layouts/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/media/Layout.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/widgets/EmailReply.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/widgets/InlineReply.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/widgets/card/MenuCard.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/widgets/card/NameCard.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/widgets/card/PostImage.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/widgets/card/PostListCard.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/widgets/card/PostSingleCard.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/widgets/card/ProfileCard.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/widgets/card/SettingCard.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/widgets/card/WeatherCard.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/widgets/chart/BoxChart.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/widgets/chart/MiniChart.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/widgets/form/ContactForm.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/widgets/form/EventForm.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/widgets/form/PaymentForm.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/widgets/form/ShipmentForm.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/widgets/list/MessageList.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/widgets/list/NotificationList.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/widgets/list/PlainTable.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/widgets/list/PlainTableOrder.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/widgets/statistic/CircleStatistic.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/widgets/statistic/LinearStatistic.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/components/widgets/statistic/MiniStatistic.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/event.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/lang/i18n/en.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/lang/i18n/zh.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/lang/lang.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/plugins/vuetify.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/registerServiceWorker.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/router/config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/router/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/store.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/store/actions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/store/getters.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/store/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/store/module/app.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/store/mutations.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/theme/default.styl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/theme/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/util/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/views/Dashboard.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/views/Error.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/views/Login.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/views/Media.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/views/Widget.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/views/auth/Login.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/views/error/Deny.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/views/error/Error.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/views/error/NotFound.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/views/form/BasicForm.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/views/form/Editors.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/views/form/SelectionControls.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/views/form/Selects.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/views/form/Steppers.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/views/form/TextFields.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/views/list/Table.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/views/widgets/Chart.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/views/widgets/List.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/views/widgets/Post.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/views/widgets/Social.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/views/widgets/Statistic.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/test/e2e/custom-assertions/elementCount.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/test/e2e/nightwatch.conf.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/test/e2e/runner.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/test/e2e/specs/test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/test/unit/.eslintrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/test/unit/jest.conf.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/test/unit/setup.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/test/unit/specs/HelloWorld.spec.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/vue.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/modules/mac-header.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LiveChat.iml" beforeDir="false" afterPath="$PROJECT_DIR$/LiveChat.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/modules/HomeComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modules/HomeComponent.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/modules/pages/Dashboard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modules/pages/Dashboard.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/store/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/store/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -597,16 +195,16 @@
     <property name="ts.external.directory.path" value="D:\inst\IntelliJ IDEA 2019.2.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="P:\livechat\html\resources\js\components\modules" />
+      <recent name="C:\Users\Администратор\Desktop\OSPanel\domains\LiveChat\app\Events" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="P:\livechat\html\app\Models" />
       <recent name="P:\livechat\html\app\Models\" />
       <recent name="P:\livechat\html\app" />
       <recent name="P:\livechat\html\app\Traits" />
       <recent name="P:\livechat\html\app\Models\Dialogs" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="P:\livechat\html\resources\js\components\modules" />
-      <recent name="C:\Users\Администратор\Desktop\OSPanel\domains\LiveChat\app\Events" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -681,7 +279,7 @@
       <workItem from="1568698473535" duration="58238000" />
       <workItem from="1569326563732" duration="74092000" />
       <workItem from="1569991094551" duration="149000" />
-      <workItem from="1569991267612" duration="15180000" />
+      <workItem from="1569991267612" duration="40314000" />
     </task>
     <task id="LOCAL-00001" summary="Обновление 0.0.2">
       <created>1563279931885</created>
@@ -935,7 +533,14 @@
       <option name="project" value="LOCAL" />
       <updated>1569848450579</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Обновление 0.0.2.38">
+      <created>1570107066763</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1570107066763</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -958,7 +563,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Обновление 0.0.2.10" />
     <MESSAGE value="Обновление 0.0.2.11" />
     <MESSAGE value="Обновление 0.0.2.14" />
     <MESSAGE value="Обновление 0.0.2.15" />
@@ -983,25 +587,8 @@
     <MESSAGE value="Обновление 0.0.2.35" />
     <MESSAGE value="Обновление 0.0.2.36" />
     <MESSAGE value="Обновление 0.0.2.37" />
-    <option name="LAST_COMMIT_MESSAGE" value="Обновление 0.0.2.37" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/resources/js/components/templates/vue-material-admin-master/src/views/Dashboard.vue</url>
-          <line>5</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/resources/js/components/modules/pages/Dashboard.vue</url>
-          <line>4</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Обновление 0.0.2.38" />
+    <option name="LAST_COMMIT_MESSAGE" value="Обновление 0.0.2.38" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

@@ -4,6 +4,7 @@
             app
             clipped-left
             color="primary white"
+            style="box-shadow: inset 2px -3px 12px 0px rgb(119, 119, 119), 2px -1px 5px 0px rgb(46, 46, 46), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);"
         >
             <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
             <span class="title white--text ml-3 mr-5">IT&nbsp;<span class="font-weight-light">помощник</span></span>
@@ -49,7 +50,6 @@
         <v-content>
             <v-container
                 fluid
-                class="grey lighten-4"
             >
                 <router-view></router-view>
             </v-container>
