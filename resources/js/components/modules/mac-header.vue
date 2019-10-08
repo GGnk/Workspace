@@ -26,7 +26,8 @@
         padding-left: 11px ;
         width: 100%;
         background: white;
-        box-shadow: inset 2px -3px 20px 0px rgba(0, 0, 0, 0.2), 2px -1px 5px 0px rgba(25, 118, 210, 0.24), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+        line-height: 2;
+        box-shadow: inset 2px -3px 20px 0px rgba(25, 118, 210, 0.26), 2px -1px 5px 0px rgba(25, 118, 210, 0.24);
     }
     .macTitle {
         width: 70%;
