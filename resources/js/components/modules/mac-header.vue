@@ -26,6 +26,7 @@
         padding-left: 11px ;
         width: 100%;
         background: white;
+        height: 48px;
         line-height: 2;
         box-shadow: inset 2px -3px 20px 0px rgba(25, 118, 210, 0.26), 2px -1px 5px 0px rgba(25, 118, 210, 0.24);
     }

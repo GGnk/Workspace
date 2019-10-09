@@ -2,7 +2,7 @@
     <v-row
         class="layout wrap"
     >
-        <v-flex class="mb-2 px-2"  lg8 sm8 xs11 >
+        <v-flex class="mb-2 px-2"  lg8 sm8 xs12 >
             <v-card color="basil">
                 <v-tabs
                     v-model="tab"
@@ -19,11 +19,11 @@
                 </v-tabs>
 
                 <v-tabs-items v-model="tab">
-                    <v-tab-item>
+                    <v-tab-item >
                         <v-list two-line subheader>
                             <v-container>
                                 <v-flex xs12>
-                                    <v-text-field clearable v-model="newTodo" id="newTodo" name="newTodo" :label="sortedArray.length > 0 ?'Еще пару задач?':'Начни что то делать...'" @keyup.enter="addTodo">
+                                    <v-text-field clearable v-model="newTodo" id="newTodo" name="newTodo" :label="sortedArray.length > 0 ?'Еще пару задач?':'Начни что то делать...'" @keyup.enter="">
                                     </v-text-field>
                                 </v-flex>
                             </v-container>
@@ -42,30 +42,97 @@
                                     ></v-select>
                                 </div>
                             </v-subheader>
-                            <div v-for="(todo, i) in sortedArray" >
-                                <v-list-item
-                                    style="line-height: 1; min-height: 45px; height: 45px"
-                                >
-                                    <v-list-item-action>
-                                        <v-checkbox v-model="todo.completed"></v-checkbox>
-                                    </v-list-item-action>
-                                    <v-list-item-content>
-                                        <v-list-item-title :class="{
+                            <div style="overflow: auto; height: 25vw">
+                                <div v-for="(todo, i) in sortedArray" >
+                                    <v-list-item
+                                        style="line-height: 1; min-height: 45px; height: 45px"
+                                    >
+                                        <v-list-item-action>
+                                            <v-checkbox v-model="todo.completed"></v-checkbox>
+                                        </v-list-item-action>
+                                        <v-list-item-content>
+                                            <v-list-item-title :class="{
                                         done: todo.completed
                                         }" class="title">{{todo.title}}
-                                        </v-list-item-title>
-                                        <v-list-item-subtitle>Создана: {{todo.created_at}}</v-list-item-subtitle>
-                                    </v-list-item-content>
-                                    <v-btn icon ripple color="red"  v-if="todo.completed" @click="removeTodo(i)">
-                                        <v-icon class="white--text opacity-1"
-                                                color="red"
-                                        >close</v-icon>
-                                    </v-btn>
-                                </v-list-item>
+                                            </v-list-item-title>
+                                            <v-list-item-subtitle>Создана: {{todo.created_at}}</v-list-item-subtitle>
+                                        </v-list-item-content>
+                                        <v-btn icon ripple color="red"  v-if="todo.completed" @click="removeTodo(i)">
+                                            <v-icon class="white--text opacity-1"
+                                                    color="red"
+                                            >close</v-icon>
+                                        </v-btn>
+                                    </v-list-item>
+                                </div>
                             </div>
+
                         </v-list>
                     </v-tab-item>
+                    <v-tab-item>
+                        <v-list
+                            three-line
+                            flat
+                            nav
+                        >
+                            <v-text-field
+                                outlined
+                                flat
+                                hide-details
+                                label="Поиск человека"
+                                prepend-inner-icon="search"
+                            ></v-text-field>
+                            <v-list-item-group color="primary">
 
+                                <v-row>
+                                    <v-flex lg4 sm6 xs12
+                                            class="mb-2 px-2">
+                                        <v-list-item
+                                        v-for="(item, i) in itemsC"
+                                        :key="i"
+                                    >
+                                        <v-list-item-avatar v-if="item.avatar">
+                                            <v-img :src="item.avatar"></v-img>
+                                        </v-list-item-avatar>
+                                        <v-list-item-content>
+                                            <v-list-item-title v-html="item.title"></v-list-item-title>
+                                            <v-list-item-subtitle v-html="item.subtitle"></v-list-item-subtitle>
+                                        </v-list-item-content>
+                                    </v-list-item>
+                                    </v-flex>
+                                    <v-flex lg4 sm6 xs12
+                                            class="mb-2 px-2">
+                                        <v-list-item
+                                            v-for="(item, i) in itemsC"
+                                            :key="i"
+                                        >
+                                            <v-list-item-avatar v-if="item.avatar">
+                                                <v-img :src="item.avatar"></v-img>
+                                            </v-list-item-avatar>
+                                            <v-list-item-content>
+                                                <v-list-item-title v-html="item.title"></v-list-item-title>
+                                                <v-list-item-subtitle v-html="item.subtitle"></v-list-item-subtitle>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </v-flex>
+                                    <v-flex lg4 sm6 xs12
+                                            class="mb-2 px-2">
+                                        <v-list-item
+                                            v-for="(item, i) in itemsC"
+                                            :key="i"
+                                        >
+                                            <v-list-item-avatar v-if="item.avatar">
+                                                <v-img :src="item.avatar"></v-img>
+                                            </v-list-item-avatar>
+                                            <v-list-item-content>
+                                                <v-list-item-title v-html="item.title"></v-list-item-title>
+                                                <v-list-item-subtitle v-html="item.subtitle"></v-list-item-subtitle>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </v-flex>
+                                </v-row>
+                            </v-list-item-group>
+                        </v-list>
+                    </v-tab-item>
                 </v-tabs-items>
             </v-card>
         </v-flex>
@@ -151,7 +218,34 @@
             ],
             tab: null,
             items: [
-                'Задачи',
+                'Задачи', 'Контакты'
+            ],
+            itemsC: [
+                {
+                    avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
+                    title: 'Brunch this weekend? hj hj h hjhjhj ',
+                    subtitle: "<span class='text--primary'>Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?",
+                },
+                {
+                    avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
+                    title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>',
+                    subtitle: "<span class='text--primary'>to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.",
+                },
+                {
+                    avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
+                    title: 'Oui oui',
+                    subtitle: "<span class='text--primary'>Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?",
+                },
+                {
+                    avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
+                    title: 'Birthday gift',
+                    subtitle: "<span class='text--primary'>Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?",
+                },
+                {
+                    avatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
+                    title: 'Recipe to try',
+                    subtitle: "<span class='text--primary'>Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.",
+                },
             ],
         }),
         computed: {

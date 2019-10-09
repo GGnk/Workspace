@@ -20,7 +20,7 @@ class TaskController extends Controller
     {
         $tasks = User::with(['tasks' => function($qwery){
             $qwery->where('completed', false);
-        }])->get();
+        }])->where('role_id', 1)->get();
         $auth = Auth::user();
         return compact('tasks', 'auth');
     }
