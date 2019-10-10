@@ -53,7 +53,7 @@
                                         <v-list-item-content>
                                             <v-list-item-title :class="{
                                         done: todo.completed
-                                        }" class="title">{{todo.title}}
+                                        }" class="" >{{todo.title}}
                                             </v-list-item-title>
                                             <v-list-item-subtitle>Создана: {{todo.created_at}}</v-list-item-subtitle>
                                         </v-list-item-content>

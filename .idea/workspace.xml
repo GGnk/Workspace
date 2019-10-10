@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="381a243a-1d9c-4d69-8a68-88a322d6b33a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/modules/mac-header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modules/mac-header.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/modules/pages/Dashboard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modules/pages/Dashboard.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -278,7 +276,7 @@
       <workItem from="1569991094551" duration="149000" />
       <workItem from="1569991267612" duration="41722000" />
       <workItem from="1570424028319" duration="12805000" />
-      <workItem from="1570509555691" duration="13432000" />
+      <workItem from="1570509555691" duration="17900000" />
     </task>
     <task id="LOCAL-00001" summary="Обновление 0.0.2">
       <created>1563279931885</created>
@@ -553,7 +551,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570539796423</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="Обновление 0.0.2.41">
+      <created>1570626134093</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1570626134093</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -576,7 +581,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Обновление 0.0.2.15" />
     <MESSAGE value="Обновление 0.0.2.16" />
     <MESSAGE value="Обновление 0.0.2.17" />
     <MESSAGE value="Обновление 0.0.2.18" />
@@ -601,7 +605,8 @@
     <MESSAGE value="Обновление 0.0.2.38" />
     <MESSAGE value="Обновление 0.0.2.39" />
     <MESSAGE value="Обновление 0.0.2.40" />
-    <option name="LAST_COMMIT_MESSAGE" value="Обновление 0.0.2.40" />
+    <MESSAGE value="Обновление 0.0.2.41" />
+    <option name="LAST_COMMIT_MESSAGE" value="Обновление 0.0.2.41" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
