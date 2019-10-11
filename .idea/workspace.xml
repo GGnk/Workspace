@@ -187,6 +187,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="ts.external.directory.path" value="D:\inst\IntelliJ IDEA 2019.2.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
@@ -276,7 +277,8 @@
       <workItem from="1569991094551" duration="149000" />
       <workItem from="1569991267612" duration="41722000" />
       <workItem from="1570424028319" duration="12805000" />
-      <workItem from="1570509555691" duration="17900000" />
+      <workItem from="1570509555691" duration="22582000" />
+      <workItem from="1570790322108" duration="1774000" />
     </task>
     <task id="LOCAL-00001" summary="Обновление 0.0.2">
       <created>1563279931885</created>
@@ -558,7 +560,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570626134093</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="Обновление 0.0.2.42">
+      <created>1570712729708</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1570712729708</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -581,7 +590,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Обновление 0.0.2.16" />
     <MESSAGE value="Обновление 0.0.2.17" />
     <MESSAGE value="Обновление 0.0.2.18" />
     <MESSAGE value="Обновление 0.0.2.19 ftp" />
@@ -606,7 +614,8 @@
     <MESSAGE value="Обновление 0.0.2.39" />
     <MESSAGE value="Обновление 0.0.2.40" />
     <MESSAGE value="Обновление 0.0.2.41" />
-    <option name="LAST_COMMIT_MESSAGE" value="Обновление 0.0.2.41" />
+    <MESSAGE value="Обновление 0.0.2.42" />
+    <option name="LAST_COMMIT_MESSAGE" value="Обновление 0.0.2.42" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

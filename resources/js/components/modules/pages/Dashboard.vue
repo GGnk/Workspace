@@ -141,7 +141,7 @@
                 class="mb-2 px-2 news">
             <mac-header title="Новости Саратова"></mac-header>
             <v-carousel
-                            cycle
+
                             hide-delimiter-background
                             show-arrows-on-hover
                         >
@@ -175,11 +175,14 @@
                                     text-align: center;
                                     background: rgba(0, 0, 0, 0.44);
                                     box-shadow: inset 0 -8px 3px 0px #ffffffa6;" v-html="item.descr"></div>
-                                    <a :href="item.url" target="_blank">
-                                        <v-btn
-                                            text
-                                        >Подробнее ...</v-btn>
-                                    </a>
+                                    <div style="width: 75%; text-align: center">
+                                        <a :href="item.url" target="_blank">
+                                            <v-btn
+                                                text
+                                            >Подробнее ...</v-btn>
+                                        </a>
+                                    </div>
+
                                 </v-row>
                             </v-sheet>
                         </v-carousel-item>
