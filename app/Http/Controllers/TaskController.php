@@ -13,22 +13,27 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB as DB;
+use Illuminate\Support\Facades\Hash;
 
 class TaskController extends Controller
 {
-    public function index()
+    public function index(User $user)
     {
-        $tasks = User::with(['tasks' => function($qwery){
-            $qwery->where('completed', false);
-        }])->where('role_id', 1)->get();
+
+        $tasks = $user->setConnection('it_crud')->where('role_id', 1)->with(['tasks' => function($qwery) {
+            $qwery->where('completed',false)->latest();
+        }])->get();
+
         $auth = Auth::user();
+
         return compact('tasks', 'auth');
     }
     /**
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Task|Task[]|Builder|Builder[]|Collection|Model
+     * @return Model
      */
     public function store(Request $request)
     {

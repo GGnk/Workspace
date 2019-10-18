@@ -2,8 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="381a243a-1d9c-4d69-8a68-88a322d6b33a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/storage/debugbar/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storage/framework/cache/data/3f/cf/3fcff8d7e08ae3f50661ccc993b3df787177b3e3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storage/framework/cache/data/cc/85/cc8553f69bf73266b2d936f66cda1bf74f7ba40c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bootstrap/cache/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap/cache/config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/modules/HomeComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modules/HomeComponent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/modules/mac-header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modules/mac-header.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/modules/pages/Dashboard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modules/pages/Dashboard.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -278,7 +290,9 @@
       <workItem from="1569991267612" duration="41722000" />
       <workItem from="1570424028319" duration="12805000" />
       <workItem from="1570509555691" duration="22582000" />
-      <workItem from="1570790322108" duration="1774000" />
+      <workItem from="1570790322108" duration="9515000" />
+      <workItem from="1571115687861" duration="1723000" />
+      <workItem from="1571290235243" duration="30824000" />
     </task>
     <task id="LOCAL-00001" summary="Обновление 0.0.2">
       <created>1563279931885</created>
@@ -567,7 +581,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570712729708</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="Обновление 0.0.2.43">
+      <created>1570796262739</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1570796262739</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -590,7 +611,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Обновление 0.0.2.17" />
     <MESSAGE value="Обновление 0.0.2.18" />
     <MESSAGE value="Обновление 0.0.2.19 ftp" />
     <MESSAGE value="Обновление 0.0.2.20 ftp" />
@@ -615,7 +635,8 @@
     <MESSAGE value="Обновление 0.0.2.40" />
     <MESSAGE value="Обновление 0.0.2.41" />
     <MESSAGE value="Обновление 0.0.2.42" />
-    <option name="LAST_COMMIT_MESSAGE" value="Обновление 0.0.2.42" />
+    <MESSAGE value="Обновление 0.0.2.43" />
+    <option name="LAST_COMMIT_MESSAGE" value="Обновление 0.0.2.43" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

@@ -1,18 +1,17 @@
 <template>
     <v-row
         class="layout wrap"
+        dense
     >
-        <v-flex class="mb-2 px-2"  lg8 sm8 xs12 >
-            <v-card color="basil">
+        <v-flex class="mb-2 px-2"  lg9 sm3 xs12>
+            <v-card dark>
                 <v-tabs
                     v-model="tab"
                     background-color="transparent"
-                    color="basil"
-                    grow
                 >
                     <v-tab
-                        v-for="item in items"
-                        :key="item"
+                        v-for="(item, i) in items"
+                        :key="i"
                     >
                         {{ item }}
                     </v-tab>
@@ -70,62 +69,79 @@
                     </v-tab-item>
                     <v-tab-item>
                         <v-list
-                            three-line
-                            flat
+                            two-line
                             nav
+                            dense
                         >
                             <v-text-field
                                 outlined
                                 flat
                                 hide-details
-                                label="Поиск человека"
+                                label="Поиск информации"
                                 prepend-inner-icon="search"
+                                v-model="input"
+                                @keydown.enter="searchInfo"
                             ></v-text-field>
                             <v-list-item-group color="primary">
 
                                 <v-row>
                                     <v-flex lg4 sm6 xs12
                                             class="mb-2 px-2">
+                                        <p class="title" style="text-align: center; margin: 0">Люди</p>
+                                        <hr style="margin: 0">
                                         <v-list-item
-                                        v-for="(item, i) in itemsC"
-                                        :key="i"
-                                    >
-                                        <v-list-item-avatar v-if="item.avatar">
-                                            <v-img :src="item.avatar"></v-img>
-                                        </v-list-item-avatar>
-                                        <v-list-item-content>
-                                            <v-list-item-title v-html="item.title"></v-list-item-title>
-                                            <v-list-item-subtitle v-html="item.subtitle"></v-list-item-subtitle>
-                                        </v-list-item-content>
-                                    </v-list-item>
-                                    </v-flex>
-                                    <v-flex lg4 sm6 xs12
-                                            class="mb-2 px-2">
-                                        <v-list-item
-                                            v-for="(item, i) in itemsC"
+                                            v-for="(item, i) in results"
+                                            v-if="item.sort == 1"
                                             :key="i"
                                         >
-                                            <v-list-item-avatar v-if="item.avatar">
-                                                <v-img :src="item.avatar"></v-img>
+                                            <v-list-item-avatar>
+                                                <i class="material-icons">
+                                                    emoji_people
+                                                </i>
                                             </v-list-item-avatar>
                                             <v-list-item-content>
-                                                <v-list-item-title v-html="item.title"></v-list-item-title>
-                                                <v-list-item-subtitle v-html="item.subtitle"></v-list-item-subtitle>
+                                                <v-list-item-title v-html="item.name"></v-list-item-title>
+                                                <v-list-item-subtitle v-html="item.phone"></v-list-item-subtitle>
                                             </v-list-item-content>
                                         </v-list-item>
                                     </v-flex>
                                     <v-flex lg4 sm6 xs12
                                             class="mb-2 px-2">
+                                        <p class="title" style="text-align: center; margin: 0">Службы</p>
+                                        <hr style="margin: 0">
                                         <v-list-item
-                                            v-for="(item, i) in itemsC"
+                                            v-for="(item, i) in results"
+                                            v-if="item.sort == 2"
                                             :key="i"
                                         >
-                                            <v-list-item-avatar v-if="item.avatar">
-                                                <v-img :src="item.avatar"></v-img>
+                                            <v-list-item-avatar>
+                                                <i class="material-icons">
+                                                    build
+                                                </i>
                                             </v-list-item-avatar>
                                             <v-list-item-content>
-                                                <v-list-item-title v-html="item.title"></v-list-item-title>
-                                                <v-list-item-subtitle v-html="item.subtitle"></v-list-item-subtitle>
+                                                <v-list-item-title v-html="item.name"></v-list-item-title>
+                                                <v-list-item-subtitle v-html="item.phone"></v-list-item-subtitle>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </v-flex>
+                                    <v-flex lg4 sm6 xs12
+                                            class="mb-2 px-2">
+                                        <p class="title" style="text-align: center; margin: 0">Внешнии компании</p>
+                                        <hr style="margin: 0">
+                                        <v-list-item
+                                            v-for="(item, i) in results"
+                                            v-if="item.sort == 3"
+                                            :key="i"
+                                        >
+                                            <v-list-item-avatar>
+                                                <i class="material-icons">
+                                                    business
+                                                </i>
+                                            </v-list-item-avatar>
+                                            <v-list-item-content>
+                                                <v-list-item-title v-html="item.name"></v-list-item-title>
+                                                <v-list-item-subtitle v-html="item.phone"></v-list-item-subtitle>
                                             </v-list-item-content>
                                         </v-list-item>
                                     </v-flex>
@@ -137,56 +153,30 @@
             </v-card>
         </v-flex>
 
-        <v-flex lg4 sm4 xs12
+        <v-flex lg3 sm3 xs12
                 class="mb-2 px-2 news">
             <mac-header title="Новости Саратова"></mac-header>
-            <v-carousel
-
-                            hide-delimiter-background
-                            show-arrows-on-hover
-                        >
-                        <v-carousel-item
-                            v-for="(item, i) in XMLyandex"
-                            :key="i"
-
-                        >
-
-                            <v-sheet
-                                height="100%"
-                                tile
-                                :color="colorNews[Math.round(i + 1) ]"
-                                style="padding-top: 10%;"
-                            >
-                                <v-row
-                                    align="center"
-                                    justify="center"
-                                >
-
-                                    <div class="display-1" style="
-                                    height: 210px;
-                                    overflow: hidden;
-                                    padding:10px; width: 75%; text-align: center; background: #080808ad">{{item.title}}</div>
-                                    <div style="margin-top:10px;
-                                    padding:10px;
-                                    border-radius: 10px;
-                                    width: 75%;
-                                    height: 145px;
-                                    overflow: hidden;
-                                    text-align: center;
-                                    background: rgba(0, 0, 0, 0.44);
-                                    box-shadow: inset 0 -8px 3px 0px #ffffffa6;" v-html="item.descr"></div>
-                                    <div style="width: 75%; text-align: center">
-                                        <a :href="item.url" target="_blank">
-                                            <v-btn
-                                                text
-                                            >Подробнее ...</v-btn>
-                                        </a>
-                                    </div>
-
-                                </v-row>
-                            </v-sheet>
-                        </v-carousel-item>
-            </v-carousel>
+            <v-expansion-panels
+                multiple
+                focusable
+            >
+                <v-expansion-panel
+                    v-for="(item, i) in XMLyandex"
+                    :key="i"
+                >
+                    <v-expansion-panel-header>{{item.title}}</v-expansion-panel-header>
+                    <v-expansion-panel-content>
+                        <div v-html="item.descr"></div>
+                        <div style=" text-align: center">
+                            <a :href="item.url" target="_blank">
+                                <v-btn
+                                    text
+                                >Подробнее ...</v-btn>
+                            </a>
+                        </div>
+                    </v-expansion-panel-content>
+                </v-expansion-panel>
+            </v-expansion-panels>
         </v-flex>
     </v-row>
 </template>
@@ -205,51 +195,18 @@
 
             newTodo: '',
             todo: [],
-            todos: [],
-            day: '25',
-            date: 'Wednesday ',
-            ord: 'dddd',
-            year: '2019',
 
             XMLyandex: window.m_index,
-            colorNews: [
-                'indigo',
-                'warning',
-                'pink darken-2',
-                'red lighten-1',
-                'deep-purple accent-4'
-            ],
-            tab: null,
+
+            tab: 1,
             items: [
                 'Задачи', 'Контакты'
             ],
-            itemsC: [
-                {
-                    avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-                    title: 'Brunch this weekend? hj hj h hjhjhj ',
-                    subtitle: "<span class='text--primary'>Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?",
-                },
-                {
-                    avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
-                    title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>',
-                    subtitle: "<span class='text--primary'>to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.",
-                },
-                {
-                    avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-                    title: 'Oui oui',
-                    subtitle: "<span class='text--primary'>Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?",
-                },
-                {
-                    avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
-                    title: 'Birthday gift',
-                    subtitle: "<span class='text--primary'>Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?",
-                },
-                {
-                    avatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
-                    title: 'Recipe to try',
-                    subtitle: "<span class='text--primary'>Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.",
-                },
-            ],
+
+            results: '',
+            input: '',
+            error: null,
+            loading: false,
         }),
         computed: {
             ...mapGetters(['sortedArray','options', 'tasksUsers', 'intTask']),
@@ -266,16 +223,45 @@
             this.$store.dispatch('FETCH_DATA')
         },
         mounted() {
+            this.searchInfo();
+        },
+        watch: {
+            input(after, before) {
+                this.searchInfo();
+            }
         },
         methods: {
+            searchInfo() {
+                if(this.input.length == 0) {
+                    axios.get('/getInfo')
+                        .then(response => {
+                            this.results = response.data.users
+                            console.log(this.results)
+                        })
+                        .catch(error => {
+                            console.log('Что то пошло не так, статус ошибки: ' + error)
+                        });
+                }else if (this.input.length > 2) {
+                    axios.get('/searchInfo', {params: {keywords: this.input.replace(/,/g, '*,')}})
+                        .then(response => {
+                            if (response.data.error) {
+                                this.error = response.data.error
+                                console.log(this.error)
 
-        },
-        filters: {
-            /*capitalize: function (value) {
-                if (!value) return ''
-                value = value.toString()
-                return value.charAt(0).toUpperCase() + value.slice(1)
-            }*/
+                            } else if (response.data.message) {
+                                this.error = response.data.message
+                                console.log(this.error)
+
+                            } else {
+                                this.results = response.data.users
+                                console.log(this.results)
+                            }
+                        })
+                        .catch(error => {
+                            console.log('Что то пошло не так, статус ошибки: ' + error)
+                        });
+                }
+            },
         }
     }
 </script>
@@ -285,6 +271,10 @@
     /* Helper classes */
     .basil {
         box-shadow: inset 2px -3px 20px 0px rgba(25, 118, 210, 0.26), 2px -1px 5px 0px rgba(25, 118, 210, 0.24);
+    }
+
+    .v-list-item__subtitle, .v-list-item__title {
+        white-space: inherit !important;
     }
 </style>
 

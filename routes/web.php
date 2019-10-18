@@ -9,14 +9,11 @@ Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login')->name('auth.login');
 Route::get('logout', 'Auth\LoginController@logout')->name('auth.logout');
 
-/*Route::group(['middleware' => ['auth'],'prefix' => 'messages', 'as' => 'messages.'], function () {
-    Route::get('/', ['uses' => 'MessagesController@index', 'as' => 'index']);
-    Route::get('create', [ 'uses' => 'MessagesController@create','as' => 'create']);
-    Route::post('/', ['uses' => 'MessagesController@store','as' => 'store']);
-    Route::get('{id}', ['uses' => 'MessagesController@show','as' => 'show']);
-    Route::put('{id}', ['uses' => 'MessagesController@update','as' => 'update']);
-});*/
 Route::get('/admin', ['uses' => 'HomeController@index', 'as' => 'index']);
+Route::get('/searchInfo', ['uses' => 'HomeController@searchInfo', 'as' => 'searchInfo']);
+Route::get('/getInfo', ['uses' => 'HomeController@getInfo', 'as' => 'getInfo']);
+
+
 Route::post('/obmen', ['uses' => 'FileManagerController@index', 'as' => 'index']);
 
 Route::group(['middleware' =>  ['auth'],'prefix' => 'dialog', 'as' => 'dialog.'], function () {

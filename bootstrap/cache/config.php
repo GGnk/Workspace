@@ -248,6 +248,26 @@
         array (
         ),
       ),
+      'it_crud' => 
+      array (
+        'driver' => 'mysql',
+        'url' => NULL,
+        'host' => '127.0.0.1',
+        'port' => '3306',
+        'database' => 'it_crud',
+        'username' => 'web',
+        'password' => 'webweb',
+        'unix_socket' => '',
+        'charset' => 'utf8mb4',
+        'collation' => 'utf8mb4_unicode_ci',
+        'prefix' => '',
+        'prefix_indexes' => true,
+        'strict' => true,
+        'engine' => NULL,
+        'options' => 
+        array (
+        ),
+      ),
       'pgsql' => 
       array (
         'driver' => 'pgsql',
