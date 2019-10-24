@@ -15,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+
     }
 
     /**
@@ -30,11 +30,34 @@ class HomeController extends Controller
 
     public function getInfo(User $user) {
         $result = collect();
+        $people = collect();
+        $build = collect();
+        $business = collect();
+
         for ($i = 1; $i <= 3; $i++) {
-            $user = User::where('sort', $i)->inRandomOrder()->limit(5)->get();
-            $result->push($user);
+            $array = User::where('sort', $i)->get();
+
+            $array->each(function ($item) use ($people,$build,$business) {
+                switch ($item['sort']) {
+                    case 1:
+                        $people->push($item);
+                        break;
+                    case 2:
+                        $build->push($item);
+                        break;
+                    case 3:
+                        $business->push($item);
+                        break;
+                }
+
+            });
+
         }
-        return ['users' => $result->collapse()];
+        $result->put('people',count($people));
+        $result->put('build',count($build));
+        $result->put('business',count($business));
+
+        return $result;
 
 
     }
@@ -48,9 +71,31 @@ class HomeController extends Controller
                 ->take(5)
                 ->get();
 
-            $result = ['users' => $user];
+            $people =collect();
+            $build = collect();
+            $business = collect();
 
-            return $result['users']->count() ? $result : ['error' => 'По запросу ничего не найдено'];
+            collect($user)->each(function ($item) use ($people,$build,$business) {
+                switch ($item['sort']) {
+                    case 1:
+                        $people->push($item);
+                        break;
+                    case 2:
+                        $build->push($item);
+                        break;
+                    case 3:
+                        $business->push($item);
+                        break;
+                }
+
+            });
+
+            $result = collect();
+            $result->put('people', $people);
+            $result->put('build', $build);
+            $result->put('business', $business);
+
+            return $user->count() ? $result : ['message' => 'По запросу ничего не найдено'];
 
         }
 

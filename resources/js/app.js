@@ -1,6 +1,6 @@
 require('jquery');
 require('./bootstrap');
-import { mdiAccountSupervisorCircle } from '@mdi/js';
+
 import Vue from 'vue'
 import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';

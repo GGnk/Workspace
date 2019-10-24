@@ -1,15 +1,17 @@
 let actions = {
-    async FETCH_DATA({commit}) {
-        commit("LOADER_INFO", "NULL")
-        await axios.get('/dialog/tasks')
-            .then((e) => {
-                commit('TASKS_DATA', e)
-                commit("LOADER_INFO", "NULL")
-            })
-            .catch((err) => {
-                commit("LOADER_INFO", 'ERROR')
-                console.log(err)
-            })
+    async FETCH_DATA({commit, getters}) {
+
+            commit("LOADER_INFO", "NULL")
+            await axios.get('/admin/tasks')
+                .then((e) => {
+                    commit('TASKS_DATA', e)
+                    commit("LOADER_INFO", "NULL")
+                })
+                .catch((err) => {
+                    commit("LOADER_INFO", 'ERROR')
+                    console.log(err)
+                })
+
     },
 }
 

@@ -7,18 +7,11 @@
         >
             <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
             <span class="title white--text ml-3 mr-5">IT&nbsp;<span class="font-weight-light">помощник</span></span>
-            <v-text-field
-                dark
-                solo-inverted
-                flat
-                hide-details
-                label="Поиск инфы"
-                prepend-inner-icon="search"
-            ></v-text-field>
+
             <div class="flex-grow-1"></div>
         </v-app-bar>
 
-        <v-navigation-drawer
+        <!--<v-navigation-drawer
             v-model="drawer"
             app
             clipped
@@ -38,14 +31,14 @@
                             <v-icon>{{ item.icon }}</v-icon>
                         </v-list-item-action>
                         <v-list-item-content>
-                            <v-list-item-title class="grey--text">
+                            <v-list-item-title class="grey&#45;&#45;text">
                                 {{ item.text }}
                             </v-list-item-title>
                         </v-list-item-content>
                     </v-list-item>
                 </template>
             </v-list>
-        </v-navigation-drawer>
+        </v-navigation-drawer>-->
 
         <v-content>
             <v-container

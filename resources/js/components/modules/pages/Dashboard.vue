@@ -3,7 +3,7 @@
         class="layout wrap"
         dense
     >
-        <v-flex class="mb-2 px-2"  lg9 sm3 xs12>
+        <v-col class="mb-2 px-2" >
             <v-card dark>
                 <v-tabs
                     v-model="tab"
@@ -19,7 +19,15 @@
 
                 <v-tabs-items v-model="tab">
                     <v-tab-item >
-                        <v-list two-line subheader>
+                        <v-card v-if="Auser.length === 0">
+                            <v-card-title>
+                                Авторизуйтесь для просмотра задач
+                            </v-card-title>
+                            <v-card-actions>
+                                <v-btn block outlined href="/login">Войти</v-btn>
+                            </v-card-actions>
+                        </v-card>
+                        <v-list v-else two-line subheader>
                             <v-container>
                                 <v-flex xs12>
                                     <v-text-field clearable v-model="newTodo" id="newTodo" name="newTodo" :label="sortedArray.length > 0 ?'Еще пару задач?':'Начни что то делать...'" @keyup.enter="">
@@ -78,39 +86,165 @@
                                 flat
                                 hide-details
                                 label="Поиск информации"
+                                placeholder="Введи запрос. Не менее 3 символов!"
                                 prepend-inner-icon="search"
-                                v-model="input"
-                                @keydown.enter="searchInfo"
+                                v-model="input_info"
+                                @keydown.enter="SEARCH_INFO"
+                                @keydown.esc="$store.commit('INPUT_SET', '')"
                             ></v-text-field>
+                            <v-btn
+                            class="ma-2"
+                            outlined
+                            rounded
+                            small
+                            @click="addFormUser = !addFormUser"
+                            >
+                                <v-icon left>mdi-plus</v-icon>
+                                Добавить
+                            </v-btn>
+                            <v-badge
+                                v-if="addFormUser && valid"
+                                overlap
+                                class="align-self-center"
+                            >
+                                <template v-slot:badge >
+                                    <v-tooltip right class="success">
+                                        <template v-slot:activator="{ on }">
+                                            <v-icon v-on="on" class="white--text" >keyboard</v-icon>
+                                        </template>
+                                        <span>Ctrl + <v-icon>mouse</v-icon> left</span>
+                                    </v-tooltip>
+                                </template>
+                                <v-btn
+                                    class="ma-2"
+                                    outlined
+                                    rounded
+                                    small
+                                    @click="$store.dispatch('ADD_CONTACT')"
+                                >
+                                    Save
+                                </v-btn>
+                            </v-badge>
+
                             <v-list-item-group color="primary">
 
                                 <v-row>
-                                    <v-flex lg4 sm6 xs12
-                                            class="mb-2 px-2">
+                                    <v-flex v-if="get_error_search" class="px-2">
+                                        <v-skeleton-loader
+                                            v-if="loading_search"
+                                            height="94"
+                                            type="list-item-two-line"
+                                        >
+                                        </v-skeleton-loader>
+                                        <v-card
+                                            outlined
+                                            disabled
+                                            style="text-align: center"
+                                        >
+                                            <v-card-title
+                                                style="text-align: center"
+
+                                                v-html="get_error_search"
+                                            >
+                                            </v-card-title>
+
+                                        </v-card>
+                                    </v-flex>
+                                    <v-expand-transition>
+                                        <v-col cols="12" v-if="addFormUser" @click.ctrl.left="$store.dispatch('ADD_CONTACT')">
+                                            <v-alert
+                                                dense
+                                                text
+                                                v-model="alertT"
+                                                type="success"
+                                            >
+                                                Лех, у тебя получилось!!! ))
+                                            </v-alert>
+                                            <v-form v-model="valid">
+                                                    <v-container>
+                                                        <v-row>
+                                                            <v-col
+                                                                cols="12"
+                                                                md="6"
+                                                            >
+                                                                <v-text-field
+                                                                    v-model="input_name"
+                                                                    :rules="nameRules"
+                                                                    :counter="30"
+                                                                    label="ФИО (Название)"
+                                                                    required
+                                                                ></v-text-field>
+                                                            </v-col>
+
+                                                            <v-col
+                                                                cols="12"
+                                                                md="6"
+                                                            >
+                                                                <v-text-field
+                                                                    v-model="input_profession"
+                                                                    :rules="nameRules"
+                                                                    :counter="30"
+                                                                    label="Должность"
+                                                                    required
+                                                                ></v-text-field>
+                                                            </v-col>
+
+                                                            <v-col
+                                                                cols="12"
+                                                                md="6"
+                                                            >
+                                                                <v-text-field
+                                                                    v-model="input_email"
+                                                                    :rules="emailRules"
+                                                                    label="E-mail"
+                                                                ></v-text-field>
+                                                            </v-col>
+                                                            <v-col
+                                                                cols="12"
+                                                                md="6"
+                                                            >
+                                                                <v-text-field
+                                                                    v-model="input_phone"
+                                                                    :rules="phoneRules"
+                                                                    label="Телефон"
+                                                                    aria-required="true"
+                                                                ></v-text-field>
+                                                            </v-col>
+                                                        </v-row>
+                                                    </v-container>
+                                                </v-form>
+                                        </v-col>
+                                    </v-expand-transition>
+                                    <v-col
+                                            class="mb-2 px-2" v-if="get_results_search.people.length > 0">
                                         <p class="title" style="text-align: center; margin: 0">Люди</p>
                                         <hr style="margin: 0">
-                                        <v-list-item
-                                            v-for="(item, i) in results"
-                                            v-if="item.sort == 1"
-                                            :key="i"
-                                        >
-                                            <v-list-item-avatar>
-                                                <i class="material-icons">
-                                                    emoji_people
-                                                </i>
-                                            </v-list-item-avatar>
-                                            <v-list-item-content>
-                                                <v-list-item-title v-html="item.name"></v-list-item-title>
-                                                <v-list-item-subtitle v-html="item.phone"></v-list-item-subtitle>
-                                            </v-list-item-content>
-                                        </v-list-item>
-                                    </v-flex>
-                                    <v-flex lg4 sm6 xs12
-                                            class="mb-2 px-2">
+                                        <v-row>
+                                            <v-col :lg="(get_results_search.build.length || get_results_search.business.length) > 0? 12:4"
+                                                   :sm="(get_results_search.build.length || get_results_search.business.length) > 0? 12:6"
+                                                   xl="12"
+                                                   v-for="(item, i) in get_results_search.people"
+                                                   v-if="item.sort == 1"
+                                                   :key="i">
+                                                <v-list-item>
+                                                    <v-list-item-avatar>
+                                                        <i class="material-icons">
+                                                            emoji_people
+                                                        </i>
+                                                    </v-list-item-avatar>
+                                                    <v-list-item-content>
+                                                        <v-list-item-title v-html="item.name"></v-list-item-title>
+                                                        <v-list-item-subtitle v-html="item.phone"></v-list-item-subtitle>
+                                                    </v-list-item-content>
+                                                </v-list-item>
+                                            </v-col>
+                                        </v-row>
+                                    </v-col>
+                                    <v-col class="mb-2 px-2" v-if="get_results_search.build.length > 0">
                                         <p class="title" style="text-align: center; margin: 0">Службы</p>
                                         <hr style="margin: 0">
                                         <v-list-item
-                                            v-for="(item, i) in results"
+                                            v-for="(item, i) in get_results_search.build"
                                             v-if="item.sort == 2"
                                             :key="i"
                                         >
@@ -124,13 +258,12 @@
                                                 <v-list-item-subtitle v-html="item.phone"></v-list-item-subtitle>
                                             </v-list-item-content>
                                         </v-list-item>
-                                    </v-flex>
-                                    <v-flex lg4 sm6 xs12
-                                            class="mb-2 px-2">
+                                    </v-col>
+                                    <v-col class="mb-2 px-2" v-if="get_results_search.business.length > 0">
                                         <p class="title" style="text-align: center; margin: 0">Внешнии компании</p>
                                         <hr style="margin: 0">
                                         <v-list-item
-                                            v-for="(item, i) in results"
+                                            v-for="(item, i) in get_results_search.business"
                                             v-if="item.sort == 3"
                                             :key="i"
                                         >
@@ -144,14 +277,14 @@
                                                 <v-list-item-subtitle v-html="item.phone"></v-list-item-subtitle>
                                             </v-list-item-content>
                                         </v-list-item>
-                                    </v-flex>
+                                    </v-col>
                                 </v-row>
                             </v-list-item-group>
                         </v-list>
                     </v-tab-item>
                 </v-tabs-items>
             </v-card>
-        </v-flex>
+        </v-col>
 
         <v-flex lg3 sm3 xs12
                 class="mb-2 px-2 news">
@@ -183,13 +316,14 @@
 
 <script>
     import widget from '../Widget'
-    import {mapGetters} from 'vuex'
+    import {mapGetters, mapActions} from 'vuex'
 
     export default {
         name: "Dashboard",
         components: {
           widget,
-            'mac-header':  () => import ('../mac-header')
+            'mini-tasks': () => import('./etc/miniTasks'),
+            'mac-header':  () => import ('./etc/mac-header')
         },
         data: () => ({
 
@@ -203,13 +337,35 @@
                 'Задачи', 'Контакты'
             ],
 
-            results: '',
-            input: '',
-            error: null,
-            loading: false,
+            alertT: false,
+
+            addFormUser: false,
+            valid: false,
+            name: '',
+            profession: '',
+            phone:'',
+            phoneRules: [
+                v => !!v || 'Телефон обязателен!',
+
+            ],
+            sort: '',
+            nameRules: [
+                v => !!v || 'Потом не вспомнишь!',
+                v => v.length <= 30 || 'Name must be less than 30 characters',
+            ],
+            email: '',
+            emailRules: [
+                /* v => !!v || 'E-mail is required',
+                v => /.+@.+/.test(v) || 'E-mail must be valid',*/
+            ],
+
+
         }),
         computed: {
-            ...mapGetters(['sortedArray','options', 'tasksUsers', 'intTask']),
+            ...mapGetters(['Auser','sortedArray','options', 'tasksUsers', 'intTask',
+                'get_info', 'get_input_search', 'get_results_search', 'get_error_search', 'loading_search',
+                'inputContactName','inputContactProfession','inputContactSort','inputContactEmail','inputContactPhone',
+            ]),
             task_array: {
                 get () {
                     return this.intTask
@@ -217,51 +373,69 @@
                 set (value) {
                     this.$store.commit('TASK_LIST', value)
                 }
+            },
+            input_info: {
+                get() {
+                    return this.get_input_search
+                },
+                set(value) {
+                    this.$store.commit('INPUT_SET', value)
+                }
+            },
+            input_name: {
+                get() {
+                    return this.inputContactName
+                },
+                set(value) {
+                    this.$store.commit('UPDATE_INPUT_CONTACT', {key: 'name', data: value})
+                }
+            },
+            input_profession: {
+                get() {
+                    return this.inputContactName
+                },
+                set(value) {
+                    this.$store.commit('UPDATE_INPUT_CONTACT', {key: 'profession', data: value})
+                }
+            },
+            input_sort: {
+                get() {
+                    return this.inputContactName
+                },
+                set(value) {
+                    this.$store.commit('UPDATE_INPUT_CONTACT', {key: 'sort', data: value})
+                }
+            },
+            input_email: {
+                get() {
+                    return this.inputContactName
+                },
+                set(value) {
+                    this.$store.commit('UPDATE_INPUT_CONTACT', {key: 'email', data: value})
+                }
+            },
+            input_phone: {
+                get() {
+                    return this.inputContactName
+                },
+                set(value) {
+                    this.$store.commit('UPDATE_INPUT_CONTACT', {key: 'phone', data: value})
+                }
             }
         },
         created() {
             this.$store.dispatch('FETCH_DATA')
         },
         mounted() {
-            this.searchInfo();
+            // this.$store.dispatch('GET_INFO')
         },
         watch: {
-            input(after, before) {
-                this.searchInfo();
+            input_info(newInput, oldInput) {
+                this.SEARCH_INFO()
             }
         },
         methods: {
-            searchInfo() {
-                if(this.input.length == 0) {
-                    axios.get('/getInfo')
-                        .then(response => {
-                            this.results = response.data.users
-                            console.log(this.results)
-                        })
-                        .catch(error => {
-                            console.log('Что то пошло не так, статус ошибки: ' + error)
-                        });
-                }else if (this.input.length > 2) {
-                    axios.get('/searchInfo', {params: {keywords: this.input.replace(/,/g, '*,')}})
-                        .then(response => {
-                            if (response.data.error) {
-                                this.error = response.data.error
-                                console.log(this.error)
-
-                            } else if (response.data.message) {
-                                this.error = response.data.message
-                                console.log(this.error)
-
-                            } else {
-                                this.results = response.data.users
-                                console.log(this.results)
-                            }
-                        })
-                        .catch(error => {
-                            console.log('Что то пошло не так, статус ошибки: ' + error)
-                        });
-                }
-            },
+            ...mapActions(['SEARCH_INFO'])
         }
     }
 </script>

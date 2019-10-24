@@ -13,6 +13,7 @@ import state from "./state"
 import fileManager from "./modules/file-manager"
 import maps from "./modules/maps";
 import tasks from "./modules/tasks";
+import search from "./modules/search";
 
 
 export default new Vuex.Store({
@@ -21,7 +22,8 @@ export default new Vuex.Store({
     modules: {
         fileManager,
         maps,
-        tasks
+        tasks,
+        search
     },
     state,
     mutations,

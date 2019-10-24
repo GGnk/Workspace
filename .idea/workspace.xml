@@ -2,19 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="381a243a-1d9c-4d69-8a68-88a322d6b33a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/storage/debugbar/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/framework/cache/data/3f/cf/3fcff8d7e08ae3f50661ccc993b3df787177b3e3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/framework/cache/data/cc/85/cc8553f69bf73266b2d936f66cda1bf74f7ba40c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/modules/pages/etc/miniTasks.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/store/modules/search.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bootstrap/cache/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap/cache/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/fonts/vendor/@mdi/materialdesignicons-webfont.eot" beforeDir="false" afterPath="$PROJECT_DIR$/public/fonts/vendor/@mdi/materialdesignicons-webfont.eot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/fonts/vendor/@mdi/materialdesignicons-webfont.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/public/fonts/vendor/@mdi/materialdesignicons-webfont.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/fonts/vendor/@mdi/materialdesignicons-webfont.woff" beforeDir="false" afterPath="$PROJECT_DIR$/public/fonts/vendor/@mdi/materialdesignicons-webfont.woff" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/fonts/vendor/@mdi/materialdesignicons-webfont.woff2" beforeDir="false" afterPath="$PROJECT_DIR$/public/fonts/vendor/@mdi/materialdesignicons-webfont.woff2" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/modules/HomeComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modules/HomeComponent.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/modules/mac-header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modules/mac-header.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/modules/mac-header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modules/pages/etc/mac-header.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/modules/pages/Dashboard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modules/pages/Dashboard.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/store/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/store/modules/tasks.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/store/modules/tasks.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -67,6 +76,13 @@
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="livechat: schema" type="ebfa3cd1:MariaImplModel$Schema" />
         <item name="messages: table" type="dbc44a63:MariaImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="livechat: schema" type="ebfa3cd1:MariaImplModel$Schema" />
+        <item name="users: table" type="dbc44a63:MariaImplModel$Table" />
       </path>
     </expand>
     <select />
@@ -203,16 +219,16 @@
     <property name="ts.external.directory.path" value="D:\inst\IntelliJ IDEA 2019.2.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="P:\livechat\html\resources\js\components\modules" />
+      <recent name="C:\Users\Администратор\Desktop\OSPanel\domains\LiveChat\app\Events" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="P:\livechat\html\resources\js\components\modules\pages\etc" />
       <recent name="P:\livechat\html\app\Models" />
       <recent name="P:\livechat\html\app\Models\" />
       <recent name="P:\livechat\html\app" />
       <recent name="P:\livechat\html\app\Traits" />
-      <recent name="P:\livechat\html\app\Models\Dialogs" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="P:\livechat\html\resources\js\components\modules" />
-      <recent name="C:\Users\Администратор\Desktop\OSPanel\domains\LiveChat\app\Events" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -292,7 +308,9 @@
       <workItem from="1570509555691" duration="22582000" />
       <workItem from="1570790322108" duration="9515000" />
       <workItem from="1571115687861" duration="1723000" />
-      <workItem from="1571290235243" duration="30824000" />
+      <workItem from="1571290235243" duration="33092000" />
+      <workItem from="1571648426455" duration="49833000" />
+      <workItem from="1571897960613" duration="14677000" />
     </task>
     <task id="LOCAL-00001" summary="Обновление 0.0.2">
       <created>1563279931885</created>
@@ -588,7 +606,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570796262739</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="Обновление 0.0.2.44">
+      <created>1571401871273</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1571401871273</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -611,7 +636,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Обновление 0.0.2.18" />
     <MESSAGE value="Обновление 0.0.2.19 ftp" />
     <MESSAGE value="Обновление 0.0.2.20 ftp" />
     <MESSAGE value="Обновление 0.0.2.21 ftp" />
@@ -636,7 +660,8 @@
     <MESSAGE value="Обновление 0.0.2.41" />
     <MESSAGE value="Обновление 0.0.2.42" />
     <MESSAGE value="Обновление 0.0.2.43" />
-    <option name="LAST_COMMIT_MESSAGE" value="Обновление 0.0.2.43" />
+    <MESSAGE value="Обновление 0.0.2.44" />
+    <option name="LAST_COMMIT_MESSAGE" value="Обновление 0.0.2.44" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
