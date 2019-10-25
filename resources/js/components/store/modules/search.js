@@ -1,5 +1,6 @@
 
 let actions = {
+
     async GET_INFO({commit, state}) {
         state.loading = true
         await axios.get('/getInfo')
@@ -38,6 +39,7 @@ let actions = {
         axios.post('/admin/add-contact', state.addContact)
             .then(response => {
                 commit('ADD_CONTACT', response)
+
             })
             .catch(err => {
                 console.log(err)
@@ -49,10 +51,11 @@ let actions = {
 
 let mutations = {
     ADD_CONTACT (state, response) {
-        if (response.error) {
-            state.error = response.error
-        } else if (response.messages) {
-            state.message = response.messages
+        if (response.data.error) {
+            state.error = response.data.error
+        } else if (response.data.message) {
+            state.message = response.data.message
+            state.alert_message = true
         }
         console.log(response)
     },
@@ -98,9 +101,11 @@ let mutations = {
     INPUT_SET (state, input) {
         state.input_search = input
     },
+    ALERT_SET (state, input) {
+        state.alert_message = input
+    },
     UPDATE_INPUT_CONTACT(state, payload) {
-        console.log(payload.key)
-        console.log(state.addContact[payload.key] = payload.data)
+        state.addContact[payload.key] = payload.data
     }
 }
 
@@ -119,6 +124,12 @@ let getters = {
     },
     loading_search: state =>{
         return state.loading
+    },
+    get_message: state =>{
+        return state.message
+    },
+    get_alert: state => {
+       return state.alert_message
     },
     inputContactName: state =>{
         return state.addContact.name
@@ -153,13 +164,17 @@ let state = {
 
         profession: '',
         name: '',
-        sort:'',
+        sort:1,
         email:'',
         phone:''
     },
     input_search: '',
     error: null,
-    message: '',
+    alert_message: false,
+    message: {
+        type: 'success',
+        text: ''
+    },
     loading: false,
 }
 

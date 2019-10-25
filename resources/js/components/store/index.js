@@ -4,16 +4,13 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex);
 
-
-import actions from './actions'
-import mutations from './mutations'
-import getters from './getters'
-import state from "./state"
+import config from './config'
 
 import fileManager from "./modules/file-manager"
-import maps from "./modules/maps";
-import tasks from "./modules/tasks";
-import search from "./modules/search";
+import maps from "./modules/maps"
+import tasks from "./modules/tasks"
+import search from "./modules/search"
+import dialog from "./modules/dialog"
 
 
 export default new Vuex.Store({
@@ -23,10 +20,8 @@ export default new Vuex.Store({
         fileManager,
         maps,
         tasks,
-        search
+        search,
+        dialog
     },
-    state,
-    mutations,
-    getters,
-    actions
+    config
 })

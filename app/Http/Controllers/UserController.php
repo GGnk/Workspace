@@ -14,7 +14,6 @@ class UserController extends Controller
      */
     public function index()
     {
-        $this->middleware('web');
     }
 
 
@@ -26,8 +25,25 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+
+        $search = User::where('name', $request->name)->first();
+        if ($search) {
+            return [
+                $search,
+                'message' => [
+                    'type' => 'info',
+                    'text' => "Такой пользователь существует!"
+                ]
+            ];
+        }
         $user = User::create($request->all());
-        return $user;
+        return [
+            $user,
+            'message' => [
+                'type' => 'success',
+                'text' => 'Пользователь создан!'
+            ]
+        ];
     }
 
 

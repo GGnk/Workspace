@@ -19,13 +19,13 @@ const router = new VueRouter({
     routes
 })
 import wrapper from './components/WrapperComponent';
-import home from './components/modules/HomeComponent';
+import home from './components/HomeComponent';
 import store from '../js/components/store';
 
 const app = new Vue({
     el: '#app',
     components: {
-        wrapper,
+        // wrapper,
         home
     },
     store,
