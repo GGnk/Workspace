@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Models\Posts;
+use App\Models\Role;
 use App\Models\Task;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -25,7 +27,7 @@ class User extends Authenticatable {
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'phone'
     ];
 
     /**
@@ -45,10 +47,18 @@ class User extends Authenticatable {
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id');
+    }
 
     public function tasks()
     {
         return $this->hasMany(Task::class, 'users_id');
+    }
+    public function posts()
+    {
+        return $this->hasMany(Posts::class, 'users_id');
     }
 
     /**
@@ -114,4 +124,6 @@ class User extends Authenticatable {
                 $q->orWhere((new Dialog\Thread)->getTable() . '.updated_at', '>', $this->getConnection()->raw($this->getConnection()->getTablePrefix() . (new Dialog\Participant)->getTable() . '.last_read'));
             })->get();
     }
+
+
 }

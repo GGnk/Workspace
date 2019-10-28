@@ -36,7 +36,8 @@ let actions = {
         }
     },
     ADD_CONTACT({commit, state}) {
-        axios.post('/admin/add-contact', state.addContact)
+        // TODO: поставить /admin/add-contact
+        axios.post('/add-contact', state.addContact)
             .then(response => {
                 commit('ADD_CONTACT', response)
 

@@ -17,11 +17,12 @@ export default new Vuex.Store({
     //Строгий режим. Все изменения проводить через мутацию (в режиме разработчика)
    // strict: process.env.NODE_ENV !== 'production',
     modules: {
-        fileManager,
-        maps,
+        config,
+
+        // fileManager,
+        // maps,
         tasks,
         search,
-        dialog
-    },
-    config
+        // dialog
+    }
 })

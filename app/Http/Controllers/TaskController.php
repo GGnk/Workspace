@@ -25,9 +25,8 @@ class TaskController extends Controller
             $qwery->where('completed',false)->latest();
         }])->get();
 
-        $auth = Auth::user();
 
-        return compact('tasks', 'auth');
+        return compact('tasks');
     }
     /**
      * Store a newly created resource in storage.

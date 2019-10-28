@@ -2,24 +2,42 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="381a243a-1d9c-4d69-8a68-88a322d6b33a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/js/components/store/config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/store/modules/dialog.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/PostsController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/RoleController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/SearchController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Models/Posts.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Models/Role.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/flare.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/ignition.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LiveChat.iml" beforeDir="false" afterPath="$PROJECT_DIR$/LiveChat.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Exceptions/Handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exceptions/Handler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Task.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Task.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bootstrap/cache/config.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bootstrap/cache/packages.php" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap/cache/packages.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bootstrap/cache/services.php" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap/cache/services.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/modules/HomeComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/HomeComponent.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/modules/pages/Dashboard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/Dashboard.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/modules/pages/etc/mac-header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/etc/mac-header.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/modules/pages/etc/miniTasks.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/etc/miniTasks.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/store/actions.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/store/getters.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/HomeComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/HomeComponent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/pages/Dashboard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/Dashboard.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/store/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/store/config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/store/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/store/modules/dialog.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/store/modules/dialog.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/store/modules/search.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/store/modules/search.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/store/mutations.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/store/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/store/routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/store/state.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/store/modules/tasks.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/store/modules/tasks.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/data/2a/db/2adb32b5e5d3fa7e68cfd0cb1648ac55962f61a0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/data/5f/6c/5f6c52387a9a1bada5ec08b8df9e489b6a114d87" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/data/aa/d1/aad1781b855cc5816599899c0450c4bee686891b" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/data/ca/f0/caf014779207c9c7477fe1c660835ebc62e1190f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/framework/cache/data/ee/2f/ee2f842aa7bb1f53edf3a2ed2c09a1807ffa6c90" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,7 +48,7 @@
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution>
-      <executable />
+      <executable path="composer" />
     </execution>
   </component>
   <component name="DatabaseLocalColorSettings">
@@ -183,14 +201,16 @@
       <path value="$PROJECT_DIR$/vendor/fideloper/proxy" />
       <path value="$PROJECT_DIR$/vendor/paragonie/random_compat" />
       <path value="$PROJECT_DIR$/vendor/hamcrest/hamcrest-php" />
-      <path value="$PROJECT_DIR$/vendor/predis/predis" />
-      <path value="$PROJECT_DIR$/vendor/cakephp/chronos" />
-      <path value="$PROJECT_DIR$/vendor/laravel/horizon" />
       <path value="$PROJECT_DIR$/vendor/maximebf/debugbar" />
       <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-debugbar" />
       <path value="$PROJECT_DIR$/vendor/doctrine/instantiator" />
       <path value="$PROJECT_DIR$/vendor/doctrine/inflector" />
       <path value="$PROJECT_DIR$/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/vendor/facade/ignition-contracts" />
+      <path value="$PROJECT_DIR$/vendor/facade/ignition" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/type" />
+      <path value="$PROJECT_DIR$/vendor/facade/flare-client-php" />
+      <path value="$PROJECT_DIR$/vendor/scrivo/highlight.php" />
     </include_path>
   </component>
   <component name="ProjectId" id="1Qg8vZdmfwSDj2mU1kxzWITDT7r" />
@@ -214,16 +234,16 @@
     <property name="ts.external.directory.path" value="D:\inst\IntelliJ IDEA 2019.2.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="P:\livechat\html\resources\js\components\modules" />
+      <recent name="C:\Users\Администратор\Desktop\OSPanel\domains\LiveChat\app\Events" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="P:\livechat\html\app\Models" />
       <recent name="P:\livechat\html\resources\js\components\pages" />
       <recent name="P:\livechat\html\resources\js\components" />
       <recent name="P:\livechat\html\resources\js\components\store" />
       <recent name="P:\livechat\html\resources\js\components\modules\pages\etc" />
-      <recent name="P:\livechat\html\app\Models" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="P:\livechat\html\resources\js\components\modules" />
-      <recent name="C:\Users\Администратор\Desktop\OSPanel\domains\LiveChat\app\Events" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -305,7 +325,8 @@
       <workItem from="1571115687861" duration="1723000" />
       <workItem from="1571290235243" duration="33092000" />
       <workItem from="1571648426455" duration="49833000" />
-      <workItem from="1571897960613" duration="27663000" />
+      <workItem from="1571897960613" duration="27757000" />
+      <workItem from="1572171283207" duration="29166000" />
     </task>
     <task id="LOCAL-00001" summary="Обновление 0.0.2">
       <created>1563279931885</created>
@@ -615,7 +636,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571921957025</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="Обновление 0.0.2.46">
+      <created>1572006341100</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1572006341100</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -638,7 +666,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Обновление 0.0.2.20 ftp" />
     <MESSAGE value="Обновление 0.0.2.21 ftp" />
     <MESSAGE value="Обновление 0.0.2.22" />
     <MESSAGE value="Обновление 0.0.2.24" />
@@ -663,7 +690,8 @@
     <MESSAGE value="Обновление 0.0.2.43" />
     <MESSAGE value="Обновление 0.0.2.44" />
     <MESSAGE value="Обновление 0.0.2.45" />
-    <option name="LAST_COMMIT_MESSAGE" value="Обновление 0.0.2.45" />
+    <MESSAGE value="Обновление 0.0.2.46" />
+    <option name="LAST_COMMIT_MESSAGE" value="Обновление 0.0.2.46" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

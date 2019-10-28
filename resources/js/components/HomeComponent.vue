@@ -73,6 +73,12 @@
             ],
 
         }),
+        created() {
+            this.$store.dispatch('config/INITIAL_BOOT')
+        },
+        mounted() {
+            this.$store.dispatch('config/INSPECTOR')
+        }
 
 
     }

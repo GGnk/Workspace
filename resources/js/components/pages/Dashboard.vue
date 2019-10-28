@@ -19,15 +19,7 @@
 
                 <v-tabs-items v-model="tab">
                     <v-tab-item >
-                        <v-card v-if="!Auser">
-                            <v-card-title>
-                                Авторизуйтесь для просмотра задач
-                            </v-card-title>
-                            <v-card-actions>
-                                <v-btn block outlined href="/login">Войти</v-btn>
-                            </v-card-actions>
-                        </v-card>
-                        <v-list v-else two-line subheader>
+                        <v-list v-if="this['config/auth']" two-line subheader>
                             <v-container>
                                 <v-flex xs12>
                                     <v-text-field clearable v-model="newTodo" id="newTodo" name="newTodo" :label="sortedArray.length > 0 ?'Еще пару задач?':'Начни что то делать...'" @keyup.enter="">
@@ -74,6 +66,14 @@
                             </div>
 
                         </v-list>
+                        <v-card v-else>
+                            <v-card-title>
+                                Авторизуйтесь для просмотра задач
+                            </v-card-title>
+                            <v-card-actions>
+                                <v-btn block outlined href="/login">Войти</v-btn>
+                            </v-card-actions>
+                        </v-card>
                     </v-tab-item>
                     <v-tab-item>
                         <v-list
@@ -112,7 +112,7 @@
                                         <template v-slot:activator="{ on }">
                                             <v-icon v-on="on" class="white--text" >keyboard</v-icon>
                                         </template>
-                                        <span>Ctrl + <v-icon>mouse</v-icon> left</span>
+                                        <span>Ctrl + Enter</span>
                                     </v-tooltip>
                                 </template>
                                 <v-btn
@@ -151,7 +151,7 @@
                                         </v-card>
                                     </v-flex>
                                     <v-expand-transition>
-                                        <v-col cols="12" v-if="addFormUser" @click.ctrl.left="$store.dispatch('ADD_CONTACT')">
+                                        <v-col cols="12" v-if="addFormUser" @keyup.ctrl.enter="$store.dispatch('ADD_CONTACT')">
                                             <v-alert
                                                 prominent
                                                 colored-border
@@ -175,7 +175,7 @@
                                                                 <v-text-field
                                                                     v-model="input_name"
                                                                     :rules="nameRules"
-                                                                    :counter="30"
+                                                                    :counter="50"
                                                                     label="ФИО (Название)"
                                                                     required
                                                                 ></v-text-field>
@@ -188,7 +188,7 @@
                                                                 <v-text-field
                                                                     v-model="input_profession"
                                                                     :rules="nameRules"
-                                                                    :counter="30"
+                                                                    :counter="50"
                                                                     label="Должность"
                                                                     required
                                                                 ></v-text-field>
@@ -336,6 +336,8 @@
 <script>
     import widget from '../modules/Widget'
     import {mapGetters, mapActions} from 'vuex'
+    import getters from "../templates/vue-material-admin-master/src/store/getters";
+    import store from "../templates/vue-material-admin-master/src/store";
 
     export default {
         name: "Dashboard",
@@ -373,20 +375,20 @@
             sort: '',
             nameRules: [
                 v => !!v || 'Потом не вспомнишь!',
-                v => v.length <= 30 || 'Name must be less than 30 characters',
+                v => v.length <= 50 || 'Name must be less than 30 characters',
             ],
             email: '',
             emailRules: [
-                /* v => !!v || 'E-mail is required', */
-                v => /.+@.+/.test(v) || 'E-mail must be valid',
+                /* v => !!v || 'E-mail is required',
+                v => /.+@.+/.test(v) || 'E-mail must be valid', */
             ],
 
 
         }),
         computed: {
-            ...mapGetters(['Auser','sortedArray','options', 'tasksUsers', 'intTask',
+            ...mapGetters(["config/auth",'sortedArray','options', 'tasksUsers', 'intTask',
                 'get_info', 'get_input_search', 'get_results_search', 'get_error_search', 'loading_search', 'get_message', 'get_alert',
-                'inputContactName','inputContactProfession','inputContactSort','inputContactEmail','inputContactPhone',
+                'inputContactName','inputContactProfession','inputContactSort','inputContactEmail','inputContactPhone'
             ]),
             task_array: {
                 get () {
@@ -457,10 +459,6 @@
             this.$store.dispatch('FETCH_DATA')
         },
         mounted() {
-            axios.interceptors.request.use(config => {
-                console.log('Лог по запросу');
-                return config;
-            });
         },
         watch: {
             input_info(newInput, oldInput) {

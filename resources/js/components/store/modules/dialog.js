@@ -114,17 +114,7 @@ let getters = {
 }
 
 let mutations = {
-    LOADER_INFO (state, err) {
-        if (state.loaderRequest && err !== 'ERROR') {
-            state.loaderRequest = false
-            state.loaderError = false
-        }else if(state.loaderRequest && err === 'ERROR') {
-            state.loaderRequest = false
-            state.loaderError = true
-        }else {
-            state.loaderRequest = true
-        }
-    },
+
     GET_ALL_CHATS (state, e) {
         console.log(e)
         state.threads = e.data.result
@@ -225,8 +215,6 @@ let state = {
         subject: 'Сообщение',
         recipients: []
     },
-    loaderRequest: false,
-    loaderError: false,
     currentTab: 'mapRGD',
     showChat: 'notshow',
     tabss: [
