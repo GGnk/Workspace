@@ -11,6 +11,8 @@ import maps from "./modules/maps"
 import tasks from "./modules/tasks"
 import search from "./modules/search"
 import dialog from "./modules/dialog"
+import contacts from "./modules/contacts"
+import posts from "./modules/posts"
 
 
 export default new Vuex.Store({
@@ -18,7 +20,8 @@ export default new Vuex.Store({
    // strict: process.env.NODE_ENV !== 'production',
     modules: {
         config,
-
+        contacts,
+        posts,
         // fileManager,
         // maps,
         tasks,

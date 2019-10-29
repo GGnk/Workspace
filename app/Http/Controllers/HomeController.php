@@ -34,14 +34,17 @@ class HomeController extends Controller
         if($auth) {
             return [
                 'auth' => true,
-                'user' => $user->where('id', Auth::id())->with('role')->get(),
+                'user' => $user->with('role')->find(Auth::id()),
                 'setting' => [
                     'default' => 1
                 ]
             ];
         } else {
             return [
-                'auth' => $auth
+                'auth' => $auth,
+                'setting' => [
+                    'default' => 1
+                ]
             ];
         }
     }

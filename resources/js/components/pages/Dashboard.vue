@@ -93,11 +93,12 @@
                                 @keydown.esc="$store.commit('INPUT_SET', '')"
                             ></v-text-field>
                             <v-btn
-                            class="ma-2"
-                            outlined
-                            rounded
-                            small
-                            @click="addFormUser = !addFormUser"
+                                v-if="this['config/admin']"
+                                class="ma-2"
+                                outlined
+                                rounded
+                                small
+                                @click="addFormUser = !addFormUser"
                             >
                                 <v-icon left>mdi-plus</v-icon>
                                 Добавить
@@ -120,7 +121,7 @@
                                     outlined
                                     rounded
                                     small
-                                    @click="$store.dispatch('ADD_CONTACT')"
+                                    @click="$store.dispatch('contacts/ADD_CONTACT')"
                                 >
                                     Save
                                 </v-btn>
@@ -150,8 +151,9 @@
 
                                         </v-card>
                                     </v-flex>
-                                    <v-expand-transition>
-                                        <v-col cols="12" v-if="addFormUser" @keyup.ctrl.enter="$store.dispatch('ADD_CONTACT')">
+                                    <v-expand-transition
+                                    >
+                                        <v-col cols="12" v-if="addFormUser" @keyup.ctrl.enter="$store.dispatch('contacts/ADD_CONTACT')">
                                             <v-alert
                                                 prominent
                                                 colored-border
@@ -159,10 +161,10 @@
                                                 v-model="alert_add"
                                                 border="left"
                                                 elevation="2"
-                                                :type="get_message.type"
+                                                :type="this['contacts/get_message'].type"
                                                 icon="mdi-account"
                                             >
-                                                {{get_message.text}}
+                                                {{this['contacts/get_message'].text}}
 
                                             </v-alert>
                                             <v-form v-model="valid">
@@ -234,14 +236,14 @@
                                                 </v-form>
                                         </v-col>
                                     </v-expand-transition>
-                                    <v-col
-                                            class="mb-2 px-2" v-if="get_results_search.people.length > 0">
+                                    <v-col class="mb-2 px-2" v-if="get_results_search.people.length > 0">
                                         <p class="title" style="text-align: center; margin: 0">Люди</p>
                                         <hr style="margin: 0">
                                         <v-row>
                                             <v-col :lg="(get_results_search.build.length || get_results_search.business.length) > 0? 12:4"
                                                    :sm="(get_results_search.build.length || get_results_search.business.length) > 0? 12:6"
                                                    xl="12"
+                                                   style="flex-basis: auto"
                                                    v-for="(item, i) in get_results_search.people"
                                                    v-if="item.sort == 1"
                                                    :key="i">
@@ -259,7 +261,8 @@
                                             </v-col>
                                         </v-row>
                                     </v-col>
-                                    <v-col class="mb-2 px-2" v-if="get_results_search.build.length > 0">
+                                    <v-col class="mb-2 px-2"
+                                           v-if="get_results_search.build.length > 0">
                                         <p class="title" style="text-align: center; margin: 0">Службы</p>
                                         <hr style="margin: 0">
                                         <v-list-item
@@ -336,8 +339,6 @@
 <script>
     import widget from '../modules/Widget'
     import {mapGetters, mapActions} from 'vuex'
-    import getters from "../templates/vue-material-admin-master/src/store/getters";
-    import store from "../templates/vue-material-admin-master/src/store";
 
     export default {
         name: "Dashboard",
@@ -386,9 +387,12 @@
 
         }),
         computed: {
-            ...mapGetters(["config/auth",'sortedArray','options', 'tasksUsers', 'intTask',
-                'get_info', 'get_input_search', 'get_results_search', 'get_error_search', 'loading_search', 'get_message', 'get_alert',
-                'inputContactName','inputContactProfession','inputContactSort','inputContactEmail','inputContactPhone'
+            ...mapGetters(['config/auth','config/admin','config/root',
+                'sortedArray','options', 'tasksUsers', 'intTask',
+                'get_info', 'get_input_search', 'get_results_search', 'get_error_search', 'loading_search',
+                'contacts/get_alert','contacts/get_message',
+                'contacts/inputContactName','contacts/inputContactProfession','contacts/inputContactSort',
+                'contacts/inputContactEmail','contacts/inputContactPhone'
             ]),
             task_array: {
                 get () {
@@ -400,10 +404,10 @@
             },
             alert_add: {
                 get () {
-                    return this.get_alert
+                    return this['contacts/get_alert']
                 },
                 set (value) {
-                    this.$store.commit('ALERT_SET', value)
+                    this.$store.commit('contacts/ALERT_SET', value)
                 }
             },
             input_info: {
@@ -416,42 +420,42 @@
             },
             input_name: {
                 get() {
-                    return this.inputContactName
+                    return this['contacts/inputContactName']
                 },
                 set(value) {
-                    this.$store.commit('UPDATE_INPUT_CONTACT', {key: 'name', data: value})
+                    this.$store.commit('contacts/UPDATE_INPUT_CONTACT', {key: 'name', data: value})
                 }
             },
             input_profession: {
                 get() {
-                    return this.inputContactProfession
+                    return this['contacts/inputContactProfession']
                 },
                 set(value) {
-                    this.$store.commit('UPDATE_INPUT_CONTACT', {key: 'profession', data: value})
+                    this.$store.commit('contacts/UPDATE_INPUT_CONTACT', {key: 'profession', data: value})
                 }
             },
             input_sort: {
                 get() {
-                    return this.inputContactSort
+                    return this['contacts/inputContactSort']
                 },
                 set(value) {
-                    this.$store.commit('UPDATE_INPUT_CONTACT', {key: 'sort', data: value})
+                    this.$store.commit('contacts/UPDATE_INPUT_CONTACT', {key: 'sort', data: value})
                 }
             },
             input_email: {
                 get() {
-                    return this.inputContactEmail
+                    return this['contacts/inputContactEmail']
                 },
                 set(value) {
-                    this.$store.commit('UPDATE_INPUT_CONTACT', {key: 'email', data: value})
+                    this.$store.commit('contacts/UPDATE_INPUT_CONTACT', {key: 'email', data: value})
                 }
             },
             input_phone: {
                 get() {
-                    return this.inputContactPhone
+                    return this['contacts/inputContactPhone']
                 },
                 set(value) {
-                    this.$store.commit('UPDATE_INPUT_CONTACT', {key: 'phone', data: value})
+                    this.$store.commit('contacts/UPDATE_INPUT_CONTACT', {key: 'phone', data: value})
                 }
             }
         },

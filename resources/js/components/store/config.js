@@ -3,6 +3,7 @@ let actions = {
         await axios.post('/initial')
             .then((info) => {
                 commit('INITIAL_BOOT', info)
+                commit('ACCESS_INFO')
             })
             .catch((err) => {
                 console.log(err)
@@ -21,10 +22,43 @@ let actions = {
 let mutations = {
     INITIAL_BOOT(state, info) {
         if(info.data.auth) {
-            state.auth_user = info.data.user
+            state.user = info.data.user
             state.setting = info.data.setting
+            state.loggedIn = true
         } else {
-            state.auth_user = false
+            state.user = false
+            state.loggedIn = false
+            state.setting = info.data.setting
+        }
+    },
+    /**
+     * Access for user
+     * 1 - add
+     * 2 - edit
+     * 3 - delete
+     * 4 - view for root user
+     * 5 - soft deleted
+     * @return boolean
+     * */
+    ACCESS_INFO(state) {
+        if (state.loggedIn) {
+            if (state.user.role_id === 3){
+                state.setting.access_admin = false
+                state.setting.access_root = false
+            } else if(state.user.role_id === 2) {
+                state.setting.access_admin = true
+                state.setting.access_root = false
+            }else if(state.user.role_id === 1) {
+                state.setting.access_admin = true
+                state.setting.access_root = true
+            }else {
+                state.setting.access_admin = false
+                state.setting.access_root = false
+            }
+            console.log('===================================')
+            console.log('Доступ админа: '+ (state.setting.access_admin ? 'Да':'Нет'))
+            console.log('Доступ root: '+ (state.setting.access_root ? 'Да':'Нет'))
+            console.log('===================================')
         }
     },
     LOADER_INFO (state, err) {
@@ -37,21 +71,32 @@ let mutations = {
         }else {
             state.loaderRequest = true
         }
-    },
+    }
 }
 
 let getters = {
     auth: state => {
-        return state.auth_user
+        return state.loggedIn
+    },
+    admin: state => {
+        return state.setting.access_admin
+    },
+    root: state => {
+        return state.setting.access_root
+    },
+    user: state => {
+        return state.user
     }
 }
 
 let state = {
-    auth_user: false,
+    user: false,
     setting: {
-        default: 1
+        access_admin: false,
+        access_root: false,
+        default: 1,
+        loggedIn: false
     },
-    admin: false,
     loaderRequest: false,
     loaderError: false,
 }

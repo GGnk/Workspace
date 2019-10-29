@@ -3,7 +3,7 @@ let actions = {
         if (getters['config/auth']) {
             await axios.get('/admin/tasks')
                 .then((e) => {
-                    let index = e.data.tasks.findIndex(el => el.id === getters['config/auth'].id)
+                    let index = e.data.tasks.findIndex(el => el.id === getters['config/user'].id)
                     commit('TASKS_DATA', {e,index})
                 })
                 .catch((err) => {
@@ -38,7 +38,7 @@ let getters = {
             // .sort((a, b) => a.completed - b.completed)
     },
     intTask: (state, getters) => {
-        return state.intTask = getters['config/auth'].id
+        return state.intTask = getters['config/user'].id
     },
     options: state=> {
         return state.options
