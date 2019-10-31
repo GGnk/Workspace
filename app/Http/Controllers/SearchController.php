@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Posts;
 use App\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SearchController extends Controller
 {
@@ -42,14 +44,14 @@ class SearchController extends Controller
 
     }
 
-    public function searchInfo(Request $request) {
+    public function searchInfo(Request $request, User $user) {
 
         if($request->has('keywords')) {
             $input = $request->input('keywords');
 
-            $user = collect(User::WhereRaw("MATCH(name, email, profession, phone) AGAINST('*$input*' IN BOOLEAN MODE)")
-                ->take(5)
-                ->get());
+            $req = collect($user/*->setConnection('it_crud')*/->WhereRaw("MATCH(name, email, profession, phone) AGAINST('*$input*' IN BOOLEAN MODE)")
+                        ->take(5)
+                        ->get());
 
             $posts = collect(Posts::WhereRaw("MATCH(title, description) AGAINST('*$input*' IN BOOLEAN MODE)")
                 ->take(5)
@@ -59,16 +61,17 @@ class SearchController extends Controller
             $build = collect();
             $business = collect();
 
-            $user->each(function ($item) use ($people,$build,$business) {
-                switch ($item['sort']) {
+            $req->each(function ($item) use ($people,$build,$business) {
+                $res = collect($item)->put('menu', false);
+                switch ($res['sort']) {
                     case 1:
-                        $people->push($item);
+                        $people->push($res);
                         break;
                     case 2:
-                        $build->push($item);
+                        $build->push($res);
                         break;
                     case 3:
-                        $business->push($item);
+                        $business->push($res);
                         break;
                 }
 
@@ -80,7 +83,7 @@ class SearchController extends Controller
             $result->put('business', $business);
             $result->put('posts', $posts);
 
-            return $user->count() || $posts->count() ? $result : ['message' => 'По запросу ничего не найдено'];
+            return $req->count() || $posts->count() ? $result : ['message' => 'По запросу ничего не найдено'];
 
         }
 

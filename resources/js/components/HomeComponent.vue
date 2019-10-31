@@ -11,7 +11,7 @@
             <div class="flex-grow-1"></div>
         </v-app-bar>
 
-        <!--<v-navigation-drawer
+        <v-navigation-drawer
             v-model="drawer"
             app
             clipped
@@ -21,29 +21,39 @@
                 dense
                 class="grey lighten-4"
             >
-                <template v-for="(item, i) in items">
+                <template
+                    v-for="(item, i) in $store.getters['config/left_menu']"
+                    v-if="item.access"
+                >
 
                     <v-list-item
+                        link
+                        light
                         :key="i"
-                        @click=""
+                        :href="item.url"
+                        @click="item.action = !item.action"
                     >
-                        <v-list-item-action>
+                        <v-list-item-action v-if="!item.replace">
                             <v-icon>{{ item.icon }}</v-icon>
                         </v-list-item-action>
-                        <v-list-item-content>
-                            <v-list-item-title class="grey&#45;&#45;text">
+                        <v-list-item-content v-if="!item.replace">
+                            <v-list-item-title class="grey--text">
                                 {{ item.text }}
                             </v-list-item-title>
                         </v-list-item-content>
+
+                        <full-screen-setting v-if="item.replace" :item="item"></full-screen-setting>
                     </v-list-item>
+
                 </template>
             </v-list>
-        </v-navigation-drawer>-->
+        </v-navigation-drawer>
 
         <v-content>
             <v-container
                 fluid
             >
+
                 <router-view></router-view>
             </v-container>
         </v-content>
@@ -56,22 +66,14 @@
         props: {
             source: String,
         },
+        components: {
+            'full-screen-setting': () => import ('./pages/etc/fullScreenSetting')
+        },
+        computed: {
 
+        },
         data: () => ({
             drawer: false,
-            items: [
-                { icon: 'lightbulb_outline', text: 'Заметки' },
-                { icon: 'touch_app', text: 'Reminders' },
-                { icon: 'add', text: 'Create new label' },
-                { icon: 'archive', text: 'Archive' },
-                { icon: 'delete', text: 'Trash' },
-                { icon: 'settings', text: 'Settings' },
-                { icon: 'chat_bubble', text: 'Trash' },
-                { icon: 'help', text: 'Help' },
-                { icon: 'phonelink', text: 'App downloads' },
-                { icon: 'keyboard', text: 'Keyboard shortcuts' },
-            ],
-
         }),
         created() {
             this.$store.dispatch('config/INITIAL_BOOT')

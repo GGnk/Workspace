@@ -4,6 +4,7 @@ let actions = {
             .then((info) => {
                 commit('INITIAL_BOOT', info)
                 commit('ACCESS_INFO')
+                commit('LEFT_MENU')
             })
             .catch((err) => {
                 console.log(err)
@@ -12,7 +13,7 @@ let actions = {
     INSPECTOR(){
         axios.interceptors.request.use(config => {
             console.log('Исходящий запрос на '+config.url)
-            console.log('Ответ: '+config.data)
+            console.log(config)
             return config
         })
     }
@@ -23,13 +24,12 @@ let mutations = {
     INITIAL_BOOT(state, info) {
         if(info.data.auth) {
             state.user = info.data.user
-            state.setting = info.data.setting
             state.loggedIn = true
         } else {
             state.user = false
             state.loggedIn = false
-            state.setting = info.data.setting
         }
+        state.setting.default = info.data.setting.default
     },
     /**
      * Access for user
@@ -42,7 +42,7 @@ let mutations = {
      * */
     ACCESS_INFO(state) {
         if (state.loggedIn) {
-            if (state.user.role_id === 3){
+            if (state.user.role_id && state.user.role_id === 3){
                 state.setting.access_admin = false
                 state.setting.access_root = false
             } else if(state.user.role_id === 2) {
@@ -71,6 +71,21 @@ let mutations = {
         }else {
             state.loaderRequest = true
         }
+    },
+    LEFT_MENU (state) {
+        state.left_menu = [
+            { icon: 'add', text: 'Создать что то' , access: state.setting.access_admin},
+            { icon: 'chat_bubble', text: 'Месседжер' , access: state.loggedIn },
+            { icon: 'folder_shared', text: 'Файл менеджер', access: state.loggedIn},
+            { icon: 'delete', text: 'Корзина', access: state.setting.access_root},
+            { icon: 'settings', text: 'Настройки' , 'replace': true, 'action': state.full_screen_setting , access: true},
+            { icon: 'help', text: 'Help' , access: true},
+            { icon: 'contacts', text: 'Войти' , url: '/login', access: !state.loggedIn},
+            { icon: 'logout', text: 'Выйти' , url: '/logout', access: state.loggedIn},
+        ]
+    },
+    FULL_SCREEN_MENU(state) {
+        state.full_screen_setting = !state.full_screen_setting
     }
 }
 
@@ -86,6 +101,12 @@ let getters = {
     },
     user: state => {
         return state.user
+    },
+    left_menu: state => {
+        return state.left_menu
+    },
+    full_screen_setting: state => {
+        return state.full_screen_setting
     }
 }
 
@@ -95,8 +116,13 @@ let state = {
         access_admin: false,
         access_root: false,
         default: 1,
-        loggedIn: false
     },
+
+    left_menu: {},
+    full_screen_setting: false,
+
+    loggedIn: true,
+
     loaderRequest: false,
     loaderError: false,
 }

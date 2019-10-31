@@ -20,6 +20,9 @@ Route::post('/obmen', ['uses' => 'FileManagerController@index', 'as' => 'index']
 
 Route::group(['middleware' =>  ['auth'],'prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::post('/add-contact', ['uses' => 'UserController@store', 'as' => 'add-contact']);
+    Route::put('/edit-contact', ['uses' => 'UserController@update', 'as' => 'edit-contact']);
+    Route::get('/delete-contact/{id}', ['uses' => 'UserController@destroy', 'as' => 'delete-contact']);
+
     Route::post('/add-posts', ['uses' => 'PostsController@store', 'as' => 'add-posts']);
     Route::resource('deps', 'DepController', [
         'except' => ['create', 'edit', 'show']

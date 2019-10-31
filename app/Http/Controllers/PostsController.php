@@ -56,27 +56,6 @@ class PostsController extends Controller
         ];
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Posts  $posts
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Posts $posts)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Posts  $posts
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Posts $posts)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
