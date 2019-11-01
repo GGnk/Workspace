@@ -28,10 +28,9 @@
 
                     <v-list-item
                         link
-                        light
                         :key="i"
                         :href="item.url"
-                        @click="item.action = !item.action"
+                        @click="(item.route && $router.push(item.route).catch( err => {})) || (item.action = !item.action) "
                     >
                         <v-list-item-action v-if="!item.replace">
                             <v-icon>{{ item.icon }}</v-icon>
@@ -39,6 +38,11 @@
                         <v-list-item-content v-if="!item.replace">
                             <v-list-item-title class="grey--text">
                                 {{ item.text }}
+                                <v-badge
+                                    overlap
+                                    class="align-self-center"
+                                >
+                                </v-badge>
                             </v-list-item-title>
                         </v-list-item-content>
 

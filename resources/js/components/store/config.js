@@ -74,9 +74,11 @@ let mutations = {
     },
     LEFT_MENU (state) {
         state.left_menu = [
+            { icon: 'home', text: 'Главная', 'route': '/' , access: true},
             { icon: 'add', text: 'Создать что то' , access: state.setting.access_admin},
             { icon: 'chat_bubble', text: 'Месседжер' , access: state.loggedIn },
             { icon: 'folder_shared', text: 'Файл менеджер', access: state.loggedIn},
+            { icon: 'report', text: 'Версионность', 'route': 'ver', access: state.setting.access_admin},
             { icon: 'delete', text: 'Корзина', access: state.setting.access_root},
             { icon: 'settings', text: 'Настройки' , 'replace': true, 'action': state.full_screen_setting , access: true},
             { icon: 'help', text: 'Help' , access: true},
@@ -84,8 +86,8 @@ let mutations = {
             { icon: 'logout', text: 'Выйти' , url: '/logout', access: state.loggedIn},
         ]
     },
-    FULL_SCREEN_MENU(state) {
-        state.full_screen_setting = !state.full_screen_setting
+    TF_CONFIG (state, per) {
+        state[per] = !state[per]
     }
 }
 
@@ -107,6 +109,9 @@ let getters = {
     },
     full_screen_setting: state => {
         return state.full_screen_setting
+    },
+    theme: state => {
+        return state.theme
     }
 }
 
@@ -122,6 +127,8 @@ let state = {
     full_screen_setting: false,
 
     loggedIn: true,
+
+    theme: false,
 
     loaderRequest: false,
     loaderError: false,

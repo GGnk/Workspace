@@ -81,8 +81,8 @@
                             nav
                             dense
                         >
+
                             <v-text-field
-                                rounded
                                 solo
                                 clearable
                                 :loading="loading_search"

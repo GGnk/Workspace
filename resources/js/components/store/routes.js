@@ -7,5 +7,13 @@ let routes = [
             // requiresAuth: true
         }
     },
+    {
+        path: '/ver',
+        name: 'Ver',
+        component: () => import('../modules/VerComponent'),
+        meta: {
+            // requiresAuth: true
+        }
+    },
 ]
 export default routes
