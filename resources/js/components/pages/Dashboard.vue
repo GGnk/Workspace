@@ -286,6 +286,18 @@
                             </v-list-item-group>
                         </v-list>
                     </v-tab-item>
+                    <v-tab-item>
+                        <posts
+                            :title="'заголовок'"
+                            :desc="'тут тиао текст'"
+                            :author="{
+                                name: 'ФИО',
+                                img: 'https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light'
+                            }"
+                            :like="999"
+                            :color="'pink'"
+                            ></posts>
+                    </v-tab-item>
                 </v-tabs-items>
             </v-card>
         </v-col>
@@ -305,7 +317,8 @@
         components: {
             'miniContacts': () => import ('./etc/miniContacts'),
             'news':  () => import ('./etc/news'),
-            'mac-header':  () => import ('./etc/mac-header')
+            'mac-header':  () => import ('./etc/mac-header'),
+            'posts': () => import('./etc/posts')
         },
         data: () => ({
 
@@ -313,7 +326,7 @@
 
             tab: 1,
             items: [
-                'Задачи', 'Контакты'
+                'Задачи', 'Контакты', 'FAQ'
             ],
 
             /*Для формы добавления контакта*/
