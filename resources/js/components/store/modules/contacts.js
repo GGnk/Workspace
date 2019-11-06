@@ -24,10 +24,12 @@ let actions = {
                 console.log(err)
             })
     },
-    DELETE_CONTACT({commit, state}, id) {
-        axios.get('/admin/delete-contact/'+id)
+    DELETE_CONTACT({commit, state}, payload) {
+        console.log(payload)
+        axios.get('/admin/delete-contact/'+payload.item.id)
             .then(response => {
                 commit('INFO_CONTACT', response)
+                commit('DELETE_CONTACT', {item: payload.item, index: payload.index, cat: payload.cat}, { root: true })
             })
             .catch(err => {
                 state.message = {
@@ -51,6 +53,7 @@ let mutations = {
         }
         console.log(response)
     },
+
     UPDATE_INPUT_CONTACT(state, payload) {
         state.addContact[payload.key] = payload.data
     },

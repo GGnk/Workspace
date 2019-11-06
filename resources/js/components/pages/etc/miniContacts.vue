@@ -41,7 +41,7 @@
                         <v-btn
                             v-if="$store.getters['config/admin']"
                             icon
-                            @click="$store.dispatch('contacts/DELETE_CONTACT', item.id)"
+                            @click="dialog = true"
                         >
                             <v-icon>mdi-delete</v-icon>
                         </v-btn>
@@ -129,22 +129,38 @@
                     <v-btn @click="item.menu = false">Cancel</v-btn>
                     <v-btn
                         v-if="$store.getters['config/admin']"
-                        color="success" @click="$store.dispatch('contacts/EDIT_CONTACT', item)">Save</v-btn>
+                        color="success" @click="$store.dispatch('contacts/EDIT_CONTACT', item) && (item.menu = !item.menu)">Save</v-btn>
                 </v-form>
 
             </v-card-actions>
+
         </v-card>
+
+        <v-dialog v-model="dialog" persistent max-width="400">
+            <v-card>
+                <v-card-title class="headline"></v-card-title>
+                <v-card-text class="black--text">Вы уверены, что хотите удалить контакт - {{item.name}} ?</v-card-text>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="dark darken-1" text @click="dialog = false">Отмена</v-btn>
+                    <v-btn color="red white--text" @click="$store.dispatch('contacts/DELETE_CONTACT', {item, index, cat})  && (item.menu = !item.menu)">Удалить</v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
     </v-menu>
 </template>
 
 <script>
 export default {
   props: [
-        'item'
+      'item',
+      'index',
+      'cat'
   ],
 
   data() {
     return {
+        dialog: false,
         valid: false,
         rules: {
             phoneRules: [

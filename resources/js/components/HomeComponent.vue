@@ -1,5 +1,5 @@
 <template>
-    <v-app id="keep">
+    <v-app id="keep" >
         <v-app-bar
             app
             clipped-left
@@ -15,11 +15,11 @@
             v-model="drawer"
             app
             clipped
-            color="grey lighten-4"
+            :color="this.$vuetify.theme.dark ? '': 'grey lighten-4'"
         >
             <v-list
                 dense
-                class="grey lighten-4"
+                :class="this.$vuetify.theme.dark ? '': 'grey lighten-4'"
             >
                 <template
                     v-for="(item, i) in $store.getters['config/left_menu']"
@@ -57,10 +57,37 @@
             <v-container
                 fluid
             >
-
                 <router-view></router-view>
             </v-container>
         </v-content>
+        <v-btn
+            v-if="$store.getters['config/root']"
+            color="primary"
+            fab
+            bottom
+            right
+            fixed
+            dark
+            @click.stop="dialog = true"
+        >
+            <v-icon large>info</v-icon>
+        </v-btn>
+
+        <v-dialog
+            v-if="$store.getters['config/root']"
+            v-model="dialog"
+            max-width="500"
+        >
+            <v-card dark>
+                <v-card-title class="headline">Терминал</v-card-title>
+                <v-card-text class="pt-2 black">
+                    <p v-for="item in $store.getters['config/console']" v-if="item.module">{{item.module}} ({{item.message}})</p>
+                </v-card-text>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
     </v-app>
 </template>
 
@@ -78,6 +105,7 @@
         },
         data: () => ({
             drawer: false,
+            dialog: false,
         }),
         created() {
             this.$store.dispatch('config/INITIAL_BOOT')

@@ -1,3 +1,4 @@
+
 let actions = {
     async INITIAL_BOOT({commit}) {
         await axios.post('/initial')
@@ -12,7 +13,7 @@ let actions = {
     },
     INSPECTOR(){
         axios.interceptors.request.use(config => {
-            console.log('Исходящий запрос на '+config.url)
+            state.console.push({module: 'INSPECTOR', message: 'Исходящий запрос на '+config.url})
             console.log(config)
             return config
         })
@@ -55,10 +56,8 @@ let mutations = {
                 state.setting.access_admin = false
                 state.setting.access_root = false
             }
-            console.log('===================================')
-            console.log('Доступ админа: '+ (state.setting.access_admin ? 'Да':'Нет'))
-            console.log('Доступ root: '+ (state.setting.access_root ? 'Да':'Нет'))
-            console.log('===================================')
+            state.console.push({module: 'ACCESS_INFO', message: 'Доступ админа: '+ (state.setting.access_admin ? 'Да':'Нет')})
+            state.console.push({module: 'ACCESS_INFO', message: 'Доступ root: '+ (state.setting.access_root ? 'Да':'Нет')})
         }
     },
     LOADER_INFO (state, err) {
@@ -86,6 +85,9 @@ let mutations = {
             { icon: 'logout', text: 'Выйти' , url: '/logout', access: state.loggedIn},
         ]
     },
+    CONSOLE_CONFIG(state, payload) {
+        state.console.push({module: payload.module, message: payload.message})
+    },
     TF_CONFIG (state, per) {
         state[per] = !state[per]
     }
@@ -112,6 +114,9 @@ let getters = {
     },
     theme: state => {
         return state.theme
+    },
+    console: state => {
+        return state.console
     }
 }
 
@@ -128,10 +133,11 @@ let state = {
 
     loggedIn: true,
 
-    theme: false,
 
     loaderRequest: false,
     loaderError: false,
+
+    console: []
 }
 
 export default {

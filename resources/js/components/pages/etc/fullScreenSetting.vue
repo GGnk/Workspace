@@ -75,10 +75,10 @@
             },
             theme: {
                 get() {
-                    return this.$store.getters['config/theme']
+                    return this.$vuetify.theme.dark
                 },
                 set() {
-                    return this.$store.commit('config/TF_CONFIG', 'theme')
+                    return this.$vuetify.theme.dark = !this.$vuetify.theme.dark
                 }
             },
         },
@@ -93,6 +93,8 @@
             btn_menu() {
                 this.$store.commit('config/TF_CONFIG', 'full_screen_setting')
             }
+        },
+        mounted() {
         }
     }
 </script>

@@ -3,8 +3,8 @@
         class="layout wrap"
         dense
     >
-        <v-col class="mb-2 px-2" >
-            <v-card dark>
+        <v-col class="mb-2 px-2">
+            <v-card :dark="$store.getters['config/theme']">
                 <v-tabs
                     v-model="tab"
                     background-color="transparent"
@@ -84,7 +84,6 @@
 
                             <v-text-field
                                 solo
-                                clearable
                                 :loading="loading_search"
                                 autocomplete="none"
                                 autofocus
@@ -170,7 +169,7 @@
                                     <v-expand-transition
                                     >
                                         <v-col cols="12" v-if="addFormUser" @keyup.ctrl.enter="$store.dispatch('contacts/ADD_CONTACT')">
-                                            <v-form v-model="valid">
+                                            <v-form ref="form" v-model="valid">
                                                     <v-container>
                                                         <v-row>
                                                             <v-col
@@ -245,12 +244,12 @@
                                         <v-row>
                                                 <v-col :lg="(get_results_search.build.length || get_results_search.business.length) > 0? 12:4"
                                                        :sm="(get_results_search.build.length || get_results_search.business.length) > 0? 12:6"
-                                                       xl="12"
+                                                       :xl="(get_results_search.build.length || get_results_search.business.length) > 0? 6:3"
                                                        style="flex-basis: auto"
                                                        v-for="(item, i) in get_results_search.people"
                                                        :key="i">
 
-                                                    <miniContacts :item="item"></miniContacts>
+                                                    <miniContacts :item="item" :index="i" :cat="'people'"></miniContacts>
 
                                                 </v-col>
                                         </v-row>
@@ -262,10 +261,11 @@
                                         <v-row>
                                             <v-col :lg="(get_results_search.people.length || get_results_search.business.length) > 0? 12:4"
                                                    :sm="(get_results_search.people.length || get_results_search.business.length) > 0? 12:6"
+                                                   :xl="(get_results_search.people.length || get_results_search.business.length) > 0? 6:3"
                                                     v-for="(item, i) in get_results_search.build"
                                                     :key="i"
                                             >
-                                                <miniContacts :item="item"></miniContacts>
+                                                <miniContacts :item="item" :index="i" :cat="'build'"></miniContacts>
                                             </v-col>
                                         </v-row>
                                     </v-col>
@@ -275,10 +275,11 @@
                                         <v-row>
                                             <v-col :lg="(get_results_search.people.length || get_results_search.build.length) > 0? 12:4"
                                                    :sm="(get_results_search.people.length || get_results_search.build.length) > 0? 12:6"
+                                                   :xl="(get_results_search.people.length || get_results_search.build.length) > 0? 6:3"
                                                     v-for="(item, i) in get_results_search.business"
                                                     :key="i"
                                             >
-                                                <miniContacts :item="item"></miniContacts>
+                                                <miniContacts :item="item" :index="i" :cat="'business'"></miniContacts>
                                             </v-col>
                                         </v-row>
                                     </v-col>
@@ -287,16 +288,52 @@
                         </v-list>
                     </v-tab-item>
                     <v-tab-item>
-                        <posts
-                            :title="'заголовок'"
-                            :desc="'тут тиао текст'"
-                            :author="{
+                        <v-row class="mx-0">
+                            <posts
+                                :title="'заголовок'"
+                                :desc="'тут тиао текст'"
+                                :author="{
                                 name: 'ФИО',
                                 img: 'https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light'
                             }"
-                            :like="999"
-                            :color="'pink'"
-                            ></posts>
+                                :like="999"
+                                :color="'pink'"
+                            >
+                            </posts>
+                            <posts
+                                :title="'заголовок'"
+                                :desc="'тут тиао текст'"
+                                :author="{
+                                name: 'ФИО',
+                                img: 'https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light'
+                            }"
+                                :like="999"
+                                :color="'green'"
+                            >
+                            </posts>
+                            <posts
+                                :title="'заголовок'"
+                                :desc="'тут тиао текст'"
+                                :author="{
+                                name: 'ФИО',
+                                img: 'https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light'
+                            }"
+                                :like="999"
+                                :color="'dark'"
+                            >
+                            </posts>
+                            <posts
+                                :title="'заголовок'"
+                                :desc="'тут тиао текст'"
+                                :author="{
+                                name: 'ФИО',
+                                img: 'https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light'
+                            }"
+                                :like="999"
+                                :color="'grey'"
+                            >
+                            </posts>
+                        </v-row>
                     </v-tab-item>
                 </v-tabs-items>
             </v-card>
@@ -446,7 +483,10 @@
             }
         },
         methods: {
-            ...mapActions(['SEARCH_INFO' ])
+            ...mapActions(['SEARCH_INFO' ]),
+            reset () {
+                this.$refs.form.reset()
+            },
         }
     }
 </script>

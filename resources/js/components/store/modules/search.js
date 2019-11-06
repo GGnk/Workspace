@@ -18,7 +18,6 @@ let actions = {
             state.loading = true
         await axios.get('/searchInfo', {params: {keywords: state.input_search.replace(/,/g, '*,')}})
                 .then(response => {
-                    console.log('Отправляю в обработчик')
                     commit('INFO_SET', response)
                     state.loading = false
                 })
@@ -47,7 +46,6 @@ let mutations = {
         }
     },
     INFO_SET (state, response) {
-        console.log('Обработал')
         if (response.data.error) {
             state.error = response.data.error
 
@@ -70,22 +68,24 @@ let mutations = {
 
         } else {
             state.error = ''
-                state.results = {
+            state.results = {
                 people: response.data.people,
                 build: response.data.build,
                 business: response.data.business
             }
-            console.log(state.results)
         }
     },
     INPUT_SET (state, input) {
         state.input_search = input
-    }
+    },
+    DELETE_CONTACT(state, payload) {
+        state.results[payload.cat].splice(payload.index, 1)
+    },
 }
 
 let getters = {
     get_info: state=> {
-      return state.info
+        return state.info
     },
     get_results_search: state=> {
         return state.results

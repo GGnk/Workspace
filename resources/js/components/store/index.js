@@ -14,9 +14,9 @@ import dialog from "./modules/dialog"
 import contacts from "./modules/contacts"
 import posts from "./modules/posts"
 
-
 export default new Vuex.Store({
     //Строгий режим. Все изменения проводить через мутацию (в режиме разработчика)
+   // strict: process.env.NODE_ENV !== 'production',
    // strict: process.env.NODE_ENV !== 'production',
     modules: {
         config,
@@ -28,4 +28,5 @@ export default new Vuex.Store({
         search,
         // dialog
     }
+
 })

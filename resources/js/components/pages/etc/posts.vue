@@ -1,5 +1,4 @@
 <template>
-    <v-row>
         <v-col lg="4" sm="4" xl="12">
             <v-card
                 class="mx-auto"
@@ -45,7 +44,6 @@
                 </v-card-actions>
             </v-card>
         </v-col>
-    </v-row>
 </template>
 
 <script>

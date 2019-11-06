@@ -28,8 +28,8 @@ const app = new Vue({
         // wrapper,
         home
     },
-    store,
     vuetify,
+    store,
     router
 
 });

@@ -13,19 +13,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB as DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class TaskController extends Controller
 {
     public function index(User $user)
     {
-
         $tasks = $user->setConnection('it_crud')->where('role_id', 1)->with(['tasks' => function($qwery) {
             $qwery->where('completed',false)->latest();
         }])->get();
-
-
         return compact('tasks');
     }
     /**
