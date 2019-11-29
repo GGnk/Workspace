@@ -1,9 +1,10 @@
+<script src="../../../../../../obmen/html/resources/js/app.js"></script>
 <template>
     <v-row
         class="layout wrap"
         dense
     >
-        <v-col class="mb-2 px-2">
+        <v-col lg="9" sm="9" xs="12" class="mb-2 px-2">
             <v-card :dark="$store.getters['config/theme']">
                 <v-tabs
                     v-model="tab"
@@ -19,59 +20,15 @@
 
                 <v-tabs-items v-model="tab">
                     <v-tab-item >
-                        <v-list v-if="this['config/auth']" two-line subheader>
-                            <v-container>
-                                <v-flex xs12>
-                                    <v-text-field clearable v-model="newTodo" id="newTodo" name="newTodo" :label="sortedArray.length > 0 ?'Еще пару задач?':'Начни что то делать...'" @keyup.enter="">
-                                    </v-text-field>
-                                </v-flex>
-                            </v-container>
-                            <v-subheader class="subheading">Задачи:
-                                <div class="mx-2">
-                                    <v-select
-                                        :items="tasksUsers"
-                                        label="Пользователя"
-                                        width="120"
-                                        v-model="task_array"
-                                        item-text="name"
-                                        item-value="id"
-                                        hide-selected
-                                        color="success"
-                                        height="48"
-                                    ></v-select>
-                                </div>
-                            </v-subheader>
-                            <div style="overflow: auto; height: 25vw">
-                                <div v-for="(todo, i) in sortedArray" >
-                                    <v-list-item
-                                        style="line-height: 1; min-height: 45px; height: 45px"
-                                    >
-                                        <v-list-item-action>
-                                            <v-checkbox v-model="todo.completed"></v-checkbox>
-                                        </v-list-item-action>
-                                        <v-list-item-content>
-                                            <v-list-item-title :class="{
-                                        done: todo.completed
-                                        }" class="" >{{todo.title}}
-                                            </v-list-item-title>
-                                            <v-list-item-subtitle>Создана: {{todo.created_at}}</v-list-item-subtitle>
-                                        </v-list-item-content>
-                                        <v-btn icon ripple color="red"  v-if="todo.completed" @click="removeTodo(i)">
-                                            <v-icon class="white--text opacity-1"
-                                                    color="red"
-                                            >close</v-icon>
-                                        </v-btn>
-                                    </v-list-item>
-                                </div>
-                            </div>
-
-                        </v-list>
+                        <tasks v-if="this['config/auth']"></tasks>
                         <v-card v-else>
                             <v-card-title>
                                 Авторизуйтесь для просмотра задач
                             </v-card-title>
                             <v-card-actions>
-                                <v-btn block outlined href="/login">Войти</v-btn>
+                                <v-btn
+                                    @click="$store.commit('config/HOME_CONFIG', 'pincode')"
+                                    block outlined >Войти</v-btn>
                             </v-card-actions>
                         </v-card>
                     </v-tab-item>
@@ -94,40 +51,43 @@
                                 @keydown.enter="SEARCH_INFO"
                                 @keydown.esc="$store.commit('INPUT_SET', '')"
                             ></v-text-field>
-                            <v-btn
-                                v-if="this['config/admin']"
-                                class="ma-2"
-                                outlined
-                                rounded
-                                small
-                                @click="addFormUser = !addFormUser"
-                            >
-                                <v-icon left>mdi-plus</v-icon>
-                                Добавить
-                            </v-btn>
-                            <v-badge
-                                v-if="addFormUser && valid"
-                                overlap
-                                class="align-self-center"
-                            >
-                                <template v-slot:badge >
-                                    <v-tooltip right class="success">
-                                        <template v-slot:activator="{ on }">
-                                            <v-icon v-on="on" class="white--text" >keyboard</v-icon>
-                                        </template>
-                                        <span>Ctrl + Enter</span>
-                                    </v-tooltip>
-                                </template>
+                            <v-col cols
+                            class="text-right py-0">
+                                <v-badge
+                                    v-if="addFormUser && valid"
+                                    overlap
+                                    class="align-self-center"
+                                >
+                                    <template v-slot:badge >
+                                        <v-tooltip right class="success">
+                                            <template v-slot:activator="{ on }">
+                                                <v-icon v-on="on" class="white--text" >keyboard</v-icon>
+                                            </template>
+                                            <span>Ctrl + Enter</span>
+                                        </v-tooltip>
+                                    </template>
+                                    <v-btn
+                                        class="mx-2"
+                                        outlined
+                                        rounded
+                                        small
+                                        @click="$store.dispatch('contacts/ADD_CONTACT')"
+                                    >
+                                        Save
+                                    </v-btn>
+                                </v-badge>
                                 <v-btn
-                                    class="ma-2"
+                                    v-if="this['config/admin']"
+                                    class="mx-2"
                                     outlined
                                     rounded
                                     small
-                                    @click="$store.dispatch('contacts/ADD_CONTACT')"
+                                    @click="addFormUser = !addFormUser"
                                 >
-                                    Save
+                                    <v-icon left>mdi-plus</v-icon>
+                                    Добавить
                                 </v-btn>
-                            </v-badge>
+                            </v-col>
 
                             <v-list-item-group color="primary">
 
@@ -339,10 +299,10 @@
             </v-card>
         </v-col>
 
-        <v-flex lg3 sm3 xs12
+        <v-col lg="3" sm="3" xs="12"
                 class="mb-2 px-2">
             <news :title="'Саратова'"></news>
-        </v-flex>
+        </v-col>
     </v-row>
 </template>
 
@@ -352,20 +312,18 @@
     export default {
         name: "Dashboard",
         components: {
+            'tasks': () => import('../modules/TasksComponent'),
             'miniContacts': () => import ('./etc/miniContacts'),
             'news':  () => import ('./etc/news'),
             'mac-header':  () => import ('./etc/mac-header'),
-            'posts': () => import('./etc/posts')
+            'posts': () => import('./etc/posts'),
         },
         data: () => ({
-
-            newTodo: '',
 
             tab: 1,
             items: [
                 'Задачи', 'Контакты', 'FAQ'
             ],
-
             /*Для формы добавления контакта*/
             addFormUser: false,
             valid: false,
@@ -375,7 +333,7 @@
                 ],
                 nameRules: [
                     v => !!v || 'Потом не вспомнишь!',
-                    v => v.length <= 50 || 'Name must be less than 30 characters',
+                    v => v.length <= 70 || 'Name must be less than 30 characters',
                 ],
                 emailRules: [
                     /* v => !!v || 'E-mail is required',
@@ -393,20 +351,11 @@
         }),
         computed: {
             ...mapGetters(['config/auth','config/admin','config/root',
-                'sortedArray','options', 'tasksUsers', 'intTask',
                 'get_info', 'get_input_search', 'get_results_search', 'get_error_search', 'loading_search',
                 'contacts/get_alert','contacts/get_message',
                 'contacts/inputContactName','contacts/inputContactProfession','contacts/inputContactSort',
                 'contacts/inputContactEmail','contacts/inputContactPhone'
             ]),
-            task_array: {
-                get () {
-                    return this.intTask
-                },
-                set (value) {
-                    this.$store.commit('TASK_LIST', value)
-                }
-            },
             alert_add: {
                 get () {
                     return this['contacts/get_alert']
@@ -473,7 +422,6 @@
             }
         },
         created() {
-            this.$store.dispatch('FETCH_DATA')
         },
         mounted() {
         },
@@ -483,10 +431,7 @@
             }
         },
         methods: {
-            ...mapActions(['SEARCH_INFO' ]),
-            reset () {
-                this.$refs.form.reset()
-            },
+            ...mapActions(['SEARCH_INFO' ])
         }
     }
 </script>

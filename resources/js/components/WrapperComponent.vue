@@ -50,7 +50,6 @@
 
     import chats from '../components/modules/ThreadsComponent'
 
-    import file_manager from '../components/modules/FileManagerComponent'
     import sidebar from '../components/modules/SideBarComponent'
     import mapRGD from '../components/modules/MapComponent'
     import {mapGetters} from 'vuex'
@@ -61,7 +60,6 @@
         // mixins: [mixin],
         components: {
             chats,
-            file_manager,
             sidebar,
             mapRGD
         },

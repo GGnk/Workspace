@@ -1,5 +1,5 @@
 <template>
-        <v-col lg="4" sm="4" xl="12">
+        <v-col cols="12" sm="6" lg="4" xl="3">
             <v-card
                 class="mx-auto"
                 :color="color"

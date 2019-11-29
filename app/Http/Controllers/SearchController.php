@@ -49,9 +49,10 @@ class SearchController extends Controller
         if($request->has('keywords')) {
             $input = $request->input('keywords');
 
-            $req = collect($user/*->setConnection('it_crud')*/->WhereRaw("MATCH(name, email, profession, phone) AGAINST('*$input*' IN BOOLEAN MODE)")
-                        ->take(5)
-                        ->get());
+            $req = collect($user/*->setConnection('it_crud')*/
+                                ->WhereRaw("MATCH(name, email, profession, phone) AGAINST('*$input*' IN BOOLEAN MODE)")
+                                ->take(10)
+                                ->get());
 
             $posts = collect(Posts::WhereRaw("MATCH(title, description) AGAINST('*$input*' IN BOOLEAN MODE)")
                 ->take(5)

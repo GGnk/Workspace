@@ -15,5 +15,13 @@ let routes = [
             // requiresAuth: true
         }
     },
+    {
+        path: '/file-manager',
+        name: 'FileManager',
+        component: () => import('../pages/laravel-file-manager/src/FileManager'),
+        meta: {
+            // requiresAuth: true
+        }
+    },
 ]
 export default routes

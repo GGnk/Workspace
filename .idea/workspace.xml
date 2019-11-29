@@ -1,21 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="381a243a-1d9c-4d69-8a68-88a322d6b33a" name="Default Changelist" comment="">
+    <list default="true" id="381a243a-1d9c-4d69-8a68-88a322d6b33a" name="Default Changelist" comment="Обновление 1.0.2">
+      <change afterPath="$PROJECT_DIR$/.idea/composerJson.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/laravel-plugin.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/file-manager.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/modules/PinCodeComponent.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/.browserslistrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/.env.local" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/.eslintignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/.eslintrc.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/babel.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/jest.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/postcss.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/FileManager.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/assets/laravel-file-manager.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/components/blocks/ContextMenu.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/components/blocks/InfoBlock.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/components/blocks/Navbar.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/components/blocks/Notification.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/components/blocks/mixins/contextMenu.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/components/blocks/mixins/contextMenuActions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/components/blocks/mixins/contextMenuRules.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/components/manager/Breadcrumb.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/components/manager/DiskList.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/components/manager/GridView.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/components/manager/Manager.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/components/manager/TableView.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/components/manager/mixins/manager.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/components/modals/Modal.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/components/modals/additions/Cropper.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/components/modals/additions/SelectedFileList.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/components/modals/mixins/modal.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/components/modals/views/About.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/components/modals/views/AudioPlayer.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/components/modals/views/Clipboard.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/components/modals/views/Delete.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/components/modals/views/NewFile.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/components/modals/views/NewFolder.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/components/modals/views/Preview.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/components/modals/views/Properties.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/components/modals/views/Rename.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/components/modals/views/Status.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/components/modals/views/TextEdit.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/components/modals/views/Unzip.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/components/modals/views/Upload.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/components/modals/views/VideoPlayer.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/components/modals/views/Zip.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/components/tree/Branch.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/components/tree/FolderTree.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/eventBus.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/http/get.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/http/init-axios.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/http/post.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/init.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/lang/ar.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/lang/en.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/lang/ru.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/mixins/helper.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/mixins/translate.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/store.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/store/actions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/store/getters.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/store/manager/actions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/store/manager/getters.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/store/manager/mutations.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/store/manager/store.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/store/messages/mutations.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/store/messages/store.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/store/modal/mutations.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/store/modal/store.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/store/mutations.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/store/settings/getters.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/store/settings/mutations.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/store/settings/store.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/store/state.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/store/tree/actions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/store/tree/getters.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/store/tree/mutations.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/src/store/tree/store.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/vue.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/pages/laravel-file-manager/yarn.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storage/framework/cache/data/14/98/14987aec1199b0920ccd370a798591b1320f3bca" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storage/framework/cache/data/61/b7/61b76a73415193ec90a85980cc709e362191d9b6" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/ResetPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/ResetPasswordController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/VerificationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/VerificationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SearchController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SearchController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Task.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Task.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bootstrap/cache/packages.php" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap/cache/packages.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bootstrap/cache/services.php" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap/cache/services.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laravel-echo-server.lock" beforeDir="false" afterPath="$PROJECT_DIR$/laravel-echo-server.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/HomeComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/HomeComponent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/WrapperComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/WrapperComponent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/modules/FileManagerComponent.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/modules/TasksComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modules/TasksComponent.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/pages/Dashboard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/Dashboard.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/pages/etc/fullScreenSetting.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/etc/fullScreenSetting.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/pages/etc/miniContacts.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/etc/miniContacts.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/pages/etc/posts.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/pages/etc/posts.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/store/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/store/config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/store/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/store/modules/contacts.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/store/modules/contacts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/store/modules/search.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/store/modules/search.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/store/modules/tasks.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/store/modules/tasks.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/store/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/store/routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -91,6 +197,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="IgnoredFileRootStore">
     <option name="generatedRoots">
@@ -189,6 +296,15 @@
       <path value="$PROJECT_DIR$/vendor/sebastian/type" />
       <path value="$PROJECT_DIR$/vendor/facade/flare-client-php" />
       <path value="$PROJECT_DIR$/vendor/scrivo/highlight.php" />
+      <path value="$PROJECT_DIR$/vendor/intervention/image" />
+      <path value="$PROJECT_DIR$/vendor/jeremeamia/superclosure" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/vendor/alexusmai/laravel-file-manager" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-util" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php56" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/intervention/imagecache" />
     </include_path>
   </component>
   <component name="ProjectId" id="1Qg8vZdmfwSDj2mU1kxzWITDT7r" />
@@ -198,32 +314,33 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="TODO_SCOPE" value="All Places" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1568180178441" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="editor.config.ad.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/js/components/pages/etc" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
+    <property name="settings.editor.selected.configurable" value="Laravel.SettingsForm" />
     <property name="ts.external.directory.path" value="D:\inst\IntelliJ IDEA 2019.2.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="P:\livechat\html\resources\js\components\pages\etc" />
-      <recent name="P:\livechat\html\resources\js\components\modules" />
-      <recent name="P:\livechat\html\resources\js\components" />
-      <recent name="C:\Users\Администратор\Desktop\OSPanel\domains\LiveChat\app\Events" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="P:\livechat\html\resources\js\components" />
       <recent name="P:\livechat\html\resources\js\components\pages\etc" />
       <recent name="P:\livechat\html\app\Models" />
       <recent name="P:\livechat\html\resources\js\components\pages" />
       <recent name="P:\livechat\html\resources\js\components\store" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="P:\livechat\html\resources\js\components\pages\etc" />
+      <recent name="P:\livechat\html\resources\js\components\modules" />
+      <recent name="P:\livechat\html\resources\js\components" />
+      <recent name="C:\Users\Администратор\Desktop\OSPanel\domains\LiveChat\app\Events" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -307,14 +424,29 @@
       <workItem from="1571648426455" duration="49833000" />
       <workItem from="1571897960613" duration="27757000" />
       <workItem from="1572171283207" duration="138423000" />
-      <workItem from="1573014690776" duration="17860000" />
-    </task>
-    <task id="LOCAL-00002" summary="Обновление 0.0.2.1">
-      <created>1563281916877</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1563281916877</updated>
+      <workItem from="1573014690776" duration="30261000" />
+      <workItem from="1573194065225" duration="8097000" />
+      <workItem from="1573377831624" duration="4711000" />
+      <workItem from="1573534413606" duration="221000" />
+      <workItem from="1573534645318" duration="225000" />
+      <workItem from="1573534882549" duration="713000" />
+      <workItem from="1573571911065" duration="5524000" />
+      <workItem from="1573621397169" duration="622000" />
+      <workItem from="1573623792468" duration="54000" />
+      <workItem from="1573654723950" duration="7332000" />
+      <workItem from="1573707280375" duration="8885000" />
+      <workItem from="1573732293156" duration="15165000" />
+      <workItem from="1573833055797" duration="7482000" />
+      <workItem from="1574011892343" duration="5223000" />
+      <workItem from="1574064433537" duration="1334000" />
+      <workItem from="1574079721050" duration="7565000" />
+      <workItem from="1574236124340" duration="598000" />
+      <workItem from="1574253829777" duration="9681000" />
+      <workItem from="1574315518569" duration="10357000" />
+      <workItem from="1574657308526" duration="914000" />
+      <workItem from="1574658291647" duration="2078000" />
+      <workItem from="1574846226708" duration="26901000" />
+      <workItem from="1575047643592" duration="3051000" />
     </task>
     <task id="LOCAL-00003" summary="Обновление 0.0.2.2">
       <created>1563367167599</created>
@@ -652,7 +784,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572806597406</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="Обновление 1.0.1">
+      <created>1573044133927</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1573044133928</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -675,8 +814,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Обновление 0.0.2.27" />
-    <MESSAGE value="Обновление 0.0.2.28" />
     <MESSAGE value="Обновление 0.0.2.29" />
     <MESSAGE value="Обновление 0.0.2.30" />
     <MESSAGE value="Обновление 0.0.2.31" />
@@ -700,7 +837,9 @@
     <MESSAGE value="Обновление 0.0.2.49" />
     <MESSAGE value="Обновление 0.0.2.50" />
     <MESSAGE value="Обновление 0.0.2.51" />
-    <option name="LAST_COMMIT_MESSAGE" value="Обновление 0.0.2.51" />
+    <MESSAGE value="Обновление 1.0.1" />
+    <MESSAGE value="Обновление 1.0.2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Обновление 1.0.2" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

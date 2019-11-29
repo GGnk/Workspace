@@ -15,9 +15,9 @@
                         emoji_people
                     </i>
                 </v-list-item-avatar>
-                <v-list-item-content>
-                    <v-list-item-title v-html="item.name"></v-list-item-title>
-                    <v-list-item-subtitle v-html="item.phone"></v-list-item-subtitle>
+                <v-list-item-content >
+                    <v-list-item-title class="text-wrap">{{item.name}}</v-list-item-title>
+                    <v-list-item-subtitle>{{item.profession}}, {{item.phone}} </v-list-item-subtitle>
                 </v-list-item-content>
             </v-list-item>
         </template>
@@ -34,7 +34,6 @@
 
                     <v-list-item-content>
                         <v-list-item-title>{{item.name}}</v-list-item-title>
-                        <v-list-item-subtitle>{{item.profession}}</v-list-item-subtitle>
                     </v-list-item-content>
 
                     <v-list-item-action>
@@ -78,7 +77,7 @@
                                     :disabled="!$store.getters['config/admin']"
                                     v-model="item.profession"
                                     :rules="rules.nameRules"
-                                    :counter="50"
+                                    :counter="70"
                                     label="Должность"
                                     required
                                 ></v-text-field>
@@ -168,7 +167,7 @@ export default {
             ],
             nameRules: [
                 v => !!v || 'Потом не вспомнишь!',
-                v => v.length <= 50 || 'Name must be less than 30 characters',
+                v => v.length <= 70 || 'Name must be less than 30 characters',
             ],
             emailRules: [
                 /* v => !!v || 'E-mail is required',

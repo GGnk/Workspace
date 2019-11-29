@@ -10,7 +10,7 @@ class Task extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['title','desc','priority', 'toDate','status','completed','user_create','users_id','file',];
+    protected $fillable = ['title','desc','priority', 'toDate','status','cat','deps_id', 'general','completed','user_create','users_id','file',];
     protected $hidden = [];
 
     public function users()
@@ -18,7 +18,7 @@ class Task extends Model
         return $this->belongsTo(User::class, 'users_id');
     }
 
-    public function create_user()
+    public function author()
     {
         return $this->belongsTo(User::class, 'user_create');
     }

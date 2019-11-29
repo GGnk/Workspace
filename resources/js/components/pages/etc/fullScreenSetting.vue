@@ -22,22 +22,12 @@
                     </v-btn>
                     <v-toolbar-title>Настройки</v-toolbar-title>
                     <v-spacer></v-spacer>
-                    <v-toolbar-items>
-                        <v-btn dark text @click="dialog = false">Save</v-btn>
-                    </v-toolbar-items>
                 </v-toolbar>
                 <v-list three-line subheader>
-                    <v-subheader>User Controls</v-subheader>
                     <v-list-item>
                         <v-list-item-content>
-                            <v-list-item-title>Content filtering</v-list-item-title>
-                            <v-list-item-subtitle>Set the content filtering level to restrict apps that can be downloaded</v-list-item-subtitle>
-                        </v-list-item-content>
-                    </v-list-item>
-                    <v-list-item>
-                        <v-list-item-content>
-                            <v-list-item-title>Password</v-list-item-title>
-                            <v-list-item-subtitle>Require password for purchase or use password to restrict purchase</v-list-item-subtitle>
+                            <v-list-item-title>Общие настройки</v-list-item-title>
+                            <v-list-item-subtitle>Изменения в системе сохраняются в базе данных, для каждого пользователя отдельно!</v-list-item-subtitle>
                         </v-list-item-content>
                     </v-list-item>
                 </v-list>
@@ -50,7 +40,7 @@
                         </v-list-item-action>
                         <v-list-item-content>
                             <v-list-item-title>Темная тема</v-list-item-title>
-                            <v-list-item-subtitle>Все возможные элементы на странице будут иметь фон - черный цвет, текст - белый.</v-list-item-subtitle>
+                            <v-list-item-subtitle>Все возможные элементы на странице будут иметь фон - цвета 'dark', текст - 'white'.</v-list-item-subtitle>
                         </v-list-item-content>
                     </v-list-item>
                 </v-list>

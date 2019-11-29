@@ -5,14 +5,16 @@
             clipped-left
             color="secondary"
         >
-            <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+            <v-app-bar-nav-icon
+                @click="$store.commit('config/HOME_CONFIG', 'drawer')"
+            ></v-app-bar-nav-icon>
             <span class="title white--text ml-3 mr-5">IT&nbsp;<span class="font-weight-light">помощник</span></span>
 
             <div class="flex-grow-1"></div>
         </v-app-bar>
 
         <v-navigation-drawer
-            v-model="drawer"
+            :value="$store.getters['config/home'].drawer"
             app
             clipped
             :color="this.$vuetify.theme.dark ? '': 'grey lighten-4'"
@@ -68,14 +70,15 @@
             right
             fixed
             dark
-            @click.stop="dialog = true"
+            @click.stop="$store.commit('config/HOME_CONFIG', 'dialog')"
         >
             <v-icon large>info</v-icon>
         </v-btn>
 
         <v-dialog
             v-if="$store.getters['config/root']"
-            v-model="dialog"
+            :value="$store.getters['config/home'].dialog"
+            @input="$store.commit('config/HOME_CONFIG', 'dialog')"
             max-width="500"
         >
             <v-card dark>
@@ -88,31 +91,43 @@
                 </v-card-actions>
             </v-card>
         </v-dialog>
+        <v-dialog
+            v-if="!$store.getters['config/user']"
+            :value="$store.getters['config/home'].pincode"
+            @input="$store.commit('config/HOME_CONFIG', 'pincode')"
+            max-width="500"
+        >
+            <pin-code-component></pin-code-component>
+        </v-dialog>
     </v-app>
 </template>
 
 <script>
+    import PinCodeComponent from "./modules/PinCodeComponent";
+
     export default {
         name: "Home",
         props: {
             source: String,
         },
         components: {
+            'pin-code-component': () => import ('./modules/PinCodeComponent'),
             'full-screen-setting': () => import ('./pages/etc/fullScreenSetting')
         },
         computed: {
 
         },
         data: () => ({
-            drawer: false,
-            dialog: false,
+
         }),
         created() {
             this.$store.dispatch('config/INITIAL_BOOT')
         },
         mounted() {
             this.$store.dispatch('config/INSPECTOR')
-        }
+        },
+        methods:{}
+
 
 
     }

@@ -62,6 +62,25 @@ return [
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
         ],
+        'kiosk' => [
+            'driver' => 'mysql',
+            'url' => env('DATABASE_URL'),
+            'host' => '81.177.26.143',
+            'port' => env('DB_PORT', '3306'),
+            'database' => 'kiosk',
+            'username' => 'root',
+            'password' => 'Zz654654654',
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ],
         'it_crud' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
@@ -96,7 +115,7 @@ return [
             'sslmode' => 'prefer',
         ],
 
-        'sqlsrv' => [
+        '1c' => [
             'driver' => 'sqlsrv',
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', 'localhost'),

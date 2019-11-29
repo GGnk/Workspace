@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Events\TaskCreated;
 use App\Events\TaskRemoved;
 use App\Events\TaskUpdated;
+use App\Models\Dep;
 use App\Models\Task;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -18,12 +20,24 @@ use Illuminate\Support\Facades\Hash;
 
 class TaskController extends Controller
 {
-    public function index(User $user)
+    public function index(User $user, Dep $dep)
     {
-        $tasks = $user->setConnection('it_crud')->where('role_id', 1)->with(['tasks' => function($qwery) {
-            $qwery->where('completed',false)->latest();
+        $with_date_tasks = Carbon::now()->subMonth(2);
+        $tasks = $user->where('role_id', 1)->with(['tasks' => function($qwery) use ($with_date_tasks) {
+            $qwery->whereMonth('created_at','>=', $with_date_tasks)
+                ->whereCompleted('=', 0)
+                ->whereGeneral(0)
+                ->latest();
         }])->get();
-        return compact('tasks');
+        $general_tasks = $dep->whereHas('tasks')->with(['tasks' => function($qwery) use ($with_date_tasks) {
+            $qwery->whereMonth('created_at','>=', $with_date_tasks)
+                ->whereCompleted(0)
+                ->whereGeneral(1)
+                ->with('author')
+                ->latest();
+        }])->get();
+        $deps = $dep->select('id','name')->get();
+        return compact('tasks', 'with_date_tasks', 'general_tasks', 'deps');
     }
     /**
      * Store a newly created resource in storage.
@@ -33,9 +47,16 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        $newTask = Task::create($request->all() + ['users_id' => $request->user, 'user_create' => $request->user]);
+        $newTask = Task::create($request->all() + ['users_id' => Auth::id(), 'user_create' => Auth::id()]);
         $task = Task::with('users')->find($newTask->id);
-        broadcast(new TaskCreated($task));
+//        broadcast(new TaskCreated($task));
+        return $task;
+    }
+    public function done(Request $request)
+    {
+        $task = Task::with('users')->findOrFail($request->id);
+        $task->update($request->all());
+//        broadcast(new TaskUpdated($task));
         return $task;
     }
 
@@ -43,14 +64,13 @@ class TaskController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param int $id
      * @return Task|Task[]|Builder|Builder[]|Collection|Model
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $task = Task::with('users')->findOrFail($id);
-        $task->update($request->all());
-        broadcast(new TaskUpdated($task));
+        $task = Task::with('users')->findOrFail($request->task['id']);
+        $task->update($request->task);
+//        broadcast(new TaskUpdated($task));
         return $task;
     }
     /**
@@ -62,7 +82,7 @@ class TaskController extends Controller
     public function destroy($id)
     {
         $task = Task::findOrFail($id);
-        broadcast(new TaskRemoved($task));
+//        broadcast(new TaskRemoved($task));
         $task->delete();
         return 'Задача удалена';
     }

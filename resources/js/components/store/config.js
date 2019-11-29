@@ -76,10 +76,10 @@ let mutations = {
             { icon: 'home', text: 'Главная', 'route': '/' , access: true},
             { icon: 'add', text: 'Создать что то' , access: state.setting.access_admin},
             { icon: 'chat_bubble', text: 'Месседжер' , access: state.loggedIn },
-            { icon: 'folder_shared', text: 'Файл менеджер', access: state.loggedIn},
+            { icon: 'folder_shared', text: 'Файл менеджер', 'route': 'file-manager', access: state.loggedIn},
             { icon: 'report', text: 'Версионность', 'route': 'ver', access: state.setting.access_admin},
             { icon: 'delete', text: 'Корзина', access: state.setting.access_root},
-            { icon: 'settings', text: 'Настройки' , 'replace': true, 'action': state.full_screen_setting , access: true},
+            { icon: 'settings', text: 'Настройки' , 'replace': true, 'action': state.full_screen_setting , access: state.loggedIn},
             { icon: 'help', text: 'Help' , access: true},
             { icon: 'contacts', text: 'Войти' , url: '/login', access: !state.loggedIn},
             { icon: 'logout', text: 'Выйти' , url: '/logout', access: state.loggedIn},
@@ -90,6 +90,9 @@ let mutations = {
     },
     TF_CONFIG (state, per) {
         state[per] = !state[per]
+    },
+    HOME_CONFIG (state, per) {
+        state.home[per] = !state.home[per]
     }
 }
 
@@ -117,6 +120,9 @@ let getters = {
     },
     console: state => {
         return state.console
+    },
+    home: state => {
+        return state.home
     }
 }
 
@@ -137,7 +143,13 @@ let state = {
     loaderRequest: false,
     loaderError: false,
 
-    console: []
+    console: [],
+
+    home: {
+        drawer: false,
+        dialog: false,
+        pincode: false
+    }
 }
 
 export default {

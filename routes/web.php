@@ -1,12 +1,12 @@
 <?php
-
+use Illuminate\Support\Facades\DB;
 
 Route::get('/', function () {
     return redirect()->route('admin.index');
 });
 // Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('login', 'Auth\LoginController@login')->name('auth.login');
+Route::post('pin', 'Auth\LoginController@pinCode')->name('auth.pinCode');
 Route::get('logout', 'Auth\LoginController@logout')->name('auth.logout');
 
 Route::get('admin', ['uses' => 'HomeController@index', 'as' => 'admin.index']);
@@ -27,9 +27,18 @@ Route::group(['middleware' =>  ['auth'],'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('deps', 'DepController', [
         'except' => ['create', 'edit', 'show']
     ]);
-    Route::resource('tasks', 'TaskController', [
-        'except' => ['create', 'edit', 'show']
-    ]);
+    Route::get('/tasks', ['uses' => 'TaskController@index', 'as' => 'task.index']);
+    Route::post('/tasks', ['uses' => 'TaskController@store', 'as' => 'task.store']);
+    Route::put('/tasks/done', ['uses' => 'TaskController@done', 'as' => 'task.done']);
+    Route::put('/tasks', ['uses' => 'TaskController@update', 'as' => 'task.update']);
+    Route::get('/tasks/delete/{id}', ['uses' => 'TaskController@destroy', 'as' => 'task.destroy']);
+
+    Route::get('/kiosk', function(){
+            $db = (new DB)->connection('kiosk')->table('users')->get();
+            return $db;
+
+    });
+
 });
 
 Auth::routes();
