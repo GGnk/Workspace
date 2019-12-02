@@ -2,7 +2,7 @@ let routes = [
     {
         path: '/',
         name: 'Dashboard',
-        component: () => import('../pages/Dashboard'),
+        component: () => import('../modules/Dashboard/Dashboard'),
         meta: {
             // requiresAuth: true
         }
@@ -10,7 +10,7 @@ let routes = [
     {
         path: '/ver',
         name: 'Ver',
-        component: () => import('../modules/VerComponent'),
+        component: () => import('../modules/Version/VerComponent'),
         meta: {
             // requiresAuth: true
         }
@@ -18,7 +18,7 @@ let routes = [
     {
         path: '/file-manager',
         name: 'FileManager',
-        component: () => import('../pages/laravel-file-manager/src/FileManager'),
+        component: () => import('../modules/FileManager/laravel-file-manager/src/FileManager'),
         meta: {
             // requiresAuth: true
         }

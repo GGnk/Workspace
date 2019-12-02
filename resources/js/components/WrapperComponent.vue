@@ -24,7 +24,6 @@
             </div>
         </div>
         <div class="window-area row">
-            <sidebar></sidebar>
 
             <div class="right-tabs col-12 ">
                 <ul class="tabs">
@@ -48,10 +47,9 @@
 <script>
     // import { mixin } from '../modal/alerts.js'
 
-    import chats from '../components/modules/ThreadsComponent'
+    import chats from './modules/Messages/ThreadsComponent'
 
-    import sidebar from '../components/modules/SideBarComponent'
-    import mapRGD from '../components/modules/MapComponent'
+    import mapRGD from './modules/Map/MapComponent'
     import {mapGetters} from 'vuex'
     import {mapActions} from 'vuex'
     import {mapMutations} from 'vuex'
@@ -60,7 +58,6 @@
         // mixins: [mixin],
         components: {
             chats,
-            sidebar,
             mapRGD
         },
         name: "Wrapper",

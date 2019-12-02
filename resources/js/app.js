@@ -22,7 +22,7 @@ const router = new VueRouter({
 import wrapper from './components/WrapperComponent';
 import home from './components/HomeComponent';
 import store from '../js/components/store';
-import FileManager from "./components/pages/laravel-file-manager";
+import FileManager from "./components/modules/FileManager/laravel-file-manager";
 
 Vue.use(FileManager, {store})
 

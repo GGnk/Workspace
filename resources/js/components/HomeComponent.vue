@@ -103,7 +103,7 @@
 </template>
 
 <script>
-    import PinCodeComponent from "./modules/PinCodeComponent";
+    import PinCodeComponent from "./modules/PinCode/PinCodeComponent";
 
     export default {
         name: "Home",
@@ -111,8 +111,8 @@
             source: String,
         },
         components: {
-            'pin-code-component': () => import ('./modules/PinCodeComponent'),
-            'full-screen-setting': () => import ('./pages/etc/fullScreenSetting')
+            'pin-code-component': () => import ('./modules/PinCode/PinCodeComponent'),
+            'full-screen-setting': () => import ('./modules/Dashboard/blocks/fullScreenSetting')
         },
         computed: {
 

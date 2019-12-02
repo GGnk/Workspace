@@ -6,14 +6,14 @@ Vue.use(Vuex);
 
 import config from './config'
 
-import maps from "./modules/maps"
-import tasks from "./modules/tasks"
-import search from "./modules/search"
-import dialog from "./modules/dialog"
-import contacts from "./modules/contacts"
-import posts from "./modules/posts"
-import FileManager from '../pages/laravel-file-manager'
-import pin_code from "../modules/PinCodeComponent";
+// import maps from "../modules/Map/maps"
+// import dialog from "../modules/Messages/dialog"
+// import FileManager from '../modules/FileManager/laravel-file-manager'
+import tasks from "../modules/Tasks"
+import search from "../modules/Search"
+import contacts from "../modules/Contacts"
+import posts from "../modules/Posts"
+import pin_code from "../modules/PinCode";
 
 export default new Vuex.Store({
     // Строгий режим. Все изменения проводить через мутацию (в режиме разработчика)
