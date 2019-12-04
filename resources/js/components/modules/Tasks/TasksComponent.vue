@@ -3,6 +3,7 @@
         <v-row class="mx-0 text-center">
             <v-col sm="7">
                 <v-divider></v-divider>
+
                 <v-col sm="12" style="height: 50px">
                     <v-subheader class="subheading">Задачи:
                         <div class="mx-2">
@@ -27,6 +28,7 @@
                         </v-btn>
                     </v-subheader>
 
+<!-- начало - Форма добавления задач------------- -->
                     <v-dialog
                         :value="dialogAddTask"
                         @input="$store.commit('tasks/DIALOG_ADD') "
@@ -103,9 +105,11 @@
                             </v-card-actions>
                         </v-card>
                     </v-dialog>
-
+<!-- конец - Форма обновления задачи------------- -->
                 </v-col>
+
                 <v-divider></v-divider>
+<!-- начало - Бумажный список задач------------- -->
                 <v-card
                     class="mb-2"
                 >
@@ -113,28 +117,107 @@
                     <v-card-text>
                         <v-list>
                             <v-list-item
-                                v-for="(todo, index) in sortedArray"
-                                v-if="todo.completed == false && todo.cat == 1"
+                                v-for="(task, index) in sortedArray"
+                                v-if="task.cat === 1"
                                 :key="index"
                                 style="min-height:30px!important;"
                             >
-                                <v-tooltip
-                                    right>
-                                    <template v-slot:activator="{ on }">
-                                        <v-list-item-subtitle
-                                            class="text-wrap black--text text-left"
-                                            v-on="on"
-                                        >
-                                            {{todo.title}}
-                                        </v-list-item-subtitle>
-                                    </template>
-                                    <span
-                                    >{{todo.status?todo.status:'Задайте статус'}}</span>
-                                </v-tooltip>
-                                <v-list-item-action
-                                    class="mt-0"
-                                    style="display: inline!important;"
+                                <div
+                                    class="return-task"
+                                    v-if=task.completed == false"
                                 >
+                                    <v-tooltip
+                                        right>
+                                        <template v-slot:activator="{ on }">
+                                            <v-list-item-subtitle
+                                                class="text-wrap black--text text-left"
+                                                v-on="on"
+                                            >
+                                                {{task.title}}
+                                            </v-list-item-subtitle>
+                                        </template>
+                                        <span
+                                        >{{task.status?task.status:'Задайте статус'}}</span>
+                                    </v-tooltip>
+                                    <v-list-item-action
+                                        class="mt-0"
+                                        style="display: inline!important;"
+                                    >
+                                        <v-menu
+                                            v-model="task.menu"
+                                            close-on-click
+                                            close-on-content-click
+                                            offset-y
+                                        >
+                                            <template v-slot:activator="{ on }">
+                                                <v-btn
+                                                    v-on="on"
+                                                    class="mx-2" outlined fab x-small color="accent">
+                                                    <v-icon>mdi-format-list-bulleted-square</v-icon>
+                                                </v-btn>
+                                            </template>
+                                            <v-list>
+                                                <v-list-item
+                                                    v-for="(item, index) in menuMode.list"
+                                                    :key="index"
+                                                    @click="item.dispatch? $store.dispatch('tasks/'+item.module, {id:task.id, index:i}):$store.commit('tasks/'+item.module, task)"
+                                                >
+                                                    <v-list-item-title>{{ item.title }}</v-list-item-title>
+                                                </v-list-item>
+                                            </v-list>
+                                        </v-menu>
+                                        <v-btn
+                                            @click="$store.dispatch('tasks/DONE_TASK', {id: task.id, completed: 1, index: index, list:'tasks'})"
+                                            class="mx-2" outlined fab x-small color="success">
+                                            <v-icon>done</v-icon>
+                                        </v-btn>
+                                    </v-list-item-action>
+                                </div>
+                                <div
+                                    class="return-task"
+                                    v-else
+                                >
+                                    <v-btn
+                                        @click="$store.dispatch('tasks/DONE_TASK', {id: task.id, completed: 0, index: index, list:'tasks'})"
+                                        class="mx-2" outlined  color="grey">
+                                        Вернуть задачу
+                                    </v-btn>
+                                    <v-list-item-subtitle
+                                        class="text-wrap black--text text-left"
+                                    >
+                                        {{task.title}}
+                                    </v-list-item-subtitle>
+                                </div>
+
+                            </v-list-item>
+                        </v-list>
+                    </v-card-text>
+                </v-card>
+<!-- конец - Бумажный список задач------------- -->
+
+<!-- начало - Свой писок задач ------------- -->
+                <v-slide-x-transition
+                    v-for="(todo, i) in sortedArray"
+                    v-if="todo.cat !== 1"
+                    :key="i"
+                >
+                    <v-card
+                        class="mb-2"
+                        :id="i"
+                    >
+                        <div
+                            class="return-task"
+                            v-if="todo.completed == false"
+                        >
+                            <v-card-title class="text-break">
+                                <v-col sm="9">
+                                    <span
+                                        class="position-absolute font-italic font-weight-medium caption"
+                                        :class="color_status(todo.priority)"
+                                        style="top: 0; right: 8px">{{todo.status}}</span>
+                                    {{todo.title}}
+                                </v-col>
+                                <v-col sm="3">
                                     <v-menu
                                         v-model="todo.menu"
                                         close-on-click
@@ -159,66 +242,34 @@
                                         </v-list>
                                     </v-menu>
                                     <v-btn
-                                        @click="$store.dispatch('tasks/DONE_TASK', {id: todo.id, completed: 1, index: index})"
+                                        @click="$store.dispatch('tasks/DONE_TASK', {id: todo.id, completed: 1, index: i, list:'tasks'})"
                                         class="mx-2" outlined fab x-small color="success">
                                         <v-icon>done</v-icon>
                                     </v-btn>
-                                </v-list-item-action>
-
-                            </v-list-item>
-                        </v-list>
-                    </v-card-text>
-                </v-card>
-                <v-slide-x-transition
-                    v-for="(todo, i) in sortedArray"
-                    v-if="todo.completed == false && todo.cat !== 1"
-                    :key="i"
-                >
-                    <v-card
-                        class="mb-2"
-                        :id="i"
-                    >
-                        <v-card-title class="text-break">
-                            <v-col sm="9">
-                                <span
-                                    class="position-absolute font-italic font-weight-medium caption"
-                                    :class="color_status(todo.priority)"
-                                    style="top: 0; right: 8px">{{todo.status}}</span>
+                                </v-col>
+                            </v-card-title>
+                        </div>
+                        <div
+                            class="return-task pa-5"
+                            v-else
+                        >
+                            <v-btn
+                                @click="$store.dispatch('tasks/DONE_TASK', {id: todo.id, completed: 0, index: i, list:'tasks'})"
+                                class="mx-2" outlined  color="grey">
+                                Вернуть задачу
+                            </v-btn>
+                            <v-list-item-subtitle
+                                class="text-wrap black--text text-left"
+                            >
                                 {{todo.title}}
-                            </v-col>
-                            <v-col sm="3">
-                                <v-menu
-                                    v-model="todo.menu"
-                                    close-on-click
-                                    close-on-content-click
-                                    offset-y
-                                >
-                                    <template v-slot:activator="{ on }">
-                                        <v-btn
-                                            v-on="on"
-                                            class="mx-2" outlined fab x-small color="accent">
-                                            <v-icon>mdi-format-list-bulleted-square</v-icon>
-                                        </v-btn>
-                                    </template>
-                                    <v-list>
-                                        <v-list-item
-                                            v-for="(item, index) in menuMode.list"
-                                            :key="index"
-                                            @click="item.dispatch? $store.dispatch('tasks/'+item.module, {id:todo.id, index:i}):$store.commit('tasks/'+item.module, todo)"
-                                        >
-                                            <v-list-item-title>{{ item.title }}</v-list-item-title>
-                                        </v-list-item>
-                                    </v-list>
-                                </v-menu>
-                                <v-btn
-                                    @click="$store.dispatch('tasks/DONE_TASK', {id: todo.id, completed: 1, index: i})"
-                                    class="mx-2" outlined fab x-small color="success">
-                                    <v-icon>done</v-icon>
-                                </v-btn>
-                            </v-col>
-                        </v-card-title>
+                            </v-list-item-subtitle>
+                        </div>
+
                     </v-card>
                 </v-slide-x-transition>
+<!-- конец - Свой писок задач ------------- -->
+
+<!-- начало - Форма обновления задачи------------- -->
                 <v-dialog
                     :value="dialogUpdateTask"
                     @input="$store.commit('tasks/DIALOG_UPDATE') "
@@ -296,14 +347,17 @@
                         </v-card-actions>
                     </v-card>
                 </v-dialog>
+<!-- конец - Форма обновления задачи------------- -->
+
             </v-col>
+
+<!-- начало - Общий список задач------------- -->
             <v-col sm="5">
                 <v-divider></v-divider>
                 <v-col sm="12"  style="height: 50px">
                     Общий список
                 </v-col>
                 <v-divider></v-divider>
-
                 <v-slide-x-transition
                     v-for="(dep, i) in general_tasks"
                     v-if="dep.tasks.length"
@@ -320,58 +374,79 @@
                                     :key="index"
                                     style="min-height:30px!important;"
                                 >
-                                    <v-tooltip
-                                        right>
-                                        <template v-slot:activator="{ on }">
-                                            <v-list-item-subtitle
-                                                class="text-wrap black--text text-left"
-                                                v-on="on"
-                                            >
-                                                {{task.title}}
-                                            </v-list-item-subtitle>
-                                        </template>
-                                        <span
-                                        >{{task.status?task.status:'Задайте статус'}}</span>
-                                    </v-tooltip>
-                                    <v-list-item-action
-                                        class="mt-0"
-                                        style="display: inline!important;"
-                                    >
-                                        <v-menu
-                                            v-model="task.menu"
-                                            close-on-click
-                                            close-on-content-click
-                                            offset-y
-                                        >
+                                    <div
+                                        class="return-task"
+                                        v-if="task.completed == false">
+                                        <v-tooltip
+                                            right>
                                             <template v-slot:activator="{ on }">
-                                                <v-btn
+                                                <v-list-item-subtitle
+                                                    class="text-wrap black--text text-left"
                                                     v-on="on"
-                                                    class="mx-2" outlined fab x-small color="accent">
-                                                    <v-icon>mdi-format-list-bulleted-square</v-icon>
-                                                </v-btn>
-                                            </template>
-                                            <v-list>
-                                                <v-list-item
-                                                    v-for="(item, index) in menuMode.list"
-                                                    :key="index"
-                                                    @click="item.dispatch? $store.dispatch('tasks/'+item.module, {id:task.id, index:i}):$store.commit('tasks/'+item.module, task)"
                                                 >
-                                                    <v-list-item-title>{{ item.title }}</v-list-item-title>
-                                                </v-list-item>
-                                            </v-list>
-                                        </v-menu>
+                                                    {{task.title}}
+                                                </v-list-item-subtitle>
+                                            </template>
+                                            <span>
+                                                {{task.status?task.status:'Задайте статус'}}
+                                            </span>
+                                        </v-tooltip>
+                                        <v-list-item-action
+                                            class="mt-0"
+                                            style="display: inline!important;"
+                                        >
+                                            <v-menu
+                                                v-model="task.menu"
+                                                close-on-click
+                                                close-on-content-click
+                                                offset-y
+                                            >
+                                                <template v-slot:activator="{ on }">
+                                                    <v-btn
+                                                        v-on="on"
+                                                        class="mx-2" outlined fab x-small color="accent">
+                                                        <v-icon>mdi-format-list-bulleted-square</v-icon>
+                                                    </v-btn>
+                                                </template>
+                                                <v-list>
+                                                    <v-list-item
+                                                        v-for="(item, index) in menuMode.list"
+                                                        :key="index"
+                                                        @click="item.dispatch? $store.dispatch('tasks/'+item.module, {id:task.id, index:i}):$store.commit('tasks/'+item.module, task)"
+                                                    >
+                                                        <v-list-item-title>{{ item.title }}</v-list-item-title>
+                                                    </v-list-item>
+                                                </v-list>
+                                            </v-menu>
+                                            <v-btn
+                                                @click="$store.dispatch('tasks/DONE_TASK', {id: task.id, completed: 1, index: index, list:'general_tasks'})"
+                                                class="mx-2" outlined fab x-small color="success">
+                                                <v-icon>done</v-icon>
+                                            </v-btn>
+                                        </v-list-item-action>
+                                    </div>
+                                    <div
+                                        class="return-task"
+                                        v-else>
                                         <v-btn
-                                            @click="$store.dispatch('tasks/DONE_TASK', {id: todo.id, completed: 1, index: index})"
-                                            class="mx-2" outlined fab x-small color="success">
-                                            <v-icon>done</v-icon>
+                                            @click="$store.dispatch('tasks/DONE_TASK', {id: task.id, completed: 0, index: index, list:'general_tasks'})"
+                                            class="mx-2" outlined  color="grey">
+                                            Вернуть задачу
                                         </v-btn>
-                                    </v-list-item-action>
+                                        <v-list-item-subtitle
+                                            class="text-wrap black--text text-left"
+                                        >
+                                            {{task.title}}
+                                        </v-list-item-subtitle>
+                                    </div>
+
                                 </v-list-item>
                             </v-list>
                         </v-card-text>
                     </v-card>
                 </v-slide-x-transition>
             </v-col>
+<!-- конец - Общий список задач------------- -->
         </v-row>
     </v-list>
 </template>
@@ -553,6 +628,11 @@
 </script>
 
 <style scoped>
+    .return-task {
+        align-items: center;
+        display: flex;
+        flex: 1 1 100%;
+    }
     .hover {
         opacity: 0.5;
     }

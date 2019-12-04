@@ -25,6 +25,7 @@ class TaskController extends Controller
         $with_date_tasks = Carbon::now()->subMonth(2);
         $tasks = $user->where('role_id', 1)->with(['tasks' => function($qwery) use ($with_date_tasks) {
             $qwery->whereMonth('created_at','>=', $with_date_tasks)
+                ->whereCompleted(0)
                 ->whereGeneral(0)
                 ->latest();
         }])->get();

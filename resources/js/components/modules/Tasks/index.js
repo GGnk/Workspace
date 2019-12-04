@@ -1,7 +1,5 @@
-import {consoleInfo} from "vuetify/lib/util/console";
-
 let actions = {
-    async FETCH_DATA({commit, getters, rootGetters}) {
+    async FETCH_DATA({commit, rootGetters}) {
         if (rootGetters['config/auth']) {
             await axios.get('/admin/tasks')
                 .then((e) => {
@@ -13,7 +11,7 @@ let actions = {
                 })
         } else console.log('Получить задачи могут только авторизованные пользователи!')
     },
-    async ADD_TASK({state, commit, getters, rootGetters}) {
+    async ADD_TASK({state, commit, rootGetters}) {
         if (rootGetters['config/auth']) {
             await axios.post(`/admin/tasks`, state.task)
                 .then((e) => {
@@ -24,11 +22,11 @@ let actions = {
                 })
         } else console.log('Получить задачи могут только авторизованные пользователи!')
     },
-    async UPDATE_TASK({commit, getters, rootGetters}) {
+    async UPDATE_TASK({commit, rootGetters}) {
         if (rootGetters['config/auth']) {
         await axios.put(`/admin/tasks`, {task: state.task_update, method: 'put'})
             .then((e) => {
-                // commit('TASK_UPDATE', {task: e.data,index: payload.index})
+                commit('TASK_UPDATE', {task: e.data,index: payload.index})
             })
             .catch((err) => {
                 console.log(err)
@@ -39,7 +37,7 @@ let actions = {
         if (rootGetters['config/auth']) {
             await axios.put(`/admin/tasks/done`, {id: payload.id, completed: payload.completed, method: 'put'})
                 .then((e) => {
-                    commit('TASK_UPDATE', {task: e.data,index: payload.index})
+                    commit('TASK_UPDATE', {task: e.data,index: payload.index, list: payload.list})
                 })
                 .catch((err) => {
                     console.log(err)
@@ -91,7 +89,14 @@ let mutations = {
         state.tasks.splice(payload.index, 1)
     },
     TASK_UPDATE(state, payload) {
-        state.tasks.splice(payload.index, 1,payload.task)
+        if(payload.list === 'general_tasks'){
+            let index = state[payload.list]
+                .findIndex(item =>  item.id === payload.task.deps_id)
+            console.log(state[payload.list][index])
+            state[payload.list][index].tasks.splice(payload.index, 1,payload.task)
+        }
+        else state[payload.list].splice(payload.index, 1,payload.task)
+
     },
     DIALOG_ADD(state) {
         state.dialogAddTask = !state.dialogAddTask
