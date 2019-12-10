@@ -138,7 +138,7 @@
                                                                 <v-text-field
                                                                     v-model="input_name"
                                                                     :rules="rules.nameRules"
-                                                                    :counter="50"
+                                                                    :counter="120"
                                                                     label="ФИО (Название)"
                                                                     required
                                                                 ></v-text-field>
@@ -151,9 +151,8 @@
                                                                 <v-text-field
                                                                     v-model="input_profession"
                                                                     :rules="rules.nameRules"
-                                                                    :counter="50"
+                                                                    :counter="120"
                                                                     label="Должность"
-                                                                    required
                                                                 ></v-text-field>
                                                             </v-col>
 
@@ -197,13 +196,16 @@
                                                 </v-form>
                                         </v-col>
                                     </v-expand-transition>
-                                    <v-col class="mb-2 px-2" v-if="get_results_search.people.length > 0">
+                                    <v-col class="mb-2 px-2"
+                                           v-if="get_results_search.people.length > 0"
+                                           cols
+                                    >
                                         <p class="title" style="text-align: center; margin: 0">Люди</p>
                                         <hr style="margin: 0">
                                         <v-row>
-                                                <v-col :lg="(get_results_search.build.length || get_results_search.business.length) > 0? 12:4"
+                                                <v-col :lg="(get_results_search.build.length || get_results_search.business.length) > 0? 6:4"
                                                        :sm="(get_results_search.build.length || get_results_search.business.length) > 0? 12:6"
-                                                       :xl="(get_results_search.build.length || get_results_search.business.length) > 0? 6:3"
+                                                       :xl="(get_results_search.build.length || get_results_search.business.length) > 0? 12:3"
                                                        style="flex-basis: auto"
                                                        v-for="(item, i) in get_results_search.people"
                                                        :key="i">
@@ -214,13 +216,15 @@
                                         </v-row>
                                     </v-col>
                                     <v-col class="mb-2 px-2"
-                                           v-if="get_results_search.build.length > 0">
+                                           v-if="get_results_search.build.length > 0"
+                                           cols
+                                    >
                                         <p class="title" style="text-align: center; margin: 0">Службы</p>
                                         <hr style="margin: 0">
                                         <v-row>
                                             <v-col :lg="(get_results_search.people.length || get_results_search.business.length) > 0? 12:4"
                                                    :sm="(get_results_search.people.length || get_results_search.business.length) > 0? 12:6"
-                                                   :xl="(get_results_search.people.length || get_results_search.business.length) > 0? 6:3"
+                                                   :xl="(get_results_search.people.length || get_results_search.business.length) > 0? 12:3"
                                                     v-for="(item, i) in get_results_search.build"
                                                     :key="i"
                                             >
@@ -228,13 +232,16 @@
                                             </v-col>
                                         </v-row>
                                     </v-col>
-                                    <v-col class="mb-2 px-2" v-if="get_results_search.business.length > 0">
+                                    <v-col class="mb-2 px-2"
+                                           v-if="get_results_search.business.length > 0"
+                                           cols
+                                    >
                                         <p class="title" style="text-align: center; margin: 0">Внешнии компании</p>
                                         <hr style="margin: 0">
                                         <v-row>
-                                            <v-col :lg="(get_results_search.people.length || get_results_search.build.length) > 0? 12:4"
+                                            <v-col :lg="(get_results_search.people.length || get_results_search.build.length) > 0? 6:4"
                                                    :sm="(get_results_search.people.length || get_results_search.build.length) > 0? 12:6"
-                                                   :xl="(get_results_search.people.length || get_results_search.build.length) > 0? 6:3"
+                                                   :xl="(get_results_search.people.length || get_results_search.build.length) > 0? 12:3"
                                                     v-for="(item, i) in get_results_search.business"
                                                     :key="i"
                                             >
@@ -297,7 +304,7 @@
                 ],
                 nameRules: [
                     v => !!v || 'Потом не вспомнишь!',
-                    v => v.length <= 70 || 'Name must be less than 30 characters',
+                    v => v.length <= 120 || 'Name must be less than 30 characters',
                 ],
                 emailRules: [
                     /* v => !!v || 'E-mail is required',

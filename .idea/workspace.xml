@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="381a243a-1d9c-4d69-8a68-88a322d6b33a" name="Default Changelist" comment="Update 1.0.4&#10;Added ability to return completed tasks!">
+    <list default="true" id="381a243a-1d9c-4d69-8a68-88a322d6b33a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/bootstrap/cache/config.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/modules/News/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/modules/Tasks/blocks/universal-card.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/modules/Dashboard/Dashboard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modules/Dashboard/Dashboard.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/modules/News/news.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modules/News/news.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/modules/Tasks/TasksComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modules/Tasks/TasksComponent.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/modules/Tasks/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modules/Tasks/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/store/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -76,8 +83,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Vue Single File Component" />
         <option value="JavaScript File" />
+        <option value="Vue Single File Component" />
       </list>
     </option>
   </component>
@@ -332,14 +339,8 @@
       <workItem from="1574657308526" duration="914000" />
       <workItem from="1574658291647" duration="2078000" />
       <workItem from="1574846226708" duration="26901000" />
-      <workItem from="1575047643592" duration="28348000" />
-    </task>
-    <task id="LOCAL-00005" summary="Обновление 0.0.2.4 (vue.js)">
-      <created>1563539047668</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1563539047668</updated>
+      <workItem from="1575047643592" duration="42179000" />
+      <workItem from="1575609474143" duration="57873000" />
     </task>
     <task id="LOCAL-00006" summary="Обновление 0.0.2.5 (vue.js)">
       <created>1563799567830</created>
@@ -677,7 +678,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575306505464</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="Update 1.0.4&#10;Added ability to return completed tasks!">
+      <created>1575435604616</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1575435604617</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -697,6 +705,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Обновление 0.0.2.31" />

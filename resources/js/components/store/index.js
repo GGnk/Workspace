@@ -14,6 +14,7 @@ import search from "../modules/Search"
 import contacts from "../modules/Contacts"
 import posts from "../modules/Posts"
 import pin_code from "../modules/PinCode";
+import news from "../modules/News";
 
 export default new Vuex.Store({
     // Строгий режим. Все изменения проводить через мутацию (в режиме разработчика)
@@ -24,6 +25,7 @@ export default new Vuex.Store({
         posts,
         pin_code,
         // maps,
+        news,
         tasks,
         search,
         // dialog

@@ -25,17 +25,22 @@
 </template>
 
 <script>
+    import {mapGetters} from "vuex";
+
     export default {
         name: "news",
         components: {
             'mac-header':  () => import ('../Dashboard/blocks/mac-header')
         },
-        props: {
-            title: String,
-        },
+        props: {},
         data: () => ({
-            XMLyandex: window.m_index
-        })
+        }),
+        computed:{
+            ...mapGetters('news', ['title', 'XMLyandex'])
+        },
+        mounted() {
+            this.$store.commit('news/LOAD_DATA')
+        }
     }
 </script>
 

@@ -11,44 +11,53 @@ let actions = {
                 })
         } else console.log('Получить задачи могут только авторизованные пользователи!')
     },
-    async ADD_TASK({state, commit, rootGetters}) {
+
+    async SAVE_TASK({state, commit, dispatch, rootGetters}) {
         if (rootGetters['config/auth']) {
-            await axios.post(`/admin/tasks`, state.task)
-                .then((e) => {
-                    commit('TASK_ADD', e.data)
-                })
-                .catch((err) => {
-                    console.log(err)
-                })
-        } else console.log('Получить задачи могут только авторизованные пользователи!')
+            if (state.taskIndex > -1) {
+                dispatch('UPDATE_TASK')
+            } else {
+                dispatch('ADD_TASK')
+            }
+            commit('DIALOG_FORM_CLOSE')
+
+        } else console.log('Доступно только авторизованным пользователям!')
     },
-    async UPDATE_TASK({commit, rootGetters}) {
-        if (rootGetters['config/auth']) {
-        await axios.put(`/admin/tasks`, {task: state.task_update, method: 'put'})
+    async ADD_TASK({commit}) {
+        await axios.post(`/admin/tasks`, state.task)
             .then((e) => {
-                commit('TASK_UPDATE', {task: e.data,index: payload.index})
+                commit('TASK_ADD', e.data)
             })
             .catch((err) => {
                 console.log(err)
             })
-        } else console.log('Получить задачи могут только авторизованные пользователи!')
     },
+    async UPDATE_TASK({commit}) {
+        await axios.put(`/admin/tasks`, {task: state.task, method: 'put'})
+            .then((e) => {
+                commit('TASK_UPDATE', e.data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    },
+
     async DONE_TASK({commit, getters, rootGetters}, payload) {
         if (rootGetters['config/auth']) {
             await axios.put(`/admin/tasks/done`, {id: payload.id, completed: payload.completed, method: 'put'})
                 .then((e) => {
-                    commit('TASK_UPDATE', {task: e.data,index: payload.index, list: payload.list})
+                    commit('TASK_DONE', {task: e.data,index: payload.index})
                 })
                 .catch((err) => {
                     console.log(err)
                 })
         } else console.log('Получить задачи могут только авторизованные пользователи!')
     },
-    async DELETE_TASK({commit, getters, rootGetters}, payload) {
+    async DELETE_TASK({commit, getters, rootGetters}, task) {
         if (rootGetters['config/auth']) {
-            await axios.get(`/admin/tasks/delete/`+payload.id)
+            await axios.get(`/admin/tasks/delete/`+task.id)
                 .then((e) => {
-                    commit('TASK_DELETE', {index: payload.index})
+                    commit('TASK_DELETE', task)
                 })
                 .catch((err) => {
                     console.log(err)
@@ -74,50 +83,82 @@ let mutations = {
         state.tasks = state.arrayTasks[index].tasks
     },
     TASK_ADD(state, task) {
-        state.dialogAddTask = false
-        state.tasks.unshift(task)
-        state.task = {
-                        title:'',
-                        priority: 1,
-                        desc: '',
-                        toDate: "",
-                        status: '',
-                        cat: null
-                    }
-    },
-    TASK_DELETE(state, payload) {
-        state.tasks.splice(payload.index, 1)
-    },
-    TASK_UPDATE(state, payload) {
-        if(payload.list === 'general_tasks'){
-            let index = state[payload.list]
-                .findIndex(item =>  item.id === payload.task.deps_id)
-            console.log(state[payload.list][index])
-            state[payload.list][index].tasks.splice(payload.index, 1,payload.task)
+        let vm = this
+        if(task.general === 1 && task.deps_id > 0){
+            let dep_index = state.deps.findIndex(item =>  item.id === task.deps_id)
+            let task_dep = state.general_tasks.findIndex(item =>  item.id === state.deps[dep_index].id)
+            if(task_dep > -1){
+                state.general_tasks[task_dep].tasks.unshift(task)
+            }
+            else {
+                state.general_tasks.unshift(state.deps[dep_index])
+                state.general_tasks[0].tasks.unshift(task)
+            }
+
         }
-        else state[payload.list].splice(payload.index, 1,payload.task)
+        else {
+            state.tasks.unshift(task)
+        }
 
     },
-    DIALOG_ADD(state) {
-        state.dialogAddTask = !state.dialogAddTask
+
+    TASK_DELETE(state, task) {
+        if(task.general === 1 && task.deps_id > 0){
+            let dep_index = state.deps.findIndex(item =>  item.id === task.deps_id)
+            let task_dep = state.general_tasks.findIndex(item =>  item.id === state.deps[dep_index].id)
+            //TODO: доделать условие, при не нахождение
+            if(task_dep > -1){
+                state.general_tasks[task_dep].tasks.splice(state.general_tasks[task_dep].tasks.indexOf(task), 1)
+            }
+        }
+        else state.tasks.splice(state.tasks.indexOf(task), 1)
     },
-    DIALOG_UPDATE(state, task) {
-        state.task_update = {}
-        state.dialogUpdateTask = !state.dialogUpdateTask
+    TASK_DONE(state, payload) {
+        if(payload.task.general === 1 && payload.task.deps_id > 0){
+            let dep_index = state.deps.findIndex(item =>  item.id === payload.task.deps_id)
+            let task_dep = state.general_tasks.findIndex(item =>  item.id === state.deps[dep_index].id)
+            if(task_dep > -1) {
+                state.general_tasks[task_dep].tasks.splice(payload.index, 1,payload.task)
+            }
+        }
+        else {
+            state.tasks.splice(payload.index, 1,payload.task)
+        }
     },
-    DIALOG_LOAD_DATA(state, task) {
-        state.task_update = task
-        state.dialogUpdateTask = !state.dialogUpdateTask
+    TASK_UPDATE(state, task) {
+        // TODO: доделать перемешение
+        if(task.general === 1  && task.deps_id > 0){
+            let index = state.general_tasks.findIndex(item =>  item.id === task.deps_id)
+            Object.assign(state.general_tasks[index].tasks[state.taskIndex], state.task)
+        }
+        else {
+            Object.assign(state.tasks[state.taskIndex], state.task)
+        }
     },
-    TASK_ADD_DATA(state, payload) {
+
+    EDIT_DIALOG_FORM(state, payload){
+        if(payload.list === 'general'){
+            let index = state.general_tasks.findIndex(item =>  item.id === payload.task.deps_id)
+            state.taskIndex = state.general_tasks[index].tasks.indexOf(payload.task)
+        } else {
+            state.taskIndex = state.tasks.indexOf(payload.task)
+        }
+
+        state.task = Object.assign(state.task, payload.task)
+        state.dialogForm = true
+    },
+    ENTER_TASK_FORM(state, payload){
         state.task[payload.vv] = payload.value
     },
-    TASK_UPDATE_DATA(state, payload) {
-        state.task_update[payload.vv] = payload.value
+    DIALOG_FORM_CLOSE (state) {
+        state.dialogForm = false
+        state.task.menu = false
+        setTimeout(() => {
+            state.task = Object.assign({}, state.dialogFormInput)
+            state.taskIndex = -1
+        }, 300)
     },
-    MENU_MODE(state) {
-        state.menuMode.active = !state.menuMode.active
-    }
+
 }
 
 let getters = {
@@ -131,6 +172,10 @@ let getters = {
     intTask: (state, getters, rootState, rootGetters) => {
         return state.intTask = rootGetters['config/user'].id
     },
+    task: state => {
+        return state.task
+    },
+
     options: state=> {
         return state.options
     },
@@ -143,18 +188,14 @@ let getters = {
     tasksUsers: state => {
         return state.Wusers
     },
-    dialogAddTask: state => {
-        return state.dialogAddTask
+    dialogForm: state => {
+        return state.dialogForm
     },
-    dialogUpdateTask: state => {
-        return state.dialogUpdateTask
+    dialogFormTitle: state =>{
+        return state.taskIndex === -1? 'Добавляем задачу':'Обновляем задачу'
     },
-
-    task: state => {
-        return state.task
-    },
-    task_update:state => {
-        return state.task_update
+    dialogFormButtomTitle: state =>{
+        return state.taskIndex === -1? 'Добавить':'Обновить'
     },
     menuMode: state => {
         return state.menuMode
@@ -174,13 +215,25 @@ let state = {
         desc: '',
         toDate: "",
         status: '',
-        cat: null
+        cat: null,
+        general: 0,
+        deps_id: 5
     },
 
-    task_update:{
+    dialogFormInput: {
+        title:'',
+        priority: 1,
+        desc: '',
+        toDate: "",
+        status: '',
+        cat: null,
+        general: 0,
+        deps_id: 5
     },
+    taskIndex: -1,
+    dialogForm:false,
+
     deps: [],
-
     options: [
         { text: 'Низкий', value: 1 },
         { text: 'Средний', value: 2 },
@@ -189,16 +242,7 @@ let state = {
     cat:[
         { text: 'Документ', value: 1 },
         { text: 'Прочее', value: null },
-    ],
-    MyList: '',
-    dialogAddTask:false,
-    dialogUpdateTask:false,
-    menuMode: {
-        list: [
-            { title: 'Редактировать', dispatch: false, module: 'DIALOG_LOAD_DATA' },
-            { title: 'Удалить', dispatch: true, module: 'DELETE_TASK' }
-        ]
-    }
+    ]
 }
 
 export default {

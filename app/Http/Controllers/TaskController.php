@@ -36,7 +36,13 @@ class TaskController extends Controller
                 ->with('author')
                 ->latest();
         }])->get();
-        $deps = $dep->select('id','name')->get();
+
+        $deps = $dep->with(['tasks' => function($qwery) use ($with_date_tasks) {
+            $qwery->whereCompleted(0)
+                ->latest()
+                ->first();
+        }])->select('id','name')->get();
+
         return compact('tasks', 'with_date_tasks', 'general_tasks', 'deps');
     }
     /**
