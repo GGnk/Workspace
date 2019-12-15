@@ -927,6 +927,29 @@
       'table' => 'failed_jobs',
     ),
   ),
+  'scout' => 
+  array (
+    'driver' => 'elasticsearch',
+    'prefix' => '',
+    'queue' => false,
+    'chunk' => 
+    array (
+      'searchable' => 500,
+      'unsearchable' => 500,
+    ),
+    'soft_delete' => false,
+    'elasticsearch' => 
+    array (
+      'index' => 'scout',
+      'config' => 
+      array (
+        'hosts' => 
+        array (
+          0 => 'http://localhost:9200',
+        ),
+      ),
+    ),
+  ),
   'services' => 
   array (
     'mailgun' => 

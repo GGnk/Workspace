@@ -17,7 +17,7 @@
             <v-list>
                 <v-list-item
                     v-for="(todo, indexTask) in tasks"
-                    v-if="todo.general === 1 ||todo.cat === 1"
+                    v-if="todo.general == true ||todo.cat === 1"
                     :key="indexTask"
                     style="min-height:30px!important;"
                 >

@@ -9,7 +9,7 @@ let actions = {
                 .catch((err) => {
                     console.log(err)
                 })
-        } else console.log('Получить задачи могут только авторизованные пользователи!')
+        } else console.log('Доступно только авторизованным пользователям!')
     },
 
     async SAVE_TASK({state, commit, dispatch, rootGetters}) {
@@ -35,7 +35,7 @@ let actions = {
     async UPDATE_TASK({commit}) {
         await axios.put(`/admin/tasks`, {task: state.task, method: 'put'})
             .then((e) => {
-                commit('TASK_UPDATE', e.data)
+                commit('TASK_UPDATE', {oldTask: state.cacheTask, newTask: e.data})
             })
             .catch((err) => {
                 console.log(err)
@@ -51,7 +51,7 @@ let actions = {
                 .catch((err) => {
                     console.log(err)
                 })
-        } else console.log('Получить задачи могут только авторизованные пользователи!')
+        } else console.log('Доступно только авторизованным пользователям!')
     },
     async DELETE_TASK({commit, getters, rootGetters}, task) {
         if (rootGetters['config/auth']) {
@@ -62,7 +62,7 @@ let actions = {
                 .catch((err) => {
                     console.log(err)
                 })
-        } else console.log('Получить задачи могут только авторизованные пользователи!')
+        } else console.log('Доступно только авторизованным пользователям!')
     },
 }
 
@@ -125,14 +125,59 @@ let mutations = {
             state.tasks.splice(payload.index, 1,payload.task)
         }
     },
-    TASK_UPDATE(state, task) {
-        // TODO: доделать перемешение
-        if(task.general === 1  && task.deps_id > 0){
-            let index = state.general_tasks.findIndex(item =>  item.id === task.deps_id)
-            Object.assign(state.general_tasks[index].tasks[state.taskIndex], state.task)
+    TASK_UPDATE(state, payload) {
+        // TODO: исправить перемешение (удалять старые)
+        if (payload.newTask.general == false) {
+                if(payload.oldTask.general == payload.newTask.general) {
+                    Object.assign(state.tasks[state.taskIndex], payload.newTask)
+                    console.log('Свой список, действующий ')
+                }
+                else {
+                    let indexDep = state.general_tasks.findIndex(item =>  item.id === payload.oldTask.deps_id)
+                    state.general_tasks[indexDep].tasks.splice(state.taskIndex, 1)
+
+                    state.tasks.unshift(payload.newTask)
+                    console.log('Свой список, новый ')
+                }
         }
         else {
-            Object.assign(state.tasks[state.taskIndex], state.task)
+            if (payload.oldTask.general == payload.newTask.general) {
+                let indexDep = state.general_tasks.findIndex(item => item.id === payload.newTask.deps_id)
+
+                if(payload.oldTask.deps_id === state.general_tasks[indexDep].id) {
+                    Object.assign(state.general_tasks[indexDep].tasks[state.taskIndex], payload.newTask)
+                } else {
+                    if (indexDep > -1) {
+                        state.general_tasks[indexDep].tasks.unshift(payload.newTask)
+
+                    } else {
+                        indexDep = state.deps.findIndex(item => item.id === payload.newTask.deps_id)
+                        state.general_tasks.unshift(state.deps[indexDep])
+                        state.general_tasks[0].tasks.unshift(payload.newTask)
+                    }
+//Todo:Либо доделать удаление , либо перепланировать обьект\массив general
+                    indexDep = state.general_tasks.findIndex(item => item.id === payload.oldTask.deps_id)
+                    let item = state.general_tasks[indexDep].findIndex(item => item.id === payload.oldTask.id)
+                    if(item > -1) {
+                        state.general_tasks[indexDep].splice(item, 1)
+                    }
+                }
+
+                console.log('Общий список, действующий ')
+            } else {
+                state.tasks.splice(state.taskIndex, 1)
+
+                let indexDep = state.deps.findIndex(item => item.id === payload.newTask.deps_id)
+                let indexDepGeneral = state.general_tasks.findIndex(item => item.id === state.deps[indexDep].id)
+                if (indexDepGeneral > -1) {
+                    state.general_tasks[indexDepGeneral].tasks.unshift(payload.newTask)
+                } else {
+                    state.general_tasks.unshift(state.deps[indexDep])
+                    state.general_tasks[0].tasks.unshift(payload.newTask)
+                }
+
+                console.log('Общий список, новый ')
+            }
         }
     },
 
@@ -143,7 +188,7 @@ let mutations = {
         } else {
             state.taskIndex = state.tasks.indexOf(payload.task)
         }
-
+        state.cacheTask = payload.task
         state.task = Object.assign(state.task, payload.task)
         state.dialogForm = true
     },
@@ -155,6 +200,7 @@ let mutations = {
         state.task.menu = false
         setTimeout(() => {
             state.task = Object.assign({}, state.dialogFormInput)
+            state.cacheTask = {}
             state.taskIndex = -1
         }, 300)
     },
@@ -219,6 +265,7 @@ let state = {
         general: 0,
         deps_id: 5
     },
+    cacheTask: {},
 
     dialogFormInput: {
         title:'',

@@ -11,7 +11,7 @@ Route::get('logout', 'Auth\LoginController@logout')->name('auth.logout');
 
 Route::get('admin', ['uses' => 'HomeController@index', 'as' => 'admin.index']);
 Route::get('searchInfo', ['uses' => 'SearchController@searchInfo', 'as' => 'searchInfo']);
-Route::get('getInfo', ['uses' => 'SearchController@getInfo', 'as' => 'getInfo']);
+Route::get('search', ['uses' => 'SearchController@search', 'as' => 'search']);
 Route::post('initial', ['uses' => 'HomeController@InitialBoot', 'as' => 'initial']);
 //Route::post('/add-contact', ['uses' => 'UserController@store', 'as' => 'add-contact']);
 //Route::post('/add-posts', ['uses' => 'PostsController@store', 'as' => 'add-posts']);

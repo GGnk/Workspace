@@ -53,6 +53,13 @@
       'Image' => 'Intervention\\Image\\Facades\\Image',
     ),
   ),
+  'laravel/scout' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Laravel\\Scout\\ScoutServiceProvider',
+    ),
+  ),
   'laravel/tinker' => 
   array (
     'providers' => 
@@ -72,6 +79,13 @@
     'providers' => 
     array (
       0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    ),
+  ),
+  'tamayo/laravel-scout-elastic' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'ScoutEngines\\Elasticsearch\\ElasticsearchProvider',
     ),
   ),
 );

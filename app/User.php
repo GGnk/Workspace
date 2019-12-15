@@ -15,11 +15,13 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Dialog;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Traits\Dialog as TrDialog;
+use Laravel\Scout\Searchable;
 use phpDocumentor\Reflection\Types\This;
 
 class User extends Authenticatable {
     use TrDialog;
     use Notifiable;
+    use Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -27,7 +29,7 @@ class User extends Authenticatable {
      * @var array
      */
     protected $fillable = [
-        'name', 'email',  'phone', 'profession','sort'
+        'name', 'email',  'phone', 'profession','sort', 'comment'
     ];
 
     /**

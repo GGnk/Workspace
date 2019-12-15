@@ -210,7 +210,7 @@
                                                        v-for="(item, i) in get_results_search.people"
                                                        :key="i">
 
-                                                    <miniContacts :item="item" :index="i" :cat="'people'"></miniContacts>
+                                                        <miniContacts :item="item" :index="i" :cat="'people'"></miniContacts>
 
                                                 </v-col>
                                         </v-row>
@@ -228,7 +228,7 @@
                                                     v-for="(item, i) in get_results_search.build"
                                                     :key="i"
                                             >
-                                                <miniContacts :item="item" :index="i" :cat="'build'"></miniContacts>
+                                                    <miniContacts :item="item" :index="i" :cat="'build'"></miniContacts>
                                             </v-col>
                                         </v-row>
                                     </v-col>
