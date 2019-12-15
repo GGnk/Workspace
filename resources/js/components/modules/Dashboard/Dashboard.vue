@@ -47,11 +47,17 @@
                                 hint="Введи запрос. Не менее 3 символа!"
                                 prepend-inner-icon="search"
                                 v-model="input_info"
-                                @keydown.enter="SEARCH_INFO"
+                                @keydown.enter="SWITCH_MODE_SEARCH()"
                                 @keydown.esc="$store.commit('INPUT_SET', '')"
                             ></v-text-field>
                             <v-col cols
                             class="text-right py-0">
+                                <v-switch
+                                    v-model="ModeSearch"
+                                    label="new Поиск"
+                                    class="float-left ma-0"
+                                    style="height: 28px"
+                                ></v-switch>
                                 <v-badge
                                     v-if="addFormUser && valid"
                                     overlap
@@ -278,7 +284,7 @@
 </template>
 
 <script>
-    import {mapGetters, mapActions} from 'vuex'
+    import {mapGetters, mapActions, mapMutations} from 'vuex'
 
     export default {
         name: "Dashboard",
@@ -322,11 +328,20 @@
         }),
         computed: {
             ...mapGetters(['config/auth','config/admin','config/root',
-                'get_info', 'get_input_search', 'get_results_search', 'get_error_search', 'loading_search',
+                'get_input_search', 'get_results_search', 'get_error_search',
+                'loading_search', 'switchModeSearch',
                 'contacts/get_alert','contacts/get_message',
                 'contacts/inputContactName','contacts/inputContactProfession','contacts/inputContactSort',
                 'contacts/inputContactEmail','contacts/inputContactPhone'
             ]),
+            ModeSearch: {
+                get () {
+                    return this.switchModeSearch
+                },
+                set (value) {
+                    this.MODE_SEARCH(value)
+                }
+            },
             alert_add: {
                 get () {
                     return this['contacts/get_alert']
@@ -398,11 +413,12 @@
         },
         watch: {
             input_info(newInput, oldInput) {
-                this.SEARCH_INFO()
+                this.SWITCH_MODE_SEARCH()
             }
         },
         methods: {
-            ...mapActions(['SEARCH_INFO' ])
+            ...mapActions(['SWITCH_MODE_SEARCH']),
+            ...mapMutations(['MODE_SEARCH'])
         }
     }
 </script>

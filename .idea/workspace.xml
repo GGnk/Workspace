@@ -1,29 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="381a243a-1d9c-4d69-8a68-88a322d6b33a" name="Default Changelist" comment="Update 1.0.4&#10;Updated task module!">
-      <change afterPath="$PROJECT_DIR$/config/scout.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+    <list default="true" id="381a243a-1d9c-4d69-8a68-88a322d6b33a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SearchController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SearchController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bootstrap/cache/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap/cache/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bootstrap/cache/packages.php" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap/cache/packages.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bootstrap/cache/services.php" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap/cache/services.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Posts.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Posts.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/laravel-echo-server.lock" beforeDir="false" afterPath="$PROJECT_DIR$/laravel-echo-server.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/modules/Contacts/blocks/miniContacts.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modules/Contacts/blocks/miniContacts.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/modules/Dashboard/Dashboard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modules/Dashboard/Dashboard.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/modules/Search/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modules/Search/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/modules/Tasks/blocks/universal-card.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modules/Tasks/blocks/universal-card.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/modules/Tasks/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/modules/Tasks/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.mix.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -360,14 +346,7 @@
       <workItem from="1576128345100" duration="2366000" />
       <workItem from="1576219704746" duration="8914000" />
       <workItem from="1576401532198" duration="1585000" />
-      <workItem from="1576417482138" duration="390000" />
-    </task>
-    <task id="LOCAL-00007" summary="Обновление 0.0.2.6 (vue.js, not run)">
-      <created>1563886640003</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1563886640003</updated>
+      <workItem from="1576417482138" duration="6274000" />
     </task>
     <task id="LOCAL-00008" summary="Обновление 0.0.2.7 (vue.js, run)">
       <created>1563971785423</created>
@@ -705,7 +684,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575953076901</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="Update 1.0.4&#10;Updated search module!">
+      <created>1576417901906</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1576417901907</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -728,7 +714,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Обновление 0.0.2.32" />
     <MESSAGE value="Обновление 0.0.2.33" />
     <MESSAGE value="Обновление 0.0.2.34" />
     <MESSAGE value="Обновление 0.0.2.35" />
@@ -753,10 +738,7 @@
     <MESSAGE value="Обновление 1.0.3" />
     <MESSAGE value="Update 1.0.4&#10;Added ability to return completed tasks!" />
     <MESSAGE value="Update 1.0.4&#10;Updated task module!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update 1.0.4&#10;Updated task module!" />
-  </component>
-  <component name="antWorkspaceConfiguration">
-    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
-    <option name="FILTER_TARGETS" value="false" />
+    <MESSAGE value="Update 1.0.4&#10;Updated search module!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update 1.0.4&#10;Updated search module!" />
   </component>
 </project>

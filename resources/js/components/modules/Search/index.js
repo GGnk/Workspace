@@ -40,8 +40,15 @@ let actions = {
                 business: []
             }
         }
-    }
+    },
 
+    SWITCH_MODE_SEARCH({dispatch, state}) {
+        if (state.switchModeSearch) {
+            dispatch('SEARCH')
+        } else {
+            dispatch('SEARCH_INFO')
+        }
+    }
 }
 
 let mutations = {
@@ -81,6 +88,9 @@ let mutations = {
     DELETE_CONTACT(state, payload) {
         state.results[payload.cat].splice(payload.index, 1)
     },
+    MODE_SEARCH(state, value) {
+        state.switchModeSearch = value
+    }
 }
 
 let getters = {
@@ -95,6 +105,9 @@ let getters = {
     },
     loading_search: state =>{
         return state.loading
+    },
+    switchModeSearch: state => {
+        return state.switchModeSearch
     }
 }
 
@@ -104,7 +117,7 @@ let state = {
         build: [],
         business: []
     },
-
+    switchModeSearch: false,
     input_search: '',
     error: null,
     loading: false,
