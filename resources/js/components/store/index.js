@@ -1,8 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import mouseMenu from 'vue-mouse-menu'
 
+Vue.config.productionTip = false;
 
 Vue.use(Vuex);
+Vue.use(mouseMenu);
 
 import config from './config'
 

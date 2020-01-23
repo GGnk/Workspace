@@ -33,7 +33,7 @@ export default {
   components: { SelectedFileList },
   computed: {
     /**
-     * Files and folders for deleting
+     * File and folders for deleting
      * @returns {*}
      */
     selectedItems() {

@@ -1,11 +1,12 @@
 let actions = {
-    HIDE_KEYBOARD({state, commit, dispatch}) {
+    HIDE_KEYBOARD({state, rootState, commit, dispatch}) {
         if (state.value.length === state.length) {
             axios.post('/pin', {pin: state.value})
                 .then((e) => {
                     if (e.data == 'yes') {
                         state.In = 'security-in3'
                         dispatch('config/INITIAL_BOOT', '', {root: true})
+                        rootState.config.home.pincode = false
                     } else {
                         state.In = 'security-in2'
                     }

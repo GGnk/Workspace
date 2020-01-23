@@ -20,7 +20,7 @@ export default {
     },
 
     /**
-     * Files list for selected directory
+     * File list for selected directory
      * @returns {*}
      */
     files() {

@@ -4,12 +4,12 @@
     'name' => '<< Portal IT Department >>',
     'env' => 'local',
     'debug' => true,
-    'url' => 'http://192.168.2.59:8000/',
+    'url' => 'http://188.235.147.108:8000/',
     'asset_url' => NULL,
-    'timezone' => 'UTC',
-    'locale' => 'en',
-    'fallback_locale' => 'en',
-    'faker_locale' => 'en_US',
+    'timezone' => 'Europe/Saratov',
+    'locale' => 'ru',
+    'fallback_locale' => 'ru',
+    'faker_locale' => 'ru_RU',
     'key' => 'base64:tHBNVshlqPNvzYJyZyFWzLVqtNPjB5kEN2aI1F91qx4=',
     'cipher' => 'AES-256-CBC',
     'providers' => 
@@ -251,7 +251,6 @@
       'kiosk' => 
       array (
         'driver' => 'mysql',
-        'url' => NULL,
         'host' => '81.177.26.143',
         'port' => '3306',
         'database' => 'kiosk',
@@ -345,7 +344,7 @@
   ),
   'debugbar' => 
   array (
-    'enabled' => NULL,
+    'enabled' => false,
     'except' => 
     array (
       0 => 'telescope*',
@@ -362,7 +361,7 @@
     'capture_ajax' => true,
     'add_ajax_timing' => false,
     'error_handler' => false,
-    'clockwork' => false,
+    'clockwork' => true,
     'collectors' => 
     array (
       'phpinfo' => true,
@@ -372,21 +371,21 @@
       'exceptions' => true,
       'log' => true,
       'db' => true,
-      'views' => true,
+      'views' => false,
       'route' => true,
-      'auth' => false,
-      'gate' => true,
+      'auth' => true,
+      'gate' => false,
       'session' => true,
       'symfony_request' => true,
-      'mail' => true,
-      'laravel' => false,
-      'events' => false,
-      'default_request' => false,
-      'logs' => false,
+      'mail' => false,
+      'laravel' => true,
+      'events' => true,
+      'default_request' => true,
+      'logs' => true,
       'files' => false,
-      'config' => false,
-      'cache' => false,
-      'models' => false,
+      'config' => true,
+      'cache' => true,
+      'models' => true,
     ),
     'options' => 
     array (
@@ -709,7 +708,7 @@
   ),
   'filesystems' => 
   array (
-    'default' => 'local',
+    'default' => 'public',
     'cloud' => 's3',
     'disks' => 
     array (
@@ -722,7 +721,7 @@
       array (
         'driver' => 'local',
         'root' => '/var/www/livechat/html/storage/app/public',
-        'url' => 'http://192.168.2.59:8000//storage',
+        'url' => 'http://188.235.147.108:8000//storage',
         'visibility' => 'public',
       ),
       'obmen' => 
@@ -766,7 +765,7 @@
   ),
   'ignition' => 
   array (
-    'editor' => 'phpstorm',
+    'editor' => '',
     'theme' => 'light',
     'enable_share_button' => true,
     'register_commands' => false,
@@ -791,6 +790,7 @@
           0 => 'daily',
         ),
         'ignore_exceptions' => false,
+        'permission' => 436,
       ),
       'single' => 
       array (
@@ -929,7 +929,7 @@
   ),
   'scout' => 
   array (
-    'driver' => 'elasticsearch',
+    'driver' => 'null',
     'prefix' => '',
     'queue' => false,
     'chunk' => 
@@ -989,7 +989,7 @@
     'driver' => 'file',
     'lifetime' => '10080',
     'expire_on_close' => false,
-    'expired-session-redirect' => 'http://192.168.2.59:8000/',
+    'expired-session-redirect' => 'http://188.235.147.108:8000/',
     'encrypt' => false,
     'files' => '/var/www/livechat/html/storage/framework/sessions',
     'connection' => NULL,

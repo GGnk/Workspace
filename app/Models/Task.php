@@ -10,8 +10,10 @@ class Task extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['title','desc','priority', 'toDate','status','cat','deps_id', 'general','completed','user_create','users_id','file',];
+    protected $fillable = ['title','desc','priority', 'toDate','status','cat', 'general','completed','user_create','users_id'];
     protected $hidden = [];
+
+    protected $with = ['house', 'files'];
 
     public function users()
     {
@@ -22,8 +24,13 @@ class Task extends Model
     {
         return $this->belongsTo(User::class, 'user_create');
     }
-    public function dep()
+    public function house()
     {
-        return $this->belongsTo(Dep::class, 'deps_id');
+        return $this->morphToMany(House::class, 'houselist');
+    }
+
+    public function files()
+    {
+        return $this->morphToMany(File::class, 'filelist');
     }
 }

@@ -1,6 +1,6 @@
 export default {
   /**
-   * Files count
+   * File count
    * @param state
    * @returns {number}
    */
@@ -18,7 +18,7 @@ export default {
   },
 
   /**
-   * Files size - bytes
+   * File size - bytes
    * @param state
    * @returns {*}
    */

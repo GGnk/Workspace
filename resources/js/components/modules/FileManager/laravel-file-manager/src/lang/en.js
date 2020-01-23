@@ -51,10 +51,10 @@ const en = {
   },
   info: {
     directories: 'Folders:',
-    files: 'Files:',
+    files: 'File:',
     selected: 'Selected:',
-    selectedSize: 'Files size:',
-    size: 'Files size:',
+    selectedSize: 'File size:',
+    size: 'File size:',
   },
   manager: {
     table: {

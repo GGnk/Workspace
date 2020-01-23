@@ -28,9 +28,6 @@ class HomeController extends Controller
     {
         return view('home');
     }
-    public function kiosk() {
-
-    }
 
     public function InitialBoot(User $user) {
         $auth = UserController::getCheckAuth();

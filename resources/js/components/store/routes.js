@@ -2,7 +2,7 @@ let routes = [
     {
         path: '/',
         name: 'Dashboard',
-        component: () => import('../modules/Dashboard/Dashboard'),
+        component: () => import('../views/Dashboard'),
         meta: {
             // requiresAuth: true
         }

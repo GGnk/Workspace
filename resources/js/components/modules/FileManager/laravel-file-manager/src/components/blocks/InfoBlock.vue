@@ -74,7 +74,7 @@ export default {
     },
 
     /**
-     * Files count in selected directory
+     * File count in selected directory
      * @returns {*}
      */
     filesCount() {
@@ -90,7 +90,7 @@ export default {
     },
 
     /**
-     * Files size in selected directory
+     * File size in selected directory
      * @returns {*|string}
      */
     filesSize() {

@@ -2,69 +2,93 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Posts;
+use App\Models\File;
+use App\Models\Post;
+
+use App\Repositories\PostRepositoryInterface;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    protected $posts;
+
+    public function __construct(PostRepositoryInterface $posts)
     {
-        //
+        $this->posts = $posts;
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Returns a list of posts.
      *
-     * @return \Illuminate\Http\Response
+     * @return array
      */
-    public function create()
+    public function index() : array
     {
-        //
+        try {
+            return [
+                'posts' => $this->posts->all(),
+                'message' => [
+                    'type' => 'success',
+                    'text' => ""
+                ]
+            ];
+        } catch (ModelNotFoundException $e) {
+            return [
+                'message' => [
+                    'type' => 'info',
+                    'text' => "Ничего не найдено, ошибка: $e"
+                ]
+            ];
+        }
+
+
     }
+
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
+     * @param File $file
      * @return array
      */
-    public function store(Request $request)
+    public function store(Request $request, File $file)
     {
+        try {
+            $files = $request->allFiles();
+            $path = $file->uploadFiles($files, 'post_img');
+            $post = $this->posts->create($request->all('title', 'description')+[ 'users_id'=> Auth::id(), 'img' => $path['path_img'], 'files'=>$path['path_files']->toArray()]);
 
-        $search = Posts::where('title', $request->title)->first();
-        if ($search) {
             return [
-                $search,
+                'post' => $post,
                 'message' => [
-                    'type' => 'info',
-                    'text' => "Такая публикация существует!"
+                    'type' => 'success',
+                    'text' => 'Ваш пост опубликован!'
+                ]
+            ];
+        } catch (\Exception $e) {
+            return [
+                'message' => [
+                'type' => 'warning',
+                'text' => "Произошла ошибка! {$e}"
                 ]
             ];
         }
-        $post = Posts::create($request->all());
-        return [
-            $post,
-            'message' => [
-                'type' => 'success',
-                'text' => 'Ваша мысль опубликована!'
-            ]
-        ];
+
     }
 
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param  \App\Posts  $posts
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Posts $posts)
+    public function update(Request $request, Post $posts)
     {
         //
     }
@@ -75,7 +99,7 @@ class PostsController extends Controller
      * @param  \App\Posts  $posts
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Posts $posts)
+    public function destroy(Post $posts)
     {
         //
     }

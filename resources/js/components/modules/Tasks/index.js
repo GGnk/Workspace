@@ -13,7 +13,7 @@ let actions = {
     },
 
     async SAVE_TASK({state, commit, dispatch, rootGetters}) {
-        if (rootGetters['config/auth']) {
+        if (rootGetters['config/auth'] && state.dialogFormValid) {
             if (state.taskIndex > -1) {
                 dispatch('UPDATE_TASK')
             } else {
@@ -21,7 +21,7 @@ let actions = {
             }
             commit('DIALOG_FORM_CLOSE')
 
-        } else console.log('Доступно только авторизованным пользователям!')
+        } else console.log('Что то пошло не так! ')
     },
     async ADD_TASK({commit}) {
         await axios.post(`/admin/tasks`, state.task)
@@ -35,7 +35,7 @@ let actions = {
     async UPDATE_TASK({commit}) {
         await axios.put(`/admin/tasks`, {task: state.task, method: 'put'})
             .then((e) => {
-                commit('TASK_UPDATE', {oldTask: state.cacheTask, newTask: e.data})
+                commit('TASK_UPDATE', {task: e.data})
             })
             .catch((err) => {
                 console.log(err)
@@ -46,7 +46,19 @@ let actions = {
         if (rootGetters['config/auth']) {
             await axios.put(`/admin/tasks/done`, {id: payload.id, completed: payload.completed, method: 'put'})
                 .then((e) => {
-                    commit('TASK_DONE', {task: e.data,index: payload.index})
+                    commit('TASK_DONE', e.data)
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+        } else console.log('Доступно только авторизованным пользователям!')
+    },
+    async DELETE_RELATION({commit, rootGetters}, payload) {
+        if (rootGetters['config/auth']) {
+            let data = {task_id: payload.task_id, relation_id: payload.relation_id}
+            await axios.post(`/admin/tasks/rem-relation`, data)
+                .then((e) => {
+                    commit('TASK_DELETE_RELATION', {task: e.data, index: payload.task_index} )
                 })
                 .catch((err) => {
                     console.log(err)
@@ -69,128 +81,55 @@ let actions = {
 let mutations = {
     TASKS_DATA (state, info) {
         state.arrayTasks = info.e.data.tasks
-        state.tasks = info.e.data.tasks[info.index].tasks
-        state.Wusers = info.e.data.tasks.map(function (qw) {
+        state.Wusers = info.e.data.users.map(function (qw) {
             let name  = qw.name.replace(/(\S)\S* (\S+) (\S)\S*/, "$2 $3.$1.")
             return {id : qw.id, name : name}
         })
-        state.general_tasks = info.e.data.general_tasks
-        state.deps = info.e.data.deps
+
+        if(info.index == -1) {
+            state.tasks = []
+        } else{
+            state.tasks = info.e.data.tasks[info.index].tasks
+        }
+
+        state.houses = info.e.data.houses
     },
     TASK_LIST (state, data) {
         state.intTask = data
         let index = state.arrayTasks.findIndex(el => el.id === data)
-        state.tasks = state.arrayTasks[index].tasks
+        if (index == -1) {
+            state.tasks = []
+        }else {
+            state.tasks = state.arrayTasks[index].tasks
+        }
     },
     TASK_ADD(state, task) {
-        let vm = this
-        if(task.general === 1 && task.deps_id > 0){
-            let dep_index = state.deps.findIndex(item =>  item.id === task.deps_id)
-            let task_dep = state.general_tasks.findIndex(item =>  item.id === state.deps[dep_index].id)
-            if(task_dep > -1){
-                state.general_tasks[task_dep].tasks.unshift(task)
-            }
-            else {
-                state.general_tasks.unshift(state.deps[dep_index])
-                state.general_tasks[0].tasks.unshift(task)
-            }
-
-        }
-        else {
-            state.tasks.unshift(task)
-        }
-
+        state.tasks.unshift(task)
+    },
+    TASK_DELETE_RELATION(state, data) {
+        state.tasks.splice(data.index, 1, data.task)
     },
 
     TASK_DELETE(state, task) {
-        if(task.general === 1 && task.deps_id > 0){
-            let dep_index = state.deps.findIndex(item =>  item.id === task.deps_id)
-            let task_dep = state.general_tasks.findIndex(item =>  item.id === state.deps[dep_index].id)
-            //TODO: доделать условие, при не нахождение
-            if(task_dep > -1){
-                state.general_tasks[task_dep].tasks.splice(state.general_tasks[task_dep].tasks.indexOf(task), 1)
-            }
-        }
-        else state.tasks.splice(state.tasks.indexOf(task), 1)
+        state.tasks.splice(state.tasks.indexOf(task), 1)
     },
-    TASK_DONE(state, payload) {
-        if(payload.task.general === 1 && payload.task.deps_id > 0){
-            let dep_index = state.deps.findIndex(item =>  item.id === payload.task.deps_id)
-            let task_dep = state.general_tasks.findIndex(item =>  item.id === state.deps[dep_index].id)
-            if(task_dep > -1) {
-                state.general_tasks[task_dep].tasks.splice(payload.index, 1,payload.task)
-            }
-        }
-        else {
-            state.tasks.splice(payload.index, 1,payload.task)
-        }
+    TASK_DONE(state, task) {
+        let old_task = state.tasks.findIndex(task_ => task_.id === task.id)
+        state.tasks.splice(old_task, 1, task)
     },
     TASK_UPDATE(state, payload) {
-        // TODO: исправить перемешение (удалять старые)
-        if (payload.newTask.general == false) {
-                if(payload.oldTask.general == payload.newTask.general) {
-                    Object.assign(state.tasks[state.taskIndex], payload.newTask)
-                    console.log('Свой список, действующий ')
-                }
-                else {
-                    let indexDep = state.general_tasks.findIndex(item =>  item.id === payload.oldTask.deps_id)
-                    state.general_tasks[indexDep].tasks.splice(state.taskIndex, 1)
-
-                    state.tasks.unshift(payload.newTask)
-                    console.log('Свой список, новый ')
-                }
-        }
-        else {
-            if (payload.oldTask.general == payload.newTask.general) {
-                let indexDep = state.general_tasks.findIndex(item => item.id === payload.newTask.deps_id)
-
-                if(payload.oldTask.deps_id === state.general_tasks[indexDep].id) {
-                    Object.assign(state.general_tasks[indexDep].tasks[state.taskIndex], payload.newTask)
-                } else {
-                    if (indexDep > -1) {
-                        state.general_tasks[indexDep].tasks.unshift(payload.newTask)
-
-                    } else {
-                        indexDep = state.deps.findIndex(item => item.id === payload.newTask.deps_id)
-                        state.general_tasks.unshift(state.deps[indexDep])
-                        state.general_tasks[0].tasks.unshift(payload.newTask)
-                    }
-//Todo:Либо доделать удаление , либо перепланировать обьект\массив general
-                    indexDep = state.general_tasks.findIndex(item => item.id === payload.oldTask.deps_id)
-                    let item = state.general_tasks[indexDep].findIndex(item => item.id === payload.oldTask.id)
-                    if(item > -1) {
-                        state.general_tasks[indexDep].splice(item, 1)
-                    }
-                }
-
-                console.log('Общий список, действующий ')
-            } else {
-                state.tasks.splice(state.taskIndex, 1)
-
-                let indexDep = state.deps.findIndex(item => item.id === payload.newTask.deps_id)
-                let indexDepGeneral = state.general_tasks.findIndex(item => item.id === state.deps[indexDep].id)
-                if (indexDepGeneral > -1) {
-                    state.general_tasks[indexDepGeneral].tasks.unshift(payload.newTask)
-                } else {
-                    state.general_tasks.unshift(state.deps[indexDep])
-                    state.general_tasks[0].tasks.unshift(payload.newTask)
-                }
-
-                console.log('Общий список, новый ')
-            }
-        }
+        state.tasks.splice(state.taskIndex, 1, payload.task)
     },
 
-    EDIT_DIALOG_FORM(state, payload){
-        if(payload.list === 'general'){
-            let index = state.general_tasks.findIndex(item =>  item.id === payload.task.deps_id)
-            state.taskIndex = state.general_tasks[index].tasks.indexOf(payload.task)
-        } else {
-            state.taskIndex = state.tasks.indexOf(payload.task)
-        }
-        state.cacheTask = payload.task
-        state.task = Object.assign(state.task, payload.task)
+    EDIT_DIALOG_FORM(state, task){
+        state.taskIndex = state.tasks.indexOf(task)
+
+        state.cacheTask = task
+        state.task = Object.assign(state.task, task)
         state.dialogForm = true
+    },
+    DIALOG_FORM_VALID (state, value) {
+        state.dialogFormValid = value
     },
     ENTER_TASK_FORM(state, payload){
         state.task[payload.vv] = payload.value
@@ -209,11 +148,31 @@ let mutations = {
 
 let getters = {
     sortedArray: state=> {
-        return state.tasks
+        return state.tasks.filter(item => item.general === 0)
             // .sort((a, b) => a.completed - b.completed)
     },
-    general_tasks: state=> {
-        return state.general_tasks
+    generalArray: state => {
+        if (!state.arrayTasks) return []
+        let ll = []
+        for(let itemI of state.arrayTasks) {
+            if(itemI.tasks.length){
+                for(let item of itemI.tasks) {
+                    if(item.general == 1) ll.push(item)
+                }
+            }
+        }
+        return ll
+    },
+    count_my_tasks: (state, getters, rootState, rootGetters) => {
+        if (!state.arrayTasks.length) return 0
+        let index = state.arrayTasks.findIndex(el => el.id === rootGetters['config/user'].id)
+        if (index === -1) return 0
+        let items = state.arrayTasks[index].tasks.filter(task => task.completed === 0 && task.general === 0)
+        return items.length
+    },
+    count_general_tasks: (state, getters) => {
+        let items = getters.generalArray.filter(item => item.completed === 0)
+        return items.length
     },
     intTask: (state, getters, rootState, rootGetters) => {
         return state.intTask = rootGetters['config/user'].id
@@ -221,6 +180,12 @@ let getters = {
     task: state => {
         return state.task
     },
+    task_houses: state => {
+        return state.task.house.map(function (item) {
+            return item.id
+        })
+    },
+    no_cat_task: state=> state.tasks.find(task => task.cat > 0),
 
     options: state=> {
         return state.options
@@ -228,59 +193,90 @@ let getters = {
     cat: state=> {
         return state.cat
     },
-    deps: state => {
-        return state.deps
+    houses: state => {
+        return state.houses
     },
     tasksUsers: state => {
         return state.Wusers
     },
+    get_rules: state => {
+        return state.rules
+    },
     dialogForm: state => {
         return state.dialogForm
+    },
+    dialogFormValid:state => {
+        return state.dialogFormValid
     },
     dialogFormTitle: state =>{
         return state.taskIndex === -1? 'Добавляем задачу':'Обновляем задачу'
     },
     dialogFormButtomTitle: state =>{
         return state.taskIndex === -1? 'Добавить':'Обновить'
-    },
-    menuMode: state => {
-        return state.menuMode
     }
 
 }
 
 let state = {
     tasks: [],
-    general_tasks: [],
     intTask: '',
-    arrayTasks: '',
+    arrayTasks: [],
     Wusers: [],
     task: {
-        title:'',
         priority: 1,
         desc: '',
         toDate: "",
         status: '',
-        cat: null,
+        cat: 0,
         general: 0,
-        deps_id: 5
+        house: []
     },
     cacheTask: {},
 
     dialogFormInput: {
-        title:'',
         priority: 1,
         desc: '',
         toDate: "",
         status: '',
-        cat: null,
+        cat: 0,
         general: 0,
-        deps_id: 5
+        house: []
     },
     taskIndex: -1,
     dialogForm:false,
-
-    deps: [],
+    dialogFormValid: false,
+    rules: {
+        task_img: [
+            value => {
+                if(value) {
+                    return value.size < 2097152 || 'Картинка не может быть больше 2 MB!'
+                }
+                return true
+            },
+        ],
+        task_desc: [
+            value => !!value || 'Описание обязателено!',
+        ],
+        task_priority: [
+            value => !!value || 'Укажите приоритет!',
+        ],
+        task_cat: [
+            value => !!value || 'Укажите категорию!',
+        ],
+        task_files: [
+            value => {
+                if(value.length) {
+                    let countSize = 0
+                    value.forEach(function(item) {
+                        countSize+=item.size
+                    })
+                    return countSize < 10485760 || 'Докуметы не должны превышать 10 MB!'
+                }
+                return true
+            }
+        ],
+    },
+    houses: [],
     options: [
         { text: 'Низкий', value: 1 },
         { text: 'Средний', value: 2 },
@@ -288,7 +284,7 @@ let state = {
     ],
     cat:[
         { text: 'Документ', value: 1 },
-        { text: 'Прочее', value: null },
+        { text: 'Прочее', value: 0 },
     ]
 }
 

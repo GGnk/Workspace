@@ -1,7 +1,31 @@
+function inputFormData(data, log = false) {
+    let formData = new FormData()
+    _.forEach(data, function(item, key) {
+        formData.append(key,item)
+    })
 
+    console.log(data)
+    if(data.file != null && data.files.length > 0){
+        let countFile = 1
+        _.forEach(data.files, function (value) {
+            formData.append('files'+countFile, value);
+            countFile++
+        });
+    }
+
+    if (log){
+        formData.forEach(function (item, key) {
+            console.log(`${key}` +' => '+`${item}`)
+        })
+    }
+
+    return formData
+}
 let actions = {
     ADD_CONTACT({commit, state}) {
-        axios.post('/admin/add-contact', state.addContact)
+        let formData = inputFormData(state.addContact,true)
+
+        axios.post('/admin/add-contact', formData)
             .then(response => {
                 commit('INFO_CONTACT', response)
             })
@@ -11,7 +35,10 @@ let actions = {
     },
     EDIT_CONTACT({commit}, contact) {
         commit('CACHE_INPUT_CONTACT', contact)
-        axios.put('/admin/edit-contact', contact)
+
+        let formData = inputFormData(contact,true)
+
+        axios.post('/admin/edit-contact', formData)
             .then(response => {
                 commit('INFO_CONTACT', response)
             })
@@ -29,7 +56,7 @@ let actions = {
         axios.get('/admin/delete-contact/'+payload.item.id)
             .then(response => {
                 commit('INFO_CONTACT', response)
-                commit('DELETE_CONTACT', {item: payload.item, index: payload.index, cat: payload.cat}, { root: true })
+                commit('DELETE_CONTACT', {item: payload.item, index: payload.index, cat: payload.cat, server_message: response.data.message}, { root: true })
             })
             .catch(err => {
                 state.message = {
@@ -44,6 +71,9 @@ let actions = {
 }
 
 let mutations = {
+    /**
+     * @return {boolean}
+     */
     INFO_CONTACT (state, response) {
         if (response.data.error) {
             state.error = response.data.error
@@ -97,10 +127,13 @@ let getters = {
 let state = {
     addContact: {
         profession: '',
+        img: null,
+        new_img: null,
         name: '',
         sort: 1,
         email:'',
-        phone:''
+        phone:'',
+        files: null
     },
     CacheContacts: {},
     error: null,
@@ -109,7 +142,7 @@ let state = {
         type: 'success',
         text: ''
     },
-    loading: false,
+    loading: false
 }
 
 export default {

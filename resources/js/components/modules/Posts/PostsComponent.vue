@@ -1,81 +1,246 @@
 <template>
-    <v-data-table
-        :headers="headers"
-        :items="desserts"
-        sort-by="calories"
-        class="elevation-1"
+    <v-card
+        class="mx-auto"
     >
-        <template v-slot:top>
-            <v-toolbar flat color="white">
-                <v-toolbar-title>My CRUD</v-toolbar-title>
+        <v-snackbar
+            v-model="alert"
+            :color="get_alert_message.type"
+            right
+            :timeout="5000"
+            top
+        >
+            {{get_alert_message.text}}
+            <v-btn
+                dark
+                text
+                @click="$store.commit('posts/ALERT_CLOSE')"
+            >
+                Close
+            </v-btn>
+        </v-snackbar>
+        <v-toolbar
+            color="white"
+        >
+            <v-text-field
+                append-icon="search"
+                v-model="input_posts"
+                label="Найти"
+                :loading="loading_search"
+                @keydown.enter="$store.dispatch('SEARCH_INFO','posts')"
+                @keydown.esc="$store.commit('INPUT_SET', '')"
+                single-line
+                hide-details
+            />
+            <v-btn
+                @click="$store.commit('posts/DIALOG_FORM_OPEN')"
+                color="primary" icon dark class="mb-2" >
+                <v-icon>add</v-icon>
+            </v-btn>
+            <v-dialog v-model="dialog">
+                <v-card>
+                    <v-card-title class="headline">{{dialogFormTitle}}</v-card-title>
+
+                    <v-card-text>
+                        <v-form
+                            v-model="valid"
+                        >
+                            <v-row>
+                                <v-col class="text-center">
+                                    <v-file-input
+                                        v-if="dialogFormUpdate"
+                                        v-model="post_img"
+                                        :rules="get_rules.post_img"
+                                        accept="image/png, image/jpeg, image/bmp"
+                                        placeholder="Загрузите картинку для поста"
+                                        prepend-icon="mdi-camera"
+                                        label="IMG"
+                                    />
+                                    <v-hover v-else>
+                                        <template
+                                            v-slot:default="{ hover}">
+                                            <div>
+                                                <v-avatar
+                                                    size="150"
+                                                >
+                                                    <img
+                                                        v-if="post_img"
+                                                        :src="'/storage/'+post_img"
+                                                    >
+                                                    <v-icon v-else>mdi-camera</v-icon>
+                                                </v-avatar>
+                                                <v-fade-transition>
+                                                    <v-overlay
+                                                        v-if="hover"
+                                                        absolute
+                                                        color="#036358"
+                                                    >
+                                                        <v-btn>{{post_img?'Сменить картинку':'Загрузить картинку' }}</v-btn>
+                                                    </v-overlay>
+                                                </v-fade-transition>
+                                            </div>
+                                        </template>
+                                    </v-hover>
+                                </v-col>
+                                <v-col>
+                                    <v-text-field
+                                        v-model="post_title"
+                                        :rules="get_rules.post_title"
+                                        label="Заголовок"
+                                        required
+                                    />
+                                </v-col>
+                            </v-row>
+
+                            <v-textarea
+                                v-model="post_desc"
+                                :rules="get_rules.post_desc"
+                                label="Описание"
+                                rows="15"
+                                required
+                            />
+                            <v-file-input
+                                v-if="dialogFormUpdate"
+                                v-model="post_files"
+                                :rules="get_rules.post_files"
+                                placeholder="Загрузите документы"
+                                label="Файлы"
+                                multiple
+                                prepend-icon="mdi-paperclip"
+                            >
+                                <template v-slot:selection="{ text }">
+                                    <v-chip
+                                        small
+                                        label
+                                        color="primary"
+                                    >
+                                        {{ text }}
+                                    </v-chip>
+                                </template>
+                            </v-file-input>
+                            <v-tooltip
+                                v-else
+                                v-for="(file, i) in post_files"
+                                :key="i"
+                                bottom>
+                                <template v-slot:activator="{ on }">
+                                    <v-btn icon :href="'/storage/'+file.path" v-on="on" title="" target="_blank">
+                                        <v-icon>insert_drive_file</v-icon>
+                                    </v-btn>
+                                </template>
+                                <span>{{file.name}}</span>
+                            </v-tooltip>
+                        </v-form>
+                    </v-card-text>
+
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+
+                        <v-btn
+                            color="green darken-1"
+                            text
+                            @click="$store.commit('posts/DIALOG_FORM_CLOSE')"
+                        >
+                            Отмена
+                        </v-btn>
+
+                        <v-btn
+                            color="green darken-1"
+                            text
+                            @click="$store.dispatch('posts/SAVE_POST')"
+                        >
+                            {{dialogFormButtomTitle}}
+                        </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
+        </v-toolbar>
+
+        <v-list two-line>
+            <template
+                v-for="(post, index) in (get_results_search.posts && get_results_search.posts.length ?get_results_search.posts: get_posts)"
+
+            >
+                <v-list-item
+                    :key="index"
+                    title=""
+                >
+                    <v-list-item-avatar v-if="post.img">
+                        <v-img :src="'/storage/'+post.img"/>
+                    </v-list-item-avatar>
+                    <v-list-item-avatar v-else>
+                        <v-icon>mdi-camera</v-icon>
+                    </v-list-item-avatar>
+                    <v-list-item-content>
+                        <v-list-item-title v-text="post.title"/>
+                        <v-list-item-subtitle>
+                            <span class='text--primary'>{{post.author.name.replace(/(\S)\S* (\S+) (\S)\S*/, '$2 $3.$1.')}}</span> &mdash;
+                            {{post.description }}
+                        </v-list-item-subtitle>
+                    </v-list-item-content>
+
+                    <v-list-item-action>
+                        <v-list-item-action-text>
+                            Создан {{post.created_at | moment}}
+                        </v-list-item-action-text>
+                        <v-card
+                            flat
+                        >
+                            <v-tooltip
+                                v-for="(file, i) in post.files"
+                                :key="i"
+                                bottom>
+                                <template v-slot:activator="{ on }">
+                                    <v-btn icon :href="'/storage/'+file.path" v-on="on" title="" target="_blank">
+                                        <v-icon>insert_drive_file</v-icon>
+                                    </v-btn>
+                                </template>
+                                <span>{{file.name}}</span>
+                            </v-tooltip>
+                            <v-menu bottom left>
+                                <template v-slot:activator="{ on }">
+                                    <v-btn
+                                        icon
+                                        v-on="on"
+                                    >
+                                        <v-icon>mdi-dots-vertical</v-icon>
+                                    </v-btn>
+                                </template>
+
+                                <v-list>
+                                    <v-list-item
+                                        @click="$store.commit('posts/DIALOG_FORM_OPEN', {index: index, post: post})"
+                                    >
+                                        <v-list-item-title>Редактировать</v-list-item-title>
+                                    </v-list-item>
+                                    <v-list-item
+                                        @click=""
+                                    >
+                                        <v-list-item-title>В закладки</v-list-item-title>
+                                    </v-list-item>
+                                    <v-list-item
+                                        @click=""
+                                    >
+                                        <v-list-item-title>Удалить</v-list-item-title>
+                                    </v-list-item>
+                                </v-list>
+                            </v-menu>
+                        </v-card>
+                    </v-list-item-action>
+                </v-list-item>
+
                 <v-divider
-                    class="mx-4"
-                    inset
-                    vertical
-                ></v-divider>
-                <v-spacer></v-spacer>
-                <v-dialog v-model="dialog" max-width="500px">
-                    <template v-slot:activator="{ on }">
-                        <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn>
-                    </template>
-                    <v-card>
-                        <v-card-title>
-                            <span class="headline">{{ formTitle }}</span>
-                        </v-card-title>
+                    v-if="index + 1 < get_posts.length"
+                    style="margin: 0!important;"
+                />
+            </template>
+        </v-list>
 
-                        <v-card-text>
-                            <v-container>
-                                <v-row>
-                                    <v-col cols="12" sm="6" md="4">
-                                        <v-text-field v-model="editedItem.name" label="Dessert name"></v-text-field>
-                                    </v-col>
-                                    <v-col cols="12" sm="6" md="4">
-                                        <v-text-field v-model="editedItem.calories" label="Calories"></v-text-field>
-                                    </v-col>
-                                    <v-col cols="12" sm="6" md="4">
-                                        <v-text-field v-model="editedItem.fat" label="Fat (g)"></v-text-field>
-                                    </v-col>
-                                    <v-col cols="12" sm="6" md="4">
-                                        <v-text-field v-model="editedItem.carbs" label="Carbs (g)"></v-text-field>
-                                    </v-col>
-                                    <v-col cols="12" sm="6" md="4">
-                                        <v-text-field v-model="editedItem.protein" label="Protein (g)"></v-text-field>
-                                    </v-col>
-                                </v-row>
-                            </v-container>
-                        </v-card-text>
-
-                        <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-                            <v-btn color="blue darken-1" text @click="save">Save</v-btn>
-                        </v-card-actions>
-                    </v-card>
-                </v-dialog>
-            </v-toolbar>
-        </template>
-        <template v-slot:item.action="{ item }">
-            <v-icon
-                small
-                class="mr-2"
-                @click="editItem(item)"
-            >
-                edit
-            </v-icon>
-            <v-icon
-                small
-                @click="deleteItem(item)"
-            >
-                delete
-            </v-icon>
-        </template>
-        <template v-slot:no-data>
-            <v-btn color="primary" @click="initialize">Reset</v-btn>
-        </template>
-    </v-data-table>
+    </v-card>
 </template>
 
 <script>
+    import {mapActions, mapGetters} from "vuex";
+
     export default {
         name: "Posts",
         components: {
@@ -83,155 +248,101 @@
         },
         props: [],
         data:() => ({
-            dialog: false,
-            headers: [
-                {
-                    text: 'Dessert (100g serving)',
-                    align: 'left',
-                    sortable: false,
-                    value: 'name',
-                },
-                { text: 'Calories', value: 'calories' },
-                { text: 'Fat (g)', value: 'fat' },
-                { text: 'Carbs (g)', value: 'carbs' },
-                { text: 'Protein (g)', value: 'protein' },
-                { text: 'Actions', value: 'action', sortable: false },
-            ],
-            desserts: [],
-            editedIndex: -1,
-            editedItem: {
-                name: '',
-                calories: 0,
-                fat: 0,
-                carbs: 0,
-                protein: 0,
-            },
-            defaultItem: {
-                name: '',
-                calories: 0,
-                fat: 0,
-                carbs: 0,
-                protein: 0,
-            },
+            overlay: false,
+            editPost: false
         }),
         computed: {
-            formTitle () {
-                return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+            ...mapGetters('posts' ,['get_posts', 'get_post',
+                'dialogForm', 'dialogFormButtomTitle', 'dialogFormTitle', 'dialogFormUpdate',
+                'get_message', 'get_rules', 'dialogFormValid', 'get_alert', 'get_alert_message',
+            ]),
+            ...mapGetters(['get_input_search_posts', 'get_results_search', 'get_error_search',
+                'loading_search', 'switchModeSearch']),
+            input_posts: {
+                get() {
+                    return this.get_input_search_posts
+                },
+                set(value) {
+                    this.$store.commit('INPUT_SET_POSTS', value)
+                }
+            },
+            dialog: {
+                get() {
+                    return this.dialogForm
+                },
+                set(value) {
+                    this.$store.commit('posts/DIALOG_FORM_CLOSE')
+                }
+            },
+            alert: {
+                get() {
+                    return this.get_alert
+                },
+                set(value) {
+                    this.$store.commit('posts/ALERT_CLOSE')
+                }
+            },
+            valid: {
+                get() {
+                    return this.dialogFormValid
+                },
+                set(value) {
+                    this.$store.commit('posts/DIALOG_FORM_VALID', value)
+                }
+            },
+            post_title: {
+                get() {
+                    return this.get_post.title
+                },
+                set(value) {
+                    this.$store.commit('posts/INPUT_POST_FORM', {vv: 'title', value})
+                }
+            },
+            post_desc: {
+                get() {
+                    return this.get_post.description
+                },
+                set(value) {
+                    this.$store.commit('posts/INPUT_POST_FORM', {vv: 'description', value})
+                }
+            },
+            post_img: {
+                get() {
+                    return this.get_post.img
+                },
+                set(value) {
+                    this.$store.commit('posts/INPUT_POST_FORM', {vv: 'img', value})
+                }
+            },
+            post_files: {
+                get() {
+                    return this.get_post.files
+                },
+                set(value) {
+                    this.$store.commit('posts/INPUT_POST_FORM', {vv: 'files', value})
+                }
             },
         },
         created() {
-            this.initialize()
+            this.FETCH_DATA()
         },
         mounted() {
         },
         watch: {
-            dialog (val) {
-                val || this.close()
-            },
+            input_posts(newInput, oldInput) {
+                this.SEARCH_INFO('posts')
+            }
+        },
+        filters: {
+            moment: function (date) {
+                moment.locale('ru')
+                return moment(date).fromNow()
+            }
         },
         methods:{
-            initialize () {
-                this.desserts = [
-                    {
-                        name: 'Frozen Yogurt',
-                        calories: 159,
-                        fat: 6.0,
-                        carbs: 24,
-                        protein: 4.0,
-                    },
-                    {
-                        name: 'Ice cream sandwich',
-                        calories: 237,
-                        fat: 9.0,
-                        carbs: 37,
-                        protein: 4.3,
-                    },
-                    {
-                        name: 'Eclair',
-                        calories: 262,
-                        fat: 16.0,
-                        carbs: 23,
-                        protein: 6.0,
-                    },
-                    {
-                        name: 'Cupcake',
-                        calories: 305,
-                        fat: 3.7,
-                        carbs: 67,
-                        protein: 4.3,
-                    },
-                    {
-                        name: 'Gingerbread',
-                        calories: 356,
-                        fat: 16.0,
-                        carbs: 49,
-                        protein: 3.9,
-                    },
-                    {
-                        name: 'Jelly bean',
-                        calories: 375,
-                        fat: 0.0,
-                        carbs: 94,
-                        protein: 0.0,
-                    },
-                    {
-                        name: 'Lollipop',
-                        calories: 392,
-                        fat: 0.2,
-                        carbs: 98,
-                        protein: 0,
-                    },
-                    {
-                        name: 'Honeycomb',
-                        calories: 408,
-                        fat: 3.2,
-                        carbs: 87,
-                        protein: 6.5,
-                    },
-                    {
-                        name: 'Donut',
-                        calories: 452,
-                        fat: 25.0,
-                        carbs: 51,
-                        protein: 4.9,
-                    },
-                    {
-                        name: 'KitKat',
-                        calories: 518,
-                        fat: 26.0,
-                        carbs: 65,
-                        protein: 7,
-                    },
-                ]
-            },
+            ...mapActions('posts', ['FETCH_DATA']),
+            ...mapActions(['SEARCH_INFO']),
 
-            editItem (item) {
-                this.editedIndex = this.desserts.indexOf(item)
-                this.editedItem = Object.assign({}, item)
-                this.dialog = true
-            },
-
-            deleteItem (item) {
-                const index = this.desserts.indexOf(item)
-                confirm('Are you sure you want to delete this item?') && this.desserts.splice(index, 1)
-            },
-
-            close () {
-                this.dialog = false
-                setTimeout(() => {
-                    this.editedItem = Object.assign({}, this.defaultItem)
-                    this.editedIndex = -1
-                }, 300)
-            },
-
-            save () {
-                if (this.editedIndex > -1) {
-                    Object.assign(this.desserts[this.editedIndex], this.editedItem)
-                } else {
-                    this.desserts.push(this.editedItem)
-                }
-                this.close()
-            },
         }
     }
 </script>

@@ -64,7 +64,7 @@ return [
         ],
         'kiosk' => [
             'driver' => 'mysql',
-            'url' => env('DATABASE_URL'),
+            //'url' => env('DATABASE_URL'),
             'host' => '81.177.26.143',
             'port' => env('DB_PORT', '3306'),
             'database' => 'kiosk',

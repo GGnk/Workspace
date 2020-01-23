@@ -2,7 +2,12 @@
 
 namespace App;
 
-use App\Models\Posts;
+use App\Models\Dept;
+use App\Models\File;
+use App\Models\House;
+use App\Models\Office;
+use App\Models\Phone;
+use App\Models\Post;
 use App\Models\Role;
 use App\Models\Task;
 use Illuminate\Database\Eloquent\Collection;
@@ -10,18 +15,17 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Model;
 use App\Models\Dialog;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Traits\Dialog as TrDialog;
 use Laravel\Scout\Searchable;
-use phpDocumentor\Reflection\Types\This;
 
 class User extends Authenticatable {
     use TrDialog;
     use Notifiable;
     use Searchable;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -29,7 +33,7 @@ class User extends Authenticatable {
      * @var array
      */
     protected $fillable = [
-        'name', 'email',  'phone', 'profession','sort', 'comment'
+        'name', 'email', 'img', 'phone', 'profession','sort', 'birthdate', 'actual_address', 'depts_id', 'offices_id', 'roles_id', 'pin'
     ];
 
     /**
@@ -49,9 +53,29 @@ class User extends Authenticatable {
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function isSuperAdmin(){
+        return $this->roles_id == 1;
+    }
+    public function isAdmin(){
+        return $this->roles_id == 2;
+    }
+    public function isNotAdmin(){
+        return $this->roles_id > 2 || empty($this->roles_id);
+    }
+
     public function role()
     {
         return $this->belongsTo(Role::class, 'role_id');
+    }
+
+    public function dept()
+    {
+        return $this->belongsTo(Dept::class, 'role_id');
+    }
+
+    public function office()
+    {
+        return $this->belongsTo(Office::class, 'role_id');
     }
 
     public function tasks()
@@ -60,7 +84,22 @@ class User extends Authenticatable {
     }
     public function posts()
     {
-        return $this->hasMany(Posts::class, 'users_id');
+        return $this->hasMany(Post::class, 'users_id');
+    }
+
+    public function house()
+    {
+        return $this->morphToMany(House::class, 'houselist');
+    }
+
+    public function phone()
+    {
+        return $this->morphToMany(Phone::class, 'phonelist');
+    }
+
+    public function files()
+    {
+        return $this->morphToMany(File::class, 'filelist');
     }
 
     /**

@@ -25,6 +25,34 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        $user = \Auth::user();
+        //Только супер-админы
+        Gate::define('super_admins', function ($user) {
+            return in_array($user->roles_id, [1]);
+        });
+        //Только админы
+        Gate::define('admins', function ($user) {
+            return in_array($user->roles_id, [1, 2]);
+        });
+        //Обновить пользователя
+        Gate::define('update_user', function ($user, $update_user) {
+            if($user->isSuperAdmin()) return true;
+            if($update_user->isSuperAdmin()) return false;
+
+            if ($user->roles_id == $update_user->roles_id) {
+                return true;
+            }
+
+            return in_array($user->roles_id, [1, 2]);
+        });
+        //Удалить пользователя
+        Gate::define('del_user', function ($user, $del_user) {
+            if ($del_user->isSuperAdmin() || $user->roles_id == $del_user->roles_id || $user->isAdmin() == $del_user->isAdmin()) {
+                return false;
+            }
+            if($user->isSuperAdmin()) return true;
+
+            return in_array($user->roles_id, [1, 2]);
+        });
     }
 }

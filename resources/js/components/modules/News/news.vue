@@ -30,7 +30,7 @@
     export default {
         name: "news",
         components: {
-            'mac-header':  () => import ('../Dashboard/blocks/mac-header')
+            'mac-header':  () => import ('../../views/blocks/mac-header')
         },
         props: {},
         data: () => ({
@@ -40,6 +40,7 @@
         },
         mounted() {
             this.$store.commit('news/LOAD_DATA')
+            //this.$store.dispatch('news/FETCH_DATA')
         }
     }
 </script>

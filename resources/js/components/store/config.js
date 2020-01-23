@@ -1,11 +1,13 @@
 
 let actions = {
-    async INITIAL_BOOT({commit}) {
+    async INITIAL_BOOT({commit, dispatch}) {
         await axios.post('/initial')
             .then((info) => {
                 commit('INITIAL_BOOT', info)
                 commit('ACCESS_INFO')
                 commit('LEFT_MENU')
+                commit('UI_')
+                dispatch('LOADER_MODULES')
             })
             .catch((err) => {
                 console.log(err)
@@ -13,10 +15,12 @@ let actions = {
     },
     INSPECTOR(){
         axios.interceptors.request.use(config => {
-            state.console.push({module: 'INSPECTOR', message: 'Исходящий запрос на '+config.url})
-            console.log(config)
+            state.console.push({module: 'INSPECTOR', message: 'Исходящий запрос на '+config.url })
             return config
         })
+    },
+    LOADER_MODULES({commit, dispatch, getters}) {
+        if(getters['auth']) dispatch('tasks/FETCH_DATA', null, { root: true })
     }
 
 }
@@ -27,7 +31,7 @@ let mutations = {
             state.user = info.data.user
             state.loggedIn = true
         } else {
-            state.user = false
+            state.user = []
             state.loggedIn = false
         }
         state.setting.default = info.data.setting.default
@@ -43,13 +47,13 @@ let mutations = {
      * */
     ACCESS_INFO(state) {
         if (state.loggedIn) {
-            if (state.user.role_id && state.user.role_id === 3){
+            if (state.user.roles_id && state.user.roles_id === 3){
                 state.setting.access_admin = false
                 state.setting.access_root = false
-            } else if(state.user.role_id === 2) {
+            } else if(state.user.roles_id === 2) {
                 state.setting.access_admin = true
                 state.setting.access_root = false
-            }else if(state.user.role_id === 1) {
+            }else if(state.user.roles_id === 1) {
                 state.setting.access_admin = true
                 state.setting.access_root = true
             }else {
@@ -93,7 +97,14 @@ let mutations = {
     },
     HOME_CONFIG (state, per) {
         state.home[per] = !state.home[per]
+    },
+    UI_() {
+        state.UI_ = {
+            x: window.innerWidth,
+            y: window.innerHeight
+        }
     }
+
 }
 
 let getters = {
@@ -117,17 +128,21 @@ let getters = {
     },
     theme: state => {
         return state.theme
+
     },
     console: state => {
         return state.console
     },
     home: state => {
         return state.home
+    },
+    ui_mobile: state => {
+        return state.UI_.x < 600
     }
 }
 
 let state = {
-    user: false,
+    user: [],
     setting: {
         access_admin: false,
         access_root: false,
@@ -149,6 +164,10 @@ let state = {
         drawer: false,
         dialog: false,
         pincode: false
+    },
+    UI_: {
+        x: 0,
+        y: 0
     }
 }
 
