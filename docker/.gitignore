@@ -1,4 +1,5 @@
-/databases/*
+/databases
 /server/laravel-echo-server/laravel-echo-server.json
 /server/laravel-echo-server/laravel-echo-server.lock
 /server/redis/data/*
+!.gitignore
