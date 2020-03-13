@@ -376,12 +376,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Dashboard",
   components: {
     'tasks': function tasks() {
-      return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ../modules/Tasks/TasksComponent */ "./resources/js/components/modules/Tasks/TasksComponent.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(12), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! ../modules/Tasks/TasksComponent */ "./resources/js/components/modules/Tasks/TasksComponent.vue"));
     },
     'miniContacts': function miniContacts() {
       return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ../modules/Contacts/blocks/miniContacts */ "./resources/js/components/modules/Contacts/blocks/miniContacts.vue"));
@@ -556,7 +566,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.SWITCH_MODE_SEARCH();
     }
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['SWITCH_MODE_SEARCH']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])(['MODE_SEARCH']))
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['SWITCH_MODE_SEARCH']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])(['MODE_SEARCH']), {
+    vibr: function vibr() {
+      window.navigator.vibrate([200, 100, 200]);
+    }
+  })
 });
 
 /***/ }),
@@ -632,7 +646,18 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _c("v-toolbar-title", [_vm._v("IT ")]),
+                      _c(
+                        "v-toolbar-title",
+                        [
+                          _c("v-btn", { on: { click: _vm.vibr } }, [
+                            _vm._v(
+                              "\n                        IT\n                    "
+                            )
+                          ]),
+                          _vm._v("\n\n                     ")
+                        ],
+                        1
+                      ),
                       _vm._v(" "),
                       _c("v-spacer"),
                       _vm._v(" "),
@@ -1623,7 +1648,30 @@ var render = function() {
         ? _c(
             "v-col",
             { staticClass: "mb-2 pa-0 px-sm-2", attrs: { md: "4" } },
-            [_c("news", { attrs: { title: "Саратова" } })],
+            [
+              _c("v-col", { attrs: { cols: "12" } }, [
+                _c(
+                  "span",
+                  {
+                    staticClass: "position-relative font-weight-medium",
+                    staticStyle: { bottom: "20px" }
+                  },
+                  [_vm._v("Оценка больницы в Яндексе -")]
+                ),
+                _vm._v(" "),
+                _c("iframe", {
+                  attrs: {
+                    src:
+                      "https://yandex.ru/sprav/widget/rating-badge/1764888666",
+                    width: "150",
+                    height: "50",
+                    frameborder: "0"
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("news", { attrs: { title: "Саратова" } })
+            ],
             1
           )
         : _vm._e(),

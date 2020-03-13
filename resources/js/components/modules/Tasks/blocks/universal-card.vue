@@ -7,22 +7,23 @@
         <v-card
             class="mb-2"
             :elevation="hover ? 16 : 2"
-            style="border-top: 2px solid #607D8B !important;"
+            :style="'border:1px solid '+ (task.priority > 2? '#ff8c84':'#82b1ff') +';'+
+            'border-left:'+ (task.priority*3)  +'px solid '+ (task.priority > 2? '#ff8c84':'#82b1ff') +'!important;'"
             :id="id"
         >
             <v-card-text
                 v-if="!task.completed"
                 class="pb-2 font-weight-bold text-break">
+                <span
+                    class="position-absolute font-italic font-weight-medium caption"
+                    :class="color_status(task.priority)"
+                    style="bottom: 0; left: 0">{{task.status}}</span>
                 <v-row>
                     <v-col
                         md
                         cols="12"
                         class="pa-0">
-                                    <span
-                                        class="position-absolute font-italic font-weight-medium caption"
-                                        :class="color_status(task.priority)"
-                                        style="top: -15px; right: 8px">{{task.status}}</span>
-                        {{task.desc}}
+                        <div v-html="task.desc"/>
                     </v-col>
                     <v-col
                         md="3"
@@ -97,7 +98,7 @@
                 <v-row
                     v-if="task.house"
                     cols="12"
-                    class="pt-5 chip-my"
+                    class="py-3 chip-my"
                 >
                     <v-chip
                         v-for="(house, i) in task.house"
@@ -123,9 +124,8 @@
                 </v-btn>
                 <v-list-item-subtitle
                     class="text-wrap black--text text-left"
-                >
-                    {{task.desc}}
-                </v-list-item-subtitle>
+                    v-html="task.desc"
+                />
             </v-card-text>
 
             <!--<vue-mouse-menu :visible="visible" :option="mouseOption">
@@ -148,7 +148,6 @@
 </template>
 
 <script>
-
     export default {
         name: "universal-card",
         props: {
@@ -164,6 +163,7 @@
             }
 
         },
+        components: {},
         data() {
             return {
                 items: [
@@ -172,8 +172,8 @@
                 ],
                 mouseEvent: null,
                 visible: false,
-                mouseOption: {
-                },
+                mouseOption: {},
+
             }
         },
         computed:{},

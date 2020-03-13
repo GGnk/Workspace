@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <v-col cols="12">
         <mac-header :title="'Новости '+title"></mac-header>
         <v-expansion-panels
             multiple
@@ -21,7 +21,7 @@
                 </v-expansion-panel-content>
             </v-expansion-panel>
         </v-expansion-panels>
-    </div>
+    </v-col>
 </template>
 
 <script>

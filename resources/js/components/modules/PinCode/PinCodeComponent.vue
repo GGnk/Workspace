@@ -9,7 +9,7 @@
         </label>
         <input class="input-code" @keydown="HIDE_KEYBOARD" v-model="value_p"
                :id="`code-${uuid}`" :name="`code-${uuid}`" type="tel" :maxlength="length"
-               autocorrect="off" autocomplete="off" autocapitalize="off" autofocus>
+               autocorrect="off" autocomplete="off" autocapitalize="off">
     </div>
 </template>
 

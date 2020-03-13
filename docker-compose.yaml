@@ -1,0 +1,62 @@
+version: "3.2"
+services:
+    db:
+        build: ./docker/db
+        networks:
+            - backend
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: 123456
+            MYSQL_USER: web
+            MYSQL_PASSWORD: webweb
+        volumes:
+            - ./docker/databases:/var/lib/mysql
+
+    redis:
+        build: './docker/server/redis/'
+        container_name: serv1redis
+        command: redis-server --appendonly yes
+        networks:
+            - backend
+        restart: always
+        volumes:
+            - ./docker/server/redis/data:/data
+        ports:
+            - "6379:6379"
+
+    laravel-echo-server:
+        image: oanhnn/laravel-echo-server
+        command: start --force
+        restart: always
+        env_file:  ./docker/server/laravel-echo-server/laravel-echo-server.env
+        volumes: 
+            - ./docker/server/laravel-echo-server/:/app
+        networks:
+            - backend
+        ports:
+            - 6001:6001
+        links:
+            - redis:serv1redis
+
+    server:
+        build: './docker/server/'
+        networks:
+            - backend
+        restart: always
+        ports:
+            - "80:80"
+        links:
+            - redis:serv1redis
+        volumes:
+            - .:/var/www/html/
+
+    phpmyadmin:
+        build: ./docker/admin_db
+        networks:
+            - backend
+        restart: always
+        ports:
+            - 6080:80
+networks:
+    backend:

@@ -55,7 +55,7 @@ class UserController extends Controller
             ];
         }
         $this->validate($request, [
-            'name' => 'required|unique',
+            'name' => 'required',
             'phone' => 'required',
             'profession' =>'required|string',
             'img' => 'file|mimes:' . File::getAllExtensions() . '|max:' . File::getMaxSize()

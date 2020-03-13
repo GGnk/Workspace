@@ -133,13 +133,16 @@
         },
         mounted() {
             this.$store.dispatch('config/INSPECTOR')
-
         },
 
         methods:{
             ui() {
                 this.$store.commit('config/UI_')
             },
+            full(){
+                let full = document.getElementById("app")
+                full.requestFullscreen();
+            }
         }
 
 

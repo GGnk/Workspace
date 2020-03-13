@@ -37,204 +37,197 @@
                 <v-icon>add</v-icon>
             </v-btn>
             <v-dialog v-model="dialog">
-                <v-card>
-                    <v-card-title class="headline">{{dialogFormTitle}}</v-card-title>
-
-                    <v-card-text>
-                        <v-form
-                            v-model="valid"
-                        >
-                            <v-row>
-                                <v-col class="text-center">
-                                    <v-file-input
-                                        v-if="dialogFormUpdate"
-                                        v-model="post_img"
-                                        :rules="get_rules.post_img"
-                                        accept="image/png, image/jpeg, image/bmp"
-                                        placeholder="Загрузите картинку для поста"
-                                        prepend-icon="mdi-camera"
-                                        label="IMG"
-                                    />
-                                    <v-hover v-else>
-                                        <template
-                                            v-slot:default="{ hover}">
-                                            <div>
-                                                <v-avatar
-                                                    size="150"
-                                                >
-                                                    <img
-                                                        v-if="post_img"
-                                                        :src="'/storage/'+post_img"
-                                                    >
-                                                    <v-icon v-else>mdi-camera</v-icon>
-                                                </v-avatar>
-                                                <v-fade-transition>
-                                                    <v-overlay
-                                                        v-if="hover"
-                                                        absolute
-                                                        color="#036358"
-                                                    >
-                                                        <v-btn>{{post_img?'Сменить картинку':'Загрузить картинку' }}</v-btn>
-                                                    </v-overlay>
-                                                </v-fade-transition>
-                                            </div>
-                                        </template>
-                                    </v-hover>
-                                </v-col>
-                                <v-col>
-                                    <v-text-field
-                                        v-model="post_title"
-                                        :rules="get_rules.post_title"
-                                        label="Заголовок"
-                                        required
-                                    />
-                                </v-col>
-                            </v-row>
-
-                            <v-textarea
-                                v-model="post_desc"
-                                :rules="get_rules.post_desc"
-                                label="Описание"
-                                rows="15"
-                                required
-                            />
-                            <v-file-input
-                                v-if="dialogFormUpdate"
-                                v-model="post_files"
-                                :rules="get_rules.post_files"
-                                placeholder="Загрузите документы"
-                                label="Файлы"
-                                multiple
-                                prepend-icon="mdi-paperclip"
+                <v-form
+                    v-model="valid"
+                >
+                    <v-row
+                        class="ma-0"
+                    >
+                            <v-col
+                                cols="4"
+                                class="pa-0"
+                                style="display: grid"
                             >
-                                <template v-slot:selection="{ text }">
-                                    <v-chip
-                                        small
-                                        label
-                                        color="primary"
+                                <v-card>
+                                    <v-card-title class="headline">{{dialogFormTitle}}</v-card-title>
+
+                                    <v-card-text>
+                                        <v-col class="text-center">
+                                            <v-file-input
+                                                v-if="dialogFormUpdate"
+                                                v-model="post_img"
+                                                :rules="get_rules.post_img"
+                                                accept="image/png, image/jpeg, image/bmp"
+                                                placeholder="Загрузите картинку для поста"
+                                                prepend-icon="mdi-camera"
+                                                label="IMG"
+                                            />
+                                            <v-hover v-else>
+                                                <template
+                                                    v-slot:default="{ hover}">
+                                                    <div>
+                                                        <v-avatar
+                                                            size="150"
+                                                            tile
+                                                        >
+                                                            <img
+                                                                v-if="post_img"
+                                                                :src="'/storage/'+post_img"
+                                                            >
+                                                            <v-icon v-else>mdi-camera</v-icon>
+                                                        </v-avatar>
+                                                        <v-fade-transition>
+                                                            <v-overlay
+                                                                v-if="hover"
+                                                                absolute
+                                                                color="#036358"
+                                                            >
+                                                                <v-btn>{{post_img?'Сменить картинку':'Загрузить картинку' }}</v-btn>
+                                                            </v-overlay>
+                                                        </v-fade-transition>
+                                                    </div>
+                                                </template>
+                                            </v-hover>
+                                        </v-col>
+                                        <v-file-input
+                                            v-model="post_files"
+                                            :rules="get_rules.post_files"
+                                            placeholder="Загрузите документы"
+                                            label="Файлы"
+                                            multiple
+                                            prepend-icon="mdi-paperclip"
+                                        />
+                                        <v-tooltip
+                                            v-for="(file, i) in post_files"
+                                            :key="i"
+                                            bottom>
+                                            <template v-slot:activator="{ on }">
+                                                <v-btn icon :href="'/storage/'+file.path" v-on="on" title="" target="_blank">
+                                                    <v-icon>insert_drive_file</v-icon>
+                                                </v-btn>
+                                            </template>
+                                            <span>{{file.name}}</span>
+                                        </v-tooltip>
+                                    </v-card-text>
+
+                                    <v-card-actions>
+                                        <v-spacer/>
+                                        <v-btn
+                                            color="green darken-1"
+                                            text
+                                            @click="$store.commit('posts/DIALOG_FORM_CLOSE')"
+                                        >
+                                            Отмена
+                                        </v-btn>
+
+                                        <v-btn
+                                            color="green darken-1"
+                                            text
+                                            @click="$store.dispatch('posts/SAVE_POST')"
+                                        >
+                                            {{dialogFormButtomTitle}}
+                                        </v-btn>
+                                    </v-card-actions>
+                                </v-card>
+                            </v-col>
+                            <v-col
+                                class="pa-0"
+                                cols="8"
+                                style="display: grid"
+                            >
+                                <v-card>
+                                    <v-card-title
+                                        @dblclick="editP('title')"
+                                        class="headline">
+                                        <p>{{ edit.title? '': post_title}}</p>
+                                        <v-text-field
+                                            v-if="edit.title"
+                                            @blur="endEditP('title')"
+                                            v-model="post_title"
+                                            :rules="get_rules.post_title"
+                                            label="Заголовок"
+                                            required
+                                        />
+                                    </v-card-title>
+
+                                    <v-card-text
+                                        @dblclick="editP('desc')"
                                     >
-                                        {{ text }}
-                                    </v-chip>
-                                </template>
-                            </v-file-input>
-                            <v-tooltip
-                                v-else
-                                v-for="(file, i) in post_files"
-                                :key="i"
-                                bottom>
-                                <template v-slot:activator="{ on }">
-                                    <v-btn icon :href="'/storage/'+file.path" v-on="on" title="" target="_blank">
-                                        <v-icon>insert_drive_file</v-icon>
-                                    </v-btn>
-                                </template>
-                                <span>{{file.name}}</span>
-                            </v-tooltip>
-                        </v-form>
-                    </v-card-text>
-
-                    <v-card-actions>
-                        <v-spacer></v-spacer>
-
-                        <v-btn
-                            color="green darken-1"
-                            text
-                            @click="$store.commit('posts/DIALOG_FORM_CLOSE')"
-                        >
-                            Отмена
-                        </v-btn>
-
-                        <v-btn
-                            color="green darken-1"
-                            text
-                            @click="$store.dispatch('posts/SAVE_POST')"
-                        >
-                            {{dialogFormButtomTitle}}
-                        </v-btn>
-                    </v-card-actions>
-                </v-card>
+                                        <div v-html="edit.desc? '':post_desc"/>
+                                            <v-textarea
+                                                v-if="edit.desc"
+                                                @blur="endEditP('desc')"
+                                                v-model="post_desc"
+                                                :rules="get_rules.post_desc"
+                                                label="Описание"
+                                                rows="15"
+                                                required
+                                            />
+                                    </v-card-text>
+                                </v-card>
+                            </v-col>
+                    </v-row>
+                </v-form>
             </v-dialog>
         </v-toolbar>
 
-        <v-list two-line>
-            <template
+        <v-row class="ma-0">
+            <v-col
                 v-for="(post, index) in (get_results_search.posts && get_results_search.posts.length ?get_results_search.posts: get_posts)"
-
+                :key="index"
+                :cols="ui_mobile ? 12: 6"
             >
-                <v-list-item
-                    :key="index"
-                    title=""
+                <v-card
+                    outlined
+                    class="mx-auto"
                 >
-                    <v-list-item-avatar v-if="post.img">
-                        <v-img :src="'/storage/'+post.img"/>
-                    </v-list-item-avatar>
-                    <v-list-item-avatar v-else>
-                        <v-icon>mdi-camera</v-icon>
-                    </v-list-item-avatar>
-                    <v-list-item-content>
-                        <v-list-item-title v-text="post.title"/>
-                        <v-list-item-subtitle>
-                            <span class='text--primary'>{{post.author.name.replace(/(\S)\S* (\S+) (\S)\S*/, '$2 $3.$1.')}}</span> &mdash;
-                            {{post.description }}
-                        </v-list-item-subtitle>
-                    </v-list-item-content>
+                    <v-list-item>
+                        <v-list-item-avatar v-if="post.img">
+                            <v-img :src="'/storage/'+post.img"/>
+                        </v-list-item-avatar>
+                        <v-list-item-content>
+                            <v-list-item-title class="headline text-wrap" v-text="post.title"/>
+                            <v-list-item-subtitle>
+                                <span>{{post.author.name.replace(/(\S)\S* (\S+) (\S)\S*/, '$2 $3.$1.')}}</span>
+                                <span class="position-absolute" style="right: 10px">{{post.created_at | moment}}</span>
+                            </v-list-item-subtitle>
+                        </v-list-item-content>
+                    </v-list-item>
 
-                    <v-list-item-action>
-                        <v-list-item-action-text>
-                            Создан {{post.created_at | moment}}
-                        </v-list-item-action-text>
-                        <v-card
-                            flat
+                    <v-card-text>
+                        {{post.description }}
+                    </v-card-text>
+
+                    <v-card-actions>
+                        <v-btn
+                            text
+                            color="deep-purple accent-4"
+                            @click="$store.commit('posts/DIALOG_FORM_OPEN', {index: index, post: post})"
                         >
-                            <v-tooltip
-                                v-for="(file, i) in post.files"
-                                :key="i"
-                                bottom>
-                                <template v-slot:activator="{ on }">
-                                    <v-btn icon :href="'/storage/'+file.path" v-on="on" title="" target="_blank">
-                                        <v-icon>insert_drive_file</v-icon>
-                                    </v-btn>
-                                </template>
-                                <span>{{file.name}}</span>
-                            </v-tooltip>
-                            <v-menu bottom left>
-                                <template v-slot:activator="{ on }">
-                                    <v-btn
-                                        icon
-                                        v-on="on"
-                                    >
-                                        <v-icon>mdi-dots-vertical</v-icon>
-                                    </v-btn>
-                                </template>
-
-                                <v-list>
-                                    <v-list-item
-                                        @click="$store.commit('posts/DIALOG_FORM_OPEN', {index: index, post: post})"
-                                    >
-                                        <v-list-item-title>Редактировать</v-list-item-title>
-                                    </v-list-item>
-                                    <v-list-item
-                                        @click=""
-                                    >
-                                        <v-list-item-title>В закладки</v-list-item-title>
-                                    </v-list-item>
-                                    <v-list-item
-                                        @click=""
-                                    >
-                                        <v-list-item-title>Удалить</v-list-item-title>
-                                    </v-list-item>
-                                </v-list>
-                            </v-menu>
-                        </v-card>
-                    </v-list-item-action>
-                </v-list-item>
-
-                <v-divider
-                    v-if="index + 1 < get_posts.length"
-                    style="margin: 0!important;"
-                />
-            </template>
-        </v-list>
-
+                            Прочитать
+                        </v-btn>
+                        <v-spacer/>
+                        <v-badge
+                            :content="post.files.length"
+                            :value="post.files.length"
+                            color="green"
+                            overlap
+                            class="mr-2"
+                        >
+                            <v-btn icon >
+                                <v-icon large>insert_drive_file</v-icon>
+                            </v-btn>
+                        </v-badge>
+                        <v-btn icon>
+                            <v-icon>mdi-heart</v-icon>
+                        </v-btn>
+                        <v-btn icon>
+                            <v-icon>mdi-share-variant</v-icon>
+                        </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-col>
+        </v-row>
     </v-card>
 </template>
 
@@ -249,13 +242,18 @@
         props: [],
         data:() => ({
             overlay: false,
-            editPost: false
+            editPost: false,
+            edit: {
+                title: false,
+                desc: false
+            }
         }),
         computed: {
             ...mapGetters('posts' ,['get_posts', 'get_post',
                 'dialogForm', 'dialogFormButtomTitle', 'dialogFormTitle', 'dialogFormUpdate',
-                'get_message', 'get_rules', 'dialogFormValid', 'get_alert', 'get_alert_message',
+                'get_rules', 'dialogFormValid', 'get_alert', 'get_alert_message',
             ]),
+            ...mapGetters('config',['ui_mobile']),
             ...mapGetters(['get_input_search_posts', 'get_results_search', 'get_error_search',
                 'loading_search', 'switchModeSearch']),
             input_posts: {
@@ -342,6 +340,13 @@
         methods:{
             ...mapActions('posts', ['FETCH_DATA']),
             ...mapActions(['SEARCH_INFO']),
+
+            editP(key) {
+                this.edit[key] = true
+            },
+            endEditP(key) {
+                this.edit[key] = false
+            }
 
         }
     }

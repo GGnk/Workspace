@@ -49,7 +49,7 @@
                                     v-slot:default="{ hover}">
                                     <div>
                                         <v-avatar
-                                            style="display: block!important;"
+                                            class="d-block"
                                             size="100%"
                                             tile
                                         >
@@ -75,15 +75,15 @@
                                                     <v-btn
                                                         class="mt-2"
                                                         outlined
+                                                        v-if="auth && admin"
                                                         onclick="document.getElementById('fileInput').click()">
                                                         {{item.img?'Сменить картинку':'Загрузить картинку' }}
                                                     </v-btn>
                                                     <v-btn
                                                         class="mt-2"
                                                         outlined
-                                                        v-if="item.img"
-                                                        target="_blank"
-                                                        :href="'storage/'+item.img">
+                                                        v-if="item.img || img_url"
+                                                        @click="dialog_loupe_img = true">
                                                         Увеличить
                                                     </v-btn>
                                                 </div>
@@ -102,6 +102,31 @@
                             accept="image/png, image/jpeg, image/bmp"
                             class="d-none"
                         />
+                        <v-dialog
+                            v-model="dialog_loupe_img"
+                            max-width="460"
+                            :fullscreen="ui_mobile"
+                        >
+                            <div
+                                class="position-relative"
+                            >
+                                <v-btn
+                                    absolute
+                                    top
+                                    right
+                                    small
+                                    style="z-index: 2"
+                                    color="red"
+                                    @click="dialog_loupe_img = false"
+                                >
+                                    <v-icon>mdi-close</v-icon>
+                                </v-btn>
+                                <v-img
+                                    v-if="item.img || item.new_img"
+                                    :src="item.new_img ? img_url: ('storage/'+item.img) "/>
+                            </div>
+
+                        </v-dialog>
 
                         <v-col cols="12" md="8" class="pa-0">
                             <v-row
@@ -111,7 +136,7 @@
                                     cols="4"
                                 >
                                     <v-avatar
-                                        style="display: block!important;"
+                                        class="d-sm-block ml-3"
                                         height="100px"
                                         width="100px"
                                         onclick="document.getElementById('fileInput').click()"
@@ -126,18 +151,15 @@
                                                 v-else
                                                 src="storage/avatars/default/default.png"/>
                                     </v-avatar>
+                                    <v-btn text @click="dialog_loupe_img = true"> Увеличить </v-btn>
                                 </v-col>
                                 <v-col
                                     class="text-right"
                                     cols>
-                                    <v-btn @click="item.menu = false">Cancel</v-btn>
                                     <v-btn
                                         v-if="$store.getters['config/admin']"
-                                        color="error" @click="dialog = true">Delete
-                                    </v-btn>
-                                    <v-btn
-                                        v-if="$store.getters['config/admin'] && valid"
-                                        color="success" @click="$store.dispatch('contacts/EDIT_CONTACT', item) && (item.menu = !item.menu) && (show = false)">Save
+                                        color="error" @click="dialog = true">
+                                        <v-icon>delete_forever</v-icon>
                                     </v-btn>
                                 </v-col>
                             </v-row>
@@ -208,8 +230,8 @@
                     <v-spacer/>
 
                     <v-card-actions>
+                        <v-btn @click="item.menu = false">Cancel</v-btn>
                         <div v-if="!ui_mobile">
-                            <v-btn @click="item.menu = false">Cancel</v-btn>
                             <v-btn
                                 v-if="$store.getters['config/admin']"
                                 color="error" @click="dialog = true">Delete
@@ -227,6 +249,13 @@
                             :color="item.comment ? 'black white--text': ''"
                         >
                             {{ show ? 'Скрыть' : 'Подробно' }}
+                        </v-btn>
+
+                        <v-btn
+                            v-if="ui_mobile && $store.getters['config/admin'] && valid"
+                            color="success"
+                            @click="$store.dispatch('contacts/EDIT_CONTACT', item) && (item.menu = !item.menu) && (show = false)">
+                            <v-icon>save</v-icon>
                         </v-btn>
                     </v-card-actions>
                 </v-form>
@@ -282,6 +311,7 @@ export default {
         dialog: false,
         valid: false,
         img_url: null,
+        dialog_loupe_img: false,
 
         rules: {
             imgRules: [
@@ -315,7 +345,7 @@ export default {
 
     },
     updated () {
-        console.log(this.$refs.fileInput)
+
     },
     methods: {
         ...mapMutations('contacts', ['SELECT_CONTACTS']),

@@ -1,7 +1,0 @@
-Local Homestead
-- vagrant box add laravel/homestead
-Or
-- composer require laravel/homestead --dev
-- vendor\\bin\\homestead make
-
-- vagrant up --provision

@@ -1,6 +1,6 @@
 /node_modules
 /public/hot
-/public/phpmyadmin
+/public/vendor
 /public/storage
 /storage/*.key
 /vendor
@@ -12,3 +12,4 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+.vagrant

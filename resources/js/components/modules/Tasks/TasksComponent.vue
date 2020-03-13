@@ -216,11 +216,7 @@
                     >
                         <v-row>
                             <v-col cols="12">
-                                <v-textarea
-                                    v-model="task_desc"
-                                    label="Описание"
-                                    :rules="get_rules.task_desc"
-                                />
+                                <ckeditor :editor="editor" v-model="task_desc" label="Описание" :rules="get_rules.task_desc" :config="editorConfig"/>
                             </v-col>
                             <v-col cols="12">
                                 <v-text-field
@@ -293,7 +289,7 @@
 
 <script>
     import {mapGetters} from 'vuex'
-
+    import InlineEditor from '@ckeditor/ckeditor5-build-inline';
     export default {
         name: "TasksComponent",
         components: {
@@ -301,12 +297,15 @@
         },
         props: [],
         data() {
-            return {}
+            return {
+                editor: InlineEditor,
+                editorConfig: {
+                    toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
+                }
+            }
         },
         computed: {
-            ...mapGetters('config',
-                [   'ui_mobile'
-                ]),
+            ...mapGetters('config', ['ui_mobile']),
 
             ...mapGetters('tasks',
                 [   'sortedArray', 'generalArray', 'options',
@@ -457,7 +456,6 @@
             this.$store.dispatch('tasks/FETCH_DATA')
         },
         mounted() {
-
             /*window.Echo.channel("newTask").listen(".task-created", e => {
                 this.tasks.unshift(e.task)
                 console.log("Задача с id:" + e.task.id + " была добавлена, на стороне сервера")

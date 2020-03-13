@@ -22,6 +22,9 @@
     </div>
 
     <script src="{{ mix('js/app.js') }}"></script>
-    <script src="https://news.yandex.ru/Saratov/index5.utf8.js" charset="utf-8"></script>
+    <script src="https://news.yandex.ru/ru/internet5.utf8.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        window.m_index = window.m_internet;
+    </script>
 </body>
 </html>

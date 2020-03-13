@@ -104,6 +104,8 @@ let mutations = {
         }
     },
     TASK_ADD(state, task) {
+        //TODO доделать
+        if(state.intTask !== this.getters['config/user'].id) state.intTask = Object.assign(this.getters['config/user'].id)
         state.tasks.unshift(task)
     },
     TASK_DELETE_RELATION(state, data) {

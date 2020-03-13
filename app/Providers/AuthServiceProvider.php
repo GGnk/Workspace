@@ -47,12 +47,11 @@ class AuthServiceProvider extends ServiceProvider
         });
         //Удалить пользователя
         Gate::define('del_user', function ($user, $del_user) {
-            if ($del_user->isSuperAdmin() || $user->roles_id == $del_user->roles_id || $user->isAdmin() == $del_user->isAdmin()) {
-                return false;
+            if (in_array($user->roles_id, [1, 2]) && !$del_user->isSuperAdmin() && $user->id != $del_user->id ) {
+                return true;
             }
-            if($user->isSuperAdmin()) return true;
 
-            return in_array($user->roles_id, [1, 2]);
+            return false;
         });
     }
 }

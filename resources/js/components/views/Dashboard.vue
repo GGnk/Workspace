@@ -25,7 +25,14 @@
                     <v-app-bar-nav-icon
                         @click="$store.commit('config/HOME_CONFIG', 'drawer')"
                     />
-                    <v-toolbar-title>IT&nbsp;</v-toolbar-title>
+                    <v-toolbar-title>
+                        <v-btn
+                            @click="vibr"
+                        >
+                            IT
+                        </v-btn>
+
+                        &nbsp;</v-toolbar-title>
                     <v-spacer/>
                     <v-btn
                         icon>
@@ -323,6 +330,9 @@
         <v-col  md="4"
                 v-if="!$store.getters['config/ui_mobile']"
                 class="mb-2 pa-0 px-sm-2">
+            <v-col cols="12">
+                <span class="position-relative font-weight-medium" style="bottom: 20px">Оценка больницы в Яндексе -</span> <iframe src="https://yandex.ru/sprav/widget/rating-badge/1764888666" width="150" height="50" frameborder="0"/>
+            </v-col>
             <news :title="'Саратова'"/>
         </v-col>
         <v-bottom-navigation
@@ -507,6 +517,9 @@
         methods: {
             ...mapActions(['SWITCH_MODE_SEARCH']),
             ...mapMutations(['MODE_SEARCH']),
+            vibr(){
+                window.navigator.vibrate([200, 100, 200])
+            },
 
         }
     }
